@@ -1,9 +1,3 @@
-readme
+God Touring Project 
 
-We'll dead alll
-
-i out 
-
-see you again next year
-
-i will find unwa with my lovely boy
+Start at 17/06/2018
