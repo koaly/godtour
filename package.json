@@ -1,0 +1,19 @@
+{
+  "name": "godtour",
+  "version": "1.0.0",
+  "description": "tour website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koaly/godtour.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koaly/godtour/issues"
+  },
+  "homepage": "https://github.com/koaly/godtour#readme"
+}
