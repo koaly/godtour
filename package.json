@@ -1,7 +1,7 @@
 {
   "name": "godtour",
   "version": "1.0.0",
-  "description": "Porject: God Touring Project",
+  "description": "Project: God Touring Project",
   "main": "app.js",
   "dependencies": {
     "express": "^4.16.3",
