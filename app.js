@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 
+//Get detail of Server
+const properties = require('./properties.json');
 //Initialize Appication
 const app = express();
 
@@ -14,7 +16,7 @@ app.set('view engine','pug');
 //Home page
 app.get('/',function(req,req){
     req.render('index',{
-        title: `Tour-to-ur`
+        title: properties.websiteName
 
     })    
 });
