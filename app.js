@@ -1,11 +1,22 @@
 const express = require('express');
-const app = express();
-const port = 3000
+const path = require('path');
 
+//Initialize Appication
+const app = express();
+
+//Set Port
+const port = 3000;
+
+//Initialize pug
+app.set('view engine','pug');
+
+//Home Route
 app.get('/',function(req,res){
     res.send('Hello World');
 });
 
+
+//Start server open at specify port
 app.listen(port,function(){
     console.log(`Server start on port ${port}`)
 });
