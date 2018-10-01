@@ -1,8 +1,13 @@
 {
   "name": "godtour",
   "version": "1.0.0",
-  "description": "tour website",
-  "main": "index.js",
+  "description": "Porject: God Touring Project",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
