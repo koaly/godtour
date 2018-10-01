@@ -1,0 +1,15 @@
+doctype html
+
+html
+    head
+        title #{title}
+        link(rel='stylesheet',href='/public/stylesheet/css/style.css')
+        meta(name='viewport' content="width=device-width, inital-scale=1")
+    body
+        main
+            block header
+                header.header
+                    h1 #{title}
+            block content
+    footer
+        p Copyright &copy; 2018
