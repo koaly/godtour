@@ -1,5 +1,6 @@
 html{
 	background-color: #E0FFFF;
+	clear: both;
 }
 
 header{
@@ -9,6 +10,9 @@ header{
 	margin-top: 0px;
 }
 
-header #header .title{
-		
+header .name{
+	color: white;
+	position: relative;		
+	padding-top: 5px;
+	margin-left: 10px;
 }  
