@@ -7,7 +7,8 @@ const app = express();
 //Set Port
 const port = 3000;
 
-//Initialize pug
+//Initialize Views
+app.set('views','./views');
 app.set('view engine','pug');
 
 //Home Route
