@@ -1,17 +1,11 @@
 const express = require('express');
 const path = require('path');
-const mysql = require('mysql');
 
-let db = mysql.createConnection({
-    host: "localhost",
-    user: "godtoue",
-    password: "jui"
-});
+//import auth-routes.js
+const authRoutes = require('./routes/auth-routes');
 
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
+
+//Database Connection
 
 //Get detail of Server
 const properties = require('./properties.json');
@@ -32,7 +26,12 @@ app.get('/',function(req,req){
     })    
 });
 
-// Route Files
+//set up routes
+app.use('/auth',authRoutes);
+
+//Route Files
+
+
 //let tours = require('./routes/tours');
 //let users = require('./routes/users');
 //app.use('/tours', tours);
