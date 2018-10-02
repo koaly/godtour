@@ -16,6 +16,10 @@ router.get('/google',passport.authenticate('google',{
     scope:['profile']
 }));
 
+router.get('/google/redirect',function(req,res){
+    res.send('get back');
+});
+
 
 //export module to app.js
 module.exports = router;
