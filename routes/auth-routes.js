@@ -16,7 +16,7 @@ router.get('/google',passport.authenticate('google',{
     scope:['profile']
 }));
 
-router.get('/google/redirect',function(req,res){
+router.get('/google/redirect',passport.authenticate('google'),function(req,res){
     res.send('get back');
 });
 
