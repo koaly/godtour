@@ -6,6 +6,9 @@ const articleSchema = mongoose.Schema({
         required: true
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> add tour attribute
     organizer:{
         type: String,
         required: true
@@ -58,7 +61,11 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true
     },
+<<<<<<< HEAD
     stars:{
+=======
+    tour_grade:{
+>>>>>>> add tour attribute
         type: Number,
         required: true
     },
@@ -76,9 +83,12 @@ const articleSchema = mongoose.Schema({
     highlight:{
         type: String
     }
+<<<<<<< HEAD
 =======
 
 >>>>>>> add tour model
+=======
+>>>>>>> add tour attribute
 });
 
 const Tour = mongoose.model('Tour', articleSchema);
