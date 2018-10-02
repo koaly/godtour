@@ -24,5 +24,28 @@ router.post('/add', function(req, res){
         tour.title = req.body.title;
         // tour.organizer = 
         tour.price = req.body.price;
+        tour.destination = req.body.destination;
+        tour.day_duration = req.body.day_duration;
+        tour.night_duration = req.body.night_duration;
+        tour.flight_airline = req.body.flight_airline;
+        tour.flight_airport = req.body.flight_airport;
+        tour.flight_depart = req.body.flight_depart;
+        tour.flight_return = req.body.flight_return;
+        tour.stars = req.body.stars;
+        tour.max_seat = req.body.max_seat;
+        tour.now_seat = tour.max_seat;
+        tour.description = req.body.description;
+        tour.highlight = req.body.highlight;
+        // wait for add date and time attributes
+
+        tour.save(function(err){
+            if (err){
+                console.log(err);
+                return;
+            } else {
+                req.flash('success', 'New TOUR added');
+                res.redirect('/');
+            }
+        });
     }
 });
