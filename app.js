@@ -19,7 +19,7 @@ const properties = require('./properties.json');
 const app = express();
 
 //Set Port
-const port = 3000;
+const port = properties.server.port;
 
 //Initialize Views
 app.set('views',path.join(__dirname,'views'));
@@ -28,8 +28,7 @@ app.set('view engine','pug');
 //Home page
 app.get('/',function(req,req){
     req.render('index',{
-        title: properties.websiteName
-
+        title: properties.server.name
     })    
 });
 
