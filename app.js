@@ -1,5 +1,17 @@
 const express = require('express');
 const path = require('path');
+const mysql = require('mysql');
+
+let db = mysql.createConnection({
+    host: "localhost",
+    user: "godtoue",
+    password: "jui"
+});
+
+db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 //Get detail of Server
 const properties = require('./properties.json');
