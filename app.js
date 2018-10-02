@@ -22,10 +22,10 @@ app.get('/',function(req,req){
 });
 
 // Route Files
-let tours = require('./routes/tours');
-let users = require('./routes/users');
-app.use('/tours', tours);
-app.use('/users', users);
+//let tours = require('./routes/tours');
+//let users = require('./routes/users');
+//app.use('/tours', tours);
+//app.use('/users', users);
 
 //Start server open at specify port
 const server = app.listen(port,function(){
