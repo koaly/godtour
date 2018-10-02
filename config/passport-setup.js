@@ -11,10 +11,10 @@ const keys = require('./keys')
 passport.use(
     new GoogleStrategy({
         // options for google start
+        callbackURL:'/auth/google/redirect',
         clientID: keys.google.clientID,
-        clientSecret: key.google.clientSecret
-    })  
-    ,function(){
+        clientSecret: keys.google.clientSecret
+    },function(){
         //passport callback function
-    }
+    })
 );

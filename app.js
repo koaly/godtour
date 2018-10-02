@@ -4,6 +4,7 @@ const path = require('path');
 //import auth-routes.js
 const authRoutes = require('./routes/auth-routes');
 
+const passportSetup = require('./config/passport-setup');
 
 //Database Connection
 
