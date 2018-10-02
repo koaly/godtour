@@ -14,7 +14,8 @@ passport.use(
         callbackURL:'/auth/google/redirect',
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret
-    },function(){
+    },function(accessToken,refreshToken,profile,done){
         console.log('passport callback');
+        console.log(profile);
     })
 );
