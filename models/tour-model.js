@@ -5,6 +5,7 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true
     },
+<<<<<<< HEAD
     organizer:{
         type: String,
         required: true
@@ -75,6 +76,9 @@ const articleSchema = mongoose.Schema({
     highlight:{
         type: String
     }
+=======
+
+>>>>>>> add tour model
 });
 
 const Tour = mongoose.model('Tour', articleSchema);
