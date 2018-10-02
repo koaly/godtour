@@ -4,6 +4,8 @@ const path = require('path');
 //import auth-routes.js
 const authRoutes = require('./routes/auth-routes');
 const passportSetup = require('./config/passport-setup');
+const profileRoutes = require('./routes/profile-routes')
+
 const mongoose = require('mongoose');
 
 //ask me for connect to keys <rpwrepenwork>
@@ -55,6 +57,7 @@ app.use(passport.session());
 
 //set up routes
 app.use('/auth',authRoutes);
+app.use('/profile',profileRoutes);
 
 
 
