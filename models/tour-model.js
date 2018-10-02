@@ -57,7 +57,7 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    tour_grade:{
+    stars:{
         type: Number,
         required: true
     },
