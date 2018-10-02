@@ -3,10 +3,17 @@ const path = require('path');
 
 //import auth-routes.js
 const authRoutes = require('./routes/auth-routes');
-
 const passportSetup = require('./config/passport-setup');
+const mongoose = require('mongoose');
+
+//ask me for connect to keys <rpwrepenwork>
+const keys = require('./config/keys');
 
 //Database Connection
+
+mongoose.connect(keys.mongodb.dbURI,() =>{
+    console.log('connect to mongoddb');
+});
 
 //Get detail of Server
 const properties = require('./properties.json');
