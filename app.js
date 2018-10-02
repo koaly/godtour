@@ -9,11 +9,14 @@ const mongoose = require('mongoose');
 //ask me for connect to keys <rpwrepenwork>
 const keys = require('./config/keys');
 
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 //Database Connection
 
 mongoose.connect(keys.mongodb.dbURI,() =>{
     console.log('connect to mongoddb');
 });
+
 
 //Get detail of Server
 const properties = require('./properties.json');
@@ -34,10 +37,25 @@ app.get('/',function(req,req){
     })    
 });
 
+//create cookie
+app.use(cookieSession({
+    //time out of cookie
+    maxAge:12*60*60*1000,
+    
+    //must use key.js in config not in github ask me if you wisk
+    keys:[keys.session.cookieKey]
+}));
+
+//initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//Route Files
+
 //set up routes
 app.use('/auth',authRoutes);
 
-//Route Files
 
 
 //let tours = require('./routes/tours');

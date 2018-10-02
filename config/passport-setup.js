@@ -16,8 +16,9 @@ passport.serializeUser(function(user,done){
 
 
 passport.deserializeUser(function(id,done){
-    User.findById(id).then(user);
-    done(null,user.id);
+    User.findById(id).then(function(user){
+        done(null,user);
+    });
 });
 
 passport.use(
