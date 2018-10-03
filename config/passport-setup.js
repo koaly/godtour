@@ -29,7 +29,7 @@ passport.use(
         clientSecret: keys.google.clientSecret
     
     },function(accessToken,refreshToken,profile,done){
-
+		console.log(profile);
         //check user already exits in our db
         User.findOne({googleId:profile.id})
         .then(function(currentUser){
