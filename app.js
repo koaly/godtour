@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 //import auth-routes.js
 const authRoutes = require('./routes/auth-routes');
@@ -19,7 +21,7 @@ const passport = require('passport');
 //Database Connection
 
 mongoose.connect(keys.mongodb.dbURI,() =>{
-    console.log('connect to mongoddb');
+    console.log('Connected to MongoDB');
 });
 
 
@@ -34,6 +36,20 @@ const port = properties.server.port;
 //Initialize Views
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
+
+// Express Session Middleware
+// app.use(session({
+//     secret:'keyboard cat',
+//     resave: true,
+//     saveUninitialized: true
+// }));
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function(req, res, next){
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
 
 // Express Validator Middleware
 app.use(expressValidator({
@@ -70,7 +86,7 @@ app.use(cookieSession({
     //time out of cookie
     maxAge:12*60*60*1000,
     
-    //must use key.js in config not in github ask me if you wisk
+    //must use key.js in config not in github ask me if you wish
     keys:[keys.session.cookieKey]
 }));
 

@@ -63,7 +63,7 @@ router.post('/add', function(req, res){
                 console.log(err);
                 return;
             } else {
-                // req.flash('success', 'New TOUR added');
+                req.flash('success', 'New TOUR added!');
                 res.redirect('/');
             }
         });
