@@ -41,10 +41,11 @@ header ul li .top_menu:hover{
 	color: red;
 }
 
-header ul li .user_choice , header ul li .component_use_choice{
+header ul li .user_choice , header ul .component_user_choice{
 	text-decoration: none;
 	margin-right: 10px;
 	margin-left: 10px;
+	color: blue;
 }
 
 header ul li .user_choice:hover{

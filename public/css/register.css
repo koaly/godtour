@@ -1,0 +1,15 @@
+section{
+	clear: both;
+	outline-color: red;
+	outline-style: dashed;
+	outline-width: 2px;
+	margin-top: 20px;
+	height: 400px;
+}
+
+section aside{
+	width: 30%;
+	outline-color: black;
+	outline-style: solid;
+	outline-width: 2px;
+} 
