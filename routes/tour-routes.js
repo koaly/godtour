@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 // Bring in Tour Models
 let Tour = require('../models/tour-model');
@@ -13,13 +14,14 @@ router.get('/add', function(req, res){
 
 router.post('/add', function(req, res){
 
-    let err = req.validationErrors();
-    if (err){
-        res.render('add_tour', {
-            title: 'Add TOUR',
-            errors: err
-        });
-    } else{
+    // let err = req.validationErrors();
+    // if (err){
+    //     res.render('add_tour', {
+    //         title: 'Add TOUR',
+    //         errors: err
+    //     });
+    // } else{
+        let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
         tour.organizer = 'admin';
@@ -37,34 +39,35 @@ router.post('/add', function(req, res){
         tour.now_seat = tour.max_seat;
         tour.description = req.body.description;
         tour.highlight = req.body.highlight;
-        // wait for add date and time attributes
-        tour.start_book.setDate(req.body.start_book_date);
-        tour.start_book.setMonth(req.body.start_book_month);
-        tour.start_book.setFullYear(req.body.start_book_year);
-        tour.start_book.setHour(req.body.start_book_hour, req.body.start_book_min, 0);    
-        tour.end_book.setDate(req.body.end_book_date);
-        tour.end_book.setMonth(req.body.end_book_month);
-        tour.end_book.setFullYear(req.body.end_book_year);
-        tour.end_book.setHour(req.body.end_book_hour, req.body.end_book_min, 0);    
-        tour.start_trip.setDate(req.body.start_trip_date);
-        tour.start_trip.setMonth(req.body.start_trip_month);
-        tour.start_trip.setFullYear(req.body.start_trip_year);
-        tour.start_trip.setHour(req.body.depart_hour, depart_min, 0);
-        tour.end_trip.setDate(req.body.end_trip_date);
-        tour.end_trip.setMonth(req.body.end_trip_month);
-        tour.end_trip.setFullYear(req.body.end_trip_year);
-        tour.end_trip.setHour(req.body.return_hour, return_min, 0);
+        // date and time attributes
+        tour.start_book = req.body.start_book_date;
+        time = req.body.start_book_time.split(':');
+        tour.start_book.setHours(parseInt(time[0]), parseInt(time[1]));    
 
+        tour.end_book = req.body.end_book_date;
+        time = req.body.end_book_time.split(':');
+        tour.end_book.setHours(parseInt(time[0]), parseInt(time[1]));    
+
+        tour.start_trip = req.body.start_trip;
+        time = req.body.depart_time.split(':');
+        tour.start_trip.setHours(parseInt(time[0]), parseInt(time[1]));    
+
+        tour.end_trip = req.body.end_trip;
+        time = req.body.return_time.split(':');
+        tour.end_trip.setHours(parseInt(time[0]), parseInt(time[1]));    
+
+        tour.highlight = req.body.highlight;
+        tour.description = req.body.description;
         tour.save(function(err){
             if (err){
                 console.log(err);
                 return;
             } else {
-                req.flash('success', 'New TOUR added');
+                // req.flash('success', 'New TOUR added');
                 res.redirect('/');
             }
         });
-    }
+    // }
 });
 
-module.exports = router;
+module.exports = tour = router;

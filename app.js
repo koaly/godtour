@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 //import auth-routes.js
 const authRoutes = require('./routes/auth-routes');
@@ -32,6 +33,10 @@ const port = properties.server.port;
 //Initialize Views
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
+
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Home page
 app.get('/',function(req,req){
