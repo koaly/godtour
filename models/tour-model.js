@@ -57,6 +57,11 @@ const articleSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    food:{
+        type: Number,
+        required: true,
+        default: 0
+    },
     stars:{
         type: Number,
         required: true
