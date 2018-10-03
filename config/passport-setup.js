@@ -42,7 +42,9 @@ passport.use(
                 //if not create user in our db
                 new User({
                     username: profile.displayName,
-                    googleId: profile.id
+                    googleId: profile.id,
+					gender: profile.gender,
+					photo: profile.photos[0].value
                 })
                 .save()
                 .then(function(newUser){
