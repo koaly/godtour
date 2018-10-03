@@ -22,7 +22,7 @@ router.post('/add', function(req, res){
     } else{
         let tour = new Tour();
         tour.title = req.body.title;
-        // tour.organizer = 
+        tour.organizer = 'admin';
         tour.price = req.body.price;
         tour.destination = req.body.destination;
         tour.day_duration = req.body.day_duration;
