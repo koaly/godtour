@@ -23,18 +23,48 @@ header ul li {
 	text-align: center;
 	list-style: none;
 	float: right;
-	width: 150px;
 	font-size: 20px;
-	margin-right: 20px;
 	margin-top: 12px;
 }
 
 header ul li a{
 	text-decoration: none;
+	width: 120px;
+	margin-right: 20px;
 }
 
 header ul li a:hover{
+	width: 120px;
+	margin-right: 20px;
 	text-decoration: none;
 	font-weight: bold;
 	color: red;
 }
+
+header ul li b , header ul .user_choice{
+	text-decoration: none;
+	margin-right: 10px;
+}
+
+header ul li b:hover{
+	margin-right:10px;
+	text-decoration: none;
+	font-weight: bold;
+	color: red;
+}
+
+nav{
+	clear: both;
+	margin-top: 20px;
+	height: 300px;
+	outline-color: black;
+	outline-style: solid;
+	outline-width: 2px;
+}
+
+nav p{
+	float : left;
+	width: 46%;
+	margin-right: 2%;
+	margin-left: 2%;
+} 
