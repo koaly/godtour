@@ -12,6 +12,10 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-bower": "0.0.14",
+    "gulp-notify": "^3.2.0",
+    "gulp-ruby-sass": "^3.0.0",
     "ws": "3.3.2"
   },
   "scripts": {
