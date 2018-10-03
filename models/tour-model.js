@@ -7,8 +7,11 @@ const articleSchema = mongoose.Schema({
     },
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> add tour attribute
+=======
+>>>>>>> aa008ddb29c1a926b6e6e9f70724abc3839c62b8
     organizer:{
         type: String,
         required: true
@@ -62,10 +65,19 @@ const articleSchema = mongoose.Schema({
         required: true
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     stars:{
 =======
     tour_grade:{
 >>>>>>> add tour attribute
+=======
+    food:{
+        type: Number,
+        default: 0,
+        required: true
+    },
+    stars:{
+>>>>>>> aa008ddb29c1a926b6e6e9f70724abc3839c62b8
         type: Number,
         required: true
     },
@@ -84,11 +96,14 @@ const articleSchema = mongoose.Schema({
         type: String
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> add tour model
 =======
 >>>>>>> add tour attribute
+=======
+>>>>>>> aa008ddb29c1a926b6e6e9f70724abc3839c62b8
 });
 
 const Tour = mongoose.model('Tour', articleSchema);
