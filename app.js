@@ -5,6 +5,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth-routes');
 const passportSetup = require('./config/passport-setup');
 const profileRoutes = require('./routes/profile-routes')
+const tourRoutes = require('./routes/tour-routes');
 
 const mongoose = require('mongoose');
 
@@ -58,7 +59,7 @@ app.use(passport.session());
 //set up routes
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
-
+app.use('/tour',tourRoutes);
 
 
 //let tours = require('./routes/tours');
