@@ -11,7 +11,7 @@ router.get('/', function(req, res){
             console.log(err);
         } else{
             res.render('show_tour',{
-                title: 'Tour list',
+                title: 'Tour List',
                 tours: tours
             });
         }
@@ -26,6 +26,7 @@ router.get('/add', function(req, res){
 });
 
 router.post('/add', function(req, res){
+    req.checkBody('title', 'Tour\'s name needed').notEmpty();
 
     let err = req.validationErrors();
     if (err){
@@ -81,6 +82,15 @@ router.post('/add', function(req, res){
             }
         });
     }
+});
+
+// Get Single tour
+router.get('/:id', function(req, res){
+    Tour.findById(req.params.id, function(err, tour){
+        res.render('one_tour', {
+            tour: tour
+        });
+    });
 });
 
 module.exports = tour = router;

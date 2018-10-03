@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const articleSchema = mongoose.Schema({
+const tourSchema = mongoose.Schema({
     title:{
         type: String,
         required: true
@@ -82,6 +82,6 @@ const articleSchema = mongoose.Schema({
     }
 });
 
-const Tour = mongoose.model('Tour', articleSchema);
+const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
