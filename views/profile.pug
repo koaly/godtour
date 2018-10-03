@@ -6,7 +6,7 @@ block content
 
 
     p infomation use this data for create website
-    img(src=user.photo,style='width:200px; height:200px')
+    img.img-thumbnail(src=user.photo,style='width:200px; height:200px')
     ul
         li #{user.username}
         li List Item 2
@@ -14,3 +14,14 @@ block content
         li List Item 4
 
     p #{user}
+
+    table.table
+        thead
+            tr
+                th(scope='col') #
+                th(scope='col') First
+                th(scope='col') Last
+                th(scope='col') Handle
+        tbody
+            tr
+                th(scope='row') 1
