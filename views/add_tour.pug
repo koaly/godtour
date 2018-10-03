@@ -3,3 +3,14 @@ extends layout
 block content
     h1 #{title}
     form(method="POST", action="/tour/add")
+        #form-group
+            label Title:
+            input.form-control(name='title', type='text');
+        br
+        #form-group
+            label Destination:
+            input.form-control(name='destination', type='text');
+        br
+        #form-group
+            label Price:
+            input.form-control(name='price', type='number');
