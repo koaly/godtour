@@ -5,7 +5,7 @@ const router = express.Router();
 let Tour = require('../models/tour-model');
 
 // Add Route
-router.get('/add', ensureAuthenticated, function(req, res){
+router.get('/add', function(req, res){
     res.render('add_tour', {
         title: 'Add TOUR'
     });
@@ -86,3 +86,5 @@ router.post('/add', function(req, res){
         });
     }
 });
+
+module.exports = router;
