@@ -14,13 +14,13 @@ router.get('/add', function(req, res){
 
 router.post('/add', function(req, res){
 
-    // let err = req.validationErrors();
-    // if (err){
-    //     res.render('add_tour', {
-    //         title: 'Add TOUR',
-    //         errors: err
-    //     });
-    // } else{
+    let err = req.validationErrors();
+    if (err){
+        res.render('add_tour', {
+            title: 'Add TOUR',
+            errors: err
+        });
+    } else{
         let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
@@ -67,7 +67,7 @@ router.post('/add', function(req, res){
                 res.redirect('/');
             }
         });
-    // }
+    }
 });
 
 module.exports = tour = router;

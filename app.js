@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 
 //import auth-routes.js
 const authRoutes = require('./routes/auth-routes');
@@ -33,6 +34,24 @@ const port = properties.server.port;
 //Initialize Views
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
+
+// Express Validator Middleware
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value){
+        var namespace = param.split('.'),
+            root = namespace.shift(),
+            formParam = root;
+        
+        while(namespace.length){
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return{
+            param   :   formParam,
+            msg     :   msg,
+            value   :   value
+        };
+    }
+}));
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
