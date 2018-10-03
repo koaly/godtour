@@ -2,10 +2,10 @@ extends layout
 
 
 block content
-    ul
-        li 
+    ul.list-group
+        li.list-group-item
             a(href="auth/login") login
-        li
+        li.list-group-item
             a(href="auth/logout") logout
     p #{user}
     h1 #{title}

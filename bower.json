@@ -1,0 +1,22 @@
+{
+  "name": "godtour",
+  "description": "Project: God Touring Project",
+  "main": "app.js",
+  "authors": [
+    "Key Person <pornmanuty@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/koaly/godtour",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.1.3"
+  }
+}
