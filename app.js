@@ -35,7 +35,8 @@ app.set('view engine','pug');
 //Home page
 app.get('/',function(req,req){
     req.render('index',{
-        title: properties.server.name
+        title: properties.server.name,
+        user: req.user
     })    
 });
 

@@ -3,12 +3,15 @@ const passport = require('passport');
 
 //auth login
 router.get('/login',function(req,res){
-    res.render('login');
+    res.render('login',{
+        user: req.user
+    });
 });
 
 //auth logout
 router.get('/logout',function(req,res){
-    res.send('log out');
+    req.logout();
+    res.redirect('/');
 });
 
 //auth with google
