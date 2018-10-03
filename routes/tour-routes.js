@@ -5,6 +5,19 @@ const mongoose = require('mongoose');
 // Bring in Tour Models
 let Tour = require('../models/tour-model');
 
+router.get('/', function(req, res){
+    Tour.find({}, function(err, tours){
+        if (err){
+            console.log(err);
+        } else{
+            res.render('show_tour',{
+                title: 'Tour list',
+                tours: tours
+            });
+        }
+    });
+});
+
 // Add Route
 router.get('/add', function(req, res){
     res.render('add_tour', {
@@ -63,7 +76,7 @@ router.post('/add', function(req, res){
                 console.log(err);
                 return;
             } else {
-                req.flash('success', 'New TOUR added!');
+                // req.flash('success', 'New TOUR added!');
                 res.redirect('/');
             }
         });
