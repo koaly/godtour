@@ -1,65 +1,10 @@
-html{
-	background-color: #E0FFFF;
-	clear: both;
-}
-
-header{
-	height: 50px;
-	background-color: #90EE90;
-	float: top;
-}
-
-header h3 .name{
-	float: left;
-	text-decoration: none;
-	color: white;
-	font-size: 25px;
-	padding-top: 10px;
-	margin-top: 0px;
-	padding-left: 5px;
-}
-
-header ul li {
-	text-align: center;
-	list-style: none;
-	float: right;
-	font-size: 20px;
-	margin-top: 12px;
-}
-
-header ul li a{
-	text-decoration: none;
-	width: 120px;
-	margin-right: 20px;
-}
-
-header ul li a:hover{
-	width: 120px;
-	margin-right: 20px;
-	text-decoration: none;
-	font-weight: bold;
-	color: red;
-}
-
-header ul li b , header ul .user_choice{
-	text-decoration: none;
-	margin-right: 10px;
-}
-
-header ul li b:hover{
-	margin-right:10px;
-	text-decoration: none;
-	font-weight: bold;
-	color: red;
-}
-
 nav{
 	clear: both;
 	margin-top: 20px;
 	height: 300px;
-	outline-color: black;
+/*	outline-color: black;
 	outline-style: solid;
-	outline-width: 2px;
+	outline-width: 2px;*/
 }
 
 nav p{

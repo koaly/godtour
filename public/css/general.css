@@ -1,0 +1,55 @@
+html{
+	background-color: #E0FFFF;
+	clear: both;
+}
+
+header{
+	height: 50px;
+	background-color: #90EE90;
+	float: top;
+}
+
+header h3 .name{
+	float: left;
+	text-decoration: none;
+	color: white;
+	font-size: 25px;
+	padding-top: 10px;
+	margin-top: 0px;
+	padding-left: 5px;
+}
+
+header ul li {
+	text-align: center;
+	list-style: none;
+	float: right;
+	font-size: 20px;
+	margin-top: 15px;
+}
+
+header ul li .top_menu{
+	text-decoration: none;
+	width: 120px;
+	margin-left: 20px;
+}
+
+header ul li .top_menu:hover{
+	width: 120px;
+	margin-left: 20px;
+	text-decoration: none;
+/*	font-weight: bold;*/
+	color: red;
+}
+
+header ul li .user_choice , header ul li .component_use_choice{
+	text-decoration: none;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+header ul li .user_choice:hover{
+	margin-right:10px;
+	text-decoration: none;
+/*	font-weight: bold;*/
+	color: red;
+}
