@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1 #{title}
+    ul.list-group
+        each tour, i in tours
+            li.list-group-item
+                a(href="/tour/"+tour._id)= tour.title
+    br
