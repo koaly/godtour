@@ -100,7 +100,17 @@ router.get('/:id', function(req, res){
 router.post('/:id', function(req, res){
 
     Tour.findById(req.params.id, function(err, tour){
-        if (tour.now_seat) tour.now_seat--;
+        if (tour.now_seat) {
+            tour.now_seat--;
+            // console.log(req.user.tour);
+            req.user.tour.push(tour._id);
+        }
+        req.user.save(function(err){
+            if (err){
+                console.log(err);
+                return;
+            }
+        });
         tour.save(function(err){
             if (err){
                 console.log(err);

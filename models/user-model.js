@@ -30,6 +30,9 @@ const userSchema = new Schema({
 	},
 	email: {
 		type: String
+	},
+	tour: {
+		type: [String]
 	}
 })
 
