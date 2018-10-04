@@ -1,36 +1,42 @@
 doctype html
 html
     head
-        title TO.UR WORLD!
+        title TO.UR WORLD! 
+        
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous")
-        link(href="/public/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
-        link(href="/css/style.css", rel="stylesheet")
-        link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
+        link(rel="stylesheet" href="../public/bower_components/bootstrap/dist/css/bootstrap.css")
+        link(rel="stylesheet" href="../public/stylesheet/css/style.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit")
+
     body(style="font-family: 'Kanit', sans-serif;")
+
         nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
-            a.navbar-brand(href='/') TO.UR WORLD!
-                img(src='https://lh6.googleusercontent.com/use39GA8LnmyzpbJ_XaB6hFK1dCu0waY6kI98167GA7KDSvgvL5YFno0ExoeVlh7cZatVv5OoYA6yeILJWxs=w2560-h1442')
+            a.navbar-brand(href='/' ) TO.UR WORLD! 
+            img(src='https://lh5.googleusercontent.com/IXstOoeu7-qUrmmswRctyoLeOu9m-T6yR-dPA9Ja-fdbRljbcDxmb2qHpMV3gJCmpaFSsY6M2a_-bJwMSyLE=w1366-h625' style='width:100px; height:50px')
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbars', aria-controls='navbars', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navbars.collapse.navbar-collapse
+           
                 ul.navbar-nav.mr-auto
-                    li.nav-item
+                    //li.nav-item
                         a.nav-link(href='/')
                             | Home 
                             span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='/tour') Tour List
-                    
+                ul.nav.navbar-nav.navbar-right    
                     if(!user)
-                        li.nav-item
+                        li.nav-item.color-red
                             a.nav-link(href='/auth/login') Login
                     else
                         li.nav-item
                             a.nav-link(href='/auth/logout') Logout
                         li.nav-item
                             a.nav-link(href='/profile') #{user.username}
+                
         br
-
+        
+        
         .container
             //- != messages('message', locals)
             if errors
