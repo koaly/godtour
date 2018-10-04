@@ -96,4 +96,30 @@ router.get('/:id', function(req, res){
     });
 });
 
+router.post('/:id', function(req, res){
+
+    Tour.findById(req.params.id, function(err, tour){
+        if (tour.now_seat) tour.now_seat--;
+        tour.save(function(err){
+            if (err){
+                console.log(err);
+                return;
+            } else {
+                res.redirect('/');
+            }
+        });
+    });
+
+    // Article.update(query, article, function(err){
+    //     if(err){
+    //         console.log(err);
+    //         return;
+    //     }
+    //     else{
+    //         req.flash('success', 'อัปเดตบทความ');
+    //         res.redirect('/');
+    //     }
+    // });
+});
+
 module.exports = tour = router;
