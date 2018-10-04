@@ -12,7 +12,8 @@ router.get('/', function(req, res){
         } else{
             res.render('show_tour',{
                 title: 'Tour List',
-                tours: tours
+                tours: tours,
+                user: req.user
             });
         }
     });
@@ -21,7 +22,8 @@ router.get('/', function(req, res){
 // Add Route
 router.get('/add', function(req, res){
     res.render('add_tour', {
-        title: 'Add TOUR'
+        title: 'Add TOUR',
+        user: req.user
     });
 });
 
@@ -32,6 +34,7 @@ router.post('/add', function(req, res){
     if (err){
         res.render('add_tour', {
             title: 'Add TOUR',
+            user: req.user,
             errors: err
         });
     } else{
