@@ -6,7 +6,8 @@ block content
     if tour.now_seat
         h5 #{tour.now_seat} seat(s) remaining!
         form(method="POST", action="/tour/"+tour._id)
-            input.btn.btn-primary(type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
+            if user
+                input.btn.btn-primary(type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
     else
         h5 out of order sorry!
     br

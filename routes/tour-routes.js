@@ -91,7 +91,8 @@ router.post('/add', function(req, res){
 router.get('/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         res.render('one_tour', {
-            tour: tour
+            tour: tour,
+            user: req.user
         });
     });
 });
