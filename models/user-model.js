@@ -3,14 +3,37 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     //user information
-    username: String,
-    googleId: String,
-	surname: String,
-	lastname: String,
-	gender: String,
-	photo: String,
-	phone: String,
-	email: String
+    username:{
+		type : String,
+		required: true
+	},
+	password:{
+		type: String
+	},
+    googleId:{
+		type: String
+	},
+	surname:{
+		type: String
+	},
+	lastname:{
+		type: String
+	},
+	gender:{
+		type: String
+	},
+	photo: {
+		type: String
+	},
+	phone: {
+		type: String
+	},
+	email: {
+		type: String
+	},
+	tour: {
+		type: [String]
+	}
 })
 
 const User = mongoose.model('user',userSchema);

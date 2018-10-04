@@ -12,7 +12,8 @@ router.get('/', function(req, res){
         } else{
             res.render('show_tour',{
                 title: 'Tour List',
-                tours: tours
+                tours: tours,
+                user: req.user
             });
         }
     });
@@ -21,7 +22,8 @@ router.get('/', function(req, res){
 // Add Route
 router.get('/add', function(req, res){
     res.render('add_tour', {
-        title: 'Add TOUR'
+        title: 'Add TOUR',
+        user: req.user
     });
 });
 
@@ -32,6 +34,7 @@ router.post('/add', function(req, res){
     if (err){
         res.render('add_tour', {
             title: 'Add TOUR',
+            user: req.user,
             errors: err
         });
     } else{
@@ -88,9 +91,46 @@ router.post('/add', function(req, res){
 router.get('/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         res.render('one_tour', {
-            tour: tour
+            tour: tour,
+            user: req.user
         });
     });
+});
+
+router.post('/:id', function(req, res){
+
+    Tour.findById(req.params.id, function(err, tour){
+        if (tour.now_seat) {
+            tour.now_seat--;
+            // console.log(req.user.tour);
+            req.user.tour.push(tour._id);
+        }
+        req.user.save(function(err){
+            if (err){
+                console.log(err);
+                return;
+            }
+        });
+        tour.save(function(err){
+            if (err){
+                console.log(err);
+                return;
+            } else {
+                res.redirect('/');
+            }
+        });
+    });
+
+    // Article.update(query, article, function(err){
+    //     if(err){
+    //         console.log(err);
+    //         return;
+    //     }
+    //     else{
+    //         req.flash('success', 'อัปเดตบทความ');
+    //         res.redirect('/');
+    //     }
+    // });
 });
 
 module.exports = tour = router;
