@@ -57,24 +57,18 @@ router.post('/add', function(req, res){
         tour.description = req.body.description;
         tour.highlight = req.body.highlight;
         // date and time attributes
-        tour.start_book = req.body.start_book_date;
-        time = req.body.start_book_time.split(':');
-        tour.start_book.setHours(parseInt(time[0]), parseInt(time[1]));    
+        time = req.body.start_book_date + "T" + req.body.start_book_time;
+        tour.start_book = time
 
-        tour.end_book = req.body.end_book_date;
-        time = req.body.end_book_time.split(':');
-        tour.end_book.setHours(parseInt(time[0]), parseInt(time[1]));    
+        time = req.body.end_book_date + "T" + req.body.end_book_time;
+        tour.end_book = time;
 
-        tour.start_trip = req.body.start_trip;
-        time = req.body.depart_time.split(':');
-        tour.start_trip.setHours(parseInt(time[0]), parseInt(time[1]));    
+        time = req.body.start_trip + "T" + req.body.depart_time;        
+        tour.start_trip = time;
 
-        tour.end_trip = req.body.end_trip;
-        time = req.body.return_time.split(':');
-        tour.end_trip.setHours(parseInt(time[0]), parseInt(time[1]));    
+        time = req.body.end_trip + "T" + req.body.return_time;
+        tour.end_trip = time;
 
-        tour.highlight = req.body.highlight;
-        tour.description = req.body.description;
         tour.save(function(err){
             if (err){
                 console.log(err);
@@ -97,6 +91,7 @@ router.get('/:id', function(req, res){
     });
 });
 
+// Booking
 router.post('/:id', function(req, res){
 
     Tour.findById(req.params.id, function(err, tour){
@@ -120,17 +115,66 @@ router.post('/:id', function(req, res){
             }
         });
     });
+});
 
-    // Article.update(query, article, function(err){
+// Load Edit Form
+router.get('/edit/:id', function(req, res){
+    Tour.findById(req.params.id, function(err, tour){
+        res.render('edit_tour', {
+            titile: 'Edit Article',
+            tour: tour
+        });
+    });
+});
+
+// Update Submit POST Route
+router.post('/edit/:id', function(req, res){
+    Tour.findById(req.params.id, function(err, tour){
+        if (req.body.title) tour.title = req.body.title;
+        // tour.organizer = 'admin';
+        if (req.body.price) tour.price = req.body.price;
+        if (req.body.destination) tour.destination = req.body.destination;
+        if (req.body.day_duration) tour.day_duration = req.body.day_duration;
+        if (req.body.night_duration) tour.night_duration = req.body.night_duration;
+        if (req.body.flight_airline) tour.flight_airline = req.body.flight_airline;
+        if (req.body.flight_airport) tour.flight_airport = req.body.flight_airport;
+        if (req.body.flight_depart) tour.flight_depart = req.body.flight_depart;
+        if (req.body.flight_return) tour.flight_return = req.body.flight_return;
+        if (req.body.food) tour.food = req.body.food;
+        if (req.body.stars) tour.stars = req.body.stars;
+        if (req.body.max_seat) tour.max_seat = req.body.max_seat;
+        if (req.body.now_seat) tour.now_seat = req.body.now_seat;
+        if (req.body.description) tour.description = req.body.description;
+        if (req.body.highlight) tour.highlight = req.body.highlight;
+        // date and time attributes
+        if (req.body.start_book_date && req.body.start_book_time) tour.start_book = req.body.start_book_date + "T" + req.body.start_book_time;
+
+        if (req.body.end_book_date && req.body.end_book_time) tour.end_book = req.body.end_book_date + "T" + req.body.end_book_time;
+
+        if (req.body.start_trip && req.body.depart_time) tour.start_trip = req.body.start_trip + "T" + req.body.depart_time;        
+
+        if (req.body.end_trip && req.body.return_time) tour.end_trip = req.body.end_trip + "T" + req.body.return_time;
+
+        let query = {_id:req.params.id}
+
+        tour.save(function(err){
+            if (err){
+                console.log(err);
+                return;
+            } else {
+                res.redirect('/');
+            }
+        });
+    });
+});
+    // Tour.update(query, tour, function(err){
     //     if(err){
     //         console.log(err);
     //         return;
-    //     }
-    //     else{
-    //         req.flash('success', 'อัปเดตบทความ');
+    //     } else {
+    //         // req.flash('success', 'Article Updated');
     //         res.redirect('/');
     //     }
     // });
-});
-
+// });
 module.exports = tour = router;
