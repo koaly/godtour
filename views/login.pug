@@ -3,5 +3,17 @@ extends layout
 block content
     .container
     h2 login using
-    a.mb-0(href="/auth/google")
-        button(type="button") google+
+    form(method="POST", action="/auth/login")
+        #form-group
+            label username:
+            input.form-control(name="username",type='text')
+        #form-group
+            label password:
+            input.form-control(name="password",type='password')
+
+    br 
+    a(href="/auth/google")
+        button(class="btn btn-primary" type="button") Login with Google
+    //nothing here bro
+    a(href="login")
+        button(class="btn btn-primary" type="button") Login
