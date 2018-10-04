@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    .color-red
+    h1 Welcome back #{user.username}
+
+
+    p infomation use this data for create website
+    img.img-thumbnail(src=user.photo+'0',style='width:200px; height:200px')
+    ul
+        li #{user.username}
+        li List Item 2
+        li List Item 3
+        li List Item 4
+
+    p #{user}
+
+    table.table
+        thead
+            tr
+                th(scope='col') #
+                th(scope='col') First
+                th(scope='col') Last
+                th(scope='col') Handle
+        tbody
+            tr
+                th(scope='row') 1

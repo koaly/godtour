@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 *.swp
+=======
+#key
+config/keys.js
+>>>>>>> 7e64f43cc05b66b95e6ef5be94b4169a5fc06446

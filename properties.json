@@ -1,3 +1,6 @@
 {
-    "websiteName": "To-ur-World"
+    "server": {
+        "name":"tour-ur-world",
+        "port": 3000
+    }
 }

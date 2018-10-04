@@ -18,6 +18,11 @@ section .register_picture{
 	outline-width: 1px;
 }
 
+section .register_picture .frame_profile_picture{
+	width: 200px;
+	height:250px;
+}
+
 section .register_picture .picture_center{
 	display: block;
 	width: 200px;

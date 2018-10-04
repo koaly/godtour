@@ -1,6 +1,15 @@
 html{
 	background-color: #E0FFFF;
 	clear: both;
+	margin: 0 auto;
+	padding: 0;
+	margin-top: -20px;
+}
+
+body{
+	padding: 0;
+	margin: 0 auto;
+	margin-top: 0;
 }
 
 header{
@@ -30,21 +39,26 @@ header ul li {
 header ul li .top_menu{
 	text-decoration: none;
 	width: 120px;
-	margin-left: 20px;
+	margin-right: 20px;
 }
 
 header ul li .top_menu:hover{
 	width: 120px;
-	margin-left: 20px;
+	margin-right: 20px;
 	text-decoration: none;
 /*	font-weight: bold;*/
 	color: red;
 }
 
-header ul li .user_choice , header ul .component_user_choice{
+header ul li .user_choice{
+	text-decoration: none;
+	color: blue;
+	margin-right: 10px;
+}
+
+header ul .component_user_choice{
 	text-decoration: none;
 	margin-right: 10px;
-	margin-left: 10px;
 	color: blue;
 }
 
