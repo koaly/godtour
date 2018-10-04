@@ -73,13 +73,6 @@ app.use(expressValidator({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//Home page
-app.get('/',function(req,req){
-    req.render('index',{
-        title: properties.server.name,
-        user: req.user
-    })    
-});
 
 //create cookie
 app.use(cookieSession({
@@ -103,10 +96,13 @@ app.use('/profile',profileRoutes);
 app.use('/tour',tourRoutes);
 
 
-//let tours = require('./routes/tours');
-//let users = require('./routes/users');
-//app.use('/tours', tours);
-//app.use('/users', users);
+//Home page
+app.get('/',function(req,res){
+    res.render('index',{
+        title: properties.server.name,
+        user: req.user
+    })    
+});
 
 //Start server open at specify port
 const server = app.listen(port,function(){

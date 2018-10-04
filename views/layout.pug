@@ -3,7 +3,7 @@ html
     head
         title TO.UR WORLD!
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous")
-        link(href="/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
+        link(href="/public/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
         link(href="/css/style.css", rel="stylesheet")
         link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
     body(style="font-family: 'Kanit', sans-serif;")
@@ -19,8 +19,15 @@ html
                             span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='/tour') Tour List
-                    li.nav-item
-                        a.nav-link(href='/profile') Profile
+                    
+                    if(!user)
+                        li.nav-item
+                            a.nav-link(href='auth/login') Login
+                    else
+                        li.nav-item
+                            a.nav-link(href='auth/logout') Logout
+                        li.nav-item
+                            a.nav-link(href='/profile') #{user.username}
         br
 
         .container
