@@ -22,10 +22,10 @@ html
                     
                     if(!user)
                         li.nav-item
-                            a.nav-link(href='auth/login') Login
+                            a.nav-link(href='/auth/login') Login
                     else
                         li.nav-item
-                            a.nav-link(href='auth/logout') Logout
+                            a.nav-link(href='/auth/logout') Logout
                         li.nav-item
                             a.nav-link(href='/profile') #{user.username}
         br
