@@ -10,7 +10,18 @@ router.get('/register',function(req,res){
     });
 });
 
+router.post('/register',function(req,res){
+    //initilize variable from form
+    const name = req.body.name;
+    const gender = req.body.gender;
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    const password2 = req.body.password2;
 
+    //check not empty 
+    req.checkBody('name','Name is required').notEmpty();
+});
 
 //auth login
 router.get('/login',function(req,res){
