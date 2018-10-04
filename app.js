@@ -5,22 +5,27 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const flash = require('connect-flash');
 
-//import auth-routes.js
-const authRoutes = require('./routes/auth-routes');
-const passportSetup = require('./config/passport-setup');
-const profileRoutes = require('./routes/profile-routes')
-const tourRoutes = require('./routes/tour-routes');
 
+const passportSetup = require('./config/passport-setup');
+
+//routes
+const authRoutes = require('./routes/auth-routes');
+const tourRoutes = require('./routes/tour-routes');
+const profileRoutes = require('./routes/profile-routes')
+const indexRoutes = require('./routes/index-routes')
+
+//mongodDB database
 const mongoose = require('mongoose');
 
 //ask me for connect to keys <rpwrepenwork>
 const keys = require('./config/keys');
 
+
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-//Database Connection
 
-mongoose.connect(keys.mongodb.dbURI,() =>{
+//Database Connection
+mongoose.connect(keys.mongodb.dbURI,function(){
     console.log('Connected to MongoDB');
 });
 
@@ -91,18 +96,10 @@ app.use(passport.session());
 //Route Files
 
 //set up routes
+app.use('/',indexRoutes);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 app.use('/tour',tourRoutes);
-
-
-//Home page
-app.get('/',function(req,res){
-    res.render('index',{
-        title: properties.server.name,
-        user: req.user
-    })    
-});
 
 //Start server open at specify port
 const server = app.listen(port,function(){
