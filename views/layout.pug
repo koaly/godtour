@@ -25,13 +25,15 @@ html
                         a.nav-link(href='/tour') Tour List
                 ul.nav.navbar-nav.navbar-right    
                     if(!user)
-                        li.nav-item.color-red
-                            a.nav-link(href='/auth/login') Login
+                        li.nav-item.block
+                            a(href='/auth/login') Login
+                        li.nav-item.block
+                            a(href='/auth/register') Register
                     else
-                        li.nav-item
-                            a.nav-link(href='/auth/logout') Logout
-                        li.nav-item
-                            a.nav-link(href='/profile') #{user.username}
+                        li.nav-item.block
+                            a#tab-2(href='/auth/logout') Logout
+                        li.nav-item.block
+                            a#tab-3(href='/profile') #{user.username}
                 
         br
         

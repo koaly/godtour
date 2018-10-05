@@ -1,9 +1,54 @@
 .color-red{
     background-color:red;
 }
+
+.block{
+    /*background-color:dimgrey;*/
+    padding: 10px 20px;
+}
+
 .custom-cur {
     cursor: url('https://lh6.googleusercontent.com/sqPUKM6D2WsmYc74AuXD-FCkPXzAVwHHzNIoKqWCi98EPrB-YvnJfimcsi47iEqFRjdCEILSi-qb8A=w2560-h1244');
 }
 .auto-cursor-haha{
     cursor:auto;
 }
+
+a:link{
+    color:black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00FF7F;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a#tab-2:hover {
+    color:red;
+}
+
+a#tab-3:hover {
+    color:lightgray;
+}
+
+a:active {
+    color: slategrey;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:link{
+    color:black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
