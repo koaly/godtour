@@ -21,6 +21,11 @@ router.post('/register',function(req,res){
 
     //check not empty 
     req.checkBody('name','Name is required').notEmpty();
+    req.checkBody('email','Email is required').notEmpty();
+    req.checkBody('email','Email is not valid').isEmail();
+    req.checkBody('username','Username is required').notEmpty();
+    req.checkBody('password','Password is required').notEmpty();
+    
 });
 
 //auth login
@@ -29,7 +34,9 @@ router.get('/login',function(req,res){
         user: req.user
     });
 });
+router.post('/login',function(req,res){
 
+});
 //auth logout
 router.get('/logout',function(req,res){
     req.logout();
