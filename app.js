@@ -5,8 +5,6 @@ const expressValidator = require('express-validator');
 const expressSession = require('express-session');
 
 const flash = require('connect-flash');
-
-
 const passportSetup = require('./config/passport-setup');
 
 //routes
@@ -53,16 +51,6 @@ app.set('view engine','pug');
 //set static public 
 app.use(express.static(path.join(__dirname, '/public')));
 
-
-/*
-//Express Session Middleware
-app.use(session({
-    secret:'keyboard cat',
-    resave: true,
-    saveUninitialized: true
-}));
-*/
-
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function(req, res, next){
@@ -88,7 +76,7 @@ app.use(expressValidator({
     }
 }));
 
-// Body Parser
+// Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
