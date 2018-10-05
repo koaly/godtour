@@ -30,6 +30,7 @@ mongoose.connect(keys.mongodb.dbURI,function(){
 });
 
 
+
 //Get detail of Server
 const properties = require('./properties.json');
 //Initialize Appication
@@ -42,12 +43,18 @@ const port = properties.server.port;
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine','pug');
 
-// Express Session Middleware
-// app.use(session({
-//     secret:'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true
-// }));
+//set static public 
+app.use(express.static(path.join(__dirname, '/public')));
+
+
+/*
+//Express Session Middleware
+app.use(session({
+    secret:'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+*/
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
@@ -108,7 +115,7 @@ const server = app.listen(port,function(){
 
 
 
-
+/*
 //error handle
 app.get('/404',function(req,res,next){
     next()
@@ -144,4 +151,4 @@ app.use(function(err, req, res, next){
     res.status(err.status || 500);
     res.render('500', { error: err });
   });
-  
+*/  
