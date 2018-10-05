@@ -8,6 +8,8 @@ router.get('/',function(req,res){
         user: req.user
 
     });
+    console.log('inside the homepage function');
+    console.log(req.sessionID)
 });
 
 //export module

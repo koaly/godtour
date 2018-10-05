@@ -1,6 +1,9 @@
 Porject: God Touring Project 
 
-Run appication:
-./node app.js
+Run Nodejs 
+    /node app.js
+
+Run with Nodemon
+    /nodemon --ignore sessions/ app.js
 
 

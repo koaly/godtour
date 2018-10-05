@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-const session = require('express-session');
+const expressSession = require('express-session');
+
 const flash = require('connect-flash');
 
 
@@ -14,6 +15,10 @@ const tourRoutes = require('./routes/tour-routes');
 const profileRoutes = require('./routes/profile-routes')
 const indexRoutes = require('./routes/index-routes')
 
+
+//uuid
+const uuid = require('uuid/v4')
+const fileStore = require('session-file-store')(expressSession)
 //mongodDB database
 const mongoose = require('mongoose');
 
@@ -21,7 +26,9 @@ const mongoose = require('mongoose');
 const keys = require('./config/keys');
 
 
-const cookieSession = require('cookie-session');
+
+//const cookieSession = require('cookie-session');
+
 const passport = require('passport');
 
 //Database Connection
@@ -86,13 +93,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+// 1 date
+//const expiryDate = new Date(Date.now() + 24* 60 * 60 * 1000 );
 //create cookie
-app.use(cookieSession({
-    //time out of cookie
-    maxAge:12*60*60*1000,
-    
+app.use(expressSession({
+    genid:function(req){
+        console.log('Inside the session middleware');
+        console.log(req.sessionID);
+        return uuid();
+    },
+    store: new fileStore(),
     //must use key.js in config not in github ask me if you wish
-    keys:[keys.session.cookieKey]
+    secret: 'keyboard cat',
+    //key: keys.session.cookieKey,
+    resave: false,
+    saveUninitialized: true,
+    /*
+    cookie:{
+        secureProxy: true,
+        httpOnly: true,
+        domain: 'godtor',
+        expires: expiryDate
+    }
+    */
 }));
 
 //initialize passport
@@ -115,7 +138,6 @@ const server = app.listen(port,function(){
 
 
 
-/*
 //error handle
 app.get('/404',function(req,res,next){
     next()
@@ -151,4 +173,4 @@ app.use(function(err, req, res, next){
     res.status(err.status || 500);
     res.render('500', { error: err });
   });
-*/  
+  
