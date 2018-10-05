@@ -93,7 +93,7 @@ app.use(expressSession({
     store: new fileStore(),
     //must use key.js in config not in github ask me if you wish
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie:{
         expires: expiryDate

@@ -1,3 +1,9 @@
 .color-red{
     background-color:red;
 }
+.custom-cur {
+    cursor: url('https://lh6.googleusercontent.com/sqPUKM6D2WsmYc74AuXD-FCkPXzAVwHHzNIoKqWCi98EPrB-YvnJfimcsi47iEqFRjdCEILSi-qb8A=w2560-h1244');
+}
+.auto-cursor-haha{
+    cursor:auto;
+}
