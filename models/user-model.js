@@ -33,6 +33,11 @@ const userSchema = new Schema({
 	},
 	tour: {
 		type: [String]
+	},
+	state:{
+		type: Number,
+		default: 0,
+		required: true
 	}
 })
 
