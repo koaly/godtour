@@ -94,7 +94,7 @@ app.use(bodyParser.json());
 
 
 // 1 date
-//const expiryDate = new Date(Date.now() + 24* 60 * 60 * 1000 );
+const expiryDate = new Date(Date.now() + 24* 60 * 60 * 1000 );
 //create cookie
 app.use(expressSession({
     genid:function(req){
@@ -105,17 +105,11 @@ app.use(expressSession({
     store: new fileStore(),
     //must use key.js in config not in github ask me if you wish
     secret: 'keyboard cat',
-    //key: keys.session.cookieKey,
     resave: false,
     saveUninitialized: true,
-    /*
     cookie:{
-        secureProxy: true,
-        httpOnly: true,
-        domain: 'godtor',
         expires: expiryDate
     }
-    */
 }));
 
 //initialize passport
