@@ -68,10 +68,13 @@ passport.use(
             if(currentUser){
                 //already have the user
                 console.log('found user login with',currentUser);
+                if(password == currentUser.password && username == currentUser.username){
+
+                }
                 done(null,currentUser);
             }
             else{
-
+                //not found
             }
         });
     })
