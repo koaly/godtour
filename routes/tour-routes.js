@@ -74,7 +74,7 @@ router.post('/add', function(req, res){
                 console.log(err);
                 return;
             } else {
-                // req.flash('success', 'New TOUR added!');
+                req.flash('success', 'New TOUR added!');
                 res.redirect('/');
             }
         });
@@ -121,7 +121,7 @@ router.post('/:id', function(req, res){
 router.get('/edit/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         res.render('edit_tour', {
-            titile: 'Edit Article',
+            title: 'Edit Article',
             tour: tour
         });
     });
@@ -162,6 +162,7 @@ router.post('/edit/:id', function(req, res){
                 console.log(err);
                 return;
             } else {
+                req.flash('success', 'Update ' + tour.title + ' successful!');
                 res.redirect('/');
             }
         });
