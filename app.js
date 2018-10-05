@@ -90,7 +90,7 @@ app.use(expressSession({
         console.log(req.sessionID);
         return uuid();
     },
-    store: new fileStore(),
+    //store: new fileStore(),
     //must use key.js in config not in github ask me if you wish
     secret: 'keyboard cat',
     resave: true,

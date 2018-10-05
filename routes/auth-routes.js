@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
-
+const bcrypt = require('passport');
 
 //auth register
 
@@ -25,7 +25,32 @@ router.post('/register',function(req,res){
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('username','Username is required').notEmpty();
     req.checkBody('password','Password is required').notEmpty();
+    req.checkBody('password2','Password do not match').equals(req.body.password);
+
+    let errors = req.vaildationErrors();
     
+    if(errors){
+        console.log(errors);
+    }else{
+        let newUser = new User({
+            name:name,
+            email:email,
+            gender:gender,
+            username:username,
+            password:password
+        });
+        bcrypt.genSalt(10,function(err,salt){
+            bcrypt.hash(newUser.passport,salt,function(err,hash){
+                if(err){
+                    console.log(err);
+                }
+                newUser.passport = hash;
+                newUser.save(function(err){
+
+                });
+            })
+        });
+    }
 });
 
 //auth login
