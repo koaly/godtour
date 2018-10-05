@@ -60,7 +60,8 @@ passport.use(
 );
 passport.use(
     new LocalStragtegy({
-       usernameField: 'username'
+       usernameField: 'username',
+       callbackURL:'/'
     },function(username,password,done){
         console.log('inside the localStragtegy callback');
         console.log('login with ',username);
@@ -68,14 +69,18 @@ passport.use(
         let query = {
             username:username
         };
-        User.findOne(query).then(function(err,currentUser){
-            if(err) throw err;
+        User.findOne(query).then(function(currentUser){
+            console.log('inside findone')
             
             if(currentUser){
                 //already have the user
                 console.log('found user login with',currentUser);
-                bcrypt.compare(password,user.password,function(err,isMatch){
-                    if(err) throw err;
+                bcrypt.compare(password,currentUser.password,function(err,isMatch){
+                    console.log('input password:',password)
+                    console.log('user password:',currentUser.password)
+                    if(err){
+                        console.log(err)
+                    }
                     if(isMatch){
                         console.log('login success with',currentUser);
                         done(null,currentUser);

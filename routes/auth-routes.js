@@ -45,11 +45,11 @@ router.post('/register',function(req,res){
             password:password
         });
         bcrypt.genSalt(10,function(err,salt){
-            bcrypt.hash(newUser.passport,salt,function(err,hash){
+            bcrypt.hash(newUser.password,salt,function(err,hash){
                 if(err){
                     console.log(err);
                 }
-                newUser.passport = hash;
+                newUser.password = hash;
                 newUser.save(function(err){
                     if(err){
                         console.log(err);
@@ -70,8 +70,8 @@ router.get('/login',function(req,res){
         user: req.user
     });
 });
-router.post('/login',function(req,res){
-
+router.post('/login',passport.authenticate('local'),function(req,res){
+    res.redirect('/profile/');
 });
 //auth logout
 router.get('/logout',function(req,res){
