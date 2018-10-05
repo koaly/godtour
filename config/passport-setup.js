@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const LocalStragtegy = require('passport-local').Strategy;
-
+const bcrypt = require('bcryptjs');
 //import key.js
 /**
  * I doesn't add this file to github you ask me if you want
@@ -64,17 +64,30 @@ passport.use(
     },function(username,password,done){
         console.log('inside the localStragtegy callback');
         console.log('login with ',username);
-        User.findOne({username:username})
-        .then(function(currentUser){
+        
+        let query = {
+            username:username
+        };
+        User.findOne(query).then(function(err,currentUser){
+            if(err) throw err;
+            
             if(currentUser){
                 //already have the user
                 console.log('found user login with',currentUser);
-                if(password == currentUser.password && username == currentUser.username){
-                    console.log('login success with',currentUser);
-                    done(null,currentUser);
-                }
+                bcrypt.compare(password,user.password,function(err,isMatch){
+                    if(err) throw err;
+                    if(isMatch){
+                        console.log('login success with',currentUser);
+                        done(null,currentUser);
+                    }else{
+                        console.log('wrong password',currentUser);
+                        done(null,false,{message: 'Wrong password'});
+                    } 
+                });
             }
             else{
+                console.log('not found user')
+                done(null,false,{message:'No user found'});
                 //not found
             }
         });

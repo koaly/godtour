@@ -1,7 +1,10 @@
 const router = require('express').Router();
 const passport = require('passport');
-const bcrypt = require('passport');
+const bcrypt = require('bcryptjs');
 
+//import user
+
+const User = require('../models/user-model');
 //auth register
 
 router.get('/register',function(req,res){
@@ -11,10 +14,11 @@ router.get('/register',function(req,res){
 });
 
 router.post('/register',function(req,res){
+    console.log('get submit POST')
     //initilize variable from form
-    const name = req.body.name;
-    const gender = req.body.gender;
-    const email = req.body.email;
+    let name = req.body.name;
+    let gender = req.body.gender;
+    let email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
     const password2 = req.body.password2;
@@ -27,10 +31,11 @@ router.post('/register',function(req,res){
     req.checkBody('password','Password is required').notEmpty();
     req.checkBody('password2','Password do not match').equals(req.body.password);
 
-    let errors = req.vaildationErrors();
-    
+    let errors = req.validationErrors();
     if(errors){
-        console.log(errors);
+        res.render('register',{
+            errors: errors
+        })
     }else{
         let newUser = new User({
             name:name,
@@ -46,7 +51,13 @@ router.post('/register',function(req,res){
                 }
                 newUser.passport = hash;
                 newUser.save(function(err){
-
+                    if(err){
+                        console.log(err);
+                        return;
+                    }else{
+                        req.flash('success','You are now register');
+                        res.redirect('/profile')
+                    }
                 });
             })
         });
