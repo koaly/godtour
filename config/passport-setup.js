@@ -12,6 +12,7 @@ const User = require('../models/user-model');
 
 //serializeUser
 passport.serializeUser(function(user,done){
+    console.log('Inside serializeUser callback')
     done(null,user.id);
 });
 
@@ -69,9 +70,9 @@ passport.use(
                 //already have the user
                 console.log('found user login with',currentUser);
                 if(password == currentUser.password && username == currentUser.username){
-
+                    console.log('login success with',currentUser);
+                    done(null,currentUser);
                 }
-                done(null,currentUser);
             }
             else{
                 //not found
