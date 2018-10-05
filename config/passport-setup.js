@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
+const LocalStragtegy = require('passport-local').Strategy;
 
 //import key.js
 /**
@@ -54,5 +55,24 @@ passport.use(
             }
         });
         
+    })
+);
+passport.use(
+    new LocalStragtegy({
+       usernameField: 'username'
+    },function(username,password,done){
+        console.log('inside the localStragtegy callback');
+        console.log('login with ',username);
+        User.findOne({username:username})
+        .then(function(currentUser){
+            if(currentUser){
+                //already have the user
+                console.log('found user login with',currentUser);
+                done(null,currentUser);
+            }
+            else{
+
+            }
+        });
     })
 );
