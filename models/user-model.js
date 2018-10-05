@@ -13,7 +13,7 @@ const userSchema = new Schema({
     googleId:{
 		type: String
 	},
-	surname:{
+	firstname:{
 		type: String
 	},
 	lastname:{
