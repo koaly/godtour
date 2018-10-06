@@ -43,18 +43,18 @@ router.get('/signup',(req,res,next)=>{
 
 //next time we will use this instead register
 router.post('/signup',(req,res,next)=>{
-    User.find(
+    User.findOne(
         {
             email:req.body.email
         })
         .exec()
         .then(user =>{
             console.log(user)
-            if(user.length >= 1){
-                return 
-                    res.status(409).json({
+            if(user){                
+                return res.status(409).json({
                         message : "This email already in use"
-                    });
+                
+                });
             }else{
                 bcrypt.hash(req.body.password,10,(err,hash)=>{
                     if(err){
@@ -77,7 +77,7 @@ router.post('/signup',(req,res,next)=>{
                             state: req.body.state
                         });
                         newUser
-                            save()
+                            .save()
                             .then(result =>{
                                 res.status(201).json({
                                     message: "create newUser Success",
@@ -91,7 +91,7 @@ router.post('/signup',(req,res,next)=>{
                                         state: result.state,
                                         request: {
                                             type: "GET",
-                                            url: "http://localhost:3000/user"+result._id
+                                            url: "http://localhost:3000/user/"+result._id
                                         }
                                     }
                                 });
