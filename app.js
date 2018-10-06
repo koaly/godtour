@@ -30,7 +30,10 @@ const keys = require('./config/keys');
 const passport = require('passport');
 
 //Database Connection
-mongoose.connect(keys.mongodb.dbURI,function(){
+mongoose.connect(keys.mongodb.dbURI,function(err){
+    if(err){
+        console.log(err);
+    }
     console.log('Connected to MongoDB');
 });
 
