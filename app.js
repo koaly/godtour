@@ -107,8 +107,11 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-//Route Files
+app.use((req,res,next)=>{
+    res.status(200).json({
+        messages: 'server is now running'
+    });
+});
 
 //set up routes
 app.use('/',indexRoutes);
@@ -116,46 +119,4 @@ app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 app.use('/tour',tourRoutes);
 
-//Start server open at specify port
-const server = app.listen(port,function(){
-    console.log(`Express running -> Port ${server.address().port}`);
-});
-
-
-
-//error handle
-app.get('/404',function(req,res,next){
-    next()
-});
-
-app.get('/403',function(req,res,next){
-    let err = new Error('not allowed!');
-    err.status = 403;
-    next(err);
-});
-
-app.use(function(req,res,next){
-
-    res.status(404);
-
-    res.format({
-        html: function(){
-            res.render('404',{url:req.url});
-        },
-        json: function(){
-            res.json({error:'Not found'})
-        },
-        default: function(){
-            res.type('txt').send('Not found')
-        }
-    });
-});
-
-app.use(function(err, req, res, next){
-    // we may use properties of the error object
-    // here and next(err) appropriately, or if
-    // we possibly recovered from the error, simply next().
-    res.status(err.status || 500);
-    res.render('500', { error: err });
-  });
-  
+module.exports = app;
