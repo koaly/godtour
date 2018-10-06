@@ -1,17 +1,42 @@
 extends layout
 
 block content
-    h1 #{title}
     .container(style='margin-left:10px')
+        h1 #{title}
         .row
-            each tour, i in tours
-                .col-lg-4
-                    .card(style='width:400px')
-                        img.card-img-top(src='https://d1nabgopwop1kh.cloudfront.net/hotel-asset/30000002100149018_wh_32' alt='sample image')
-                        .card-body
-                            h4 #{tour.title}
-                            p organized by #{tour.organizer}
-                            a.btn.btn-primary(href="/tour/"+tour._id) See more
-                    <br>
-    
+            .col-lg-2
+                ul.nav.nav-pills.flex-column
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    hr.d-sm-none
+            .col-lg-8
+                each tour, i in tours
+                    .col-lg-
+                            .card
+                                img.card-img-top(src='https://d1nabgopwop1kh.cloudfront.net/hotel-asset/30000002100149018_wh_32' alt='sample image')
+                                .card-body
+                                    h4 #{tour.title}
+                                    p organized by #{tour.organizer}
+                                    a.btn.btn-primary(href="/tour/"+tour._id) See more
+                            <br>
+            .col-lg-2
+                p for something in the future
+                ul.nav.nav-pills.flex-column
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    li.nav-item
+                        a.nav-link(href='#') something
+                    hr.d-sm-none
+            
+            
         
