@@ -105,7 +105,10 @@ router.get('/logout',function(req,res){
 //auth with google
 router.get('/google',
     passport.authenticate('google',{
-        scope:['profile']
+        scope: [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ]
     },
     (req,res)=>{
         /*

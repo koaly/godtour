@@ -59,6 +59,7 @@ router.post('/signup',(req,res,next)=>{
                 bcrypt.hash(req.body.password,10,(err,hash)=>{
                     if(err){
                         return res.status(500).json({
+                            message: "No password to Hash",
                             error : err
                         });
                     }else{
