@@ -6,6 +6,18 @@ body{
     background-color:red;
 }
 
+.color-dark1{
+    background-color:#343a40;
+}
+
+.color-red{
+    background-color:red;
+}
+
+.color-red{
+    background-color:red;
+}
+
 .space{
     /*background-color:dimgrey;*/
     padding: 10px 20px;
@@ -34,6 +46,10 @@ a#tab-2:hover {
 
 a#tab-3:hover {
     color:lightgray;
+}
+
+a#tab-4:hover {
+    color:grey;
 }
 
 a:active {
@@ -69,6 +85,13 @@ a:link{
 
 #showcase p{
     font-size:30px;
+}
+
+#searchbar{
+  /*margin-left:200px;
+  margin-right:400px;*/
+  color:grey;
+  background:#343a40;
 }
 
 .fakeimg {
