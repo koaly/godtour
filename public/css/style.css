@@ -1,8 +1,12 @@
+body{
+    background-color: lightgrey;
+}
+
 .color-red{
     background-color:red;
 }
 
-.block{
+.space{
     /*background-color:dimgrey;*/
     padding: 10px 20px;
 }
@@ -46,6 +50,27 @@ a:link{
 .active-page{
     background-color:rgb(224, 221, 20);
 }
+
+#showcase{
+    min-height:325px;
+    background:url(https://i.imgur.com/LYlHwsN.png) 0 -600px;
+    /*background: black;*/
+    opacity: 0.9;
+    text-align:center;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color:white;
+}
+
+#showcase h1{
+    margin-top:0px;
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+#showcase p{
+    font-size:30px;
+}
+
 .fakeimg {
     height: 200px;
     background: #aaa;
