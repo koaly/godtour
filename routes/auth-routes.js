@@ -118,9 +118,11 @@ router.get('/google',
 ));
 
 router.get('/google/redirect',passport.authenticate('google'),function(req,res){
+    /*
     res.status(200).json({
         message: "Handling /GET request to /google/redirect"
     })
+    */
     res.redirect('/profile/');
 });
 
