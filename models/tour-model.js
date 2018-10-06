@@ -9,6 +9,10 @@ const tourSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    organizerId:{
+        type: String,
+        required: true
+    },
     price:{
         type: Number,
         required: true

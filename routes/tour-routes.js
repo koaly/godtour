@@ -48,7 +48,8 @@ router.post('/add', function(req, res){
         let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
-        tour.organizer = req.user._id;
+        tour.organizerId = req.user._id;
+        tour.organizer = req.user.username;
         tour.price = req.body.price;
         tour.destination = req.body.destination;
         tour.day_duration = req.body.day_duration;
@@ -81,7 +82,7 @@ router.post('/add', function(req, res){
                 console.log(err);
                 return;
             } else {
-                req.flash('success', 'New TOUR added!');
+                req.flash('success', 'Your ' + tour.title + ' added!');
                 res.redirect('/');
             }
         });
@@ -132,6 +133,7 @@ router.post('/:id', function(req, res){
                     console.log(err);
                     return;
                 } else {
+                    req.flash('success', 'Book ' + tour.title + ' successful!');
                     res.redirect('/');
                 }
             });
@@ -142,8 +144,13 @@ router.post('/:id', function(req, res){
 // Load Edit Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Tour.findById(req.params.id, function(err, tour){
+        if(!req.user.state || tour.organizerId != req.user._id){
+            req.flash('danger', 'You don\'t have permission to edit this tour.');
+            res.redirect('/');
+            return;
+        }
         res.render('edit_tour', {
-            title: 'Edit Article',
+            title: 'Edit Tour',
             tour: tour
         });
     });
@@ -197,7 +204,7 @@ router.delete('/:id', function(req, res){
     let query = {_id:req.params.id};
 
     Tour.findById(req.params.id, function(err, tour){
-         if(tour.organizer != req.user._id){
+        if(tour.organizerId != req.user._id){
             res.status(500).send();
         }
         else{
