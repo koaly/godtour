@@ -79,7 +79,7 @@ app.use(expressValidator({
         };
     }
 }));
-
+mongoose.Promise = global.Promise;
 //use morgan for tracking
 app.use(morgan('dev'));
 // Body Parser Middleware

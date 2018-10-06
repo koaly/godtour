@@ -6,11 +6,30 @@ const User = require('../models/user-model');
 
 router.get('/',(req,res,next)=>{
     User.find()
+        .select()
         .exec()
         .then(docs =>{
-            res.status(200).json({
-                docs
-            });
+            const reponse = {
+                count: docs.length,
+                user : docs.map(doc =>
+                {
+                    return{
+                        _id : doc._id,
+                        name : doc.username,
+                        firstname : doc.firstname,
+                        lastname : doc.lastname,
+                        gender : doc.gender,
+                        photo : doc.photo,
+                        email : doc.email,
+                        state : doc.state,    
+                        request : {
+                            type: "GET",
+                            url: "http://localhost:3000/user/"+doc._id
+                        }
+                    };
+                })
+            };
+            res.status(200).json(reponse);
         })
         .catch(err =>{
             res.status(500).json({
@@ -35,7 +54,6 @@ router.post('/add',(req,res,next)=>{
         photo: req.body.imgsrc,
         phone: req.body.phone,
         email: req.body.email,
-        tour: req.body.tour,
         state: req.body.state
     });
 
@@ -55,12 +73,9 @@ router.post('/add',(req,res,next)=>{
             });
         })
 });
-router.get('/:username',(req,res,next)=>{
-   const username = req.params.username;
-   User.findOne(
-        {
-           username: username
-        })
+router.get('/:userId',(req,res,next)=>{
+   const id = req.params.userId;
+   User.findById(id)
     .exec()
     .then(doc =>{
         console.log("From Database",doc);
@@ -81,12 +96,11 @@ router.get('/:username',(req,res,next)=>{
         });
     })
 });
-
-router.delete('/:username',(req,res,next)=>{
-    const username = req.params.username;
+router.delete('/:userId',(req,res,next)=>{
+    const id = req.params.userId;
     User.remove(
         {
-        username:username
+        _id : id
         })
         .exec()
         .then(result =>{
