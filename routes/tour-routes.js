@@ -21,7 +21,7 @@ router.get('/', function(req, res){
 });
 
 // Add Route
-router.get('/add', function(req, res){
+router.get('/add', ensureAuthenticated, function(req, res){
     res.render('add_tour', {
         title: 'Add TOUR',
         user: req.user
@@ -134,7 +134,7 @@ router.post('/:id', function(req, res){
 });
 
 // Load Edit Form
-router.get('/edit/:id', function(req, res){
+router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         res.render('edit_tour', {
             title: 'Edit Article',
