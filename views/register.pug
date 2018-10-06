@@ -1,28 +1,29 @@
 extends layout
 
 block content
-    h1 Register
-    form(method='POST',action="/auth/register")
-        #form-group
-            label First Name:
-            input.form-control(name='firstname',type='text')
-        #form-group
-            label Last Name:
-            input.form-control(name='lastname',type='text')
-        #form-group
-            label Gender:
-            input.form-control(name='gender',type='text')
-        #form-group
-            label Email:
-            input.form-control(name='email',type='email')
-        #form-group
-            label Username:
-            input.form-control(name='username',type='text')
-        #form-group
-            label Password:
-            input.form-control(name='password',type='password')
-        #form-group
-            label Confirm:
-            input.form-control(name='password2',type='password')
-        br
-        input.btn.btn-primary(type='submit',value='Submit')
+    .container
+        h1 Register
+        form(method='POST',action="/user/signup")
+            #form-group
+                label First Name:
+                input.form-control(name='firstname',type='text')
+            #form-group
+                label Last Name:
+                input.form-control(name='lastname',type='text')
+            #form-group
+                label Gender:
+                input.form-control(name='gender',type='text')
+            #form-group
+                label Email:
+                input.form-control(name='email',type='email')
+            #form-group
+                label Username:
+                input.form-control(name='username',type='text')
+            #form-group
+                label Password:
+                input.form-control(name='password',type='password')
+            #form-group
+                label Confirm:
+                input.form-control(name='password2',type='password')
+            br
+            input.btn.btn-primary(type='submit',value='Submit')
