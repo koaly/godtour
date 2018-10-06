@@ -22,6 +22,12 @@ router.get('/', function(req, res){
 
 // Add Route
 router.get('/add', ensureAuthenticated, function(req, res){
+    console.log(req.user.state);
+    if(!req.user.state){
+        req.flash('danger', 'You are not a Tour Operator, please contact us.');
+        res.redirect('/');
+        return;
+    }
     res.render('add_tour', {
         title: 'Add TOUR',
         user: req.user
