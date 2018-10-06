@@ -18,7 +18,11 @@ router.get('/',(req,res,next)=>{
             })
         });
 });
+router.get('/add',(req,res,next)=>{
+    res.render('register');
+});
 
+//next time we will use this instead register
 router.post('/add',(req,res,next)=>{
     const newUser = new User({
         _id: new mongoose.Types.ObjectId,
@@ -39,9 +43,16 @@ router.post('/add',(req,res,next)=>{
         .then(result =>{
             console.log(result);
             res.status(201).json({
+                message: "Handing POST request to /register",
+                createUser: newUser
             });
         })
-        .catch()
+        .catch(err =>{
+            console.log(err);
+            res.status(500).json({
+                erorr: err
+            });
+        })
 
 
 });
