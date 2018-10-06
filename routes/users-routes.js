@@ -15,7 +15,7 @@ router.get('/',(req,res,next)=>{
                 {
                     return{
                         _id : doc._id,
-                        name : doc.username,
+                        username : doc.username,
                         firstname : doc.firstname,
                         lastname : doc.lastname,
                         gender : doc.gender,
@@ -29,7 +29,11 @@ router.get('/',(req,res,next)=>{
                     };
                 })
             };
-            res.status(200).json(reponse);
+            console.log(reponse)
+            //res.status(200).json(reponse);
+            res.render('user',{
+                userList : reponse
+            })
         })
         .catch(err =>{
             res.status(500).json({
