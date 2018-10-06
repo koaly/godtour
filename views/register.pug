@@ -4,14 +4,17 @@ block content
     h1 Register
     form(method='POST',action="/auth/register")
         #form-group
-            label Name:
-            input.form-control(name='name',type='text')
+            label First Name:
+            input.form-control(name='firstname',type='text')
+        #form-group
+            label Last Name:
+            input.form-control(name='lastname',type='text')
         #form-group
             label Gender:
             input.form-control(name='gender',type='text')
         #form-group
             label Email:
-            input.form-control(name='email',type='text')
+            input.form-control(name='email',type='email')
         #form-group
             label Username:
             input.form-control(name='username',type='text')
