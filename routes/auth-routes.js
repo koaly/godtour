@@ -8,18 +8,22 @@ const User = require('../models/user-model');
 
 //auth register
 router.get('/register',function(req,res){
+    /*
     res.status(200).json({
         message: "Handling GET request to /register"
     });
+    */
     res.render('register',{
         
     });
 });
 
 router.post('/register',function(req,res){
+    /*
     res.status(200).json({
         message: "Handling POST request to /register"
     });
+    */
     //initilize variable from form
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
@@ -74,24 +78,30 @@ router.post('/register',function(req,res){
 
 //auth login
 router.get('/login',function(req,res){
+    /*
     res.status(200).json({
         message:"Handling /GET request to /login"
     });
+    */
     res.render('login',{
         user: req.user
     });
 });
 router.post('/login',passport.authenticate('local'),function(req,res){
+    /*
     res.status(200).json({
         message:"Hadling /POST request to /login"        
     })
+    */
     res.redirect('/profile/');
 });
 //auth logout
 router.get('/logout',function(req,res){
+    /*
     res.status(200).json({
         message:"Hadling /GET request to /logout"
     })
+    */
     req.logout();
     res.redirect('/');
 });
@@ -102,9 +112,11 @@ router.get('/google',
         scope:['profile']
     },
     (req,res)=>{
+        /*
         res.status(200).json({
             message:"Hadling /GET request to /google"
         })
+        */
     }
 ));
 
