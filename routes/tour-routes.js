@@ -114,6 +114,11 @@ router.get('/:id', function(req, res){
 router.post('/:id', function(req, res){
 
     Tour.findById(req.params.id, function(err, tour){
+        if (req.user._id == tour.organizerId){
+            req.flash('danger', 'You can\'t book your own tour!');
+            res.redirect('/');
+            return;
+        }
         if (tour.now_seat) {
             tour.now_seat--;
             let booking = new Booking();
