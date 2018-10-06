@@ -2,8 +2,16 @@ extends layout
 
 block content
     h1 #{title}
-    ul.list-group
-        each tour, i in tours
-            li.list-group-item
-                a(href="/tour/"+tour._id)= tour.title
-    br
+    .container(style='margin-left:10px')
+        .row
+            each tour, i in tours
+                .col-lg-4
+                    .card(style='width:400px')
+                        img.card-img-top.fakeimg
+                        .card-body
+                            h4 #{tour.title}
+                            p organized by #{tour.organizer}
+                            a.btn.btn-primary(href="/tour/"+tour._id) See more
+                    <br>
+    
+        
