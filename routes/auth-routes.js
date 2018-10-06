@@ -8,6 +8,9 @@ const User = require('../models/user-model');
 //auth register
 
 router.get('/register',function(req,res){
+    res.status(200).json({
+        message: "Handling GET request to /register"
+    });
     res.render('register',{
         
     });

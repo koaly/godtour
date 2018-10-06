@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
-
+const morgan = require('morgan');
 const flash = require('connect-flash');
 const passportSetup = require('./config/passport-setup');
 
@@ -29,6 +29,7 @@ const keys = require('./config/keys');
 
 const passport = require('passport');
 
+
 //Database Connection
 mongoose.connect(keys.mongodb.dbURI,function(err){
     if(err){
@@ -44,6 +45,8 @@ const properties = require('./properties.json');
 //Initialize Appication
 const app = express();
 
+//use morgan for tracking
+app.use(morgan('dev'));
 //Set Port
 const port = properties.server.port;
 
@@ -107,16 +110,30 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req,res,next)=>{
-    res.status(200).json({
-        messages: 'server is now running'
-    });
-});
 
 //set up routes
 app.use('/',indexRoutes);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 app.use('/tour',tourRoutes);
+
+//handle not found 
+app.use((req,res,next)=>{
+    const error = new Error('Not found');
+    error.status(404);
+    next(error);
+});
+
+//send error back
+app.use((error,req,res,next)=>{
+    res.status(error.status || 500);
+    res.json({
+        error:{
+            messages: error.messages
+        }
+    });
+});
+
+
 
 module.exports = app;
