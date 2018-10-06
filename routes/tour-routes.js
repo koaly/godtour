@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // Bring in Tour Models
 let Tour = require('../models/tour-model');
+let Booking = require('../models/booking-model');
 
 router.get('/', function(req, res){
     Tour.find({}, function(err, tours){
@@ -97,23 +98,43 @@ router.post('/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         if (tour.now_seat) {
             tour.now_seat--;
+            let booking = new Booking();
+            booking.userId = req.user._id;
+            booking.username = req.user.username;
+            booking.tourId = tour._id;
+            booking.tourTitle = tour.title;
             // console.log(req.user.tour);
             // req.user.tour.push(tour._id);
+            
+            booking.save(function(err){
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            });
+            tour.save(function(err){
+                if (err){
+                    console.log(err);
+                    return;
+                } else {
+                    res.redirect('/');
+                }
+            });
         }
-        // req.user.save(function(err){
+        // booking.save(function(err){
         //     if (err){
         //         console.log(err);
         //         return;
         //     }
         // });
-        tour.save(function(err){
-            if (err){
-                console.log(err);
-                return;
-            } else {
-                res.redirect('/');
-            }
-        });
+        // tour.save(function(err){
+        //     if (err){
+        //         console.log(err);
+        //         return;
+        //     } else {
+        //         res.redirect('/');
+        //     }
+        // });
     });
 });
 
