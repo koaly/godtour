@@ -8,6 +8,7 @@ block content
         form(method="POST", action="/tour/"+tour._id)
             if user
                 input.btn.btn-primary(type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
+                a.btn.btn-danger.delete-tour(href='#', data-id=tour._id) Delete
     else
         h5 out of order sorry!
     br
