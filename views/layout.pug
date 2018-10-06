@@ -24,17 +24,17 @@ html
                         a.nav-link(href='/tour') Tour List
                 ul.nav.navbar-nav.navbar-right    
                     if(!user)
-                        li.nav-item.block
+                        li.nav-item.space
                             a(href='/auth/login') Login
-                        li.nav-item.block
+                        li.nav-item.space
                             a(href='/auth/register') Register
                     else
-                        li.nav-item.block
+                        li.nav-item.space
                             a#tab-2(href='/auth/logout') Logout
-                        li.nav-item.block
+                        li.nav-item.space
                             a#tab-3(href='/profile') #{user.username}
                 
-        br
+        
         
         
         .container-fluid
