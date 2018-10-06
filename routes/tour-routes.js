@@ -168,6 +168,28 @@ router.post('/edit/:id', function(req, res){
         });
     });
 });
+
+router.delete('/:id', function(req, res){
+    if(!req.user._id){
+        res.status(500).send();
+    }
+    let query = {_id:req.params.id};
+
+    Tour.findById(req.params.id, function(err, tour){
+        // if(article.authorID != req.user._id){
+        //     res.status(500).send();
+        // }
+        // else{
+            Tour.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success');
+            });
+        // }
+    });
+});
+
     // Tour.update(query, tour, function(err){
     //     if(err){
     //         console.log(err);
