@@ -33,9 +33,6 @@ const userSchema = new Schema({
 	email: {
 		type: String
 	},
-	tour: {
-		type: [String]
-	},
 	state:{
 		type: Number,
 		default: 0,

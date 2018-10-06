@@ -38,6 +38,7 @@ router.post('/add',(req,res,next)=>{
         tour: req.body.tour,
         state: req.body.state
     });
+
     newUser
         .save()
         .then(result =>{
