@@ -23,7 +23,8 @@ const userSchema = new Schema({
 		type: String
 	},
 	photo: {
-		type: String
+		type: String,
+		default: 'http://getdrawings.com/img/facebook-profile-picture-silhouette-17.jpg?sz=50'
 	},
 	phone: {
 		type: String
