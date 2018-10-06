@@ -6,14 +6,6 @@
     /*background-color:dimgrey;*/
     padding: 10px 20px;
 }
-
-.custom-cur {
-    cursor: url('https://lh6.googleusercontent.com/sqPUKM6D2WsmYc74AuXD-FCkPXzAVwHHzNIoKqWCi98EPrB-YvnJfimcsi47iEqFRjdCEILSi-qb8A=w2560-h1244');
-}
-.auto-cursor-haha{
-    cursor:auto;
-}
-
 a:link{
     color:black;
     background-color: transparent;
@@ -42,7 +34,7 @@ a#tab-3:hover {
 
 a:active {
     color: slategrey;
-    background-color: transparent;
+    background-color: green;
     text-decoration: none;
 }
 
@@ -51,4 +43,6 @@ a:link{
     background-color: transparent;
     text-decoration: none;
 }
-
+.active-page{
+    background-color:rgb(224, 221, 20);
+}
