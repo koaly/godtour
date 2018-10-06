@@ -98,12 +98,15 @@ router.post('/signup',(req,res,next)=>{
                                             url: "http://localhost:3000/user/"+result._id
                                         }
                                     }
+                                    
                                 });
+                                req.flash('success', 'Signup complete!');
+                                res.redirect('/');
                             })
                             .catch(err =>{
                                 console.log(err);
                                 res.status(500).json({
-                                    erorr: err
+                                    error: err
                                 });
                             })
                         }

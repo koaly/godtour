@@ -71,7 +71,25 @@ router.get('/login',function(req,res){
     });
 });
 router.post('/login',passport.authenticate('local'),function(req,res,next){
-    res.redirect('/profile')
+    bcrypt.hash(req.body.password,10,(err,hash)=>{
+        if(err){
+            return res.status(500).json({
+                message: "No password to Hash",
+                error : err
+            });
+        }else{
+            User.find({email: req.body.email, password: hash}, function(err, user){
+                if (err){
+                    console.log(err);
+                    req.flash('danger', 'Please check Email and Password.');
+                    res.redirect('#');
+                    return;
+                }
+                
+                res.redirect('/profile');
+            });
+        }
+    });
 });
 //auth logout
 router.get('/logout',function(req,res){
