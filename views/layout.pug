@@ -2,7 +2,6 @@ doctype html
 html
     head
         title TO.UR WORLD!
-     
         link(href="/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
         link(rel='stylesheet' href='/css/style.css')
         link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
@@ -25,18 +24,20 @@ html
                         a.nav-link(href='/tour') Tour List
                 ul.nav.navbar-nav.navbar-right    
                     if(!user)
-                        li.nav-item.color-red
-                            a.nav-link(href='/auth/login') Login
+                        li.nav-item.block
+                            a(href='/auth/login') Login
+                        li.nav-item.block
+                            a(href='/auth/register') Register
                     else
-                        li.nav-item
-                            a.nav-link(href='/auth/logout') Logout
-                        li.nav-item
-                            a.nav-link(href='/profile') #{user.username}
+                        li.nav-item.block
+                            a#tab-2(href='/auth/logout') Logout
+                        li.nav-item.block
+                            a#tab-3(href='/profile') #{user.username}
                 
         br
         
         
-        .container
+        .container-fluid
             != messages('message', locals)
             if errors
                 each error, i in errors
