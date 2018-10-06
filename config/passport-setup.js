@@ -32,7 +32,6 @@ passport.use(
         clientSecret: keys.google.clientSecret
     
     },function(accessToken,refreshToken,profile,done){
-		console.log(profile);
         //check user already exits in our db
         User.findOne({googleId:profile.id})
         .then(function(currentUser){
@@ -42,14 +41,17 @@ passport.use(
                 done(null,currentUser);    
             }
             else{
+                console.log(profile)
                 //if not create user in our db
                 new User({
                     _id: new mongooes.Types.ObjectId,
                     username: profile.displayName,
+                    //username: profile.name.givenName,
                     googleId: profile.id,
                     gender: profile.gender,
-                    firstname: profile.givenName,
-                    lastname: profile.familyname,
+                    firstname: profile.name.givenName,
+                    lastname: profile.name.familyName,
+                    email: profile.emails[0].value,
 					photo: profile.photos[0].value
                 })
                 .save()

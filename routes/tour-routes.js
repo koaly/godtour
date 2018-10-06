@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // Bring in Tour Models
 let Tour = require('../models/tour-model');
+let Booking = require('../models/booking-model');
 
 router.get('/', function(req, res){
     Tour.find({}, function(err, tours){
@@ -20,7 +21,7 @@ router.get('/', function(req, res){
 });
 
 // Add Route
-router.get('/add', function(req, res){
+router.get('/add', ensureAuthenticated, function(req, res){
     res.render('add_tour', {
         title: 'Add TOUR',
         user: req.user
@@ -41,7 +42,7 @@ router.post('/add', function(req, res){
         let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
-        tour.organizer = 'admin';
+        tour.organizer = req.user._id;
         tour.price = req.body.price;
         tour.destination = req.body.destination;
         tour.day_duration = req.body.day_duration;
@@ -81,6 +82,17 @@ router.post('/add', function(req, res){
     }
 });
 
+// Access Control
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    else{
+        req.flash('danger', 'Please Login');
+        res.redirect('/');
+    }
+}
+
 // Get Single tour
 router.get('/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
@@ -97,28 +109,32 @@ router.post('/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         if (tour.now_seat) {
             tour.now_seat--;
-            // console.log(req.user.tour);
-            // req.user.tour.push(tour._id);
+            let booking = new Booking();
+            booking.userId = req.user._id;
+            booking.username = req.user.username;
+            booking.tourId = tour._id;
+            booking.tourTitle = tour.title;
+            
+            booking.save(function(err){
+                if (err){
+                    console.log(err);
+                    return;
+                }
+            });
+            tour.save(function(err){
+                if (err){
+                    console.log(err);
+                    return;
+                } else {
+                    res.redirect('/');
+                }
+            });
         }
-        // req.user.save(function(err){
-        //     if (err){
-        //         console.log(err);
-        //         return;
-        //     }
-        // });
-        tour.save(function(err){
-            if (err){
-                console.log(err);
-                return;
-            } else {
-                res.redirect('/');
-            }
-        });
     });
 });
 
 // Load Edit Form
-router.get('/edit/:id', function(req, res){
+router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         res.render('edit_tour', {
             title: 'Edit Article',
@@ -131,7 +147,6 @@ router.get('/edit/:id', function(req, res){
 router.post('/edit/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         if (req.body.title) tour.title = req.body.title;
-        // tour.organizer = 'admin';
         if (req.body.price) tour.price = req.body.price;
         if (req.body.destination) tour.destination = req.body.destination;
         if (req.body.day_duration) tour.day_duration = req.body.day_duration;
@@ -176,28 +191,18 @@ router.delete('/:id', function(req, res){
     let query = {_id:req.params.id};
 
     Tour.findById(req.params.id, function(err, tour){
-        // if(article.authorID != req.user._id){
-        //     res.status(500).send();
-        // }
-        // else{
+         if(tour.organizer != req.user._id){
+            res.status(500).send();
+        }
+        else{
             Tour.remove(query, function(err){
                 if(err){
                     console.log(err);
                 }
                 res.send('Success');
             });
-        // }
+        }
     });
 });
 
-    // Tour.update(query, tour, function(err){
-    //     if(err){
-    //         console.log(err);
-    //         return;
-    //     } else {
-    //         // req.flash('success', 'Article Updated');
-    //         res.redirect('/');
-    //     }
-    // });
-// });
 module.exports = tour = router;

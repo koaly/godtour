@@ -15,10 +15,12 @@ const userSchema = new Schema({
 		type: String
 	},
 	firstname:{
-		type: String
+		type: String,
+		required: true
 	},
 	lastname:{
-		type: String
+		type: String,
+		required: true
 	},
 	gender:{
 		type: String
@@ -31,7 +33,10 @@ const userSchema = new Schema({
 		type: String
 	},
 	email: {
-		type: String
+		type: String,
+		required: true,
+		unique: true,
+		match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 	},
 	state:{
 		type: Number,

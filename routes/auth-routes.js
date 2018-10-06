@@ -17,13 +17,10 @@ router.get('/register',function(req,res){
         
     });
 });
-
 router.post('/register',function(req,res){
-    /*
     res.status(200).json({
         message: "Handling POST request to /register"
     });
-    */
     //initilize variable from form
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
@@ -75,7 +72,6 @@ router.post('/register',function(req,res){
         });
     }
 });
-
 //auth login
 router.get('/login',function(req,res){
     /*
@@ -109,7 +105,10 @@ router.get('/logout',function(req,res){
 //auth with google
 router.get('/google',
     passport.authenticate('google',{
-        scope:['profile']
+        scope: [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'https://www.googleapis.com/auth/userinfo.email'
+        ]
     },
     (req,res)=>{
         /*
