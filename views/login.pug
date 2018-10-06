@@ -2,18 +2,18 @@ extends layout
 
 block content
     .container
-    h2 login using
-    form(method="POST", action="/auth/login")
-        #form-group
-            label username:
-            input.form-control(name="username",type='text')
-        #form-group
-            label password:
-            input.form-control(name="password",type='password')
-        br
-        input.btn.btn-primary.form-control(type='submit',value='Submit')
-    br 
-    a(href="/auth/google")
-        button(class="btn btn-primary" type="button") Login with Google
-    a(href="/auth/register")
-        button.btn.btn-primary(type='button') Register
+        h2 login using
+        form(method="POST", action="/auth/login")
+            #form-group
+                label username:
+                input.form-control(name="username",type='text')
+            #form-group
+                label password:
+                input.form-control(name="password",type='password')
+            br
+            input.btn.btn-primary.form-control(type='submit',value='Submit')
+        br 
+        a(href="/auth/google")
+            button(class="btn btn-primary" type="button") Login with Google
+        a(href="/auth/register")
+            button.btn.btn-primary(type='button') Register
