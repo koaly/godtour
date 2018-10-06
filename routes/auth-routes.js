@@ -98,7 +98,7 @@ router.get('/google',
     passport.authenticate('google',{
         scope:['profile']
     },
-    (res,res)=>{
+    (req,res)=>{
         res.status(200).json({
             message:"Hadling /GET request to /google"
         })
