@@ -35,7 +35,26 @@ router.get('/add', ensureAuthenticated, function(req, res){
 });
 
 router.post('/add', function(req, res){
-    req.checkBody('title', 'Tour\'s name needed').notEmpty();
+    req.checkBody('title', 'Tour\'s name is needed').notEmpty();
+    req.checkBody('price', 'Price is needed').notEmpty();
+    req.checkBody('destination', 'Tour\'s destinations are needed').notEmpty();
+    req.checkBody('day_duration', 'Daylong is needed').notEmpty();
+    req.checkBody('night_duration', 'Nightlong is needed').notEmpty();
+    req.checkBody('flight_airline', 'Airline is needed').notEmpty();
+    req.checkBody('flight_airport', 'Airport-to-take-of is needed').notEmpty();
+    req.checkBody('flight_depart', 'Departure Flight is needed').notEmpty();
+    req.checkBody('depart_time', 'Departure Flight Time is needed').notEmpty();
+    req.checkBody('flight_return', 'Return Flight is needed').notEmpty();
+    req.checkBody('return_time', 'Return Flight Time is needed').notEmpty();
+    req.checkBody('food', 'Number-of-meals in tour is needed').notEmpty();
+    req.checkBody('stars', 'Grade of tour is needed').notEmpty();
+    req.checkBody('max_seat', 'Number-of-seats is needed').notEmpty();
+    req.checkBody('start_book_date', 'Start Booking Date is needed').notEmpty();
+    req.checkBody('start_book_time', 'Start Booking Time is needed').notEmpty();
+    req.checkBody('end_book_date', 'End Booking Date is needed').notEmpty();
+    req.checkBody('end_book_time', 'End Booking Time is needed').notEmpty();
+    req.checkBody('start_trip', 'Start Trip Date is needed').notEmpty();
+    req.checkBody('end_trip', 'End Trip Date is needed').notEmpty();
 
     let err = req.validationErrors();
     if (err){
@@ -45,6 +64,7 @@ router.post('/add', function(req, res){
             errors: err
         });
     } else{
+        console.log(req.user);
         let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
