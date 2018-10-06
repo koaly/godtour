@@ -42,7 +42,7 @@ router.post('/add', function(req, res){
         let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
-        tour.organizer = 'admin';
+        tour.organizer = req.user._id;
         tour.price = req.body.price;
         tour.destination = req.body.destination;
         tour.day_duration = req.body.day_duration;
@@ -82,6 +82,17 @@ router.post('/add', function(req, res){
     }
 });
 
+// Access Control
+function ensureAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    else{
+        req.flash('danger', 'Please Login');
+        res.redirect('/');
+    }
+}
+
 // Get Single tour
 router.get('/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
@@ -103,8 +114,6 @@ router.post('/:id', function(req, res){
             booking.username = req.user.username;
             booking.tourId = tour._id;
             booking.tourTitle = tour.title;
-            // console.log(req.user.tour);
-            // req.user.tour.push(tour._id);
             
             booking.save(function(err){
                 if (err){
@@ -121,20 +130,6 @@ router.post('/:id', function(req, res){
                 }
             });
         }
-        // booking.save(function(err){
-        //     if (err){
-        //         console.log(err);
-        //         return;
-        //     }
-        // });
-        // tour.save(function(err){
-        //     if (err){
-        //         console.log(err);
-        //         return;
-        //     } else {
-        //         res.redirect('/');
-        //     }
-        // });
     });
 });
 
@@ -152,7 +147,6 @@ router.get('/edit/:id', function(req, res){
 router.post('/edit/:id', function(req, res){
     Tour.findById(req.params.id, function(err, tour){
         if (req.body.title) tour.title = req.body.title;
-        // tour.organizer = 'admin';
         if (req.body.price) tour.price = req.body.price;
         if (req.body.destination) tour.destination = req.body.destination;
         if (req.body.day_duration) tour.day_duration = req.body.day_duration;
@@ -197,28 +191,18 @@ router.delete('/:id', function(req, res){
     let query = {_id:req.params.id};
 
     Tour.findById(req.params.id, function(err, tour){
-        // if(article.authorID != req.user._id){
-        //     res.status(500).send();
-        // }
-        // else{
+         if(tour.organizer != req.user._id){
+            res.status(500).send();
+        }
+        else{
             Tour.remove(query, function(err){
                 if(err){
                     console.log(err);
                 }
                 res.send('Success');
             });
-        // }
+        }
     });
 });
 
-    // Tour.update(query, tour, function(err){
-    //     if(err){
-    //         console.log(err);
-    //         return;
-    //     } else {
-    //         // req.flash('success', 'Article Updated');
-    //         res.redirect('/');
-    //     }
-    // });
-// });
 module.exports = tour = router;
