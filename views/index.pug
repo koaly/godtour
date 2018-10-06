@@ -2,11 +2,26 @@ extends layout
 
 
 block content
-    div.container
+    //div.container
         ul.list-group
             li.list-group-item
                  a(href="auth/login") login
             li.list-group-item
                  a(href="auth/logout") logout
         p #{user}
-        h1 #{title}
+        h1 #{title}//
+    section#showcase
+        br
+        br
+        br
+        br
+        if(user)
+            h1 Welcome Back, #{user.username}
+        else
+            h1 Let's go TO.UR WORLD
+        p Find the best deals on every TO.UR WORLD product you need!
+
+    .container
+        h1 hello
+        
+    
