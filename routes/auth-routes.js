@@ -5,16 +5,21 @@ const bcrypt = require('bcryptjs');
 //import user
 
 const User = require('../models/user-model');
-//auth register
 
+//auth register
 router.get('/register',function(req,res){
+    res.status(200).json({
+        message: "Handling GET request to /register"
+    });
     res.render('register',{
         
     });
 });
 
 router.post('/register',function(req,res){
-    console.log('get submit POST')
+    res.status(200).json({
+        message: "Handling POST request to /register"
+    });
     //initilize variable from form
     let name = req.body.name;
     let gender = req.body.gender;
@@ -66,25 +71,44 @@ router.post('/register',function(req,res){
 
 //auth login
 router.get('/login',function(req,res){
+    res.status(200).json({
+        message:"Handling /GET request to /login"
+    });
     res.render('login',{
         user: req.user
     });
 });
 router.post('/login',passport.authenticate('local'),function(req,res){
+    res.status(200).json({
+        message:"Hadling /POST request to /login"        
+    })
     res.redirect('/profile/');
 });
 //auth logout
 router.get('/logout',function(req,res){
+    res.status(200).json({
+        message:"Hadling /GET request to /logout"
+    })
     req.logout();
     res.redirect('/');
 });
 
 //auth with google
-router.get('/google',passport.authenticate('google',{
-    scope:['profile']
-}));
+router.get('/google',
+    passport.authenticate('google',{
+        scope:['profile']
+    },
+    (req,res)=>{
+        res.status(200).json({
+            message:"Hadling /GET request to /google"
+        })
+    }
+));
 
 router.get('/google/redirect',passport.authenticate('google'),function(req,res){
+    res.status(200).json({
+        message: "Handling /GET request to /google/redirect"
+    })
     res.redirect('/profile/');
 });
 

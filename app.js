@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const expressSession = require('express-session');
-
+const morgan = require('morgan');
 const flash = require('connect-flash');
 const passportSetup = require('./config/passport-setup');
 
@@ -29,8 +29,12 @@ const keys = require('./config/keys');
 
 const passport = require('passport');
 
+
 //Database Connection
-mongoose.connect(keys.mongodb.dbURI,function(){
+mongoose.connect(keys.mongodb.dbURI,function(err){
+    if(err){
+        console.log(err);
+    }
     console.log('Connected to MongoDB');
 });
 
@@ -76,6 +80,8 @@ app.use(expressValidator({
     }
 }));
 
+//use morgan for tracking
+app.use(morgan('dev'));
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -103,56 +109,44 @@ app.use(expressSession({
 //initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-//Route Files
-
+//header
+/*
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
+    }
+    next();
+});
+*/
 //set up routes
 app.use('/',indexRoutes);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 app.use('/tour',tourRoutes);
 
-//Start server open at specify port
-const server = app.listen(port,function(){
-    console.log(`Express running -> Port ${server.address().port}`);
+//handle not found 
+app.use((req,res,next)=>{
+    const error = new Error('Not found');
+    error.status(404);
+    next(error);
 });
 
-
-
-//error handle
-app.get('/404',function(req,res,next){
-    next()
-});
-
-app.get('/403',function(req,res,next){
-    let err = new Error('not allowed!');
-    err.status = 403;
-    next(err);
-});
-
-app.use(function(req,res,next){
-
-    res.status(404);
-
-    res.format({
-        html: function(){
-            res.render('404',{url:req.url});
-        },
-        json: function(){
-            res.json({error:'Not found'})
-        },
-        default: function(){
-            res.type('txt').send('Not found')
+//send error back
+app.use((error,req,res,next)=>{
+    res.status(error.status || 500);
+    res.json({
+        error:{
+            messages: error.messages
         }
     });
 });
 
-app.use(function(err, req, res, next){
-    // we may use properties of the error object
-    // here and next(err) appropriately, or if
-    // we possibly recovered from the error, simply next().
-    res.status(err.status || 500);
-    res.render('500', { error: err });
-  });
-  
+
+
+module.exports = app;
