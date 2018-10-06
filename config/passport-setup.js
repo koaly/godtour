@@ -45,7 +45,9 @@ passport.use(
                 new User({
                     username: profile.displayName,
                     googleId: profile.id,
-					gender: profile.gender,
+                    gender: profile.gender,
+                    firstname: profile.givenName,
+                    lastname: profile.familyname,
 					photo: profile.photos[0].value
                 })
                 .save()
