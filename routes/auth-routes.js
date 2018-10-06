@@ -21,7 +21,8 @@ router.post('/register',function(req,res){
         message: "Handling POST request to /register"
     });
     //initilize variable from form
-    let name = req.body.name;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
     let gender = req.body.gender;
     let email = req.body.email;
     const username = req.body.username;
@@ -29,7 +30,8 @@ router.post('/register',function(req,res){
     const password2 = req.body.password2;
 
     //check not empty 
-    req.checkBody('name','Name is required').notEmpty();
+    req.checkBody('firstname','First Name is required').notEmpty();
+    req.checkBody('lastname', 'Last Name is required').notEmpty();
     req.checkBody('email','Email is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('username','Username is required').notEmpty();
@@ -43,11 +45,12 @@ router.post('/register',function(req,res){
         })
     }else{
         let newUser = new User({
-            name:name,
-            email:email,
-            gender:gender,
-            username:username,
-            password:password
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            gender: gender,
+            username: username,
+            password: password
         });
         bcrypt.genSalt(10,function(err,salt){
             bcrypt.hash(newUser.password,salt,function(err,hash){
@@ -98,7 +101,7 @@ router.get('/google',
     passport.authenticate('google',{
         scope:['profile']
     },
-    (res,res)=>{
+    (req,res)=>{
         res.status(200).json({
             message:"Hadling /GET request to /google"
         })
