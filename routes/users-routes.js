@@ -54,9 +54,52 @@ router.post('/add',(req,res,next)=>{
                 erorr: err
             });
         })
-
-
+});
+router.get('/:username',(req,res,next)=>{
+   const username = req.params.username;
+   User.findOne(
+        {
+           username: username
+        })
+    .exec()
+    .then(doc =>{
+        console.log("From Database",doc);
+        if(doc){
+            res.status(200).json({
+                doc
+            });
+        }else{
+            res.status(404).json({
+                message: "Not vaild of Username"
+            });
+        }
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    })
 });
 
+router.delete('/:username',(req,res,next)=>{
+    const username = req.params.username;
+    User.remove(
+        {
+        username:username
+        })
+        .exec()
+        .then(result =>{
+            res.status(200).json({
+                message: "success remvoe username"
+            })
+        })
+        .catch(err =>{
+            console.log(err);
+            res.status(500).json({
+                error: err
+            })
+        })
 
+})
 module.exports = router;

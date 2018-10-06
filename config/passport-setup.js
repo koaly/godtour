@@ -45,7 +45,8 @@ passport.use(
                 //if not create user in our db
                 new User({
                     _id: new mongooes.Types.ObjectId,
-                    username: profile.displayName,
+                    //username: profile.displayName,
+                    username: profile.name.givenName,
                     googleId: profile.id,
                     gender: profile.gender,
                     firstname: profile.name.givenName,
