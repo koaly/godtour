@@ -45,8 +45,6 @@ const properties = require('./properties.json');
 //Initialize Appication
 const app = express();
 
-//use morgan for tracking
-app.use(morgan('dev'));
 //Set Port
 const port = properties.server.port;
 
@@ -82,6 +80,8 @@ app.use(expressValidator({
     }
 }));
 
+//use morgan for tracking
+app.use(morgan('dev'));
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -109,8 +109,21 @@ app.use(expressSession({
 //initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-
+//header
+/*
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === 'OPTIONS') {
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+        return res.status(200).json({});
+    }
+    next();
+});
+*/
 //set up routes
 app.use('/',indexRoutes);
 app.use('/auth',authRoutes);
