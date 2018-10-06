@@ -48,8 +48,8 @@ passport.use(
                     username: profile.displayName,
                     googleId: profile.id,
                     gender: profile.gender,
-                    firstname: profile.givenName,
-                    lastname: profile.familyname,
+                    firstname: profile.name.givenName,
+                    lastname: profile.name.familyName,
 					photo: profile.photos[0].value
                 })
                 .save()
