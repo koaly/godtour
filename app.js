@@ -12,7 +12,7 @@ const authRoutes = require('./routes/auth-routes');
 const tourRoutes = require('./routes/tour-routes');
 const profileRoutes = require('./routes/profile-routes')
 const indexRoutes = require('./routes/index-routes')
-
+const userRoutes = require('./routes/users-routes');
 
 //uuid
 const uuid = require('uuid/v4')
@@ -129,11 +129,12 @@ app.use('/',indexRoutes);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 app.use('/tour',tourRoutes);
+app.use('/user',userRoutes);
 
 //handle not found 
 app.use((req,res,next)=>{
     const error = new Error('Not found');
-    error.status(404);
+    error.status = 404;
     next(error);
 });
 
@@ -142,7 +143,7 @@ app.use((error,req,res,next)=>{
     res.status(error.status || 500);
     res.json({
         error:{
-            messages: error.messages
+            messages: error.message
         }
     });
 });

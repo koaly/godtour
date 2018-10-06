@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const LocalStragtegy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
+const mongooes = require('mongoose')
 //import key.js
 /**
  * I doesn't add this file to github you ask me if you want
@@ -43,9 +44,12 @@ passport.use(
             else{
                 //if not create user in our db
                 new User({
+                    _id: new mongooes.Types.ObjectId,
                     username: profile.displayName,
                     googleId: profile.id,
-					gender: profile.gender,
+                    gender: profile.gender,
+                    firstname: profile.givenName,
+                    lastname: profile.familyname,
 					photo: profile.photos[0].value
                 })
                 .save()

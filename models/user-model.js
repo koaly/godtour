@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     //user information
-    username:{
+	_id: mongoose.Schema.Types.ObjectId,
+	username:{
 		type : String,
 		required: true
 	},
@@ -23,16 +24,14 @@ const userSchema = new Schema({
 		type: String
 	},
 	photo: {
-		type: String
+		type: String,
+		default: 'http://getdrawings.com/img/facebook-profile-picture-silhouette-17.jpg?sz=50'
 	},
 	phone: {
 		type: String
 	},
 	email: {
 		type: String
-	},
-	tour: {
-		type: [String]
 	},
 	state:{
 		type: Number,
