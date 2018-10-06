@@ -66,41 +66,36 @@ passport.use(
 );
 passport.use(
     new LocalStragtegy({
-       usernameField: 'username',
-       callbackURL:'/'
-    },function(username,password,done){
-        console.log('inside the localStragtegy callback');
-        console.log('login with ',username);
+       usernameField: 'email',
+    },(email,password,done) =>{
         
-        let query = {
-            username:username
+        const query = {
+            email:email
         };
-        User.findOne(query).then(function(currentUser){
-            console.log('inside findone')
+        User.findOne(query)
+        .exec()
+        .then((user)=>{
             
-            if(currentUser){
+            if(user){
                 //already have the user
-                console.log('found user login with',currentUser);
-                bcrypt.compare(password,currentUser.password,function(err,isMatch){
-                    console.log('input password:',password)
-                    console.log('user password:',currentUser.password)
+                console.log(user)
+                bcrypt.compare(password,user.password,function(err,result){
                     if(err){
-                        console.log(err)
+                        done(err,false,{message: "Compare password Wrong"})
                     }
-                    if(isMatch){
-                        console.log('login success with',currentUser);
-                        done(null,currentUser);
+                    if(result){
+                        done(null,user);
                     }else{
-                        console.log('wrong password',currentUser);
                         done(null,false,{message: 'Wrong password'});
                     } 
                 });
             }
             else{
-                console.log('not found user')
                 done(null,false,{message:'No user found'});
-                //not found
             }
-        });
+        })
+        .catch(err =>{
+            done(err,false)
+        })
     })
 );
