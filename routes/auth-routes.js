@@ -112,10 +112,7 @@ router.get('/google',
         scope:['profile']
     },
     (req,res)=>{
-<<<<<<< HEAD
-=======
         /*
->>>>>>> f6faf9e1867d79b9b4f2928553d1e9fe200b549a
         res.status(200).json({
             message:"Hadling /GET request to /google"
         })
