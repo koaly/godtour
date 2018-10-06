@@ -17,13 +17,10 @@ router.get('/register',function(req,res){
         
     });
 });
-
 router.post('/register',function(req,res){
-    /*
     res.status(200).json({
         message: "Handling POST request to /register"
     });
-    */
     //initilize variable from form
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
@@ -75,7 +72,6 @@ router.post('/register',function(req,res){
         });
     }
 });
-
 //auth login
 router.get('/login',function(req,res){
     /*
