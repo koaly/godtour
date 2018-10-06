@@ -10,16 +10,17 @@ block content
                  a(href="auth/logout") logout
         p #{user}
         h1 #{title}//
-    section#showcase
-        br
-        br
-        br
-        br
-        if(user)
-            h1 Welcome Back, #{user.username}
-        else
-            h1 Let's go TO.UR WORLD
-        p Find the best deals on every TO.UR WORLD product you need!
+    .container-fluid
+        section#showcase
+            br
+            br
+            br
+            br
+            if(user)
+                h1 Welcome Back, #{user.username}
+            else
+                h1 Let's go TO.UR WORLD
+            p Find the best deals on every TO.UR WORLD product you need!
 
     
     
@@ -27,6 +28,7 @@ block content
         ul.nav.nav-pills
             li.nav-item.color-dark1
                 a.nav-link.active(href='#' color="white") Active
+            tr
             li.nav-item.dropdown.color-dark1
                 a#tab-4.nav-link.dropdown-toggle(data-toggle='dropdown', href='#') Dropdown
                 .dropdown-menu

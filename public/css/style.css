@@ -10,8 +10,8 @@ body{
     background-color:#343a40;
 }
 
-.color-red{
-    background-color:red;
+.color-gray1{
+    background-color:dimgray;
 }
 
 .color-red{
@@ -91,7 +91,7 @@ a:link{
   /*margin-left:200px;
   margin-right:400px;*/
   color:grey;
-  background:#343a40;
+  background:#EAEBE5;
 }
 
 .fakeimg {
