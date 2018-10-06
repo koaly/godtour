@@ -1,5 +1,5 @@
 body{
-    background-color: lightgrey;
+    background-color: lightblue;
 }
 
 .color-red{
@@ -87,6 +87,13 @@ a:link{
     font-size:30px;
 }
 
+#footer{
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #searchbar{
   /*margin-left:200px;
   margin-right:400px;*/
@@ -130,4 +137,5 @@ a:link{
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+    background-color: white;
 }

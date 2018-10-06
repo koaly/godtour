@@ -25,7 +25,7 @@ block content
     
     
     .container
-        ul.nav.nav-pills
+        //ul.nav.nav-pills
             li.nav-item.color-dark1
                 a.nav-link.active(href='#' color="white") Active
             tr
@@ -39,7 +39,7 @@ block content
                 a#tab-4.nav-link(href='#') Link
             li.nav-item.color-dark1
                 a.nav-link.disabled(href='#') Disabled
-        section#searchbar
+        //section#searchbar
 
             h1 hahahahah
             h1 hahahahah
@@ -47,23 +47,27 @@ block content
             h1 hahahahah
             h1 hahahahah
         
-        h2 Tabs
-        p Click on the buttons inside the tabbed menu:
         .tab
-            button.tablinks(onclick="openCity(event, 'London')") London
-            button.tablinks(onclick="openCity(event, 'Paris')") Paris
-            button.tablinks(onclick="openCity(event, 'Tokyo')") Tokyo
-        #London.tabcontent
-            h3 London
-            p London is the capital city of England.
-        #Paris.tabcontent
-            h3 Paris
-            p Paris is the capital of France.
-        #Tokyo.tabcontent
-            h3 Tokyo
-            p Tokyo is the capital of Japan.
+            button.tablinks(onclick="openMenu(event, 'Browse')" id="defaultOpen") Browse Tour
+            button.tablinks(onclick="openMenu(event, 'Suggest')") Suggestion
+            button.tablinks(onclick="openMenu(event, 'Promo')") About Us
+        #Browse.tabcontent
+            h3 Browse Tour
+            p input form
+            p input form
+            p input form
+        #Suggest.tabcontent
+            h3 Suggestion
+            p Tell us something
+            p Tell us something
+            p Tell us something
+        #Promo.tabcontent
+            h3 Recommend Promotions
+            p Promotion 1
+            p Promotion 2
+            p Promotion 3
         script.
-            function openCity(evt, cityName) {
+            function openMenu(evt, menuName) {
                 var i, tabconten, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
                 for (i = 0; i < tabcontent.length; i++) {
@@ -73,9 +77,10 @@ block content
                 for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
                 }
-                document.getElementById(cityName).style.display = "block";
+                document.getElementById(menuName).style.display = "block";
                 evt.currentTarget.className += " active";
             }
+            document.getElementById("defaultOpen").click();
 
 
         
