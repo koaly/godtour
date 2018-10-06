@@ -37,19 +37,24 @@ router.get('/',(req,res,next)=>{
             })
         });
 });
-router.get('/add',(req,res,next)=>{
+router.get('/signup',(req,res,next)=>{
     res.render('register');
 });
 
 //next time we will use this instead register
 router.post('/signup',(req,res,next)=>{
-    User.find({email:req.body.email})
+    User.find(
+        {
+            email:req.body.email
+        })
         .exec()
         .then(user =>{
-            if(user){
-                res.status(409).json({
-                    message : "This email already in use"
-                })
+            console.log(user)
+            if(user.length >= 1){
+                return 
+                    res.status(409).json({
+                        message : "This email already in use"
+                    });
             }else{
                 bcrypt.hash(req.body.password,10,(err,hash)=>{
                     if(err){
