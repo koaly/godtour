@@ -18,7 +18,7 @@ html
         block header
         
         body(style="font-family: 'Kanit', sans-serif;")
-        nav.navbar.navbar-expand-sm.fixed-top(style='background: #2d3246')
+        nav.navbar.navbar-expand-sm.sticky-top(style='background: #2d3246')
             a.navbar-brand(href='/' )
                 img(src='https://i.imgur.com/aW1vocb.png' alt='god_logo' style='width:100px; height:50px')
                 |   TO.UR WORLD! 
@@ -81,7 +81,7 @@ html
         
         
         
-        .container-fluid(style='margin-top:76px')
+        .container-fluid
             != messages('message', locals)
             if errors
                 each error, i in errors
