@@ -52,6 +52,29 @@ block content
             button.tablinks(onclick="openMenu(event, 'Suggest')") Suggestion
             button.tablinks(onclick="openMenu(event, 'Promo')") About Us
         #Browse.tabcontent
+            h3 Browse Tour
+            .bootstrap-iso
+                .container-fluid
+                    .row
+                        .col-md-6.col-sm-6.col-xs-12
+                            form.form-horizontal(action='https://formden.com/post/MlKtmY4x/', method='post')
+                                .form-group
+                                    label.control-label.col-sm-2.requiredField(for='date')
+                                        | Date
+                                        span.asteriskField
+                                            | *
+                                    .col-sm-10
+                                        .input-group
+                                            .input-group-addon
+                                                i.fa.fa-calendar
+                                            input#date.form-control(name='date', placeholder='MM/DD/YYYY', type='text')
+                                .form-group
+                                    .col-sm-10.col-sm-offset-2
+                                        input(name='_honey', style='display:none', type='text')
+                                        button.btn.btn-primary(name='submit', type='submit')
+                                            | Submit
+
+
             
             #form-group(style="display: inline-block; margin-bottom:20px")
                 label(style="width:400px; padding-right: 20px") Destination:
@@ -85,6 +108,7 @@ block content
                 label(style="width:200px; padding-right: 20px") Room:
                 input.form-control(name='room',type='number')
         
+
 
         #Suggest.tabcontent
             h3 Suggestion
