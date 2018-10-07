@@ -53,9 +53,79 @@ block content
             button.tablinks(onclick="openMenu(event, 'Promo')") About Us
         #Browse.tabcontent
             h3 Browse Tour
+            .bootstrap-iso
+                .container-fluid
+                    .row
+                        .col-md-6.col-sm-6.col-xs-12
+                            form.form-horizontal(action='https://formden.com/post/MlKtmY4x/', method='post')
+                                .form-group
+                                    label.control-label.col-sm-2.requiredField(for='date')
+                                        | Date
+                                        span.asteriskField
+                                            | *
+                                    .col-sm-10
+                                        .input-group
+                                            .input-group-addon
+                                                i.fa.fa-calendar
+                                            input#date.form-control(name='date', placeholder='MM/DD/YYYY', type='text')
+                                .form-group
+                                    .col-sm-10.col-sm-offset-2
+                                        input(name='_honey', style='display:none', type='text')
+                                        button.btn.btn-primary(name='submit', type='submit')
+                                            | Submit
+
+            .container
+                .row
+                    .col-sm-6
+                        .form-group
+                            #datetimepicker1.input-group.date
+                                input.form-control(type='text')
+                                span.input-group-addon
+                                    span.glyphicon.glyphicon-calendar
+                    script(type='text/javascript').
+                        $(function () {
+                        $('#datetimepicker').datetimepicker();
+                        });
+
             p input form
+            p Date:
+                input#datepicker(type='text')
             p input form
-            p input form
+            
+            #form-group(style="display: inline-block; margin-bottom:20px")
+                label(style="width:400px; padding-right: 20px") Destination:
+                    select.form-control(name='destination')
+                        option(value='Thailand') Thailand
+                        option(value='Japan') Japan
+                        option(value='Chinese') Chinese
+                        option(value='Korea') Korea
+                        option(value='Italy') Italy
+                        option(value='Brasil') Brasil
+                label Duration:
+                    select.form-control(name='duration')
+                        option(value='1') 1 Night
+                        option(value='2') 2 Nights
+                        option(value='3') 3 Nights
+                        option(value='4') 4 Nights
+                        option(value='5') 5 Nights
+                        option(value='6') 6 Nights
+                        option(value='7') 7 Nights
+                        option(value='8') 8 Nights
+                        option(value='9') 9 Nights
+                        option(value='10') 10 Nights
+                        option(value='11') 11 Nights
+                        option(value='12') 12 Nights
+                        option(value='13') 13 Nights
+                        option(value='14') 14 Nights
+                        option(value='15') 15 Nights
+                br
+                label(style="width:200px; padding-right: 20px") Guest:
+                input.form-control(name='guest',type='number')
+                label(style="width:200px; padding-right: 20px") Room:
+                input.form-control(name='room',type='number')
+        
+
+
         #Suggest.tabcontent
             h3 Suggestion
             p Tell us something

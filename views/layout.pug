@@ -9,8 +9,13 @@ html
         //- script(src="/bower_components/jquery/dist/jquery.js")
         //- script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
         //- script(src="/js/main.js")
-        block header
        
+        script(type='text/javascript', src='https://formden.com/static/cdn/formden.js')
+        link(rel='stylesheet', href='https://formden.com/static/cdn/bootstrap-iso.css')
+        link(rel='stylesheet', href='https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css')
+
+        block header
+        
         body(style="font-family: 'Kanit', sans-serif;")
         nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
             a.navbar-brand(href='/' )
@@ -92,6 +97,20 @@ html
         script(src="/bower_components/jquery/dist/jquery.js")
         script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
         script(src="/js/main.js")
+        script(type='text/javascript', src='https://code.jquery.com/jquery-1.11.3.min.js')
+        script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css')
+        script.
+            $(document).ready(function(){
+            var date_input=$('input[name="date"]'); 
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            })
+            })
 
     footer.section.footer-classic.context-dark.bg-image(style='background: #2d3246;margin-top:60px')
         .container
@@ -107,7 +126,7 @@ html
                             span ©  
                             span.copyright-year 2018
                             span  
-                            span Waves
+                            span TO.UR WORLD
                             span . 
                             span All Rights Reserved.
                 .col-md-4
@@ -122,9 +141,9 @@ html
                     dl.contact-list
                         dt phones:
                         dd
-                            a(href='tel:#') +91 7568543012
-                            span or
-                            a(href='tel:#') +91 9571195353
+                            a(href='tel:#') +66 871177555 
+                            span or 
+                            a(href='tel:#') +66 831989008 
                 .col-md-4.col-xl-3
                     h5 Links
                     ul.nav-list
@@ -140,23 +159,22 @@ html
                             a(href='#') Pricing
         .row.no-gutters.social-container
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-facebook
+                a.social-inner(href='https://www.facebook.com/tour.wor1d')
+                    span.i.mdi.mdi-facebook
                     span Facebook
             .col
-                a.social-inner(href='#')
+                a.social-inner(href='https://www.instagram.com/to.ur.world/')
                     span.icon.mdi.mdi-instagram
+
+                a.social-inner(href='https://www.instagram.com/tour.wor1d/')
+                    span.i.mdi.mdi-instagram
                     span instagram
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-twitter
+                a.social-inner(href='https://twitter.com/tour_wor1d')
+                    span.i.mdi.mdi-twitter
                     span twitter
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-youtube-play
+                a.social-inner(href='https://www.youtube.com/channel/UCejOXMM5zGyD8GUETtqhJmQ')
+                    span.i.mdi.mdi-youtube-play
                     span google
         
-    footer
-            center
-                p  Copyright &copy; 2018 TO.UR WORLD
-
