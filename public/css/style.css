@@ -186,6 +186,10 @@ a:link{
     color: #fff;
     background-color:#3b5998;
 }
+.btn-google{
+    color: #fff;
+    background-color:red; 
+}
 .btn-google:hover{
     color: #fff;
     background-color:red; 
@@ -207,4 +211,8 @@ a:link{
         background-color: inherit;
         border-top:0 none;
     }
+}
+.lo-color-red{
+    color:#fff;
+    background-color: red
 }

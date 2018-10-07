@@ -43,11 +43,12 @@ html
                                 li
                                     .row
                                         .col-md-12 
-                                            | Login via
+                                            | Login With
                                             .social-buttons
-                                                a.btn.btn-google(href="/auth/google")
-                                                    i.fa.fa-google
-                                                    |  Google 
+                                                a(href="/auth/google")
+                                                    button.btn.btn-block.btn-google
+                                                        i.fa.fa-google
+                                                        |  Google 
                                             | or
                                             form#login-nav.form(role='form', method='POST', action='/auth/login', accept-charset='UTF-8')
                                                 .form-group
@@ -66,20 +67,16 @@ html
                                                     label
                                                         input(type='checkbox') 
                                                         |  keep me logged-in
+
                                     .bottom.text-center
                                         | New here ? 
                                         a(href='/user/signup')
                                             b Register
-
-                        li.nav-item.space
-                            a(href='/auth/login') Login
-                        li.nav-item.space
-                            a(href='/user/signup') Register
                     else
                         li.nav-item.space
-                            a#tab-2(href='/auth/logout') Logout
-                        li.nav-item.space
                             a#tab-3(href='/profile') #{user.username}
+                        li.nav-item.space
+                            a#tab-2(href='/auth/logout') Logout
                 
         
         
