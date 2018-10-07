@@ -4,8 +4,8 @@ block content
     .container(style="margin-top:30px; margin:50px")
         h1 PROFILE
         .row
-            .col-lg-4
-                img.rounded-circle(src=user.photo+'0' style='width:250px; height:250px' alt='profile photo')
+            .col-lg-4.card
+                img.rounded-circle.mx-auto(src=user.photo+'0' style='width:250px; height:250px;margin-top:15px;margin-bottom:15px' alt='profile photo')
 
                 ul.nav.nav-pills.flex-column
                     li.nav-item.active-page
@@ -16,23 +16,12 @@ block content
                         a.nav-link(href='#') Purchase List
                     li.nav-item
                         a.nav-link(href='/profile/mybooking') My Booking
+                    br
                     hr.d-sm-none
-            .col-lg-8
-                h4 #{user.username}
-                h4 email
-                h4 phone number
-                p yohohohohohoohoohhhoohoohohohohohohohohohohohohohola;dfj;lasdfjals;dfj;lajdfal;sdjf;las
+            .col-lg-8.card
+                h4.card(style='margin-top:15px;margin-bottom:15px') Username: #{user.username}
+                h4.card(style='margin-top:15px;margin-bottom:15px') First name: #{user.firstname}
+                h4.card(style='margin-top:15px;margin-bottom:15px') Last name: #{user.lastname}
+                h4.card(style='margin-top:15px;margin-bottom:15px') Email: #{user.email}
+                h4.card(style='margin-top:15px;margin-bottom:15px') Gender: #{user.gender}
                 
-
-    p #{user}
-    
-    table.table
-        thead
-            tr
-                th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-        tbody
-            tr
-                th(scope='row') 1
