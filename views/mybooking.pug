@@ -4,8 +4,8 @@ block content
     .container(style="margin-top:30px; margin:50px")
         h1 #{title}
         .row
-            .col-lg-4
-                img.rounded-circle(src=user.photo+'0' style='width:250px; height:250px' alt='profile photo')
+            .col-lg-4.card
+                img.rounded-circle.mx-auto(src=user.photo+'0' style='width:250px; height:250px;margin-top:15px;margin-bottom:15px' alt='profile photo')
 
                 ul.nav.nav-pills.flex-column
                     li.nav-item
@@ -16,8 +16,9 @@ block content
                         a.nav-link(href='#') Purchase List
                     li.nav-item.active-page
                         a.nav-link(href='#') My Booking
+                    br
                     hr.d-sm-none
-            .col-lg-8
+            .col-lg-8.card
                 table.table
                     thead
                         tr
