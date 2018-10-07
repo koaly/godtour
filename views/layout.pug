@@ -22,8 +22,44 @@ html
                             span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='/tour') Tour List
-                ul.nav.navbar-nav.navbar-right    
+                ul.nav.navbar-nav.navbar-right(style='margin-right:50px')  
                     if(!user)
+                        li.dropdown.nav-item.space
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                b Login
+                                span.caret
+                            ul#login-dp.dropdown-menu
+                                li
+                                    .row
+                                        .col-md-12 
+                                            | Login via
+                                            .social-buttons
+                                                a.btn.btn-google(href="/auth/google")
+                                                    i.fa.fa-google
+                                                    |  Google 
+                                            | or
+                                            form#login-nav.form(role='form', method='post', action='login', accept-charset='UTF-8')
+                                                .form-group
+                                                    label.sr-only(for='exampleInputEmail2') Email address
+                                                    input#exampleInputEmail2.form-control(type='email', placeholder='Email address', required='')
+                                                .form-group
+                                                    label.sr-only(for='exampleInputPassword2') Password
+                                                    input#exampleInputPassword2.form-control(type='password', placeholder='Password', required='')
+                                                    .help-block.text-right
+                                                        a(href='') 
+                                                        |  Forget the password ?
+                                                .form-group
+                                                    button.btn.btn-primary.btn-block(type='submit') 
+                                                        |  Sign in
+                                                .checkbox
+                                                    label
+                                                        input(type='checkbox') 
+                                                        |  keep me logged-in
+                                        .bottom.text-center
+                                            | New here ? 
+                                            a(href='/user/signup')
+                                                b Register
+
                         li.nav-item.space
                             a(href='/auth/login') Login
                         li.nav-item.space
