@@ -42,13 +42,13 @@ html
                                                     i.fa.fa-google
                                                     |  Google 
                                             | or
-                                            form#login-nav.form(role='form', method='post', action='login', accept-charset='UTF-8')
+                                            form#login-nav.form(role='form', method='POST', action='/auth/login', accept-charset='UTF-8')
                                                 .form-group
                                                     label.sr-only(for='exampleInputEmail2') Email address
-                                                    input#exampleInputEmail2.form-control(type='email', placeholder='Email address', required='')
+                                                    input#exampleInputEmail2.form-control(name="email",type='email', placeholder='Email address', required='')
                                                 .form-group
                                                     label.sr-only(for='exampleInputPassword2') Password
-                                                    input#exampleInputPassword2.form-control(type='password', placeholder='Password', required='')
+                                                    input#exampleInputPassword2.form-control(name="password",type='password', placeholder='Password', required='')
                                                     .help-block.text-right
                                                         a(href='') 
                                                         |  Forget the password ?
@@ -117,7 +117,7 @@ html
                     dl.contact-list
                         dt email:
                         dd
-                            a(href='mailto:#') dkstudioin@gmail.com
+                            a(href='mailto:#') to.ur.godcompany@gmail.com
                     dl.contact-list
                         dt phones:
                         dd
