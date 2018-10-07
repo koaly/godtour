@@ -73,7 +73,7 @@ a:active {
 }
 
 a:link{
-    color:black;
+    color:slategray;
     background-color: transparent;
     text-decoration: none;
 }
