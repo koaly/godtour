@@ -1,11 +1,32 @@
 extends layout
 
 block content
-    .container(style='margin-bottom:50px; margin-top:30px')
-        h1= tour.title
+    .container(style='margin-bottom:50px; margin-top:30px; background-color:lightgrey; border:groove')
+        h1 #{tour.title}
         h5 organized by #{tour.organizer}
+        h5 price: #{tour.price} 
+        h5 destination: #{tour.destination}
+        h5 day_duration: #{tour.day_duration}
+        h5 night_duration: #{tour.night_duration}
+        h5 start_book: #{tour.start_book}
+        h5 end_book: #{tour.end_book}
+        h5 start_trip: #{tour.start_trip}
+        h5 end_trip: #{tour.end_trip}
+        h5 flight_airline: #{tour.flight_airline} 
+        h5 flight_airport: #{tour.flight_airport}
+        h5 flight_depart: #{tour.flight_depart}
+        h5 flight_return: #{tour.flight_return}
+        h5 food: #{tour.food}
+        h5 stars: #{tour.stars}
+        h5 max_seat: #{tour.max_seat}
+        h5 now_seat: #{tour.now_seat}
+        h5 description: #{tour.description}
+        h5 stars: #{tour.stars}
+        h5 highlight: #{tour.highlight}
+
+    .container
         if tour.now_seat
-            h5 #{tour.now_seat} seat(s) remaining!
+            h4 #{tour.now_seat} seat(s) remaining!
             form(method="POST", action="/tour/"+tour._id)
                 if((user.state==1||user.state==2)&&(user._id==tour.organizerId))
                     a.btn.btn-danger.delete-tour(href='/tour/delete', data-id=tour._id style="margin-right:20px") Delete
@@ -14,5 +35,5 @@ block content
                     input.btn.btn-primary(style="margin-right:20px" type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
                     //a.btn.btn-dark(href='/tour/edit', data-id=tour._id) Edit
         else
-            h5 out of order sorry!
+            h4 out of order sorry!
         br
