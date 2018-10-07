@@ -71,16 +71,13 @@ html
                                             | New here ? 
                                             a(href='/user/signup')
                                                 b Register
-
-                        li.nav-item.space
-                            a(href='/auth/login') Login
                         li.nav-item.space
                             a(href='/user/signup') Register
                     else
                         li.nav-item.space
-                            a#tab-2(href='/auth/logout') Logout
-                        li.nav-item.space
                             a#tab-3(href='/profile') #{user.username}
+                        li.nav-item.space
+                            a#tab-2(href='/auth/logout') Logout
                 
         
         
