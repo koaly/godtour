@@ -12,7 +12,9 @@ block content
                 input.form-control(name='lastname',type='text')
             #form-group
                 label Gender:
-                input.form-control(name='gender',type='text')
+                    select.form-control(name='gender')
+                        option(value='male') Male
+                        option(value='female') Female
             #form-group
                 label Email:
                 input.form-control(name='email',type='email')
