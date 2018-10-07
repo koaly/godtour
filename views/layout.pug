@@ -43,11 +43,12 @@ html
                                 li
                                     .row
                                         .col-md-12 
-                                            | Login via
+                                            | Login With
                                             .social-buttons
-                                                a.btn.btn-google(href="/auth/google")
-                                                    i.fa.fa-google
-                                                    |  Google 
+                                                a(href="/auth/google")
+                                                    button.btn.btn-block.btn-google
+                                                        i.fa.fa-google
+                                                        |  Google 
                                             | or
                                             form#login-nav.form(role='form', method='POST', action='/auth/login', accept-charset='UTF-8')
                                                 .form-group
