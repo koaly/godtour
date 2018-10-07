@@ -5,10 +5,10 @@ body{
 footer{
   padding-top:30px;
   padding-bottom: 15px;
-  margin-top:20px;
+  margin-top:0px;
   
   color:#ffffff;
-  background-color:rgba(0, 0, 0, 0.9);
+  background-color:#2d3246;
   text-align: center;
 }
 
@@ -115,15 +115,6 @@ a:link{
     background: #aaa;
 }
 
-.footerr {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: red;
-    color: white;
-    text-align: center;
-}
 
 .tab {
     overflow: hidden;
