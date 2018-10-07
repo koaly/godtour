@@ -4,7 +4,11 @@ html
         title TO.UR WORLD!
         link(href="/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
         link(rel='stylesheet' href='/css/style.css')
+        link(rel='stylesheet' href='/css/footer.css')
         link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
+        script(src="/bower_components/jquery/dist/jquery.js")
+        script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
+        script(src="/js/main.js")
        
         body(style="font-family: 'Kanit', sans-serif;")
         nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
@@ -45,10 +49,65 @@ html
             block content
             br
             hr
-            .container
-                footer
-                    p  Copyright &copy; 2018
-        script(src="/bower_components/jquery/dist/jquery.js")
-        script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
-        script(src="/js/main.js")
-
+    footer.section.footer-classic.context-dark.bg-image(style='background: #2d3246;')
+        .container
+            .row.row-30
+                .col-md-4.col-xl-5
+                    .pr-xl-4
+                        a.brand(href='index.html')
+                            img.brand-logo-light(src='images/agency/logo-inverse-140x37.png', alt='', width='140', height='37', srcset='images/agency/logo-retina-inverse-280x74.png 2x')
+                        p
+                            | We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.
+                        // Rights
+                        p.rights
+                            span ©  
+                            span.copyright-year 2018
+                            span  
+                            span Waves
+                            span . 
+                            span All Rights Reserved.
+                .col-md-4
+                    h5 Contacts
+                    dl.contact-list
+                        dt Address:
+                        dd 798 South Park Avenue, Jaipur, Raj
+                    dl.contact-list
+                        dt email:
+                        dd
+                            a(href='mailto:#') dkstudioin@gmail.com
+                    dl.contact-list
+                        dt phones:
+                        dd
+                            a(href='tel:#') +91 7568543012
+                            span or
+                            a(href='tel:#') +91 9571195353
+                .col-md-4.col-xl-3
+                    h5 Links
+                    ul.nav-list
+                        li
+                            a(href='#') About
+                        li
+                            a(href='#') Projects
+                        li
+                            a(href='#') Blog
+                        li
+                            a(href='#') Contacts
+                        li
+                            a(href='#') Pricing
+        .row.no-gutters.social-container
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-facebook
+                    span Facebook
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-instagram
+                    span instagram
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-twitter
+                    span twitter
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-youtube-play
+                    span google
