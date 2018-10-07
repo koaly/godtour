@@ -4,7 +4,7 @@ block content
     .container(style="margin-top:30px; margin:50px")
         h1 #{title}
         .row
-            .col-lg-4.card
+            .col-lg-4.card(style="border-left:10px dashed coral;border-bottom:10px dashed coral;border-top:10px dashed coral;")
                 img.rounded-circle.mx-auto(src=user.photo+'0' style='width:250px; height:250px;margin-top:15px;margin-bottom:15px' alt='profile photo')
 
                 ul.nav.nav-pills.flex-column
@@ -18,7 +18,7 @@ block content
                         a.nav-link(href='#') My Booking
                     br
                     hr.d-sm-none
-            .col-lg-8.card
+            .col-lg-8.card(style="border:10px dashed coral")
                 table.table
                     thead
                         tr
