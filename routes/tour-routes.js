@@ -22,6 +22,12 @@ router.get('/', function(req, res){
 
 // Add Route
 router.get('/add', ensureAuthenticated, function(req, res){
+    console.log(req.user.state);
+    if(!req.user.state){
+        req.flash('danger', 'You are not a Tour Operator, please contact us.');
+        res.redirect('/');
+        return;
+    }
     res.render('add_tour', {
         title: 'Add TOUR',
         user: req.user
@@ -29,7 +35,26 @@ router.get('/add', ensureAuthenticated, function(req, res){
 });
 
 router.post('/add', function(req, res){
-    req.checkBody('title', 'Tour\'s name needed').notEmpty();
+    req.checkBody('title', 'Tour\'s name is needed').notEmpty();
+    req.checkBody('price', 'Price is needed').notEmpty();
+    req.checkBody('destination', 'Tour\'s destinations are needed').notEmpty();
+    req.checkBody('day_duration', 'Daylong is needed').notEmpty();
+    req.checkBody('night_duration', 'Nightlong is needed').notEmpty();
+    req.checkBody('flight_airline', 'Airline is needed').notEmpty();
+    req.checkBody('flight_airport', 'Airport-to-take-of is needed').notEmpty();
+    req.checkBody('flight_depart', 'Departure Flight is needed').notEmpty();
+    req.checkBody('depart_time', 'Departure Flight Time is needed').notEmpty();
+    req.checkBody('flight_return', 'Return Flight is needed').notEmpty();
+    req.checkBody('return_time', 'Return Flight Time is needed').notEmpty();
+    req.checkBody('food', 'Number-of-meals in tour is needed').notEmpty();
+    req.checkBody('stars', 'Grade of tour is needed').notEmpty();
+    req.checkBody('max_seat', 'Number-of-seats is needed').notEmpty();
+    req.checkBody('start_book_date', 'Start Booking Date is needed').notEmpty();
+    req.checkBody('start_book_time', 'Start Booking Time is needed').notEmpty();
+    req.checkBody('end_book_date', 'End Booking Date is needed').notEmpty();
+    req.checkBody('end_book_time', 'End Booking Time is needed').notEmpty();
+    req.checkBody('start_trip', 'Start Trip Date is needed').notEmpty();
+    req.checkBody('end_trip', 'End Trip Date is needed').notEmpty();
 
     let err = req.validationErrors();
     if (err){
@@ -39,10 +64,12 @@ router.post('/add', function(req, res){
             errors: err
         });
     } else{
+        console.log(req.user);
         let time = [];
         let tour = new Tour();
         tour.title = req.body.title;
-        tour.organizer = req.user._id;
+        tour.organizerId = req.user._id;
+        tour.organizer = req.user.username;
         tour.price = req.body.price;
         tour.destination = req.body.destination;
         tour.day_duration = req.body.day_duration;
@@ -75,7 +102,7 @@ router.post('/add', function(req, res){
                 console.log(err);
                 return;
             } else {
-                req.flash('success', 'New TOUR added!');
+                req.flash('success', 'Your ' + tour.title + ' added!');
                 res.redirect('/');
             }
         });
@@ -107,6 +134,11 @@ router.get('/:id', function(req, res){
 router.post('/:id', function(req, res){
 
     Tour.findById(req.params.id, function(err, tour){
+        if (req.user._id == tour.organizerId){
+            req.flash('danger', 'You can\'t book your own tour!');
+            res.redirect('/');
+            return;
+        }
         if (tour.now_seat) {
             tour.now_seat--;
             let booking = new Booking();
@@ -126,6 +158,7 @@ router.post('/:id', function(req, res){
                     console.log(err);
                     return;
                 } else {
+                    req.flash('success', 'Book ' + tour.title + ' successful!');
                     res.redirect('/');
                 }
             });
@@ -136,8 +169,13 @@ router.post('/:id', function(req, res){
 // Load Edit Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Tour.findById(req.params.id, function(err, tour){
+        if(!req.user.state || tour.organizerId != req.user._id){
+            req.flash('danger', 'You don\'t have permission to edit this tour.');
+            res.redirect('/');
+            return;
+        }
         res.render('edit_tour', {
-            title: 'Edit Article',
+            title: 'Edit Tour',
             tour: tour
         });
     });
@@ -191,7 +229,7 @@ router.delete('/:id', function(req, res){
     let query = {_id:req.params.id};
 
     Tour.findById(req.params.id, function(err, tour){
-         if(tour.organizer != req.user._id){
+        if(tour.organizerId != req.user._id){
             res.status(500).send();
         }
         else{
