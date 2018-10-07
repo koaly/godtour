@@ -2,6 +2,16 @@ body{
     background-color: lightblue;
 }
 
+footer{
+  padding-top:30px;
+  padding-bottom: 15px;
+  margin-top:20px;
+  
+  color:#ffffff;
+  background-color:rgba(0, 0, 0, 0.9);
+  text-align: center;
+}
+
 .color-red{
     background-color:red;
 }
@@ -87,12 +97,6 @@ a:link{
     font-size:30px;
 }
 
-#footer{
-    display: table;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 #searchbar{
   /*margin-left:200px;
@@ -101,9 +105,24 @@ a:link{
   background:#EAEBE5;
 }
 
+.middle{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .fakeimg {
     height: 200px;
     background: #aaa;
+}
+
+.footerr {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
 }
 
 .tab {
