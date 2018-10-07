@@ -25,33 +25,11 @@ block content
     
     
     .container
-        //ul.nav.nav-pills
-            li.nav-item.color-dark1
-                a.nav-link.active(href='#' color="white") Active
-            tr
-            li.nav-item.dropdown.color-dark1
-                a#tab-4.nav-link.dropdown-toggle(data-toggle='dropdown', href='#') Dropdown
-                .dropdown-menu
-                    a.dropdown-item(href='#') Link 1
-                    a.dropdown-item(href='#') Link 2
-                    a.dropdown-item(href='#') Link 3
-            li.nav-item.color-dark1
-                a#tab-4.nav-link(href='#') Link
-            li.nav-item.color-dark1
-                a.nav-link.disabled(href='#') Disabled
-        //section#searchbar
-
-            h1 hahahahah
-            h1 hahahahah
-            h1 hahahahah
-            h1 hahahahah
-            h1 hahahahah
-        
-        .tab
+        .tab(style="margin:auto")
             button.tablinks(onclick="openMenu(event, 'Browse')" id="defaultOpen") Browse Tour
             button.tablinks(onclick="openMenu(event, 'Suggest')") Suggestion
             button.tablinks(onclick="openMenu(event, 'Promo')") About Us
-        #Browse.tabcontent
+        #Browse.tabcontent(style="margin:auto")
             h3 Browse Tour
             .bootstrap-iso
                 .container-fluid
@@ -110,12 +88,12 @@ block content
         
 
 
-        #Suggest.tabcontent
+        #Suggest.tabcontent(style="margin:auto")
             h3 Suggestion
             p Tell us something
             p Tell us something
             p Tell us something
-        #Promo.tabcontent
+        #Promo.tabcontent(style="margin:auto")
             h3 Recommend Promotions
             p Promotion 1
             p Promotion 2
