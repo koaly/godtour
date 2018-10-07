@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .container
+        h1 #{title}
+        table.table
+            thead
+                tr
+                    th(scope='col') #
+                    th(scope='col') Tour Name
+                    th(scope='col') Tour ID
+                    th(scope='col')
+            thead
+                each booking, i in bookings
+                    tr
+                        th(scope='row') #{i+1}
+                        td #{booking.tourTitle}
+                        td #{booking.tourId}
+                        td
+                            a.btn.btn-danger(href='/profile/mybooking/'+booking._id) Cancel
+                        

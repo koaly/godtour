@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    p #{userList.count}
+    each value in userList.user
+        li= value.username
