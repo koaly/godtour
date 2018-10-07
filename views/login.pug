@@ -6,10 +6,10 @@ block content
         form(method="POST", action="/auth/login")
             #form-group
                 label Email:
-                input.form-control(name="email",type='email')
+                input.form-control(name="email",placeholder="Email address",type='email')
             #form-group
                 label Password:
-                input.form-control(name="password",type='password')
+                input.form-control(name="password",placeholder="Password",type='password')
             br
             input.btn.btn-primary.form-control(type='submit',value='Submit')
         br 
