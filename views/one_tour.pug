@@ -9,10 +9,10 @@ block content
         else
             h5 out of order sorry!
         form(method="POST", action="/tour/"+tour._id)
-            if(((user.state)&&(user._id==tour.organizerId)) || user.state == 2)
-                a.btn.btn-danger.delete-tour(href='#', data-id=tour._id style="margin-right:20px") Delete
-                a.btn.btn-dark(href='/tour/edit/'+tour._id, data-id=tour._id) Edit
-            else
-                input.btn.btn-primary(style="margin-right:20px" type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
-                //a.btn.btn-dark(href='/tour/edit', data-id=tour._id) Edit
+            if(user)
+                if(((user.state)&&(user._id==tour.organizerId)) || user.state == 2)
+                    a.btn.btn-danger.delete-tour(href='#', data-id=tour._id style="margin-right:20px") Delete
+                    a.btn.btn-dark(href='/tour/edit/'+tour._id, data-id=tour._id) Edit
+                else
+                    input.btn.btn-primary(style="margin-right:20px" type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
         br
