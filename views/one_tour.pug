@@ -7,9 +7,13 @@ block content
         if tour.now_seat
             h5 #{tour.now_seat} seat(s) remaining!
             form(method="POST", action="/tour/"+tour._id)
-                if user
+                if(user.state==1&&(user._id==tour.organizerId))
+                    //input.btn.btn-primary(href='/tour/edit', data-id=tour._id) Edit
+                    //input.btn.btn-primary(type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
+                    a.btn.btn-danger.delete-tour(href='/tour/delete', data-id=tour._id) Delete
+                    a.btn.btn-danger.delete-tour(href='/tour/edit', data-id=tour._id) Edit
+                else
                     input.btn.btn-primary(type="submit", value="จองงงงงงงงงงงงงงงงงงงงง")
-                    a.btn.btn-danger.delete-tour(href='#', data-id=tour._id) Delete
         else
             h5 out of order sorry!
         br
