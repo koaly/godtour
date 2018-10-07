@@ -18,7 +18,7 @@ html
         block header
         
         body(style="font-family: 'Kanit', sans-serif;")
-        nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+        nav.navbar.navbar-expand-sm.navbar-dark(style='background: #2d3246')
             a.navbar-brand(href='/' )
                 img(src='https://i.imgur.com/aW1vocb.png' alt='god_logo' style='width:100px; height:50px')
                 |   TO.UR WORLD! 
@@ -66,10 +66,10 @@ html
                                                     label
                                                         input(type='checkbox') 
                                                         |  keep me logged-in
-                                        .bottom.text-center
-                                            | New here ? 
-                                            a(href='/user/signup')
-                                                b Register
+                                    .bottom.text-center
+                                        | New here ? 
+                                        a(href='/user/signup')
+                                            b Register
 
                         li.nav-item.space
                             a(href='/auth/login') Login
