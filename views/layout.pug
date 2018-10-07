@@ -33,6 +33,9 @@ html
                             span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='/tour') Tour List
+                    if(user&&user.state==2)
+                        li.nav-item
+                            a.nav-link(href='/tour/add') Add Tour
                 ul.nav.navbar-nav.navbar-right(style='margin-right:30px')  
                     if(!user)
                         li.dropdown.nav-item.space
