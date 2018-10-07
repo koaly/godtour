@@ -70,7 +70,16 @@ router.get('/login',function(req,res){
         user: req.user
     });
 });
-router.post('/login',passport.authenticate('local'),function(req,res,next){
+router.get('/login/error',(req,res)=>{
+    req.flash('danger','Email or Password is not corret')
+    res.render('login',{
+        user:req.user
+    });
+});
+router.post('/login',passport.authenticate('local',{ failureRedirect: '/auth/login/error' }),(req,res,next) =>{
+    res.redirect('/profile')
+    /*
+    console.log("suck2");
     bcrypt.hash(req.body.password,10,(err,hash)=>{
         if(err){
             return res.status(500).json({
@@ -90,6 +99,7 @@ router.post('/login',passport.authenticate('local'),function(req,res,next){
             });
         }
     });
+    */
 });
 //auth logout
 router.get('/logout',function(req,res){

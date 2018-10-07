@@ -67,6 +67,7 @@ passport.use(
 passport.use(
     new LocalStragtegy({
        usernameField: 'email',
+       passwordField: 'password',
     },(email,password,done) =>{
         
         const query = {
@@ -81,21 +82,21 @@ passport.use(
                 console.log(user)
                 bcrypt.compare(password,user.password,function(err,result){
                     if(err){
-                        done(err,false,{message: "Compare password Wrong"})
+                        return done(err,false)
                     }
                     if(result){
-                        done(null,user);
+                        return done(null,user);
                     }else{
-                        done(null,false,{message: 'Wrong password'});
+                        return done(null,false);
                     } 
                 });
             }
             else{
-                done(null,false,{message:'No user found'});
+                return done(null,false);
             }
         })
         .catch(err =>{
-            done(err,false)
+            return done(err,false)
         })
     })
 );

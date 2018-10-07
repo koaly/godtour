@@ -47,6 +47,28 @@ router.get('/signup',(req,res,next)=>{
 
 //next time we will use this instead register
 router.post('/signup',(req,res,next)=>{
+    
+    const username = req.body.username;
+    const password = req.body.password;
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const gender = req.body.gender;
+    const email = req.body.email;
+   
+    req.checkBody('firstname','First Name is required').notEmpty();
+    req.checkBody('lastname', 'Last Name is required').notEmpty();
+    req.checkBody('email','Email is required').notEmpty();
+    req.checkBody('email','Email is not valid').isEmail();
+    req.checkBody('username','Username is required').notEmpty();
+    req.checkBody('password','Password is required').notEmpty();
+    req.checkBody('password2','Password do not match').equals(req.body.password);
+
+    let errors = req.validationErrors()
+    if(errors){
+        res.render('register',{
+            errors:errors
+        })
+    }
     User.findOne(
         {
             email:req.body.email
@@ -55,10 +77,8 @@ router.post('/signup',(req,res,next)=>{
         .then(user =>{
             console.log(user)
             if(user){                
-                return res.status(409).json({
-                        message : "This email already in use"
-                
-                });
+                req.flash('danger', 'Email Already in use');
+                res.redirect('/user/signup')
             }else{
                 bcrypt.hash(req.body.password,10,(err,hash)=>{
                     if(err){
@@ -67,11 +87,11 @@ router.post('/signup',(req,res,next)=>{
                             error : err
                         });
                     }else{
+
                         const newUser = new User({
                             _id: new mongoose.Types.ObjectId,
                             username: req.body.username,
                             password: hash,
-                            googleId: req.body.googleId,
                             firstname: req.body.firstname,
                             lastname: req.body.lastname,
                             gender: req.body.gender,
@@ -83,6 +103,7 @@ router.post('/signup',(req,res,next)=>{
                         newUser
                             .save()
                             .then(result =>{
+                                /*
                                 res.status(201).json({
                                     message: "create newUser Success",
                                     createUser: {
@@ -98,8 +119,8 @@ router.post('/signup',(req,res,next)=>{
                                             url: "http://localhost:3000/user/"+result._id
                                         }
                                     }
-                                    
                                 });
+                                */
                                 req.flash('success', 'Signup complete!');
                                 res.redirect('/');
                             })
