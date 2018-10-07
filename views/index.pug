@@ -53,8 +53,43 @@ block content
             button.tablinks(onclick="openMenu(event, 'Promo')") About Us
         #Browse.tabcontent
             h3 Browse Tour
+            .bootstrap-iso
+                .container-fluid
+                    .row
+                        .col-md-6.col-sm-6.col-xs-12
+                            form.form-horizontal(action='https://formden.com/post/MlKtmY4x/', method='post')
+                                .form-group
+                                    label.control-label.col-sm-2.requiredField(for='date')
+                                        | Date
+                                        span.asteriskField
+                                            | *
+                                    .col-sm-10
+                                        .input-group
+                                            .input-group-addon
+                                                i.fa.fa-calendar
+                                            input#date.form-control(name='date', placeholder='MM/DD/YYYY', type='text')
+                                .form-group
+                                    .col-sm-10.col-sm-offset-2
+                                        input(name='_honey', style='display:none', type='text')
+                                        button.btn.btn-primary(name='submit', type='submit')
+                                            | Submit
+
+            .container
+                .row
+                    .col-sm-6
+                        .form-group
+                            #datetimepicker1.input-group.date
+                                input.form-control(type='text')
+                                span.input-group-addon
+                                    span.glyphicon.glyphicon-calendar
+                    script(type='text/javascript').
+                        $(function () {
+                        $('#datetimepicker').datetimepicker();
+                        });
+
             p input form
-            p input form
+            p Date:
+                input#datepicker(type='text')
             p input form
         #Suggest.tabcontent
             h3 Suggestion
