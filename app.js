@@ -141,11 +141,9 @@ app.use((req,res,next)=>{
 //send error back
 app.use((error,req,res,next)=>{
     res.status(error.status || 500);
-    res.json({
-        error:{
-            messages: error.message
-        }
-    });
+    res.render('error',{
+        error: error
+    })
 });
 
 
