@@ -83,6 +83,7 @@ router.post('/signup',(req,res,next)=>{
                         newUser
                             .save()
                             .then(result =>{
+                                /*
                                 res.status(201).json({
                                     message: "create newUser Success",
                                     createUser: {
@@ -98,8 +99,8 @@ router.post('/signup',(req,res,next)=>{
                                             url: "http://localhost:3000/user/"+result._id
                                         }
                                     }
-                                    
                                 });
+                                */
                                 req.flash('success', 'Signup complete!');
                                 res.redirect('/');
                             })
