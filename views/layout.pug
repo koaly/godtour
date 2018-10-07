@@ -73,10 +73,23 @@ html
                                         a(href='/user/signup')
                                             b Register
                     else
-                        li.nav-item.space
-                            a#tab-3(href='/profile') #{user.username}
-                        li.nav-item.space
-                            a#tab-2(href='/auth/logout') Logout
+                        li.dropdown.nav-item.space
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                b #{user.username}
+                                span.caret
+                            ul.dropdown-menu.dropdown-menu-right
+                                li.dropdown-item
+                                    a(href='/profile') Edit Profile
+                                li.dropdown-item
+                                    a(href='#') My Cards
+                                li.dropdown-item
+                                    a(href='#') Purchase List
+                                li.dropdown-item
+                                    a(href='/profile/mybooking') My booking
+                                li.dropdown-item
+                                    a(href='/auth/logout') Logout
+                        
+                        
                 
         
         
