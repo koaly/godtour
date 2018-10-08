@@ -73,7 +73,7 @@ a:active {
 }
 
 a:link{
-    color:black;
+    color:slategray;
     background-color: transparent;
     text-decoration: none;
 }
@@ -124,6 +124,7 @@ a:link{
 
 .tab {
     overflow: hidden;
+    width: 1000px;
     border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
@@ -150,6 +151,7 @@ a:link{
 
 .tabcontent {
     display: none;
+    width: 1000px;
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
@@ -184,6 +186,10 @@ a:link{
     color: #fff;
     background-color:#3b5998;
 }
+.btn-google{
+    color: #fff;
+    background-color:red; 
+}
 .btn-google:hover{
     color: #fff;
     background-color:red; 
@@ -205,4 +211,8 @@ a:link{
         background-color: inherit;
         border-top:0 none;
     }
+}
+.lo-color-red{
+    color:#fff;
+    background-color: red
 }

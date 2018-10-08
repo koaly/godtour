@@ -169,14 +169,15 @@ router.post('/:id', function(req, res){
 // Load Edit Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
     Tour.findById(req.params.id, function(err, tour){
-        if(!req.user.state || tour.organizerId != req.user._id){
+        if((!req.user.state || tour.organizerId != req.user._id) && req.user.state != 2){
             req.flash('danger', 'You don\'t have permission to edit this tour.');
             res.redirect('/');
             return;
         }
         res.render('edit_tour', {
             title: 'Edit Tour',
-            tour: tour
+            tour: tour,
+            user: req.user
         });
     });
 });
@@ -229,7 +230,7 @@ router.delete('/:id', function(req, res){
     let query = {_id:req.params.id};
 
     Tour.findById(req.params.id, function(err, tour){
-        if(tour.organizerId != req.user._id){
+        if(tour.organizerId != req.user._id && req.user.state != 2){
             res.status(500).send();
         }
         else{

@@ -1,38 +1,26 @@
 extends layout
 
 block content
-    .container-fluid(style='margin-left:30px;margin-right:30px')
-        h1 PROFILE
+    .container(style="margin-top:30px; margin:50px")
         .row
-            .col-lg-4
-                img.img-thumbnail(src=user.photo+'0' style='width:250px; height:250px' alt='profile photo')
+            .col-lg-4.card(style="border-left:5px dashed coral;border-bottom:5px dashed coral;border-top:5px dashed coral;")
+                img.rounded-circle.mx-auto(src=user.photo+'0' style='width:250px; height:250px;margin-top:15px;margin-bottom:15px;border:5px dashed coral' alt='profile photo')
 
                 ul.nav.nav-pills.flex-column
                     li.nav-item.active-page
-                        a.nav-link(href='#') Edit Profile
+                        a.nav-link(href='#')  Profile
                     li.nav-item
-                        a.nav-link(href='#') My Cards
+                        a.nav-link(href='#' style='cursor:not-allowed') My Cards
                     li.nav-item
-                        a.nav-link(href='#') Purchase List
+                        a.nav-link(href='#' style='cursor:not-allowed') Purchase List
                     li.nav-item
                         a.nav-link(href='/profile/mybooking') My Booking
+                    br
                     hr.d-sm-none
-            .col-lg-8
-                h4 #{user.username}
-                h4 email
-                h4 phone number
-                p yohohohohohoohoohhhoohoohohohohohohohohohohohohohola;dfj;lasdfjals;dfj;lajdfal;sdjf;las
+            .col-lg-8.card(style="border:5px dashed coral")
+                h4.card(style='margin-top:15px;margin-bottom:15px') Username: #{user.username}
+                h4.card(style='margin-top:15px;margin-bottom:15px') First name: #{user.firstname}
+                h4.card(style='margin-top:15px;margin-bottom:15px') Last name: #{user.lastname}
+                h4.card(style='margin-top:15px;margin-bottom:15px') Email: #{user.email}
+                h4.card(style='margin-top:15px;margin-bottom:15px') Gender: #{user.gender}
                 
-
-    p #{user}
-    
-    table.table
-        thead
-            tr
-                th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-        tbody
-            tr
-                th(scope='row') 1

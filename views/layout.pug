@@ -3,6 +3,7 @@ html
     head
         title TO.UR WORLD!
         link(href="/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
+        link(href="/bower_components/mdi/css/materialdesignicons.css", rel="stylesheet")
         link(rel='stylesheet' href='/css/style.css')
         link(rel='stylesheet' href='/css/footer.css')
         link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
@@ -10,8 +11,14 @@ html
         //- script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
         //- script(src="/js/main.js")
        
+        script(type='text/javascript', src='https://formden.com/static/cdn/formden.js')
+        link(rel='stylesheet', href='https://formden.com/static/cdn/bootstrap-iso.css')
+        link(rel='stylesheet', href='https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css')
+
+        block header
+        
         body(style="font-family: 'Kanit', sans-serif;")
-        nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+        nav.navbar.navbar-expand-sm.sticky-top(style='background: #2d3246')
             a.navbar-brand(href='/' )
                 img(src='https://i.imgur.com/aW1vocb.png' alt='god_logo' style='width:100px; height:50px')
                 |   TO.UR WORLD! 
@@ -26,21 +33,25 @@ html
                             span.sr-only (current)
                     li.nav-item
                         a.nav-link(href='/tour') Tour List
-                ul.nav.navbar-nav.navbar-right(style='margin-right:50px')  
+                    if(user&&user.state==2)
+                        li.nav-item
+                            a.nav-link(href='/tour/add') Add Tour
+                ul.nav.navbar-nav.navbar-right(style='margin-right:30px')  
                     if(!user)
                         li.dropdown.nav-item.space
                             a.dropdown-toggle(href='#', data-toggle='dropdown')
                                 b Login
                                 span.caret
-                            ul#login-dp.dropdown-menu
+                            ul#login-dp.dropdown-menu.dropdown-menu-right
                                 li
                                     .row
                                         .col-md-12 
-                                            | Login via
+                                            | Login With
                                             .social-buttons
-                                                a.btn.btn-google(href="/auth/google")
-                                                    i.fa.fa-google
-                                                    |  Google 
+                                                a(href="/auth/google")
+                                                    button.btn.btn-block.btn-google
+                                                        i.fa.fa-google
+                                                        |  Google 
                                             | or
                                             form#login-nav.form(role='form', method='POST', action='/auth/login', accept-charset='UTF-8')
                                                 .form-group
@@ -59,20 +70,29 @@ html
                                                     label
                                                         input(type='checkbox') 
                                                         |  keep me logged-in
-                                        .bottom.text-center
-                                            | New here ? 
-                                            a(href='/user/signup')
-                                                b Register
 
-                        li.nav-item.space
-                            a(href='/auth/login') Login
-                        li.nav-item.space
-                            a(href='/user/signup') Register
+                                    .bottom.text-center
+                                        | New here ? 
+                                        a(href='/user/signup')
+                                            b Register
                     else
-                        li.nav-item.space
-                            a#tab-2(href='/auth/logout') Logout
-                        li.nav-item.space
-                            a#tab-3(href='/profile') #{user.username}
+                        li.dropdown.nav-item.space
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                b #{user.username}
+                                span.caret
+                            ul.dropdown-menu.dropdown-menu-right
+                                li.dropdown-item
+                                    a(href='/profile')  Profile
+                                li.dropdown-item
+                                    a(href='#' style='cursor:not-allowed') My Cards
+                                li.dropdown-item
+                                    a(href='#' style='cursor:not-allowed') Purchase List
+                                li.dropdown-item
+                                    a(href='/profile/mybooking') My booking
+                                li.dropdown-item
+                                    a(href='/auth/logout') Logout
+                        
+                        
                 
         
         
@@ -85,12 +105,23 @@ html
             block content
             br
             
-            //footer
-                center
-                    p  Copyright &copy; 2018 TO.UR WORLD
         script(src="/bower_components/jquery/dist/jquery.js")
         script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
         script(src="/js/main.js")
+        script(type='text/javascript', src='https://code.jquery.com/jquery-1.11.3.min.js')
+        script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css')
+        script.
+            $(document).ready(function(){
+            var date_input=$('input[name="date"]'); 
+            var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            })
+            })
 
     footer.section.footer-classic.context-dark.bg-image(style='background: #2d3246;margin-top:60px')
         .container
@@ -100,13 +131,13 @@ html
                         a.brand(href='index.html')
                             img.brand-logo-light(src='images/agency/logo-inverse-140x37.png', alt='', width='140', height='37', srcset='images/agency/logo-retina-inverse-280x74.png 2x')
                         p
-                            | We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.
+                            | Find the best place to fulfill your wonderful vacay on TO.UR WORLD!
                         // Rights
                         p.rights
                             span ©  
                             span.copyright-year 2018
                             span  
-                            span Waves
+                            span TO.UR WORLD
                             span . 
                             span All Rights Reserved.
                 .col-md-4
@@ -121,9 +152,9 @@ html
                     dl.contact-list
                         dt phones:
                         dd
-                            a(href='tel:#') +91 7568543012
-                            span or
-                            a(href='tel:#') +91 9571195353
+                            a(href='tel:#') +66 871177555 
+                            span or 
+                            a(href='tel:#') +66 831989008 
                 .col-md-4.col-xl-3
                     h5 Links
                     ul.nav-list
@@ -139,23 +170,19 @@ html
                             a(href='#') Pricing
         .row.no-gutters.social-container
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-facebook
+                a.social-inner(href='https://www.facebook.com/tour.wor1d')
+                    span.i.mdi.mdi-facebook
                     span Facebook
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-instagram
+                a.social-inner(href='https://www.instagram.com/tour.wor1d/')
+                    span.i.mdi.mdi-instagram
                     span instagram
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-twitter
+                a.social-inner(href='https://twitter.com/tour_wor1d')
+                    span.i.mdi.mdi-twitter
                     span twitter
             .col
-                a.social-inner(href='#')
-                    span.icon.mdi.mdi-youtube-play
-                    span google
+                a.social-inner(href='https://www.youtube.com/channel/UCejOXMM5zGyD8GUETtqhJmQ')
+                    span.i.mdi.mdi-youtube
+                    span youtube
         
-    footer
-            center
-                p  Copyright &copy; 2018 TO.UR WORLD
-

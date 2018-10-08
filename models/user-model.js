@@ -23,7 +23,8 @@ const userSchema = new Schema({
 		required: true
 	},
 	gender:{
-		type: String
+		type: String,
+		default: 'undefied'
 	},
 	photo: {
 		type: String,

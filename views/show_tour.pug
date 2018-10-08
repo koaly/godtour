@@ -1,57 +1,43 @@
 extends layout
-
+block header
+    link(rel='stylesheet' href='/css/tourlist.css')
 block content
     .container(style='margin-left:10px;margin-top:30px')
         .row
             .col-lg-2
-                ul.nav.nav-pills.flex-column
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    hr.d-sm-none
+                
             .col-lg-8
                 .row
-                each tour, i in tours
-                    //p=tour
-                    .container.col-lg
-                        .card
-                            .thumbnail
-                                a(href = "/tour/"+tour._id)
-                                    img.card-img-top.img-thumbnail(src='https://d1nabgopwop1kh.cloudfront.net/hotel-asset/30000002100149018_wh_32' alt='sample image')
-                                    .card-body
-                                        .row
-                                            .col-12
-                                                h4 #{tour.title}
-                                        .row
-                                            .col-4
-                                                p organized by #{tour.organizer}
-                                                p S: #{tour.day_duration} N: #{tour.night_duration}
-                                            .col-6
-                                                h4 #{tour.destination}
-                                                p #{tour.description}
-                                            .col-2
-                                                .text-right
-                                                    p #{tour.now_seat}/#{tour.max_seat}
-                                                    h4 #{tour.price} ฿
+                    each tour, i in tours
+                        //p=tour
+                        .col-md-12
+                            .card.tl-card
+                                .thumbnail
+                                    a(href = "/tour/"+tour._id)
+                                        .tl-container
+                                            img.card-img-top.img-thumbnail(src='https://d1nabgopwop1kh.cloudfront.net/hotel-asset/30000002100149018_wh_32' alt='sample image')
+                                            .tl-text-block
+                                                h4=tour.title
                                                 
+                                        .card-body
+                                            .row
+                                                .col-6
+                                                    h4 #{tour.destination}
+                                                    p #{tour.description}
+                                                .col-4
+                                                    p organized by #{tour.organizer}
+                                                    p S: #{tour.day_duration} N: #{tour.night_duration}
+                                                .col-2
+                                                    .text-right
+                                                        p #{tour.now_seat}/#{tour.max_seat}
+                                                        h4 #{tour.price} ฿
+                                            
                         <br>
             .col-lg-2
-                p for something in the future
-                ul.nav.nav-pills.flex-column
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    li.nav-item
-                        a.nav-link(href='#') something
-                    hr.d-sm-none
+            br
+
+            
+                
             
             
         
