@@ -1,6 +1,4 @@
 Porject: God Touring Project 
 
-Run appication:
-./node app.js
-
+Run server with: npm start
 

@@ -1,0 +1,6 @@
+{
+    "server": {
+        "name":"tour-ur-world",
+        "port": 3000
+    }
+}

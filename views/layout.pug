@@ -1,15 +1,161 @@
 doctype html
-
 html
     head
-        title #{title}
-        link(rel='stylesheet',href='/public/stylesheet/css/style.css')
-        meta(name='viewport' content="width=device-width, inital-scale=1")
-    body
-        main
-            block header
-                header.header
-                    h1 #{title}
+        title TO.UR WORLD!
+        link(href="/bower_components/bootstrap/dist/css/bootstrap.css", rel="stylesheet")
+        link(rel='stylesheet' href='/css/style.css')
+        link(rel='stylesheet' href='/css/footer.css')
+        link(href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet")
+        //- script(src="/bower_components/jquery/dist/jquery.js")
+        //- script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
+        //- script(src="/js/main.js")
+       
+        body(style="font-family: 'Kanit', sans-serif;")
+        nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+            a.navbar-brand(href='/' )
+                img(src='https://i.imgur.com/aW1vocb.png' alt='god_logo' style='width:100px; height:50px')
+                |   TO.UR WORLD! 
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbars', aria-controls='navbars', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbars.collapse.navbar-collapse
+           
+                ul.navbar-nav.mr-auto
+                    //li.nav-item
+                        a.nav-link(href='/')
+                            | Home 
+                            span.sr-only (current)
+                    li.nav-item
+                        a.nav-link(href='/tour') Tour List
+                ul.nav.navbar-nav.navbar-right(style='margin-right:50px')  
+                    if(!user)
+                        li.dropdown.nav-item.space
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                b Login
+                                span.caret
+                            ul#login-dp.dropdown-menu
+                                li
+                                    .row
+                                        .col-md-12 
+                                            | Login via
+                                            .social-buttons
+                                                a.btn.btn-google(href="/auth/google")
+                                                    i.fa.fa-google
+                                                    |  Google 
+                                            | or
+                                            form#login-nav.form(role='form', method='POST', action='/auth/login', accept-charset='UTF-8')
+                                                .form-group
+                                                    label.sr-only(for='exampleInputEmail2') Email address
+                                                    input#exampleInputEmail2.form-control(name="email",type='email', placeholder='Email address', required='')
+                                                .form-group
+                                                    label.sr-only(for='exampleInputPassword2') Password
+                                                    input#exampleInputPassword2.form-control(name="password",type='password', placeholder='Password', required='')
+                                                    .help-block.text-right
+                                                        a(href='') 
+                                                        |  Forget the password ?
+                                                .form-group
+                                                    button.btn.btn-primary.btn-block(type='submit') 
+                                                        |  Sign in
+                                                .checkbox
+                                                    label
+                                                        input(type='checkbox') 
+                                                        |  keep me logged-in
+                                        .bottom.text-center
+                                            | New here ? 
+                                            a(href='/user/signup')
+                                                b Register
+
+                        li.nav-item.space
+                            a(href='/auth/login') Login
+                        li.nav-item.space
+                            a(href='/user/signup') Register
+                    else
+                        li.nav-item.space
+                            a#tab-2(href='/auth/logout') Logout
+                        li.nav-item.space
+                            a#tab-3(href='/profile') #{user.username}
+                
+        
+        
+        
+        .container-fluid
+            != messages('message', locals)
+            if errors
+                each error, i in errors
+                    div(class="alert alert-danger") #{error.msg}
             block content
+            br
+            
+            //footer
+                center
+                    p  Copyright &copy; 2018 TO.UR WORLD
+        script(src="/bower_components/jquery/dist/jquery.js")
+        script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
+        script(src="/js/main.js")
+
+    footer.section.footer-classic.context-dark.bg-image(style='background: #2d3246;margin-top:60px')
+        .container
+            .row.row-30
+                .col-md-4.col-xl-5
+                    .pr-xl-4
+                        a.brand(href='index.html')
+                            img.brand-logo-light(src='images/agency/logo-inverse-140x37.png', alt='', width='140', height='37', srcset='images/agency/logo-retina-inverse-280x74.png 2x')
+                        p
+                            | We are an award-winning creative agency, dedicated to the best result in web design, promotion, business consulting, and marketing.
+                        // Rights
+                        p.rights
+                            span ©  
+                            span.copyright-year 2018
+                            span  
+                            span Waves
+                            span . 
+                            span All Rights Reserved.
+                .col-md-4
+                    h5 Contacts
+                    dl.contact-list
+                        dt Address:
+                        dd 798 South Park Avenue, Jaipur, Raj
+                    dl.contact-list
+                        dt email:
+                        dd
+                            a(href='mailto:#') to.ur.godcompany@gmail.com
+                    dl.contact-list
+                        dt phones:
+                        dd
+                            a(href='tel:#') +91 7568543012
+                            span or
+                            a(href='tel:#') +91 9571195353
+                .col-md-4.col-xl-3
+                    h5 Links
+                    ul.nav-list
+                        li
+                            a(href='#') About
+                        li
+                            a(href='#') Projects
+                        li
+                            a(href='#') Blog
+                        li
+                            a(href='#') Contacts
+                        li
+                            a(href='#') Pricing
+        .row.no-gutters.social-container
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-facebook
+                    span Facebook
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-instagram
+                    span instagram
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-twitter
+                    span twitter
+            .col
+                a.social-inner(href='#')
+                    span.icon.mdi.mdi-youtube-play
+                    span google
+        
     footer
-        p Copyright &copy; 2018
+            center
+                p  Copyright &copy; 2018 TO.UR WORLD
+
