@@ -17,50 +17,61 @@ block content
                 input.form-control(name='price', type='number')
             br
             #form-group
+                label Days:
                 input.form-control(name='day_duration', type='number')
-                label &nbsp;days 
+                label Nights:
                 input.form-control(name='night_duration', type='number')
-                label &nbsp;nights
             br
             #form-group
                 label Airline:
                 input.form-control(name='flight_airline', type="text")
                 input.form-control(name='flight_airport', type="text")
                 br
+                label Flight Depart:
                 input.form-control(name='flight_depart', type="text")
                 input.form-control(name='depart_time', type='time')
                 br
+                label Flight Return:
                 input.form-control(name='flight_return', type="text")
                 input.form-control(name='return_time', type='time')
+            br
             #form-group
                 label Food and Star:
                 input.form-control(name='food', type='number')
                 input.form-control(name='stars', type='number')
+            br
             #form-group
                 label Seat:
                 input.form-control(name='max_seat', type='number')
+            br
             #form-group
                 label Start Booking:
                 br
                 input.form-control(name='start_book_date', type='date')
                 input.form-control(name='start_book_time', type='time')
+            br
             #form-group
                 label End Booking:
                 br
                 input.form-control(name='end_book_date', type='date')
                 input.form-control(name='end_book_time', type='time')
+            br
             #form-group
                 label Start Trip:
                 br
                 input.form-control(name='start_trip', type='date')
+            br
             #form-group
                 label End Trip:
                 br
                 input.form-control(name='end_trip', type='date')
+            br
             #form-group
                 label Highlight:
                 textarea.form-control(name="highlight")
+            br
             #form-group
                 label Description:
                 textarea.form-control(name="description")
+            br
             input.btn.btn-primary(type="submit", value="Submit")
