@@ -4,15 +4,18 @@ const app = express();
 const morgan = require('morgan');
 
 
-
+// use morgan to tracking request
 app.use(morgan('dev'));
 
 
+//import routes
+const tourRoutes = require('./api/routes/tour-router');
+const userRoutes = require('./api/routes/user-route');
 
-const tourRoutes = require('./api/routes/tour');
 
-
-app.use("/tour",tourRoutes);
+// express use routes to create path
+app.use("/api/tour",tourRoutes);
+app.use("/api/user",userRoutes);
 
 
 
