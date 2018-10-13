@@ -1,5 +1,5 @@
 
-exports.tours_get_all = (req,res,next) =>{
+exports.getAll = (req,res,next) =>{
     res.status(200).json({
         hello : "world"
     })
