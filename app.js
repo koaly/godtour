@@ -2,10 +2,26 @@ const express = require('express');
 const app = express();
 
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 
 // use morgan to tracking request
 app.use(morgan('dev'));
+
+
+//connect to database
+mongoose.connect("mongodb://"+process.env.MONGO_MLAB_USER+":"
+                +process.env.MONGO_MLAB_PW+
+                "@ds121373.mlab.com:21373/tourworld",
+                (err) =>{
+                    if(err){
+                        return console.log(err);
+                    }
+                    console.log("Connect to Mongodb");
+                }
+)
+
+mongoose.Promise = global.Promise;
 
 
 //import routes

@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGO_MLAB_USER": "user",
+        "MONGO_MLAB_PW": "looper12"
+    }
+}
