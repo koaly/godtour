@@ -19,6 +19,7 @@
   "homepage": "https://github.com/koaly/godtour#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "mongoose": "^5.3.3",
     "morgan": "^1.9.1"
   }
 }
