@@ -36,6 +36,7 @@ exports.userSignup = (req,res,next) =>{
     })
     .exec()
     .then(user =>{
+        console.log(user);
         if(user.length >= 1){
             return res.status(409).json({
                 message: "mail already exits"
@@ -43,6 +44,7 @@ exports.userSignup = (req,res,next) =>{
         }else{
             bcrypt.hash(req.body.password,10,(err,hash) =>{
                 if(err){
+                    console.log(err)
                     return res.status(500).json({
                         error: err
                     })
