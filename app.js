@@ -50,8 +50,8 @@ const userRoutes = require('./api/routes/user-route');
 
 
 // express use routes to create path
-app.use("/api/tour",tourRoutes);
-app.use("/api/user",userRoutes);
+app.use("/tours",tourRoutes);
+app.use("/users",userRoutes);
 
 
 
