@@ -3,32 +3,44 @@ import React from "react";
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+      <a className="navbar-brand" href="/">
         To-ur-world
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#collapsibleNavbar"
       >
-        <span class="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
       </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+      <div className="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <a className="nav-link" href="/tour">
+              Tour List
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">
               Link
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+          <li className="nav-item">
+            <a className="nav-link" href="#">
               Link
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Link
+        </ul>
+        <ul className="nav navbar-nav navbar-right">
+          <li className="nav-item">
+            <a className="nav-link" href="#">
+              Login
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">
+              Register
             </a>
           </li>
         </ul>
