@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import NavBar from "./components/navBar";
 import "./App.css";
 
 class App extends Component {
   render() {
-    return <h1>Woohoo</h1>;
+    return (
+      <React.Fragment>
+        <NavBar />
+      </React.Fragment>
+    );
   }
 }
 
