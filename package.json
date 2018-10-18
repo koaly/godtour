@@ -1,0 +1,23 @@
+{
+  "name": "to-ur-world",
+  "version": "1.0.0",
+  "description": "website travel project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koaly/godtour.git"
+  },
+  "keywords": [
+    "react",
+    "express"
+  ],
+  "author": "godtour",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koaly/godtour/issues"
+  },
+  "homepage": "https://github.com/koaly/godtour#readme"
+}
