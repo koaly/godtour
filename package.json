@@ -4,8 +4,7 @@
   "description": "website travel project",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
