@@ -16,7 +16,8 @@ class Customers extends Component {
         //see in chrome console
         fetch('/api/customers')
             .then(res => res.json())
-            .then(customers => this.setState({ customers }, () => console.log(`Customers fetched..`, customers)));
+            .then(customers => this.setState({ customers }, () => console.log(`Customers fetched..`, customers)))
+            .catch(err => console.log("Can't FIND "))
     }
     render() {
         return (
