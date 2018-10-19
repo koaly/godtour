@@ -17,13 +17,20 @@ body {
   text-align: center;
 }*/
 
-#footer {
+.footer {
   clear: both;
-  position: relative;
-  z-index: 10;
-  height: 3em;
-  background-color:#2d3246;
-  
+  width:100%;
+  position: absolute;
+  top: -500;
+  left:0;
+  height: 80px;
+  background-color:#343a40;
+  text-align: center;
+}
+
+.footer p {
+  padding-top:30px;
+  color:white;
 }
 
 code {
@@ -41,6 +48,7 @@ code {
   position: absolute;
   top: 100;
   left: 0;
+  margin-bottom:50px;
 }
 
 .homepage-image h1{
@@ -54,6 +62,7 @@ code {
 .homepage-image p{
   text-align:center;
   margin-top:20px;
+  margin-bottom:200px;
   font-size:30px;
   color:white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -74,5 +83,5 @@ code {
 
 .login form{
   margin-top:30px;
-  margin-bottom:50px;
+  margin-bottom:200px;
 }

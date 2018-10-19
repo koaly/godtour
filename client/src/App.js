@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "./components/navBar";
+import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
 import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
@@ -26,7 +27,9 @@ class App extends Component {
             <Route path="/profile/myBooking" component={MyBook} />
             <Redirect to="/not-found" />
           </Switch>
+          <Footer/>
         </main>
+        
       </React.Fragment>
     
     );
