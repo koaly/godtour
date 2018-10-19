@@ -5,9 +5,8 @@ class HomePage extends Component {
     return (
       <div>
         <section className="homepage-image">
-          <center>
-            <h1 className="align-center">Ohyohoho</h1>
-          </center>
+          <h1>Let's go to your world</h1>
+          <p>Find the best place to fulfill your wonderful vacay on TO.UR WORLD!</p>
         </section>
       </div>
     );
