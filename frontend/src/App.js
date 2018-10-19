@@ -3,6 +3,8 @@ import NavBar from "./components/navBar";
 import ShowTour from "./components/showTour";
 import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
+import Profile from "./components/profile";
+import AddTour from "./components/addTour";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 
