@@ -1,0 +1,34 @@
+{
+  "name": "to-ur-world",
+  "version": "0.5.0",
+  "description": "iteration2",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "start": "nodemon server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server \" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koaly/godtour.git"
+  },
+  "author": "godtour",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koaly/godtour/issues"
+  },
+  "homepage": "https://github.com/koaly/godtour#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.3",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
