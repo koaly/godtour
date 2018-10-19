@@ -28,6 +28,7 @@ class App extends Component {
           </Switch>
         </main>
       </React.Fragment>
+    
     );
   }
 }
