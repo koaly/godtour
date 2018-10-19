@@ -18,7 +18,7 @@ mongoose.connect("mongodb://"+process.env.MONGO_MLAB_USER+":"
                     if(err){
                         return console.log(err);
                     }
-                    console.log("Connect to Mongodb");
+                    console.log("Connected to MongoDB");
                 }
 )
 

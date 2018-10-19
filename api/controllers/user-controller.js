@@ -39,14 +39,14 @@ exports.userSignup = (req,res,next) =>{
         console.log(user);
         if(user.length >= 1){
             return res.status(409).json({
-                message: "mail already exits"
+                message: "Email already existed"
             })
         }else{
             bcrypt.hash(req.body.password,10,(err,hash) =>{
                 if(err){
                     return res.status(500).json({
                         error: err,
-                        message: "require password"
+                        message: "Require Password"
                     })
                 }else{
                     const user = new User({
@@ -60,7 +60,7 @@ exports.userSignup = (req,res,next) =>{
                     .then(result =>{
                         console.log(result);
                         res.status(201).json({
-                            message:"user Create"
+                            message:"User Created"
                         })
                     })
                     .catch(err =>{
