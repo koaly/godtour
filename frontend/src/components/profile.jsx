@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CancelBook from "./cancelBook";
 
 class Profile extends Component {
   render() {

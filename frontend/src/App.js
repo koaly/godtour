@@ -5,6 +5,7 @@ import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
 import Profile from "./components/profile";
 import AddTour from "./components/addTour";
+import Register from "./components/register";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 
@@ -18,6 +19,7 @@ class App extends Component {
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/" exact to component={HomePage} />
+            <Route path="/register" component={Register} />
             <Redirect to="/not-found" />
           </Switch>
         </main>
