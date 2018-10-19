@@ -7,7 +7,7 @@ import Profile from "./components/profile";
 import AddTour from "./components/addTour";
 import Register from "./components/register";
 import MyBook from "./components/myBooking";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect} from "react-router-dom";
 import "./App.css";
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar />
-        <main className="container">
+        <main className="container-fluid">
           <Switch>
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
