@@ -2,3 +2,4 @@
 #key
 config/keys.js
 sessions/.*
+/node_modules
