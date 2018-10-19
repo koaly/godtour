@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Background from "../img/02_giant_swing.jpg";
 
 class HomePage extends Component {
   render() {
