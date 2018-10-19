@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 
 
 //import routes
-const tourRoutes = require('./api/routes/tour-router');
+const tourRoutes = require('./api/routes/tour-route');
 const userRoutes = require('./api/routes/user-route');
 
 
