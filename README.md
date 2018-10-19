@@ -1,30 +1,29 @@
-### TO-UR-WORLD
+# TO-UR-WORLD
 
 >a project about tour website that can be at middle between a customer
 and a tourist 
 
-Start Server
 
-# install package
+### install package
 ```
 #for backend
 npm install
 
-#for frontend
+# for frontend
 npm run client-install
 ```
 
-#start server with command
+### start server with command
 ```
-#for backend
+# for backend
 npm run server
 
-#for frontend
+# for frontend
 npm run client
 
 ```
 
-#start server with concurrently both frontend and backend
+### start server with concurrently both frontend and backend
 ```
 npm run dev
 ```
