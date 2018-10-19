@@ -4,15 +4,15 @@ const tourSchema = mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name :{
         type: String,
-        require: true
+        required: true
     },
     operatorID :{
         type: String,
-        require: true
+        required: true
     },
     operatorName :{
         type: String,
-        require: true
+        required: true
     },
     price :{
         type: Number,

@@ -2,30 +2,29 @@ const mongoose = require('mongoose');
 
 const Tour = require('../models/tour-models');
 
-exports.getAll = (req,res,next) =>{
-    Tour.find()
-    .select()
-    .exec()
-    .then(tours =>{
+exports.getAll = async function(req,res,next){
+    try{
+        let tours = await Tour.find()
+        .select()
+        .exec()
         console.log(tours);
-        const response ={
+        const response = {
             count: tours.length,
             tour : tours
         }
         res.status(200).json({
             response
         });
-    })
-    .catch(err =>{
+    } catch(err){
         console.log(err);
         res.status(500).json({
             error: err
         });
-    });
+    }
 }
 
-exports.addTour = (req, res, next) => {
-    const tour = new Tour({
+exports.addTour = async function(req, res, next){
+    const tour = await new Tour({
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
         operatorID: "admin",
