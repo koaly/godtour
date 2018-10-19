@@ -1,11 +1,5 @@
 const mongoose = require('mongoose');
 
-const foodSchema = mongoose.Schema({
-    breakfast : Boolean,
-    lunch : Boolean,
-    dinner : Boolean
-});
-
 const tourSchema = mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name :{
@@ -13,7 +7,7 @@ const tourSchema = mongoose.Schema({
         require: true
     },
     operatorID :{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         require: true
     },
     operatorName :{
@@ -75,7 +69,8 @@ const tourSchema = mongoose.Schema({
         required: true
     },
     food :{
-        type: [foodSchema]
+        type: Number,
+        defalut: 0
     },
     detail :{
         type: String
