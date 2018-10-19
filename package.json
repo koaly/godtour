@@ -2,10 +2,13 @@
   "name": "to-ur-world",
   "version": "0.5.0",
   "description": "iteration2",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "client-install": "cd client && npm install",
+    "start": "nodemon server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server \" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -20,8 +23,12 @@
   "dependencies": {
     "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
     "express": "^4.16.4",
     "mongoose": "^5.3.3",
     "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }
