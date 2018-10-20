@@ -7,11 +7,8 @@ const userResponse = (users) => {
         setTimeout(() => {
             const response = {
                 count: users.length,
-                user: users.map(doc => {
-                    return {
-                        email: doc.email,
-                        password: doc.password
-                    }
+                user: users.map(user => {
+                    return user.toAuthJSON();
                 })
             }
             resolve(response);
