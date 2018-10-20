@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*footer{
+  padding-top:30px;
+  padding-bottom: 15px;
+  margin-top:600px;
+  color:#ffffff;
+  background-color:#2d3246;
+  text-align: center;
+}*/
+
+.footer {
+  clear: both;
+  width: 100%;
+
+  height: 80px;
+  background-color: #343a40;
+  text-align: center;
+}
+
+.footer p {
+  padding-top: 30px;
+  color: white;
+}
+
+.mdi-icon {
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.homepage-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://www.japan-guide.com/thumb/XYZeXYZe2172_1680.jpg");
+  width: 100%;
+  height: 400px;
+  background-position: top;
+  background-repeat: no-repeat;
+  margin-bottom: 50px;
+}
+
+.homepage-image h1 {
+  text-align: center;
+  padding-top: 55px;
+  font-size: 55px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.homepage-image p {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 200px;
+  font-size: 30px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.register h1 {
+  margin-top: 50px;
+}
+
+.register form {
+  margin-top: 30px;
+  margin-bottom: 150px;
+}
+
+.login h1 {
+  margin-top: 50px;
+}
+
+.login form {
+  margin-top: 30px;
+  margin-bottom: 150px;
+}
+
+.fakeimg {
+  height: 200px;
+  background: #aaa;
+}
