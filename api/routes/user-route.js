@@ -18,11 +18,16 @@ router.get('/secret', checkAuth, (req, res, next) => {
  * If we sucees login with passport it will return user
  * every req
  */
+
+//doesn't handling return error
 router.post('/login', passport.authenticate('local-login',
-    { successRedirect: 'user/secret', failureRedirect: 'user/login' }
+    {
+        successRedirect: 'users/secret',
+        failureRedirect: 'users/login',
+    }
 ));
 
-router.get('logout', checkAuth, (req, res) => {
+router.get('/logout', checkAuth, (req, res) => {
     req.logout();
     res.status(200).json({
         'message': 'succesfully logout'

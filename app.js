@@ -4,13 +4,13 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
+const session = require('express-session');
 
 //require passport
-const passport = require('passport');
+const passport = require('passport')
 const passportSetup = require('./api/config/passport-setup');
-// use morgan to tracking request
-app.use(morgan('dev'));
 
 
 //connect to database
@@ -27,10 +27,17 @@ mongoose.connect("mongodb://" + process.env.MONGO_MLAB_USER + ":"
 
 mongoose.Promise = global.Promise;
 
-
-//body parser
+// use morgan to tracking request
+app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(session({
+    secret: 'jui', // session secret
+    resave: true,
+    saveUninitialized: true
+}));
 
 //header
 app.use((req, res, next) => {
