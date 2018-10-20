@@ -45,7 +45,7 @@ class RegisterForm extends Form {
 
   render() {
     return (
-      <div className="register">
+      <div className="container register">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("firstname", "Firstname")}
