@@ -2,7 +2,11 @@ import React, { Component } from "react";
 
 class ShowTour extends Component {
   render() {
-    return <h1>Tour List</h1>;
+    return (
+      <div className="container">
+        <h1>Tour List</h1>
+      </div>
+    );
   }
 }
 

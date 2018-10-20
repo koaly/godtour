@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { TwitterIcon } from "mdi-react";
 
 const Footer = () => {
-    return (
-        <div className="footer">
-            <p>TO-UR WORLD, Copyright © 2018</p>
-        </div>
-    );
+  return (
+    <div className="footer">
+      <p>
+        TO-UR WORLD, Copyright © 2018
+        <TwitterIcon />
+      </p>
+    </div>
+  );
 };
 export default Footer;
