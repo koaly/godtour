@@ -67,7 +67,7 @@ exports.userSignup = async (req, res, next) => {
             })
             const result = await newUser.save();
             res.status(201).json({
-                message: "newUser Created",
+                message: "New User Created",
                 user: result
             })
         }
