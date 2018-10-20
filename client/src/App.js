@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar />
-        <main className="container">
+        <div className="container">
           <Switch>
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
@@ -28,7 +28,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
           <Footer/>
-        </main>
+        </div>
         
       </React.Fragment>
     
