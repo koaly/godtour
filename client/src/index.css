@@ -32,7 +32,7 @@ body {
 }
 
 .mdi-icon {
-  background-color: green;
+  
 }
 
 code {
@@ -83,4 +83,9 @@ code {
 .login form {
   margin-top: 30px;
   margin-bottom: 150px;
+}
+
+.fakeimg {
+  height: 200px;
+  background: #aaa;
 }
