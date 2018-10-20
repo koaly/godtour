@@ -3,35 +3,34 @@ const router = express.Router();
 const passport = require('passport');
 
 const userController = require('../controllers/user-controller')
-const checkAuth = require('../middleware/check-auth');
+const auth = require('./auth');
+const User = require('../models/user-models')
 
-router.get('/', userController.getAll);
-router.post('/signup', userController.userSignup);
+router.get('/', auth.optional, userController.getAll);
+router.get('/current', auth.require, userController.curretUser);
 
-router.get('/secret', checkAuth, (req, res, next) => {
+router.get('/login', auth.optional, (req, res, next) => {
+    res.status(200).json({
+        "message": "login page"
+    })
+})
+
+router.get('/secret', auth.require, (req, res, next) => {
     res.status(200).json({
         'message': "this is secret word"
     })
 })
 
-/**
- * If we sucees login with passport it will return user
- * every req
- */
+router.post('/signup', auth.optional, userController.userSignup);
+router.post('/login', auth.optional, userController.userLogin);
 
-//doesn't handling return error
-router.post('/login', passport.authenticate('local-login',
-    {
-        successRedirect: 'users/secret',
-        failureRedirect: 'users/login',
-    }
-));
-
-router.get('/logout', checkAuth, (req, res) => {
+/*
+router.get('/logout', (req, res) => {
     req.logout();
     res.status(200).json({
         'message': 'succesfully logout'
     })
 })
+*/
 
 module.exports = router;
