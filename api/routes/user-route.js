@@ -4,6 +4,7 @@ const passport = require('passport');
 
 const userController = require('../controllers/user-controller')
 const auth = require('./auth');
+const User = require('../models/user-models')
 
 router.get('/', auth.optional, userController.getAll);
 router.post('/signup', userController.userSignup);
@@ -23,31 +24,49 @@ router.get('/login', auth.optional, (req, res, next) => {
         "message": "login page"
     })
 })
-router.post('/login', function (req, res, next) {
-    passport.authenticate('local-login', function (err, user, info) {
-        console.log("helo", info)
+router.post('/login', auth.optional, function (req, res, next) {
+    const { body: user } = req;
+    if (!user.email) {
+        return res.status(422).json({
+            error: {
+                email: 'is required',
+            }
+        });
+    }
+    if (!user.password) {
+        return res.status(422).json({
+            error: {
+                password: 'is required',
+            }
+        });
+    }
+    return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
         if (err) {
-            return res.status(500).json({
-                error: err
-            })
+            return next(err);
         }
         if (!user) {
             return res.status(404).json({
                 response: info
             })
         }
-        req.logIn(user, function (err) {
-            if (err) {
-                return res.status(500).json({
-                    error: err
-                })
-            }
-            res.status(200).json({
-                message: 'login succes'
-            })
-        });
+        if (passportUser) {
+            const user = passportUser;
+            user.token = passportUser.generateJWT();
+
+            return res.json({ user: user.toAuthJSON() });
+        }
     })(req, res, next);
 });
+
+router.get('/current', auth.require, (req, res, next) => {
+    const { payload: { id } } = req;
+    return User.findById(id).then((user) => {
+        if (!user) {
+            return res.sendStatus(400);
+        }
+        return res.json({ user: user.toAuthJSON() });
+    })
+})
 
 router.get('/logout', (req, res) => {
     req.logout();
