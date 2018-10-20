@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const User = require('../models/user-models');
 
@@ -10,8 +9,8 @@ const userResponse = (users) => {
                 count: users.length,
                 user: users.map(doc => {
                     return {
-                        email: doc.email,
-                        password: doc.password
+                        email: doc.local.email,
+                        password: doc.local.password
                     }
                 })
             }
@@ -36,35 +35,20 @@ exports.getAll = async (req, res, next) => {
 }
 
 
-const createPassword = (password, salt) => {
-    return new Promise((resolve, reject) => {
-        bcrypt.hash(password, salt, (err, encrypted) => {
-            console.log(err, " ", encrypted)
-            if (err) {
-                reject(err);
-            } else {
-                resolve(encrypted)
-            }
-        })
-    })
-}
-
-
 
 exports.userSignup = async (req, res, next) => {
     try {
-        const user = await User.find({ email: req.body.email });
+        const user = await User.find({ 'local.email': req.body.email });
         if (user.length >= 1) {
             return res.status(409).json({
                 message: "Email already existed"
             })
         } else {
-            const hash = await createPassword(req.body.password, 10);
-            const newUser = await new User({
-                _id: new mongoose.Types.ObjectId,
-                email: req.body.email,
-                password: hash
-            })
+            const newUser = await new User();
+
+            newUser.local.email = await req.body.email;
+            newUser.local.password = await newUser.generateHash(req.body.password);
+
             const result = await newUser.save();
             res.status(201).json({
                 message: "newUser Created",
