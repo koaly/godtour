@@ -27,3 +27,24 @@ npm run client
 ```
 npm run dev
 ```
+
+###backend api now
+###user
+you don't need to add localhost:5000 just fetch /user
+we seting in json that proxy already
+```
+# return all user
+localhost:5000/user/
+
+# signup
+localhost:5000/user/singup
+
+# login WITH TOKEN
+localhost:5000/user/login
+
+# return current user
+localhost:5000/user/current
+
+# check user login
+localhost:5000/user/secret
+```
