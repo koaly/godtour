@@ -2,12 +2,13 @@ const passport = require('passport');
 const localStrategy = require('../middleware/passport-local');
 const User = require('../models/user-models');
 
-passport.use(localStrategy);
 passport.serializeUser((user, done) => {
+    console.log("what");
     done(null, user.email);
 })
 
 passport.deserializeUser(async (email, done) => {
+    console.log("fuck");
     try {
         const user = await User.findOne({ email: email });
         if (!user) {
@@ -19,3 +20,5 @@ passport.deserializeUser(async (email, done) => {
         done(err);
     }
 })
+
+passport.use(localStrategy);

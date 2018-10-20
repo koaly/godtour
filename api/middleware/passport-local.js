@@ -2,7 +2,10 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user-models');
 const bcrypt = require('bcrypt');
 
-const strategy = new LocalStrategy(
+const strategy = new LocalStrategy({
+    usernameField: "email",
+    passwordField: "password"
+},
     async (email, password, done) => {
         try {
             const currentUser = await User.findOne({ email: email });
@@ -13,7 +16,7 @@ const strategy = new LocalStrategy(
             if (!match) {
                 return done(null, false, { message: 'Not a matching password' })
             }
-            return (done, currentUser)
+            return done(null, currentUser)
         }
         catch (err) {
             return done(err);
