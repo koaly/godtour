@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
-
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 
+
+//require passport
+const passport = require('passport');
+const passportSetup = require('./api/config/passport-setup');
 // use morgan to tracking request
 app.use(morgan('dev'));
 
@@ -43,7 +46,8 @@ app.use((req, res, next) => {
     next();
 });
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 //import routes
 const tourRoutes = require('./api/routes/tour-route');
 const userRoutes = require('./api/routes/user-route');
