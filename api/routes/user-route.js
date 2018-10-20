@@ -18,14 +18,36 @@ router.get('/secret', checkAuth, (req, res, next) => {
  * If we sucees login with passport it will return user
  * every req
  */
-
-//doesn't handling return error
-router.post('/login', passport.authenticate('local-login',
-    {
-        successRedirect: 'users/secret',
-        failureRedirect: 'users/login',
-    }
-));
+router.get('/login', (req, res, next) => {
+    res.status(200).json({
+        "message": "login page"
+    })
+})
+router.post('/login', function (req, res, next) {
+    passport.authenticate('local-login', function (err, user, info) {
+        console.log("helo", info)
+        if (err) {
+            return res.status(500).json({
+                error: err
+            })
+        }
+        if (!user) {
+            return res.status(404).json({
+                response: info
+            })
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return res.status(500).json({
+                    error: err
+                })
+            }
+            res.status(200).json({
+                message: 'login succes'
+            })
+        });
+    })(req, res, next);
+});
 
 router.get('/logout', checkAuth, (req, res) => {
     req.logout();

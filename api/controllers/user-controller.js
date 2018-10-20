@@ -9,8 +9,8 @@ const userResponse = (users) => {
                 count: users.length,
                 user: users.map(doc => {
                     return {
-                        email: doc.local.email,
-                        password: doc.local.password
+                        email: doc.email,
+                        password: doc.password
                     }
                 })
             }
@@ -38,7 +38,8 @@ exports.getAll = async (req, res, next) => {
 
 exports.userSignup = async (req, res, next) => {
     try {
-        const user = await User.find({ 'local.email': req.body.email });
+        const { email, password } = req.body;
+        const user = await User.find({ email: email });
         if (user.length >= 1) {
             return res.status(409).json({
                 message: "Email already existed"
@@ -46,8 +47,8 @@ exports.userSignup = async (req, res, next) => {
         } else {
             const newUser = await new User();
 
-            newUser.local.email = await req.body.email;
-            newUser.local.password = await newUser.generateHash(req.body.password);
+            newUser.email = email;
+            newUser.password = await newUser.generateHash(password);
 
             const result = await newUser.save();
             res.status(201).json({

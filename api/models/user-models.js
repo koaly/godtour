@@ -2,26 +2,28 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = mongoose.Schema({
-    local: {
-        email: {
-            type: String,
-            require: true,
-            unique: true,
-            match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-        },
-        password: {
-            type: String,
-            require: true
-        }
+    email: {
+        type: String,
+        require: true,
+        unique: true,
+        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    },
+    password: {
+        type: String,
+        require: true
+    },
+    googleID: {
+        type: String,
     }
 })
 
 //generating a hash
-userSchema.methods.generateHash = function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+userSchema.methods.generateHash = function (pwd) {
+    return bcrypt.hashSync(pwd, bcrypt.genSaltSync(10), null)
 }
 //checking if password is valid
-userSchema.methods.validPassword = function (password) {
-    return bcrypt.compareSync(password, this.local.password);
+userSchema.methods.validPassword = function (pwd) {
+    console.log("suck")
+    return bcrypt.compareSync(pwd, this.password);
 }
 module.exports = mongoose.model('User', userSchema);
