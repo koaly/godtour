@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar />
-        <div className="container">
+        <div>
           <Switch>
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
@@ -27,11 +27,9 @@ class App extends Component {
             <Route path="/profile/myBooking" component={MyBook} />
             <Redirect to="/not-found" />
           </Switch>
-          <Footer/>
         </div>
-        
+        <Footer />
       </React.Fragment>
-    
     );
   }
 }
