@@ -57,3 +57,14 @@ exports.addTour = async function(req, res, next){
         })
     }
 }
+
+exports.editTour = async function(req, res, next){
+    try{
+        
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
