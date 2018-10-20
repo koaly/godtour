@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const passport = require('passport');
 const User = require('../models/user-models');
 
 const userResponse = (users) => {
@@ -30,7 +30,52 @@ exports.getAll = async (req, res, next) => {
         })
     }
 }
+exports.userLogin = (req, res, next) => {
+    const { body: user } = req;
 
+    if (!user.email) {
+        return res.status(422).json({
+            error: {
+                message: "email is required"
+            }
+        });
+    }
+    if (!user.password) {
+        return res.status(422).json({
+            error: {
+                message: "password is required"
+            }
+        })
+    }
+    return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
+        if (!user) {
+            return res.status(404).json({
+                message: info
+            })
+        }
+        if (passportUser) {
+            const user = passportUser;
+            user.token = passportUser.generateJWT();
+
+            return res.status(200).json({
+                user: user.toAuthJSON()
+            })
+        }
+    })(req, res, next)
+}
+
+exports.curretUser = async (req, res, next) => {
+    const { payload: { id } } = req;
+    const user = await User.findById(id)
+    if (!user) {
+        return res.status(400).json({
+            message: "No CurrentUser",
+        })
+    }
+    return res.status(200).json({
+        user: user.toAuthJSON()
+    });
+}
 
 
 exports.userSignup = async (req, res, next) => {
