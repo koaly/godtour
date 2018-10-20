@@ -11,13 +11,13 @@ const getTokenFromHeaders = (req) => {
 //add secret in file later
 const auth = {
     require: jwt({
-        secret: 'jui',
+        secret: process.env.JWT_SECRET,
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
         credentialsRequired: true,
     }),
     optional: jwt({
-        secret: 'jui',
+        secret: process.env.JWT_SECRET,
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
         credentialsRequired: false,

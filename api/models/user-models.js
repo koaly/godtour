@@ -38,7 +38,7 @@ userSchema.methods.generateJWT = function () {
         id: this._id,
         exp: parseInt(expirationDate.getTime() / 1000, 10)
         //another private key we must add to json that store sercet of file later
-    }, 'jui');
+    }, process.env.JWT_SECRET);
 }
 
 userSchema.methods.toAuthJSON = function () {

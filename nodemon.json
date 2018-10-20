@@ -1,6 +1,7 @@
 {
     "env": {
         "MONGO_MLAB_USER": "admin",
-        "MONGO_MLAB_PW": "123juijui"
+        "MONGO_MLAB_PW": "123juijui",
+        "JWT_SECRET": "jui-only-true-god"
     }
 }
