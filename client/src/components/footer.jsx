@@ -5,7 +5,10 @@ import { TwitterIcon } from "mdi-react";
 const Footer = () => {
   return (
     <div className="footer">
-      <p>TO-UR WORLD, Copyright © 2018</p>
+      <p>
+        TO-UR WORLD, Copyright © 2018
+        <TwitterIcon />
+      </p>
     </div>
   );
 };
