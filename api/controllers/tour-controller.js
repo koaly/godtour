@@ -82,8 +82,24 @@ exports.editTour = async function(req, res, next){
         const id = {_id:req.params.id}
         const result = await Tour.findOneAndUpdate(id, tour);
         console.log(result);
-        res.status(202).json({
+        res.status(200).json({
             message: "Tour updated"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+exports.deleteTour = async (req, res, next) => {
+    try{
+        const id = {_id:req.params.id}
+        const result = await Tour.findOneAndRemove(id);
+        console.log(result);
+        res.status(200).json({
+            message: "Tour deleted"
         })
     } catch(err){
         console.log(err);
