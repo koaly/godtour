@@ -6,11 +6,19 @@ const bookingSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        required: true
+    },
     tourID: {
         type: String,
         required: true
     },
-    numberBooking: {
+    tourName: {
+        type: String,
+        required: true
+    },
+    amountBooking: {
         type: Number,
         required: true,
         default: 1

@@ -75,8 +75,7 @@ exports.addTour = async function(req, res, next){
     try{
         const { payload: { id } } = req;
         const user = await User.findById(id);
-        console.log(user._id);
-        console.log(user.email);
+        console.log(user);
         const tour = await new Tour({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
@@ -112,6 +111,13 @@ exports.addTour = async function(req, res, next){
 
 exports.editTour = async function(req, res, next){
     try{
+        if (req.body.maxSeat < req.body.currentSeat){
+            return res.status(405).json({
+                error: {
+                    message: "Max Seat is less than Remaining Seat"
+                }
+            }); 
+        }
         const tour = {}
         if(req.body.name) tour.name = req.body.name
         if(req.body.price) tour.price = req.body.price
@@ -153,6 +159,45 @@ exports.deleteTour = async (req, res, next) => {
         res.status(200).json({
             message: "Tour deleted"
         })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+exports.bookTour = async (req, res, next) => {
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        const tour = await Tour.findById(req.params.id);
+        console.log(user);
+        console.log(tour);
+        const booking = await new Booking({
+            _id: new mongoose.Types.ObjectId,
+            userID: user._id,
+            userName: user.email,
+            tourID: tour._id,
+            tourName: tour.name,
+            amountBooking: req.body.amountBooking
+        });
+        if (tour.currentSeat - req.body.amountBooking < 0){
+            return res.status(405).json({
+                error: {
+                    message: "Attemped to book more than available"
+                }
+            }); 
+        } else{
+            tour.currentSeat -= req.body.amountBooking;
+            const bookingResult = await booking.save();
+            const tourResult = await tour.save();
+            console.log(bookingResult);
+            console.log(tourResult);
+            res.status(201).json({
+                message: "Book tour successful"
+            });
+        }
     } catch(err){
         console.log(err);
         res.status(500).json({
