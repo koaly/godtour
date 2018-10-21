@@ -1,3 +1,4 @@
+//this file doens't use right now
 module.exports = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
