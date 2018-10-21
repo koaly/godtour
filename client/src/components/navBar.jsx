@@ -28,6 +28,11 @@ const NavBar = () => {
               Add Tour
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/editTour">
+              Edit Tour
+            </NavLink>
+          </li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="nav-item">

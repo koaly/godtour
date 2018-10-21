@@ -6,6 +6,7 @@ import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
 import Profile from "./components/profile";
 import AddTourForm from "./components/addTourForm";
+import EditTourForm from "./components/editTourForm";
 import RegisterForm from "./components/registerForm";
 import LoginForm from "./components/loginForm";
 import MyBook from "./components/myBooking";
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/addTour" component={AddTourForm} />
+            <Route path="/editTour" component={EditTourForm} />
             <Route path="/profile/myBooking" component={MyBook} />
             <Route path="/profile/myCard" component={MyCard} />
             <Route path="/profile/purchaseList" component={PurchaseList} />

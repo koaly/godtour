@@ -4,7 +4,7 @@ import ProfileBar from "./common/profileBar";
 class MyCard extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container mgtb">
         <h1>My Cards</h1>
         <div className="row">
           <div className="col-md-4">

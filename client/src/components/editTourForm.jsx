@@ -15,7 +15,8 @@ class AddTourForm extends Form {
       departDate: "",
       returnDate: "",
       airline: "",
-      seat: "",
+      maxSeat: "",
+      currentSeat: "",
       food: "",
       detail: "",
       highlight: ""
@@ -59,11 +60,16 @@ class AddTourForm extends Form {
     airline: Joi.string()
       .required()
       .label("Airline"),
-    seat: Joi.number()
+    maxSeat: Joi.number()
       .integer()
       .min(0)
       .required()
-      .label("Seat"),
+      .label("Max Seat"),
+    currentSeat: Joi.number()
+      .integer()
+      .min(0)
+      .required()
+      .label("Current Seat"),
     food: Joi.number()
       .integer()
       .min(0)
@@ -85,7 +91,7 @@ class AddTourForm extends Form {
   render() {
     return (
       <div className="container addtour mgtb">
-        <h1>Add Tour</h1>
+        <h1>Edit Tour</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "Name")}
           {this.renderInput("price", "Price")}
@@ -97,11 +103,12 @@ class AddTourForm extends Form {
           {this.renderInput("departDate", "DepartDate", "date")}
           {this.renderInput("returnDate", "ReturnDate", "date")}
           {this.renderInput("airline", "Airline")}
-          {this.renderInput("seat", "Seat")}
+          {this.renderInput("maxSeat", "Max Seat")}
+          {this.renderInput("currentSeat", "Current Seat")}
           {this.renderInput("food", "Food")}
           {this.renderInput("detail", "Detail")}
           {this.renderInput("highlight", "Highlight")}
-          {this.renderButton("Add Tour")}
+          {this.renderButton("Confirm Edit")}
         </form>
       </div>
     );
