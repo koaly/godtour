@@ -60,25 +60,25 @@ const Footer = () => {
         </div>
         <div className="row no-gutters social-container">
             <div className="col">
-              <a href="#" className="social-inner">
+              <a href="https://twitter.com/tour_wor1d" className="social-inner">
                 <p><TwitterIcon/></p>
                 <p>Twitter</p>
               </a>
             </div>
             <div className="col">
-              <a href="#" className="social-inner">
+              <a href="https://www.facebook.com/tour.wor1d" className="social-inner">
                 <p><FacebookIcon/></p>
                 <p>Facebook</p>
               </a>
             </div>
             <div className="col">
-              <a href="#" className="social-inner">
+              <a href="https://www.youtube.com/channel/UCejOXMM5zGyD8GUETtqhJmQ" className="social-inner">
                 <p><YoutubeIcon/></p>
                 <p>Youtube</p>
               </a>
             </div>
             <div className="col">
-              <a href="#" className="social-inner">
+              <a href="https://www.instagram.com/tour.wor1d/" className="social-inner">
                 <p><InstagramIcon/></p>
                 <p>Instagram</p>
               </a>
