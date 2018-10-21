@@ -24,6 +24,30 @@ exports.getAll = async function(req,res,next){
     }
 }
 
+exports.checkUserPermission = async (req, res, next) => {
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        const tour = await Tour.findById(req.params.id);
+        console.log(user._id);
+        console.log(tour.operatorID);
+        if(user._id != tour.operatorID){
+            return res.status(403).json({
+                error: {
+                    message: "Permission needed"
+                }
+            });
+        } else{
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.addTour = async function(req, res, next){
     try{
         const { payload: { id } } = req;
