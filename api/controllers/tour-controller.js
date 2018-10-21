@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Tour = require('../models/tour-models');
+const User = require('../models/user-models');
 
 exports.getAll = async function(req,res,next){
     try{
@@ -25,11 +26,15 @@ exports.getAll = async function(req,res,next){
 
 exports.addTour = async function(req, res, next){
     try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        console.log(user._id);
+        console.log(user.email);
         const tour = await new Tour({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
-            operatorID: "admin",
-            operatorName: "admin",
+            operatorID: user._id,
+            operatorName: user.email,
             price: req.body.price,
             dest: req.body.dest,
             dayDuration: req.body.dayDuration,
