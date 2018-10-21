@@ -101,6 +101,7 @@ class AddTourForm extends Form {
           {this.renderInput("food", "Food")}
           {this.renderInput("detail", "Detail")}
           {this.renderInput("highlight", "Highlight")}
+          <div className="mgt"></div>
           {this.renderButton("Add Tour")}
         </form>
       </div>
