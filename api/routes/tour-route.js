@@ -6,7 +6,8 @@ const auth = require('./auth');
 
 router.get('/', auth.optional, tourController.getAll);
 router.post('/add', auth.require, tourController.addTour);
-router.put('/edit/:id', auth.require, tourController.checkUserPermission, tourController.editTour);
+router.get('/:id', auth.optional, tourController.getOneTour);
+router.put('/:id/edit', auth.require, tourController.checkUserPermission, tourController.editTour);
 router.delete('/:id', auth.require, tourController.checkUserPermission, tourController.deleteTour);
 
 module.exports = router

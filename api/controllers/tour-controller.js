@@ -9,12 +9,34 @@ exports.getAll = async function(req,res,next){
         .select()
         .exec()
         console.log(tours);
-        const response = {
-            count: tours.length,
-            tour : tours
-        }
+        // const response = {
+        //     count: tours.length,
+        //     tours : tours
+        // }
         res.status(200).json({
-            response
+            count : tours.length,
+            tours
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.getOneTour = async function(req,res,next){
+    try{
+        let tour = await Tour.findById(req.params.id)
+        .select()
+        .exec()
+        console.log(tour);
+        // const response = {
+        //     count: tours.length,
+        //     tour : tours
+        // }
+        res.status(200).json({
+            tour
         });
     } catch(err){
         console.log(err);
