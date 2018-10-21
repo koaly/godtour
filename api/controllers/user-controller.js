@@ -48,12 +48,14 @@ exports.userLogin = (req, res, next) => {
         })
     }
     return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
-        if (!user) {
+        console.log("local")
+        if (!passportUser) {
             return res.status(404).json({
                 message: info
             })
         }
         if (passportUser) {
+            console.log(passportUser)
             const user = passportUser;
             user.token = passportUser.generateJWT();
 

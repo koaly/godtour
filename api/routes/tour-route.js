@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const auth = require('./auth')
 const tourController = require('../controllers/tour-controller');
 
 router.get('/', auth.optional, tourController.getAll);
