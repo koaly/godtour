@@ -19,7 +19,7 @@ class LoginForm extends Form {
 
   doSubmit = () => {
     console.log("Submitted");
-    this.props.history.replace("/");
+    this.props.history.push("/");
   };
 
   render() {
