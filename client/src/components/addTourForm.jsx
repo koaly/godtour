@@ -84,8 +84,8 @@ class AddTourForm extends Form {
 
   render() {
     return (
-      <div className="container addtour mgtb">
-        <h1>Add Tour</h1>
+      <div className="container addtour form-container mgtb">
+        <h2>Add Tour</h2>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "Name")}
           {this.renderInput("price", "Price")}

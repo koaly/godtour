@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class HomePage extends Component {
   render() {
     return (
-      <div className="mgb">
+      <div>
         <div className="homepage-image">
           <h1>Let's go to your world</h1>
           <p>
