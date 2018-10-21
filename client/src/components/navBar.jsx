@@ -23,6 +23,11 @@ const NavBar = () => {
               Tour List
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/addTour">
+              Add Tour
+            </NavLink>
+          </li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="nav-item">
