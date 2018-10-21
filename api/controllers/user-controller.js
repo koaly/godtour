@@ -8,7 +8,7 @@ const userResponse = (users) => {
             const response = {
                 count: users.length,
                 user: users.map(user => {
-                    return user.toAuthJSON();
+                    return user.toProfileJSON();
                 })
             }
             resolve(response);
