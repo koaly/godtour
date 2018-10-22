@@ -11,7 +11,7 @@ router.post('/add', auth.require, userController.checkOperatorStatus, tourContro
 router.get('/:id', auth.optional, tourController.getOneTour);
 router.post('/:id', auth.require, bookingController.bookTour);
 router.delete('/:id', auth.require, tourController.checkOwnTour, tourController.deleteTour);
-router.get('/:id/edit', auth.require, async (req, res) => {
+router.get('/:id/edit', auth.require, tourController.checkOwnTour, async (req, res) => {
     res.status(200).json({
         "message": "edit page"
     })

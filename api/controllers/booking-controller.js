@@ -99,3 +99,50 @@ exports.bookTour = async (req, res, next) => {
         })
     }
 }
+
+exports.cancelBooking = async (req, res, next) => {
+    try{
+        const booking = await Booking.findById(req.params.id);
+        const tour = await Tour.findById(booking.tourID);
+        console.log(booking);
+        console.log(tour);
+        tour.currentSeat += booking.amountBooking;
+        const bookingResult = await booking.remove();
+        const tourResult = await tour.save();
+        console.log(bookingResult);
+        console.log(tourResult);
+        res.status(200).json({
+            message: "Booking cancel successful"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+
+exports.checkOwnBooking = async (req, res, next) => {
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        const booking = await Booking.findById(req.params.id);
+        console.log(user._id);
+        console.log(booking.userID);
+        if(user._id != booking.userID){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else{
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}

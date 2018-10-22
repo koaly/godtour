@@ -10,7 +10,14 @@ const User = require('../models/user-models')
 
 router.get('/', auth.optional, userController.getAll);
 router.get('/current', auth.require, userController.curretUser);
+
 router.get('/current/bookings', auth.require, bookingController.getUserBooking);
+router.get('/current/bookings/:id', auth.require, bookingController.checkOwnBooking, async (req, res) => {
+    res.status(200).json({
+        "message": "cancel booking page"
+    })
+});
+router.delete('/current/bookings/:id', auth.require, bookingController.checkOwnBooking, bookingController.cancelBooking);
 router.get('/current/own_tours', auth.require, userController.checkOperatorStatus, tourController.getOwnTour);
 
 router.get('/login', auth.optional, async (req, res, next) => {
