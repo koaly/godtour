@@ -17,5 +17,6 @@ router.get('/:id/edit', auth.require, async (req, res) => {
     })
 });
 router.put('/:id/edit', auth.require, tourController.checkOwnTour, tourController.editTour);
+router.get('/:id/bookings', auth.require, tourController.checkOwnTour, bookingController.getTourBooking);
 
 module.exports = router

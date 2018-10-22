@@ -42,6 +42,25 @@ exports.getUserBooking = async function(req,res,next){
     }
 }
 
+exports.getTourBooking = async function(req,res,next){
+    try{
+        const tour = await User.findById(req.params.id);
+        const bookings = await Booking.find({tourID: req.params.id})
+        .select()
+        .exec()
+        console.log(bookings);
+        res.status(200).json({
+            count : bookings.length,
+            bookings
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.bookTour = async (req, res, next) => {
     try{
         const { payload: { id } } = req;
