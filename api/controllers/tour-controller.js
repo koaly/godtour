@@ -47,7 +47,7 @@ exports.getOneTour = async function(req,res,next){
     }
 }
 
-exports.checkUserPermission = async (req, res, next) => {
+exports.checkOwnTour = async (req, res, next) => {
     try{
         const { payload: { id } } = req;
         const user = await User.findById(id);
