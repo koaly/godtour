@@ -11,10 +11,19 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        require: true
+        default: null
+    },
+    isGoogle: {
+        type: Boolean,
+        default: false
     },
     googleID: {
         type: String,
+        default: null
+    },
+    registerDate: {
+        type: Date,
+        default: Date.now(),
     }
 })
 
@@ -47,6 +56,16 @@ userSchema.methods.toAuthJSON = function () {
         email: this.email,
         //every time request create a new one
         token: this.generateJWT()
+    }
+}
+
+userSchema.methods.toProfileJSON = function () {
+    return {
+        _id: this.id,
+        email: this.email,
+        isGoogle: this.isGoogle,
+        googleID: this.googleID,
+        registerDate: this.registerDate,
     }
 }
 module.exports = mongoose.model('User', userSchema);
