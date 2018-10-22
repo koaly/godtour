@@ -46,8 +46,13 @@ class LoginDropdown extends (Component, Form) {
                 </div>
                 or
                 <form onSubmit={this.handleSubmit}>
-                  {this.renderInput("email", "Email")}
-                  {this.renderInput("password", "Password", "password")}
+                  {this.renderInput("email", "Email", "", "Email Address")}
+                  {this.renderInput(
+                    "password",
+                    "Password",
+                    "password",
+                    "Password"
+                  )}
                   {this.renderButton("Login")}
                 </form>
               </div>
