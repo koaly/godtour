@@ -11,7 +11,7 @@ class RegisterForm extends Form {
       email: "",
       password: ""
     },
-    gender: [{ _id: "1", name: "male" }, { _id: "2", name: "female" }],
+    gender: [{ _id: "1", name: "Male" }, { _id: "2", name: "Female" }],
     errors: {}
   };
 
@@ -45,17 +45,20 @@ class RegisterForm extends Form {
 
   render() {
     return (
-      <div className="container register">
-        <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          {this.renderInput("firstname", "Firstname")}
-          {this.renderInput("lastname", "Lastname")}
-          {this.renderInput("username", "Username")}
-          {this.renderInput("email", "Email")}
-          {this.renderInput("password", "Password", "password")}
-          {this.renderSelect("gender", "Gender", this.state.gender)}
-          {this.renderButton("Register")}
-        </form>
+      <div>
+        <div className="container register form-container mgtb">
+          <h2>Register</h2>
+          <form onSubmit={this.handleSubmit}>
+            {this.renderInput("firstname", "Firstname")}
+            {this.renderInput("lastname", "Lastname")}
+            {this.renderInput("username", "Username")}
+            {this.renderInput("email", "Email")}
+            {this.renderInput("password", "Password", "password")}
+            {this.renderSelect("gender", "Gender", this.state.gender)}
+            <div className="mgt"></div>
+            {this.renderButton("Register")}
+          </form>
+        </div>
       </div>
     );
   }
