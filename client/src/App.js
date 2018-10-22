@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/navBar";
 import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
-import HomePage from "./components/homePage";
+import HomePage from "./components/homepage/homePage";
 import NotFound from "./components/notFound";
 import Profile from "./components/profile";
 import AddTourForm from "./components/addTourForm";
