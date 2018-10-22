@@ -49,11 +49,11 @@ class RegisterForm extends Form {
         <div className="container register form-container mgtb">
           <h2>Register</h2>
           <form onSubmit={this.handleSubmit}>
-            {this.renderInput("firstname", "Firstname")}
-            {this.renderInput("lastname", "Lastname")}
-            {this.renderInput("username", "Username")}
-            {this.renderInput("email", "Email")}
-            {this.renderInput("password", "Password", "password")}
+            {this.renderInput("firstname", "Firstname","text","firstname")}
+            {this.renderInput("lastname", "Lastname","text","lastname")}
+            {this.renderInput("username", "Username","text","username")}
+            {this.renderInput("email", "Email","email","to-urworld@gmail.com")}
+            {this.renderInput("password", "Password", "password", "password")}
             {this.renderSelect("gender", "Gender", this.state.gender)}
             <div className="mgt"></div>
             {this.renderButton("Register")}

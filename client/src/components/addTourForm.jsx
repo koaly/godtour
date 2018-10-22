@@ -87,20 +87,20 @@ class AddTourForm extends Form {
       <div className="container addtour form-container mgtb">
         <h2>Add Tour</h2>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name")}
-          {this.renderInput("price", "Price")}
-          {this.renderInput("destination", "Destination")}
-          {this.renderInput("dayDuration", "DayDuration")}
-          {this.renderInput("nightDuration", "NightDuration")}
-          {this.renderInput("startBookDate", "StartBookDate", "date")}
-          {this.renderInput("startBookTime", "StartBookTime", "time")}
-          {this.renderInput("departDate", "DepartDate", "date")}
-          {this.renderInput("returnDate", "ReturnDate", "date")}
-          {this.renderInput("airline", "Airline")}
-          {this.renderInput("seat", "Seat")}
-          {this.renderInput("food", "Food")}
-          {this.renderInput("detail", "Detail")}
-          {this.renderInput("highlight", "Highlight")}
+          {this.renderInput("name", "Name","text","firstname")}
+          {this.renderInput("price", "Price","number","price")}
+          {this.renderInput("destination", "Destination","text","destination")}
+          {this.renderInput("dayDuration", "DayDuration","text","day-duration")}
+          {this.renderInput("nightDuration", "NightDuration","text","night-duration")}
+          {this.renderInput("startBookDate", "StartBookDate", "date", "start-book-date")}
+          {this.renderInput("startBookTime", "StartBookTime", "time", "start-book-time")}
+          {this.renderInput("departDate", "DepartDate", "date", "depart-date")}
+          {this.renderInput("returnDate", "ReturnDate", "date", "depart-time")}
+          {this.renderInput("airline", "Airline","text","airline")}
+          {this.renderInput("seat", "Seat","number","seat")}
+          {this.renderInput("food", "Food","text","food")}
+          {this.renderInput("detail", "Detail","text","detail")}
+          {this.renderInput("highlight", "Highlight","text","highlight")}
           <div className="mgt" />
           {this.renderButton("Add Tour")}
         </form>
