@@ -3,19 +3,21 @@ const router = express.Router();
 const passport = require('passport');
 
 const userController = require('../controllers/user-controller')
+const bookingController = require('../controllers/booking-controller')
 const auth = require('./auth');
 const User = require('../models/user-models')
 
 router.get('/', auth.optional, userController.getAll);
 router.get('/current', auth.require, userController.curretUser);
+router.get('/current/bookings', auth.require, bookingController.getUserBooking);
 
-router.get('/login', auth.optional, (req, res, next) => {
+router.get('/login', auth.optional, async (req, res, next) => {
     res.status(200).json({
         "message": "login page"
     })
 })
 
-router.get('/secret', auth.require, (req, res, next) => {
+router.get('/secret', auth.require, async (req, res, next) => {
     res.status(200).json({
         'message': "this is secret word"
     })

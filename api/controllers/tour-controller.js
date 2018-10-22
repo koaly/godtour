@@ -57,7 +57,7 @@ exports.checkOwnTour = async (req, res, next) => {
         if(user._id != tour.operatorID){
             return res.status(403).json({
                 error: {
-                    message: "Permission needed"
+                    message: "Permission denied"
                 }
             });
         } else{

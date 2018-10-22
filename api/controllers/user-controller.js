@@ -117,7 +117,7 @@ exports.checkOperatorStatus = async (req, res, next) => {
         if(!user.status){
             return res.status(403).json({
                 error: {
-                    message: "Permission needed"
+                    message: "Permission denied"
                 }
             });
         } else{
