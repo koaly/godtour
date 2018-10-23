@@ -157,3 +157,7 @@ code {
   height: 200px;
   background: #aaa;
 }
+
+.mySlides {
+  display:none;
+}
