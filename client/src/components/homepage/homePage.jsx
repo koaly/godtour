@@ -65,12 +65,24 @@ class HomePage extends Component {
               <div className="carousel-inner">
                 <div className="carousel-item active">
                   <img className="d-block w-100"  width="640" height="360" src="https://www.japan-guide.com/thumb/XYZeXYZe2172_1680.jpg" alt="First slide"/>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>TO-UR WORLD</h5>
+                    <p>Nuttapon Wachakitwanit</p>
+                  </div>
                 </div>
                 <div className="carousel-item">
                   <img className="d-block w-100 " width="640" height="360" src="https://www.japan-guide.com/thumb/XYZeXYZe2172_1680.jpg" alt="Second slide"/>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>TO-UR WORLD</h5>
+                    <p>Nuttapon Wachakitwanit</p>
+                  </div>
                 </div>
                 <div className="carousel-item">
                   <img className="d-block w-100"  width="640" height="360" src="https://www.japan-guide.com/thumb/XYZeXYZe2172_1680.jpg" alt="Third slide"/>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>TO-UR WORLD</h5>
+                    <p>Nuttapon Wachakitwanit</p>
+                  </div>
                 </div>
               </div>
               <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
