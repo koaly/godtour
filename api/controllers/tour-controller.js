@@ -48,10 +48,6 @@ exports.getOneTour = async function(req,res,next){
         .select()
         .exec()
         console.log(tour);
-        // const response = {
-        //     count: tours.length,
-        //     tour : tours
-        // }
         res.status(200).json({
             tour
         });

@@ -30,6 +30,23 @@ exports.getAll = async (req, res, next) => {
         })
     }
 }
+
+exports.getOneUser = async function(req,res,next){
+    try{
+        let user = await User.findById(req.params.id)
+        .select()
+        .exec()
+        console.log(user);
+        res.status(200).json({
+            user
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
 exports.userLogin = (req, res, next) => {
     const { body: user } = req;
 
