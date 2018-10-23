@@ -33,6 +33,11 @@ const NavBar = () => {
               Edit Tour
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/cancelBook">
+              Cancel Booking
+            </NavLink>
+          </li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="nav-item">

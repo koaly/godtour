@@ -31,7 +31,7 @@ class MyBook extends Component {
                   <th>Stock</th>
                   <th>Rate</th>
                   <th />
-                  <th />
+                  
                 </tr>
               </thead>
               <tbody>
