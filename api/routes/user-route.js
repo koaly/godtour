@@ -5,6 +5,7 @@ const passport = require('passport');
 const userController = require('../controllers/user-controller')
 const tourController = require('../controllers/tour-controller')
 const bookingController = require('../controllers/booking-controller')
+const operatorController = require('../controllers/operator-controller')
 const auth = require('./auth');
 const User = require('../models/user-models')
 
@@ -18,7 +19,7 @@ router.get('/current/bookings/:id', auth.require, bookingController.checkOwnBook
     })
 });
 router.delete('/current/bookings/:id', auth.require, bookingController.checkOwnBooking, bookingController.cancelBooking);
-router.get('/current/own_tours', auth.require, userController.checkOperatorStatus, tourController.getOwnTour);
+router.get('/current/own_tours', auth.require, operatorController.checkOperatorStatus, tourController.getOwnTour);
 
 router.get('/login', auth.optional, async (req, res, next) => {
     res.status(200).json({
