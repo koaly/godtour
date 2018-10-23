@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const Tour = require('../models/tour-models');
+const User = require('../models/user-models');
+const Booking = require('../models/booking-models');
 
 exports.getAll = async function(req,res,next){
     try{
@@ -8,13 +10,75 @@ exports.getAll = async function(req,res,next){
         .select()
         .exec()
         console.log(tours);
-        const response = {
-            count: tours.length,
-            tour : tours
-        }
         res.status(200).json({
-            response
+            count : tours.length,
+            tours
         });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.getOwnTour = async function(req,res,next){
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        const tours = await Tour.find({operatorID: id})
+        .select()
+        .exec()
+        console.log(tours);
+        res.status(200).json({
+            count : tours.length,
+            tours
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.getOneTour = async function(req,res,next){
+    try{
+        let tour = await Tour.findById(req.params.id)
+        .select()
+        .exec()
+        console.log(tour);
+        // const response = {
+        //     count: tours.length,
+        //     tour : tours
+        // }
+        res.status(200).json({
+            tour
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.checkOwnTour = async (req, res, next) => {
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        const tour = await Tour.findById(req.params.id);
+        console.log(user._id);
+        console.log(tour.operatorID);
+        if(user._id != tour.operatorID){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else{
+            return next();
+        }
     } catch(err){
         console.log(err);
         res.status(500).json({
@@ -25,11 +89,14 @@ exports.getAll = async function(req,res,next){
 
 exports.addTour = async function(req, res, next){
     try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        console.log(user);
         const tour = await new Tour({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
-            operatorID: "admin",
-            operatorName: "admin",
+            operatorID: user._id,
+            operatorName: user.email,
             price: req.body.price,
             dest: req.body.dest,
             dayDuration: req.body.dayDuration,
@@ -60,6 +127,13 @@ exports.addTour = async function(req, res, next){
 
 exports.editTour = async function(req, res, next){
     try{
+        if (req.body.maxSeat < req.body.currentSeat){
+            return res.status(405).json({
+                error: {
+                    message: "Max Seat is less than Remaining Seat"
+                }
+            }); 
+        }
         const tour = {}
         if(req.body.name) tour.name = req.body.name
         if(req.body.price) tour.price = req.body.price
@@ -82,8 +156,24 @@ exports.editTour = async function(req, res, next){
         const id = {_id:req.params.id}
         const result = await Tour.findOneAndUpdate(id, tour);
         console.log(result);
-        res.status(202).json({
+        res.status(200).json({
             message: "Tour updated"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+exports.deleteTour = async (req, res, next) => {
+    try{
+        const id = {_id:req.params.id}
+        const result = await Tour.findOneAndRemove(id);
+        console.log(result);
+        res.status(200).json({
+            message: "Tour deleted"
         })
     } catch(err){
         console.log(err);

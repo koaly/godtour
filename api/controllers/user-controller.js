@@ -8,7 +8,7 @@ const userResponse = (users) => {
             const response = {
                 count: users.length,
                 user: users.map(user => {
-                    return user.toAuthJSON();
+                    return user.toProfileJSON();
                 })
             }
             resolve(response);
@@ -48,12 +48,14 @@ exports.userLogin = (req, res, next) => {
         })
     }
     return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
-        if (!user) {
+        console.log("local")
+        if (!passportUser) {
             return res.status(404).json({
                 message: info
             })
         }
         if (passportUser) {
+            console.log(passportUser)
             const user = passportUser;
             user.token = passportUser.generateJWT();
 
@@ -105,4 +107,26 @@ exports.userSignup = async (req, res, next) => {
             error: err
         })
     }
+}
+
+exports.checkOperatorStatus = async (req, res, next) => {
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        console.log(user.status);
+        if(!user.status){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else{
+            return next();
+        }
+    } catch(err){
+        console.log(err)
+        return res.status(500).json({
+            error: err
+        });
+    } 
 }
