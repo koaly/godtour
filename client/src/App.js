@@ -12,6 +12,7 @@ import LoginForm from "./components/loginForm";
 import MyBook from "./components/myBooking";
 import MyCard from "./components/myCard";
 import PurchaseList from "./components/purchaseList";
+import TestFetch from "./components/fetch/FetchTest";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 
@@ -33,6 +34,7 @@ class App extends Component {
             <Route path="/profile/myCard" component={MyCard} />
             <Route path="/profile/purchaseList" component={PurchaseList} />
             <Route path="/profile" component={Profile} />
+			<Route path="/test_fetch" component={TestFetch} />
             <Redirect to="/not-found" />
           </Switch>
         </div>
