@@ -48,7 +48,7 @@ class RegisterForm extends Form {
       <div className="container">
         <div className="register form-container mgtb ">
           <div className="row">
-            <div className="register-leftside d-md-flex flex column d-none">
+            <div className="register-leftside d-md-flex flex-column d-none ">
               
             
             </div>
