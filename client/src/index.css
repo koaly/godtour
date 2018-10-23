@@ -125,18 +125,7 @@ code {
 }
 
 
-.form-container {
-  background: #afb0b3;
-  border: 10px;
-  border-style:groove;
-  border-color:silver;
-}
 
-
-.register h2 {
-  padding-top: 25px;
-  color:black;
-}
 
 .white {
   color:white;
@@ -144,25 +133,6 @@ code {
 
 .gray {
   color:gray;
-}
-
-.register form {
-  margin-top: 30px;
-}
-
-.login h1 {
-  margin-top: 50px;
-}
-
-.login form {
-  margin-top: 30px;
-}
-.addtour h2 {
-  padding-top: 25px;
-  color:black;
-}
-.addtour form {
-  margin-top: 30px;
 }
 
 .strongg {
