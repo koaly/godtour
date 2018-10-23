@@ -2,27 +2,27 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const userController = require('../controllers/user-controller')
-const tourController = require('../controllers/tour-controller')
-const bookingController = require('../controllers/booking-controller')
-const operatorController = require('../controllers/operator-controller')
+const userCtrl = require('../controllers/user-controller')
+const tourCtrl = require('../controllers/tour-controller')
+const bookingCtrl = require('../controllers/booking-controller')
+const operatorCtrl = require('../controllers/operator-controller')
 const auth = require('./auth');
 const User = require('../models/user-models')
 
-router.get('/', auth.optional, userController.getAll);
-router.get('/current', auth.require, userController.curretUser);
+router.get('/', auth.optional, userCtrl.getAll);
+router.get('/current', auth.require, userCtrl.curretUser);
 
-router.get('/current/bookings', auth.require, bookingController.getUserBooking);
-router.get('/current/bookings/:id', auth.require, bookingController.checkOwnBooking, async (req, res) => {
+router.get('/current/bookings', auth.require, bookingCtrl.getUserBooking);
+router.get('/current/bookings/:id', auth.require, bookingCtrl.checkOwnBooking, async (req, res) => {
     res.status(200).json({
         "message": "cancel booking page"
     })
 });
-router.delete('/current/bookings/:id', auth.require, bookingController.checkOwnBooking, bookingController.cancelBooking);
-router.get('/current/tours', auth.require, operatorController.checkOperatorStatus, tourController.getOwnTour);
+router.delete('/current/bookings/:id', auth.require, bookingCtrl.checkOwnBooking, bookingCtrl.cancelBooking);
+router.get('/current/tours', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.getOwnTour);
 
-router.get('/current/request/upgrade', auth.require, operatorController.checkNonOperatorStatus, userController.curretUser);
-router.put('/current/request/upgrade', auth.require, operatorController.checkNonOperatorStatus, operatorController.requestUpgrade);
+router.get('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, userCtrl.curretUser);
+router.put('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, operatorCtrl.requestUpgrade);
 
 router.get('/login', auth.optional, async (req, res, next) => {
     res.status(200).json({
@@ -36,8 +36,8 @@ router.get('/secret', auth.require, async (req, res, next) => {
     })
 })
 
-router.post('/signup', auth.optional, userController.userSignup);
-router.post('/login', auth.optional, userController.userLogin);
+router.post('/signup', auth.optional, userCtrl.userSignup);
+router.post('/login', auth.optional, userCtrl.userLogin);
 
 /*
 router.get('/logout', (req, res) => {
