@@ -11,7 +11,8 @@ class FetchClass extends React.Component{
 		this.state = {
 			error: null,
 			isLoading: false,
-			item: [],
+			num_res: 0,
+			url: ""
 		}
 	}
 
@@ -22,9 +23,11 @@ class FetchClass extends React.Component{
 
 	fetch_data(){
 		console.log("In function fetch_data");
-		fetch("http://localhost:5000/tours")
+		fetch("http://localhost:5000/users")
 			.then( response => {
 				console.log( "status of response is " + response.status)
+				this.state.num_res = response.status 
+				this.state.url = response.url
 				return response.json()
 			})
 			.then( json => { 
@@ -51,7 +54,13 @@ class FetchClass extends React.Component{
 			return(
 				<div>
 					<h1>Welcome to page for testing fetch</h1>
-					<p> Finish Loading </p>
+					<h2>General Information</h2>
+					<ul>
+						<li>&ensp;this status is {this.state.num_res}</li>
+						<li>&ensp;last url is {this.state.url}</li>
+					</ul>
+					<h2>Data</h2>
+					
 				</div>
 			);
 		}
