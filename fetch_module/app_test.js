@@ -2,7 +2,6 @@ const express = require('express')
 const app_test = express()
 const port = 4000
 
-import {FetchStream} from "./fetch_class.js";
 
 var fetch_from_url = require("fetch").fetchUrl;
 var fetch_from_stream = require("fetch").FetchStream;
@@ -14,7 +13,7 @@ var test_02;
 
 app_test.use('/' , (req , res) => res.send('Hello World'))
 
-var fetch = new fetch_from_stream("http://localhost:5000/users");
+var fetch = new fetch_from_stream("http://localhost:5000/tours");
 
 /*fetch.on("meta" , function(responseHeaders){
 	console.log("<--------- fetch on meta --------->")
@@ -48,6 +47,4 @@ fetch.on("data" , function(chunk){
 
 
 app_test.listen( port , () => console.log('app_test listen on port ' + port))
-
-a = new FetchStream( "users")
 
