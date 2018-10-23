@@ -1,4 +1,5 @@
 .form-container {
+  
   position: relative;
   display: flex;
   -webkit-box-orient: vertical;
@@ -11,16 +12,30 @@
   border: 1px solid rgba(0, 0, 0, .2);
   border-radius: 0.3rem;
   outline: 0;
+  overflow:hidden;
 }
 
 
 .register h2 {
-  padding-top: 25px;
+  text-align:center;
+  padding-top: 35px;
+  
   color:black;
 }
 
 .register form {
   margin-top: 30px;
+  margin:auto;
+}
+
+.form-container .register-leftside {
+  width: 40%;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/%E0%B9%80%E0%B8%AA%E0%B8%B2%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B8%8A%E0%B9%89%E0%B8%B2_%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%AF.JPG/1200px-%E0%B9%80%E0%B8%AA%E0%B8%B2%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B8%8A%E0%B9%89%E0%B8%B2_%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%AF.JPG) no-repeat center/cover;
+}
+
+.register-rightside {
+  width:50%;
+  margin:auto;
 }
 
 .login h1 {
@@ -36,4 +51,24 @@
 }
 .addtour form {
   margin-top: 30px;
+}
+
+.flex-column {
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+
+@media (min-width: 768px){
+  .d-md-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
 }

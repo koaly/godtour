@@ -124,8 +124,21 @@ code {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-
-
+.cancel-booking {
+  position: relative;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  margin:auto;
+  margin-top:100px;
+  margin-bottom:100px;
+  width:500px;
+  background-color: #ececec;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 0.3rem;
+}
 
 .white {
   color:white;
@@ -143,4 +156,8 @@ code {
 .fakeimg {
   height: 200px;
   background: #aaa;
+}
+
+.mySlides {
+  display:none;
 }
