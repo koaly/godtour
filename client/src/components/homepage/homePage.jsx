@@ -46,6 +46,12 @@ class HomePage extends Component {
 
       return (
         <div className="HomePage">
+          <div className="homepage-image">
+          <h1>Let's go to your world</h1>
+          <p>
+            Find the best place to fulfill your wonderful vacay on TO.UR WORLD!
+          </p>
+        </div>
           <ul>
             {users && users.map(user => (
               <li key={user.id}>
