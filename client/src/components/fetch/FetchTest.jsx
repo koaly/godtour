@@ -21,15 +21,14 @@ class FetchClass extends React.Component{
 	fetch_data(){
 		console.log("In function fetch_data");
 		fetch("http://localhost:5000/tours")
-			.then( response =>{
-					console.log( response )
-					console.log( "status of response : " + response.status )
-				}
-			)
-			.then( data =>{
-					console.log( data )
-				}
-			) 
+			.then( response => {
+				console.log( "status of response is " + response.status)
+				return response.json()
+			})
+			.then( json => { 
+				console.log( json )
+				console.log( "type of json " + typeof( json ) )
+			}) 
 	}
 	
 	render(){
