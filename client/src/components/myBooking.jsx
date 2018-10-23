@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import OneTour from "./cancelBook";
 import ProfileBar from "./common/profileBar";
 import { getMovies } from "../services/Test";
+import Pagination from "./common/pagination";
 
 class MyBook extends Component {
   state = {
-    movies: getMovies()
+    movies: getMovies(),
+    pageSize: 4,
+    currentPage: 1
   };
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
     this.setState({ movies });
   };
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
   render() {
     const { length: count } = this.state.movies;
+    const { pageSize, currentPage } = this.state;
 
     return (
       <div className="container mgtb">
@@ -53,6 +60,12 @@ class MyBook extends Component {
                 ))}
               </tbody>
             </table>
+            <Pagination
+              itemsCount={count}
+              pageSize={pageSize}
+              onPageChange={this.handlePageChange}
+              currentPage={currentPage}
+            />
           </div>
         </div>
       </div>
