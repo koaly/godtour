@@ -6,10 +6,12 @@ class FetchClass extends React.Component{
 	constructor( props ){
 		console.log("In constructor");
 		super( props );
+		this.finish = false;
+		this.list_item = [];
 		this.state = {
 			error: null,
 			isLoading: false,
-			item: []
+			item: [],
 		}
 	}
 
@@ -26,9 +28,17 @@ class FetchClass extends React.Component{
 				return response.json()
 			})
 			.then( json => { 
-				console.log( json )
-				console.log( "type of json " + typeof( json ) )
-			}) 
+				console.log( json );
+				console.log( "type of json " + typeof( json ) );
+				this.finish = true;
+				this.list_item = json;
+				console.log( "finish setstate")
+				console.log( typeof(this.state.isLoading) )
+				this.state.isLoading = this.finish
+				console.log( this.state )
+				this.forceUpdate()
+				console.log("After forceUpdate")
+			})
 	}
 	
 	render(){
@@ -37,11 +47,22 @@ class FetchClass extends React.Component{
 		console.log("error is " + error);
 		console.log("isLoading is " + isLoading );
 		console.log("item is " + item);
-		return(
-			<div>
-				<h1>Welcome to page for testing fetch</h1>
-			</div>
-		);
+		if( this.finish ){
+			return(
+				<div>
+					<h1>Welcome to page for testing fetch</h1>
+					<p> Finish Loading </p>
+				</div>
+			);
+		}
+		else{
+			return(
+				<div>
+					<h1>Welcome to page for testing fetch</h1>
+					<p> Now Loading </p>
+				</div>
+			);
+		}
 	}
 	
 }
