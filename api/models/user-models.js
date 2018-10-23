@@ -29,9 +29,13 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    needUpgrade: {
+    upgradeRequest: {
         type: Boolean,
         default: false
+    },
+    upgradeReason: {
+        type: String,
+        default: 'no request'
     }
 })
 
