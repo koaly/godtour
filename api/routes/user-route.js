@@ -19,7 +19,10 @@ router.get('/current/bookings/:id', auth.require, bookingController.checkOwnBook
     })
 });
 router.delete('/current/bookings/:id', auth.require, bookingController.checkOwnBooking, bookingController.cancelBooking);
-router.get('/current/own_tours', auth.require, operatorController.checkOperatorStatus, tourController.getOwnTour);
+router.get('/current/tours', auth.require, operatorController.checkOperatorStatus, tourController.getOwnTour);
+
+router.get('/current/request/upgrade', auth.require, operatorController.checkNonOperatorStatus, userController.curretUser);
+router.put('/current/request/upgrade', auth.require, operatorController.checkNonOperatorStatus, operatorController.requestUpgrade);
 
 router.get('/login', auth.optional, async (req, res, next) => {
     res.status(200).json({
