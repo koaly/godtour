@@ -46,9 +46,9 @@ class RegisterForm extends Form {
   render() {
     return (
       <div className="container">
-        <div className="register form-container mgtb">
+        <div className="register form-container mgtb ">
           <div className="row">
-            <div className="register-leftside">
+            <div className="register-leftside d-md-flex flex column d-none">
               
             
             </div>

@@ -25,6 +25,7 @@
   margin-top: 30px;
   margin-left: 25px;
   margin-right: 25px;
+  margin:auto;
 }
 
 .register-leftside {
@@ -34,7 +35,7 @@
 
 .register-rightside {
   width:50%;
-  margin-left:50px;
+  margin:auto;
 }
 
 .login h1 {
@@ -50,4 +51,23 @@
 }
 .addtour form {
   margin-top: 30px;
+}
+
+.flex-column {
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+@media (min-width: 768px){
+  .d-md-flex {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
 }
