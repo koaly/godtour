@@ -19,12 +19,12 @@ class LoginForm extends Form {
 
   doSubmit = () => {
     console.log("Submitted");
-    this.props.history.replace("/");
+    this.props.history.push("/");
   };
 
   render() {
     return (
-      <div className="container login">
+      <div className="container login mgtb">
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}

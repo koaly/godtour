@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import NavBar from "./components/navBar";
 import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
-import HomePage from "./components/homePage";
+import HomePage from "./components/homepage/homePage";
 import NotFound from "./components/notFound";
 import Profile from "./components/profile";
-import AddTour from "./components/addTour";
+import AddTourForm from "./components/addTourForm";
+import EditTourForm from "./components/editTourForm";
 import RegisterForm from "./components/registerForm";
 import LoginForm from "./components/loginForm";
 import MyBook from "./components/myBooking";
@@ -26,6 +27,8 @@ class App extends Component {
             <Route path="/" exact to component={HomePage} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
+            <Route path="/addTour" component={AddTourForm} />
+            <Route path="/editTour" component={EditTourForm} />
             <Route path="/profile/myBooking" component={MyBook} />
             <Route path="/profile/myCard" component={MyCard} />
             <Route path="/profile/purchaseList" component={PurchaseList} />

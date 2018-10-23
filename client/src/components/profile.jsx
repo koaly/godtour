@@ -8,7 +8,7 @@ import ProfileBar from "./common/profileBar";
 class Profile extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container mgtb">
         <h1>Profile</h1>
         <div className="row">
           <div className="col-md-4">
