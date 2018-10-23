@@ -4,6 +4,7 @@ const app = express();
 const morgan = require('morgan');
 //use morgan to tracking request
 app.use(morgan('dev'));
+app.set('json spaces', 40);
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
