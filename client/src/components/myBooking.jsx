@@ -3,11 +3,12 @@ import OneTour from "./cancelBook";
 import ProfileBar from "./common/profileBar";
 import { getMovies } from "../services/Test";
 import Pagination from "./common/pagination";
+import { paginate } from "../utility/paginate";
 
 class MyBook extends Component {
   state = {
     movies: getMovies(),
-    pageSize: 4,
+    pageSize: 3,
     currentPage: 1
   };
   handleDelete = movie => {
@@ -19,7 +20,8 @@ class MyBook extends Component {
   };
   render() {
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage } = this.state;
+    const { pageSize, currentPage, movies: allMovies } = this.state;
+    const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
       <div className="container mgtb">
@@ -42,7 +44,7 @@ class MyBook extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.movies.map(movie => (
+                {movies.map(movie => (
                   <tr key={movie._id}>
                     <td>{movie.title}</td>
                     <td>{movie.genre.name}</td>
