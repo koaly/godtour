@@ -54,6 +54,7 @@ exports.requestUpgrade = async (req, res, next) => {
         const user = await User.findById(id);
         user.upgradeRequest = true;
         if(req.body.upgradeReason) user.upgradeReason = req.body.upgradeReason;
+        else user.upgradeReason = '';
         const result = await user.save();
         console.log(result);
         res.status(200).json({
