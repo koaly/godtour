@@ -6,7 +6,7 @@ const Booking = require('../models/booking-models');
 
 exports.getUpgradeRequest = async (req, res, next) => {
     try{
-        const users = User.find({upgradeRequest: true})
+        const users = await User.find({upgradeRequest: true})
         .select()
         .exec()
         console.log(users);

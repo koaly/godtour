@@ -58,12 +58,12 @@ app.use(passport.session());
 //import routes
 const tourRoutes = require('./api/routes/tour-route');
 const userRoutes = require('./api/routes/user-route');
-
+const adminRoutes = require('./api/routes/admin-route');
 
 // express use routes to create path
 app.use("/tours", tourRoutes);
 app.use("/users", userRoutes);
-
+app.use("/admin", adminRoutes);
 
 
 //if not find path abover handling with 404
