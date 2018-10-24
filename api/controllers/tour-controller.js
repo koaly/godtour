@@ -84,14 +84,12 @@ exports.checkOwnTour = async (req, res, next) => {
 
 exports.addTour = async function(req, res, next){
     try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        console.log(user);
+        const { payload: { id, email } } = req;
         const tour = await new Tour({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
-            operatorID: user._id,
-            operatorName: user.email,
+            operatorID: id,
+            operatorName: email,
             price: req.body.price,
             dest: req.body.dest,
             dayDuration: req.body.dayDuration,
