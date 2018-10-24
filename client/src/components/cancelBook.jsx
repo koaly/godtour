@@ -6,7 +6,7 @@ class CancelBook extends Component {
   render() {
     return (
       <div class="row">
-        <div class="col-md-3">hahaไม่เลว</div>
+        <div class="col-md-3"></div>
         <div class="col-md-6">
           <div className="cancel-booking">
             <center className="mt-2 mb-2">
@@ -20,7 +20,7 @@ class CancelBook extends Component {
             </center>
           </div>
         </div>
-        <div class="col-md-3">hahaไม่เลว</div>
+        <div class="col-md-3"></div>
       </div>
     );
   }
