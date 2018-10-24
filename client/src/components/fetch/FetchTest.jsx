@@ -7,7 +7,7 @@ class FetchClass extends React.Component{
 	constructor( props ){
 		console.log("In constructor");
 		super( props );
-		this.fetch_class = new FetchMain("users")
+		this.fetch_class = new FetchMain("users" , this.receive_data )
 		this.finish = false;
 		this.list_item = [];
 		this.state = {
@@ -26,11 +26,21 @@ class FetchClass extends React.Component{
 		// didn't good because not sure I think rendor run after this constructor finish	
 	}
 
-	componentDidMount(){ // this function call when rendor first time
-		[ this.header , this.data ] = this.fetch_class.get_data()
-		console.log("Finish get data ")
+	receive_data( information , data ){
+		this.header = information;
+		this.data = data;
+		console.log("receive data")
+		console.log("-----------------> detail of header ")
+		console.log( this.header)
+		console.log("-----------------> detail of data ")
+		console.log( this.data )
 		this.finish = true
 		this.forceUpdate()
+	}
+
+	componentDidMount(){ // this function call when rendor first time
+		this.fetch_class.get_data()
+		console.log("Finish get data ")
 	}
 
 
@@ -50,7 +60,9 @@ class FetchClass extends React.Component{
 						<li>&ensp;last url is {this.state.url}</li>
 					</ul>
 					<h2>Data</h2>
-					
+					<ul>
+						
+					</ul>				
 				</div>
 			);
 		}
