@@ -17,7 +17,20 @@ class FetchClass extends React.Component{
 			url: ""
 		}
 		// if you run this you will see render have run before get_data finished
+	/*		
 		[ this.header , this.data ] = this.fetch_class.get_data()
+		console.log("Finish get data ")
+		this.finish = true
+		this.forceUpdate()
+	*/
+		// didn't good because not sure I think rendor run after this constructor finish	
+	}
+
+	componentDidMount(){ // this function call when rendor first time
+		[ this.header , this.data ] = this.fetch_class.get_data()
+		console.log("Finish get data ")
+		this.finish = true
+		this.forceUpdate()
 	}
 
 
