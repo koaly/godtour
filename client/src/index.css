@@ -130,22 +130,22 @@ code {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   flex-direction: column;
-  margin:auto;
-  margin-top:100px;
-  margin-bottom:100px;
-  width:500px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 400px;
   background-color: #ececec;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
 }
 
 .white {
-  color:white;
+  color: white;
 }
 
 .gray {
-  color:gray;
+  color: gray;
 }
 
 .strongg {
@@ -156,8 +156,4 @@ code {
 .fakeimg {
   height: 200px;
   background: #aaa;
-}
-
-.mySlides {
-  display:none;
 }
