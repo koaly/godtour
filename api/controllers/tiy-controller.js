@@ -4,6 +4,29 @@ const Tiy = require('../models/tiy-models');
 
 exports.checkOwnTiy = async (req, res, next) => {
     try{
+        const { payload: { id } } = req;
+        const tiy = await Tiy.findById(req.params.id);
+        console.log(id);
+        console.log(tiy.userID);
+        if(id != tiy.userID){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else{
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.checkOwnTiyPlus = async (req, res, next) => {
+    try{
         const { payload: { id, status } } = req;
         const tiy = await Tiy.findById(req.params.id);
         console.log(id);
@@ -24,6 +47,7 @@ exports.checkOwnTiy = async (req, res, next) => {
         });
     }
 }
+
 exports.getAll = async function(req,res,next){
     try{
         let tiys = await Tiy.find()
