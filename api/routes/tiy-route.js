@@ -21,5 +21,9 @@ router.get('/add', auth.require, operatorCtrl.checkNonOperatorStatus, async (req
     });
 });
 router.post('/add', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtrl.addTiy);
-router.get('/:id', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
+router.get('/:id', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.getOneTiy);
+router.delete('/:id', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.deleteTiy);
+router.get('/:id/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
+router.put('/:id/edit', auth.require, tourCtrl.checkOwnTiy, tiyCtrl.editTiy);
+
 module.exports = router
