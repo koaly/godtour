@@ -55,7 +55,7 @@ const tiySchema = mongoose.Schema({
     },
     food :{
         type: Number,
-        defalut: 0
+        default: 0
     },
     detail :{
         type: String
@@ -65,7 +65,10 @@ const tiySchema = mongoose.Schema({
     },
     isAccepted :{
         type: Boolean,
-        defalut: false
+        default: false
+    },
+    tourID :{
+        type: String
     }
 });
 

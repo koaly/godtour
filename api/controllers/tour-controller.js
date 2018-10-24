@@ -25,7 +25,6 @@ exports.getAll = async function(req,res,next){
 exports.getOwnTour = async function(req,res,next){
     try{
         const { payload: { id } } = req;
-        const user = await User.findById(id);
         const tours = await Tour.find({operatorID: id})
         .select()
         .exec()
