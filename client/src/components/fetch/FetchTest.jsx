@@ -1,6 +1,7 @@
 import React from "react";
-import ReactTable from 'react-table'
-import FetchMain from "./FetchMain.jsx";
+import ReactTable from 'react-table';
+//import FetchMain from "./FetchMain.jsx";
+import FetchAllUsers from "./FetchAllUsers.jsx";
 
 class FetchClass extends React.Component{
 // display
@@ -8,7 +9,7 @@ class FetchClass extends React.Component{
 	constructor( props ){
 		console.log("In constructor");
 		super( props );
-		this.fetch_class = new FetchMain("users" , this.callback ,this )
+		this.fetch_class = new FetchAllUsers( this.callback ,this )
 		this.finish = false;
 		this.state = {
 			error: null,
@@ -27,7 +28,7 @@ class FetchClass extends React.Component{
 	}
 
 	componentDidMount(){ // this function call when rendor first time
-		this.fetch_class.get_data()
+		this.fetch_class.get_all_user()
 		console.log("Finish get data ")
 	}
 
