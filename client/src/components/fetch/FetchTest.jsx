@@ -55,7 +55,6 @@ class FetchClass extends React.Component{
 		console.log("error is " + error);
 		console.log("isLoading is " + isLoading );
 // for use react table
-		const data = this.data.users.user
 		const columns = [
 							{ Header : "number id" , accessor: "_id" },
 							{ Header : "users email" , accessor: "email"},
@@ -64,6 +63,7 @@ class FetchClass extends React.Component{
 							{ Header : "register date" , accessor: "registerDate"}
 						]
 		if( this.finish ){
+			const data = this.data.users.user
 			return(
 				<div>
 					<h1>Welcome to page for testing fetch</h1>
