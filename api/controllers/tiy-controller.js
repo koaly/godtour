@@ -97,8 +97,17 @@ exports.getOneTiy = async function(req,res,next){
 
 exports.addTiy = async function(req, res, next){
     try{
+        if (req.body.maxPrice < req.body.minPrice
+            || req.body.maxDuration < req.body.minDuration
+            || req.body.maxMember < req.body.minMember){
+            return res.status(405).json({
+                error: {
+                    message: "Tried to insert max < min"
+                }
+            }); 
+        }
         const { payload: { id, email } } = req;
-        const tour = await new Tour({
+        const tiy = await new Tiy({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
             userID: id,
@@ -121,6 +130,64 @@ exports.addTiy = async function(req, res, next){
         res.status(201).json({
             message: "Tiy added"
         });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+exports.editTiy = async function(req, res, next){
+    try{
+        if (req.body.maxPrice < req.body.minPrice
+            || req.body.maxDuration < req.body.minDuration
+            || req.body.maxMember < req.body.minMember){
+            return res.status(405).json({
+                error: {
+                    message: "Tried to insert max < min"
+                }
+            }); 
+        }
+        const tiy = {}
+        if(req.body.name) tiy.name = req.body.name
+        if(req.body.minPrice) tiy.minPrice = req.body.minPrice
+        if(req.body.maxPrice) tiy.maxPrice = req.body.maxPrice
+        if(req.body.minMember) tiy.minMember = req.body.minMember
+        if(req.body.maxMember) tiy.maxMember = req.body.maxMember
+        if(req.body.dest) tiy.dest = req.body.dest
+        if(req.body.minDuration) tiy.minDuration = req.body.minDuration
+        if(req.body.maxDuration) tiy.maxDuration = req.body.maxDuration
+        if(req.body.startFreeDate) tiy.startFreeDate = req.body.startFreeDate
+        if(req.body.endFreeDate) tiy.endFreeDate = req.body.endFreeDate
+        if(req.body.food) tiy.food = req.body.food
+        if(req.body.detail) tiy.detail = req.body.detail
+        if(req.body.highlight) tiy.highlight = req.body.highlight
+        
+        console.log(req.params);
+        console.log(tiy);
+        const id = {_id:req.params.id}
+        const result = await Tiy.findOneAndUpdate(id, tiy);
+        console.log(result);
+        res.status(200).json({
+            message: "Tiy updated"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+exports.deleteTiy = async (req, res, next) => {
+    try{
+        const id = {_id:req.params.id}
+        const result = await Tiy.findOneAndRemove(id);
+        console.log(result);
+        res.status(200).json({
+            message: "Tiy deleted"
+        })
     } catch(err){
         console.log(err);
         res.status(500).json({
