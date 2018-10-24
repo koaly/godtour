@@ -119,6 +119,25 @@ exports.getOneTiy = async function(req,res,next){
     }
 }
 
+exports.getOwnTiy = async function(req,res,next){
+    try{
+        const { payload: { id } } = req;
+        const tiys = await Tiy.find({userID: id})
+        .select()
+        .exec()
+        console.log(tiys);
+        res.status(200).json({
+            count : tiys.length,
+            tiys
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.addTiy = async function(req, res, next){
     try{
         if (req.body.maxPrice < req.body.minPrice
