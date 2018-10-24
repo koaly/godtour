@@ -6,10 +6,9 @@ const Booking = require('../models/booking-models');
 
 exports.checkOperatorStatus = async (req, res, next) => {
     try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        console.log(user.status);
-        if(!user.status){
+        const { payload: { status } } = req;
+        console.log(status);
+        if(!status){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
