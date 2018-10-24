@@ -5,10 +5,11 @@ import { TrashCanIcon, CancelIcon } from "mdi-react";
 class CancelBook extends Component {
   render() {
     return (
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-          <div className="cancel-booking">
+      <div className="container">
+      <div className="row">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
+          <div className="cancel-booking ">
             <center className="mt-2 mb-2">
               <h1 className="mb-4 ">Are you sure ?</h1>
               <button className="btn btn-danger btn-lg mb-4 mr-4 ">
@@ -20,7 +21,8 @@ class CancelBook extends Component {
             </center>
           </div>
         </div>
-        <div class="col-md-3"></div>
+        <div className="col-md-3"></div>
+      </div>
       </div>
     );
   }
