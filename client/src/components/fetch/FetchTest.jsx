@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTable from 'react-table'
 import FetchMain from "./FetchMain.jsx";
 
 class FetchClass extends React.Component{
@@ -7,9 +8,8 @@ class FetchClass extends React.Component{
 	constructor( props ){
 		console.log("In constructor");
 		super( props );
-		this.fetch_class = new FetchMain("users" , this.receive_data )
+		this.fetch_class = new FetchMain("users" , this.callback ,this )
 		this.finish = false;
-		this.list_item = [];
 		this.state = {
 			error: null,
 			isLoading: false,
@@ -26,30 +26,43 @@ class FetchClass extends React.Component{
 		// didn't good because not sure I think rendor run after this constructor finish	
 	}
 
-	receive_data( information , data ){
-		this.header = information;
-		this.data = data;
-		console.log("receive data")
-		console.log("-----------------> detail of header ")
-		console.log( this.header)
-		console.log("-----------------> detail of data ")
-		console.log( this.data )
-		this.finish = true
-		this.forceUpdate()
-	}
-
 	componentDidMount(){ // this function call when rendor first time
 		this.fetch_class.get_data()
 		console.log("Finish get data ")
 	}
 
+	callback( information , data , this_){
+		console.log("<---------- In callback function ------------>")
+		console.log("--------> receive data")
+		console.log(information)
+		console.log(data)
+		console.log("--------> Information ")
+		this_.state.num_res = information.status
+		this_.state.url = information.url;
+		console.log( this_.state );
+		this_.data = data;	
+		console.log("--------> data ")
+		console.log( this_.data );
+		console.log("--------> change isLoading")
+		this_.state.isLoading = true
+		this_.finish = true
+		console.log("--------> finsh change isLoading")
+	}
 
 	render(){
 		console.log("In render")
 		const { error ,isLoading , item} = this.state;
 		console.log("error is " + error);
 		console.log("isLoading is " + isLoading );
-		console.log("item is " + item);
+// for use react table
+		const data = this.data.users.user
+		const columns = [
+							{ Header : "number id" , accessor: "_id" },
+							{ Header : "users email" , accessor: "email"},
+							{ Header : "use Google ID?" , accessor: "isGoogle"},
+							{ Header : "name Google ID" , accessor: "googleID"},
+							{ Header : "register date" , accessor: "registerDate"}
+						]
 		if( this.finish ){
 			return(
 				<div>
@@ -60,9 +73,7 @@ class FetchClass extends React.Component{
 						<li>&ensp;last url is {this.state.url}</li>
 					</ul>
 					<h2>Data</h2>
-					<ul>
-						
-					</ul>				
+					<ReactTable data = {data} columns={columns}/>
 				</div>
 			);
 		}
