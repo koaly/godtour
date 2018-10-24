@@ -6,7 +6,12 @@ const operatorCtrl = require('../controllers/operator-controller');
 const bookingCtrl = require('../controllers/booking-controller');
 const auth = require('./auth');
 
-router.get('/', auth.optional, tourCtrl.getAll);
+router.get('/', auth.optional, async (req, res) =>{
+    res.status(200).json({
+        'message': "tour's home page"
+    })
+});
+router.get('/browse', auth.optional, tourCtrl.getAll);
 router.post('/add', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.addTour);
 router.get('/:id', auth.optional, tourCtrl.getOneTour);
 router.post('/:id', auth.require, bookingCtrl.bookTour);
