@@ -1,4 +1,5 @@
 import React from "react";
+import FetchMain from "./FetchMain.jsx";
 
 class FetchClass extends React.Component{
 // display
