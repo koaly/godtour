@@ -24,6 +24,14 @@ const userSchema = mongoose.Schema({
     registerDate: {
         type: Date,
         default: Date.now(),
+    },
+    status: {
+        type: Number,
+        default: 0
+    },
+    needUpgrade: {
+        type: Boolean,
+        default: false
     }
 })
 

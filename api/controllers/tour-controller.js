@@ -10,10 +10,26 @@ exports.getAll = async function(req,res,next){
         .select()
         .exec()
         console.log(tours);
-        // const response = {
-        //     count: tours.length,
-        //     tours : tours
-        // }
+        res.status(200).json({
+            count : tours.length,
+            tours
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.getOwnTour = async function(req,res,next){
+    try{
+        const { payload: { id } } = req;
+        const user = await User.findById(id);
+        const tours = await Tour.find({operatorID: id})
+        .select()
+        .exec()
+        console.log(tours);
         res.status(200).json({
             count : tours.length,
             tours
@@ -47,7 +63,7 @@ exports.getOneTour = async function(req,res,next){
     }
 }
 
-exports.checkUserPermission = async (req, res, next) => {
+exports.checkOwnTour = async (req, res, next) => {
     try{
         const { payload: { id } } = req;
         const user = await User.findById(id);
@@ -57,7 +73,7 @@ exports.checkUserPermission = async (req, res, next) => {
         if(user._id != tour.operatorID){
             return res.status(403).json({
                 error: {
-                    message: "Permission needed"
+                    message: "Permission denied"
                 }
             });
         } else{
@@ -159,45 +175,6 @@ exports.deleteTour = async (req, res, next) => {
         res.status(200).json({
             message: "Tour deleted"
         })
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
-    }
-}
-
-exports.bookTour = async (req, res, next) => {
-    try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        const tour = await Tour.findById(req.params.id);
-        console.log(user);
-        console.log(tour);
-        const booking = await new Booking({
-            _id: new mongoose.Types.ObjectId,
-            userID: user._id,
-            userName: user.email,
-            tourID: tour._id,
-            tourName: tour.name,
-            amountBooking: req.body.amountBooking
-        });
-        if (tour.currentSeat - req.body.amountBooking < 0){
-            return res.status(405).json({
-                error: {
-                    message: "Attemped to book more than available"
-                }
-            }); 
-        } else{
-            tour.currentSeat -= req.body.amountBooking;
-            const bookingResult = await booking.save();
-            const tourResult = await tour.save();
-            console.log(bookingResult);
-            console.log(tourResult);
-            res.status(201).json({
-                message: "Book tour successful"
-            });
-        }
     } catch(err){
         console.log(err);
         res.status(500).json({
