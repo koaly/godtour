@@ -71,14 +71,53 @@ exports.userLogin = (req, res, next) => {
     })(req, res, next)
 }
 
-exports.curretUser = async (req, res, next) => {
+exports.currentUser = async (req, res, next) => {
     const { payload: { info } } = req;
     return res.status(200).json({
         info: info
     });
 }
 
+exports.editCurrentUser = async (req, res, next) => {
+    try {
+        const { payload: { info } } = req;
+        const id = info.id;
 
+        const {
+            displayName,
+            imgsrc,
+            gender,
+            status,
+            upgradeRequest,
+            upgradeReason,
+        } = req.body;
+
+        const editUser = {}
+
+        editUser.displayName = displayName
+        editUser.imgsrc = imgsrc
+        editUser.gender = gender
+        editUser.status = status
+        editUser.upgradeRequest = upgradeRequest
+        editUser.upgradeReason = upgradeReason
+
+        const user = await User.findOneAndUpdate(id, editUser)
+
+        console.log(`result: ${user}`);
+        res.status(200).json({
+            sucess: true,
+            message: "current user have been update //get new token",
+            token: user.generateJWT()
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            sucess: false,
+            error: err
+        })
+    }
+}
 exports.userSignup = async (req, res, next) => {
     try {
         const {

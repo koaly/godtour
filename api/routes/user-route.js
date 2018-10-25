@@ -12,7 +12,22 @@ const { body } = require('express-validator/check');
 const { checkValidation } = require('../middleware/validation')
 
 router.get('/', auth.optional, userCtrl.getAll);
-router.get('/current', auth.require, userCtrl.curretUser);
+router.get('/current', auth.require, userCtrl.currentUser);
+router.get('/current/edit', auth.require, userCtrl.currentUser);
+router.put('/current/edit', auth.require,
+    [
+        body('displayName')
+            .isLength({ min: 3 })
+            .trim()
+            .escape()
+            .withMessage('require string more than 3 charater'),
+        body('gender')
+            .isIn(['male', 'female', 'unknown'])
+            .withMessage('request only field male female or unknow')
+    ]
+    , checkValidation, userCtrl.editCurrentUser)
+//show uniq user with uniq username
+router.get('/:username', auth.optional, userCtrl.getOneUser)
 
 router.get('/current/bookings', auth.require, bookingCtrl.getUserBooking);
 router.get('/current/bookings/:id', auth.require, bookingCtrl.checkOwnBooking, async (req, res) => {
@@ -24,7 +39,7 @@ router.delete('/current/bookings/:id', auth.require, bookingCtrl.checkOwnBooking
 router.get('/current/tours', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.getOwnTour);
 router.get('/current/tiys', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtrl.getOwnTiy);
 
-router.get('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, userCtrl.curretUser);
+router.get('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, userCtrl.currentUser);
 router.put('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, operatorCtrl.requestUpgrade);
 
 router.get('/login', auth.optional, async (req, res, next) => {
@@ -71,7 +86,6 @@ router.post('/login', auth.optional,
     checkValidation, userCtrl.userLogin)
 
 
-router.get('/:username', auth.optional, userCtrl.getOneUser)
 /*
 router.get('/logout', (req, res) => {
     req.logout();

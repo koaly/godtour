@@ -83,7 +83,7 @@ userSchema.methods.generateJWT = function () {
 
 userSchema.methods.toProfileJSON = function () {
     return {
-        _id: this.id,
+        id: this.id,
         username: this.username,
         displayName: this.displayName,
         status: this.status,
