@@ -73,7 +73,7 @@ exports.editOffer = async function(req, res, next){
         
         console.log(req.params);
         console.log(offer);
-        const id = {_id:req.params.id}
+        const id = {_id:req.params.offerID}
         const result = await Offer.findOneAndUpdate(id, offer);
         console.log(result);
         res.status(200).json({
