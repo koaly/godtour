@@ -12,12 +12,12 @@ router.get('/', auth.optional, async (req, res) =>{
     });
 });
 router.get('/browse', auth.optional, tourCtrl.getAll);
-router.get('/add', auth.require, operatorCtrl.checkOperatorStatus, async (req, res) => {
+router.get('/create', auth.require, operatorCtrl.checkOperatorStatus, async (req, res) => {
     res.status(200).json({
         'message': "add tour page"
     });
 });
-router.post('/add', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.addTour);
+router.post('/create', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.addTour);
 router.get('/:id', auth.optional, tourCtrl.getOneTour);
 router.post('/:id', auth.require, bookingCtrl.bookTour);
 router.delete('/:id', auth.require, tourCtrl.checkOwnTour, tourCtrl.deleteTour);
