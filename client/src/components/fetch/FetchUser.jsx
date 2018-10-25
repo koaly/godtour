@@ -23,14 +23,12 @@ export default class FetchUser{
 		console.log( "<---------- FetchUser : login ---------->" );
 		console.log( "email argument is " + email );
 		console.log( "password argument is " + password );
-		var last_link = this.SumLink + _path._login;
-		console.log( "last_link is" + last_link);
 		this.PostData.email = email;
 		this.PostData.password = password;
 		console.log("<----- FetchUser : PostData ----->");
 		console.log( this.PostData )
-		
-		this.Request = new Request( last_link , 
+
+		this.Request = new Request( this.SumLink + _path._login , 
 							{ method: 'POST'
 							, headers : {
 									"Content-Type" : "application/json"

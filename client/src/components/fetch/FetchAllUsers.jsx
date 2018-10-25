@@ -8,15 +8,12 @@ export default class FetchAllUsers{
 		this.SumLink = _start_url + _domain + ":" + _port + "/" + path;
 		this.SendData = [];
 		this.SendInformation = [];
-//		this.ReturnCallback = callback; // checn to send callback when you want to fetch
 		console.log("<----- FetchAllUsers : this.SumLink ----->");
 		console.log( this.SumLink );
 		console.log("<----- FetchAllUsers : this.SendData ----->");
 		console.log( this.SendData );
 		console.log("<----- FetchAllUsers : this.SendInformation ----->");
 		console.log( this.SendInformation );
-		console.log("<----- FetchAllUsers : this.ReturnCallback ----->");
-		console.log( this.ReturnCallback );
 	}
 
 	get_all_users( Callback ){
