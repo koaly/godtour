@@ -1,0 +1,11 @@
+{
+    "env": {
+        "MONGO_MLAB_USER": "admin",
+        "MONGO_MLAB_PW": "123juijui",
+        "JWT_SECRET": "jui-only-true-god",
+        "GOOGLE": {
+            "CLIENT_ID": "1327512327-fc4mjquvfv1vdtms2anovd20q60bbt7r.apps.googleusercontent.com",
+            "CLIENT_SECRET": "uJrkhPJJMhK5nWV1rjUmx2VB"
+        }
+    }
+}
