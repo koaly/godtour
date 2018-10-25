@@ -124,8 +124,8 @@ class AddTourForm extends Form {
           {this.renderInput("airline", "Airline", "text", "airline")}
           {this.renderInput("seat", "Seat", "number", "seat")}
           {this.renderInput("food", "Food", "text", "food")}
-          {this.renderInput("detail", "Detail", "text", "detail")}
-          {this.renderInput("highlight", "Highlight", "text", "highlight")}
+          {this.renderTextarea("detail", "Detail", "text", "detail")}
+          {this.renderTextarea("highlight", "Highlight", "text", "highlight")}
           <div className="mgt" />
           {this.renderButton("Add Tour")}
         </form>
