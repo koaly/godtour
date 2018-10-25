@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../models/user-models');
+const { validationResult } = require('express-validator/check')
 
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
@@ -8,13 +9,14 @@ const userResponse = (users) => {
             const response = {
                 count: users.length,
                 user: users.map(user => {
-                    return user.toProfileJSON();
+                    return user.toAuthJSON();
                 })
             }
             resolve(response);
         }, 1000)
     })
 }
+
 exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find()
@@ -31,16 +33,16 @@ exports.getAll = async (req, res, next) => {
     }
 }
 
-exports.getOneUser = async function(req,res,next){
-    try{
+exports.getOneUser = async function (req, res, next) {
+    try {
         let user = await User.findById(req.params.id)
-        .select()
-        .exec()
+            .select()
+            .exec()
         console.log(user);
         res.status(200).json({
             user
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -48,22 +50,6 @@ exports.getOneUser = async function(req,res,next){
     }
 }
 exports.userLogin = (req, res, next) => {
-    const { body: user } = req;
-
-    if (!user.email) {
-        return res.status(422).json({
-            error: {
-                message: "email is required"
-            }
-        });
-    }
-    if (!user.password) {
-        return res.status(422).json({
-            error: {
-                message: "password is required"
-            }
-        })
-    }
     return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
         console.log("local")
         if (!passportUser) {
@@ -72,27 +58,17 @@ exports.userLogin = (req, res, next) => {
             })
         }
         if (passportUser) {
-            console.log(passportUser)
-            const user = passportUser;
-            user.token = passportUser.generateJWT();
-
             return res.status(200).json({
-                user: user.toAuthJSON()
+                user: passportUser.toAuthJSON()
             })
         }
     })(req, res, next)
 }
 
 exports.curretUser = async (req, res, next) => {
-    const { payload: { id } } = req;
-    const user = await User.findById(id)
-    if (!user) {
-        return res.status(400).json({
-            message: "No CurrentUser",
-        })
-    }
+    const { payload: { info } } = req;
     return res.status(200).json({
-        user: user.toAuthJSON()
+        info: info
     });
 }
 
