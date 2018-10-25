@@ -6,6 +6,10 @@ const offerSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    tiyID :{
+        type: String,
+        required: true
+    },
     operatorID :{
         type: String,
         required: true
