@@ -24,6 +24,6 @@ router.post('/create', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtr
 router.get('/:id', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.getOneTiy);
 router.delete('/:id', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.deleteTiy);
 router.get('/:id/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
-router.put('/:id/edit', auth.require, tourCtrl.checkOwnTiy, tiyCtrl.editTiy);
+router.put('/:id/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.editTiy);
 
 module.exports = router
