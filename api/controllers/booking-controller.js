@@ -63,6 +63,8 @@ exports.getTourBooking = async function(req,res,next){
 
 exports.bookTour = async (req, res, next) => {
     try{
+        const session = await Tour.startSession();
+        console.log(session);
         const { payload: { id } } = req;
         const user = await User.findById(id);
         const tour = await Tour.findById(req.params.id);
@@ -76,6 +78,7 @@ exports.bookTour = async (req, res, next) => {
             tourName: tour.name,
             amountBooking: req.body.amountBooking
         });
+        session.startTransaction();
         if (tour.currentSeat - req.body.amountBooking < 0){
             return res.status(405).json({
                 error: {
@@ -92,6 +95,7 @@ exports.bookTour = async (req, res, next) => {
                 message: "Book tour successful"
             });
         }
+        await session.commitTransaction();
     } catch(err){
         console.log(err);
         res.status(500).json({

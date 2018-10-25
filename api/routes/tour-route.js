@@ -1,22 +1,28 @@
 const express = require('express');
 const router = express.Router();
 
-const tourController = require('../controllers/tour-controller');
-const userController = require('../controllers/user-controller');
-const bookingController = require('../controllers/booking-controller');
+const tourCtrl = require('../controllers/tour-controller');
+const operatorCtrl = require('../controllers/operator-controller');
+const bookingCtrl = require('../controllers/booking-controller');
 const auth = require('./auth');
 
-router.get('/', auth.optional, tourController.getAll);
-router.post('/add', auth.require, userController.checkOperatorStatus, tourController.addTour);
-router.get('/:id', auth.optional, tourController.getOneTour);
-router.post('/:id', auth.require, bookingController.bookTour);
-router.delete('/:id', auth.require, tourController.checkOwnTour, tourController.deleteTour);
-router.get('/:id/edit', auth.require, tourController.checkOwnTour, async (req, res) => {
+router.get('/', auth.optional, async (req, res) =>{
     res.status(200).json({
-        "message": "edit page"
-    })
+        'message': "tour's home page"
+    });
 });
-router.put('/:id/edit', auth.require, tourController.checkOwnTour, tourController.editTour);
-router.get('/:id/bookings', auth.require, tourController.checkOwnTour, bookingController.getTourBooking);
+router.get('/browse', auth.optional, tourCtrl.getAll);
+router.get('/create', auth.require, operatorCtrl.checkOperatorStatus, async (req, res) => {
+    res.status(200).json({
+        'message': "add tour page"
+    });
+});
+router.post('/create', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.addTour);
+router.get('/:id', auth.optional, tourCtrl.getOneTour);
+router.post('/:id', auth.require, bookingCtrl.bookTour);
+router.delete('/:id', auth.require, tourCtrl.checkOwnTour, tourCtrl.deleteTour);
+router.get('/:id/edit', auth.require, tourCtrl.checkOwnTour, tourCtrl.getOneTour);
+router.put('/:id/edit', auth.require, tourCtrl.checkOwnTour, tourCtrl.editTour);
+router.get('/:id/bookings', auth.require, tourCtrl.checkOwnTour, bookingCtrl.getTourBooking);
 
 module.exports = router
