@@ -1,8 +1,8 @@
-import UserConvert from "./UserFunction.jsx"
+import UserConvert from "./UserFunction.jsx" // import function for convert object
 
-var {_start_url , _domain , _port} = require('./default_data.jsx')
+var {_start_url , _domain , _port} = require('./default_data.jsx') // import data url
 
-var HandleObject = new UserConvert();
+var HandleObject = new UserConvert(); // init class of convert for user data
 
 export default class FetchAllUsers {
 
@@ -26,7 +26,6 @@ export default class FetchAllUsers {
 			})
 			.then( json => {
 				this.SendData = json;
-//				this.ReturnCallback( this.SendInformation , this.SendData )
 				Callback( this.SendInformation , this.SendData )
 			})			
 	}
@@ -37,6 +36,7 @@ export default class FetchAllUsers {
 		console.log("===============> FetchAllUsers.get_specific_user");	
 		fetch( this.SumLink )
 			.then( response =>{
+//				console.log("=====> get_specific_user.response" , response);
 				this.SendInformation.status = response.status;
 				this.SendInformation.url = response.url;
 				this.SendInformation.type = response.type;
@@ -44,6 +44,7 @@ export default class FetchAllUsers {
 				return response.json()
 			})
 			.then( json => {
+				console.log("=====> get_specific_user.json" , json);
 				if( Specific.type === "email"){
 					var answer = this.filter_by_email( json , Specific.data )
 				}
@@ -54,9 +55,10 @@ export default class FetchAllUsers {
 	
 	filter_by_email( all_data , email ){
 		console.log("===============> FetchAllUsers.filter_by_email");	
+		console.log("=====> filter_by_email.all_data " , all_data);
 		var answer = {have:false};
 		for( var count = 0 ; count < all_data.users.count ; count++ ){
-			if( email == all_data.users.user[count].email ){
+			if( email === all_data.users.user[count].email ){
 				answer = all_data.users.user[count];
 				break;
 			}

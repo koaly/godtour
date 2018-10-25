@@ -29,6 +29,7 @@ class PostClass extends React.Component{
 
 	FetchLoginCallback( ReceiveInformation ,  ReceiveData ){
 		console.log("===============> PostClass.FetchLoginCallback");	
+		console.log("=====> FetchLoginCallback.ReceiveData " , ReceiveData );
 		this.setState( state => ({
 			IsLoading : false,
 			Data : ReceiveData,
