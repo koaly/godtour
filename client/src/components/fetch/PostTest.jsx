@@ -9,7 +9,7 @@ class PostClass extends React.Component{
 	//			http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 	// inti class process Mounting
 	constructor( props ){
-		console.log("<---------- FetchUser : constructor ---------->")
+		console.log("===============> PostClass.constructor");	
 		super( props ); // requirement to use this
 		this.state = {
 			IsLoading : true // status now are loading
@@ -22,17 +22,13 @@ class PostClass extends React.Component{
 	}
 
 	componentDidMount(){ // this function call auto when after run render one time by react
-		console.log("<---------- FetchUser : componentDidMount ---------->");
+		console.log("===============> PostClass.componentDidMount");	
 		this.UserFetch = new FetchUser();
 		this.UserFetch.login( this.email , this.password , this.FetchLoginCallback );
 	}
 
 	FetchLoginCallback( ReceiveInformation ,  ReceiveData ){
-		console.log("<---------- FetchUser : FetchLoginCallback ---------->");
-		console.log("<----- FetchUser : ReceiveInformation ----->");
-		console.log( ReceiveInformation );
-		console.log("<----- FetchUser : ReceiveData ----->");
-		console.log( ReceiveData );
+		console.log("===============> PostClass.FetchLoginCallback");	
 		this.setState( state => ({
 			IsLoading : false,
 			Data : ReceiveData,
@@ -41,7 +37,7 @@ class PostClass extends React.Component{
 	}
 
 	render(){
-		console.log("<----------- FetchUser : render ---------->");
+		console.log("===============> PostClass.render");	
 		if( this.state.IsLoading ){
 			return(
 				<div>

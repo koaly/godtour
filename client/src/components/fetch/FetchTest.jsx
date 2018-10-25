@@ -9,6 +9,7 @@ class FetchClass extends React.Component{
 	//			http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 	// inti class process Mounting
 	constructor( props ){ 
+		console.log("===============> FetchClass.constructor");	
 		super( props ); // requirement to use this
 		this.state = {
 			IsLoading : true 
@@ -20,7 +21,7 @@ class FetchClass extends React.Component{
 
 
 	componentDidMount(){ // this function call when after render one time
-		console.log("<---------- FetchClass : componentDidMount ---------->")
+		console.log("===============> FetchClass.componentDidMount");	
 		this.fetch_data = new FetchAllUsers();
 		this.fetch_data.get_specific_user( {type:"email" , data:"suck3@gmail.com"} 
 											, this.FetchCallback );	
@@ -28,11 +29,7 @@ class FetchClass extends React.Component{
 	}
 
 	FetchCallback( ReceiveInformation , ReceiveData ){
-		console.log("<---------- FetchClass : FetchCallback ---------->")
-		console.log("<----- FetchClass : ReceiveInformation ----->")
-		console.log( ReceiveInformation )
-		console.log("<----- FetchClass : ReceiveData ----->")		
-		console.log( ReceiveData )
+		console.log("===============> FetchClass.FetchCallback");	
 		this.setState( state => ({
 			IsLoading : false,
 			Data : ReceiveData,
@@ -41,7 +38,7 @@ class FetchClass extends React.Component{
 	}
 
 	render(){
-		console.log("<---------- FetchClass : render ---------->")
+		console.log("===============> FetchClass.render");	
 		if( this.state.IsLoading ){
 			return(
 				<div>
