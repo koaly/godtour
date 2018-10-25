@@ -34,17 +34,23 @@ exports.getAll = async (req, res, next) => {
 }
 
 exports.getOneUser = async function (req, res, next) {
+    const { username } = req.params
     try {
-        let user = await User.findById(req.params.id)
+        const user = await User.findOne({ username: username })
             .select()
             .exec()
+        if (!user) {
+            return res.status(404).json({
+                error: "user doesn't exits"
+            })
+        }
         console.log(user);
-        res.status(200).json({
-            user
+        return res.status(200).json({
+            user: user.toProfileJSON()
         });
     } catch (err) {
         console.log(err);
-        res.status(500).json({
+        return res.status(500).json({
             error: err
         });
     }
@@ -75,8 +81,17 @@ exports.curretUser = async (req, res, next) => {
 
 exports.userSignup = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const {
+            email,
+            password,
+            username,
+            displayName,
+            imgsrc,
+            gender,
+        } = req.body;
+
         const user = await User.find({ email: email });
+
         if (user.length >= 1) {
             return res.status(409).json({
                 message: "Email already existed"
@@ -86,6 +101,10 @@ exports.userSignup = async (req, res, next) => {
 
             newUser.email = email;
             newUser.password = await newUser.generateHash(password);
+            newUser.username = username;
+            newUser.gender = gender;
+            newUser.displayName = displayName;
+            newUser.imgsrc = imgsrc;
 
             const result = await newUser.save();
             res.status(201).json({

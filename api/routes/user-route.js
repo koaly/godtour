@@ -33,12 +33,6 @@ router.get('/login', auth.optional, async (req, res, next) => {
     })
 })
 
-router.get('/secret', auth.require, async (req, res, next) => {
-    res.status(200).json({
-        'message': "this is secret word"
-    })
-})
-
 router.post('/signup', auth.optional,
     [
         body('email')
@@ -76,6 +70,8 @@ router.post('/login', auth.optional,
     ],
     checkValidation, userCtrl.userLogin)
 
+
+router.get('/:username', auth.optional, userCtrl.getOneUser)
 /*
 router.get('/logout', (req, res) => {
     req.logout();
