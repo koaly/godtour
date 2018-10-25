@@ -22,8 +22,8 @@ class FetchClass extends React.Component{
 
 	componentDidMount(){ // this function call when after render one time
 		console.log("===============> FetchClass.componentDidMount");	
-		this.target_type = "email";
-		this.target_data = "mika@gmail.com"
+		this.target_type = "user_name";
+		this.target_data = "jui";
 		this.fetch_data = new FetchAllUsers();
 		this.fetch_data.get_specific_user( {type: this.target_type , data: this.target_data} 
 											, this.FetchCallback );	
@@ -32,7 +32,7 @@ class FetchClass extends React.Component{
 
 	FetchCallback( ReceiveInformation , ReceiveData ){
 		console.log("===============> FetchClass.FetchCallback");	
-		console.log("=====> FetchCallbacl.ReceiveData " , ReceiveData );
+		console.log("=====> FetchCallback.ReceiveData " , ReceiveData );
 		this.setState( state => ({
 			IsLoading : false,
 			Data : ReceiveData,

@@ -49,7 +49,10 @@ export default class FetchAllUsers {
 					var answer = this.filter_by_email( json , Specific.data );
 				}
 				else if( Specific.type === "id"){
-					var answer = this.fileter_by_id( json , Specific.data );
+					var answer = this.filter_by_id( json , Specific.data );
+				}
+				else if( Specific.type === "user_name"){
+					var answer = this.filter_by_user_name( json , Specific.data );
 				}
 				this.SendData = HandleObject.convert_user_data(answer);
 				Callback( this.SendInformation , this.SendData )
@@ -80,4 +83,15 @@ export default class FetchAllUsers {
 		return answer;	
 	}
 
+	filter_by_user_name( all_data , user_name ){
+		console.log("===============> FetchAllUsers.fileter_by_user_name");
+		var answer = {have:false};
+		for( var count = 0 ; count < all_data.users.count ; count++ ){
+			if( user_name === all_data.users.user[count].username ){
+				answer = all_data.users.user[count];
+				break;
+			}
+		}
+		return answer;	
+	}
 }
