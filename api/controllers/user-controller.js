@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../models/user-models');
+const { validationResult } = require('express-validator/check')
 
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
@@ -15,6 +16,7 @@ const userResponse = (users) => {
         }, 1000)
     })
 }
+
 exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find()
@@ -48,22 +50,6 @@ exports.getOneUser = async function (req, res, next) {
     }
 }
 exports.userLogin = (req, res, next) => {
-    const { body: user } = req;
-
-    if (!user.email) {
-        return res.status(422).json({
-            error: {
-                message: "email is required"
-            }
-        });
-    }
-    if (!user.password) {
-        return res.status(422).json({
-            error: {
-                message: "password is required"
-            }
-        })
-    }
     return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
         console.log("local")
         if (!passportUser) {

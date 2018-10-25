@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 
 const userCtrl = require('../controllers/user-controller')
 const tiyCtrl = require('../controllers/tiy-controller');
@@ -8,7 +7,9 @@ const tourCtrl = require('../controllers/tour-controller')
 const bookingCtrl = require('../controllers/booking-controller')
 const operatorCtrl = require('../controllers/operator-controller')
 const auth = require('./auth');
-const User = require('../models/user-models')
+//import for validator for check
+const { check } = require('express-validator/check');
+const { checkValidation } = require('../middleware/validation')
 
 router.get('/', auth.optional, userCtrl.getAll);
 router.get('/current', auth.require, userCtrl.curretUser);
@@ -39,7 +40,14 @@ router.get('/secret', auth.require, async (req, res, next) => {
 })
 
 router.post('/signup', auth.optional, userCtrl.userSignup);
-router.post('/login', auth.optional, userCtrl.userLogin);
+
+router.post('/login', auth.optional, [
+    check('email')
+        .exists()
+        .isEmail(),
+    check('password')
+        .exists()
+], checkValidation, userCtrl.userLogin)
 
 /*
 router.get('/logout', (req, res) => {
