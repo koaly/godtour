@@ -21,8 +21,9 @@ class FetchClass extends React.Component{
 
 	componentDidMount(){ // this function call when after render one time
 		console.log("<---------- FetchClass : componentDidMount ---------->")
-		this.fetch_data = new FetchAllUsers( this.FetchCallback );
-		this.fetch_data.get_specific_user( {type:"email" , data:"suck3@gmail.com"});	
+		this.fetch_data = new FetchAllUsers();
+		this.fetch_data.get_specific_user( {type:"email" , data:"suck3@gmail.com"} 
+											, this.FetchCallback );	
 		
 	}
 
