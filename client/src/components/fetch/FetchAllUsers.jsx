@@ -57,7 +57,7 @@ export default class FetchAllUsers{
 			.then( json => {
 				console.log("<----- FetchAllUsers : json ----->");
 				console.log( json );
-				if( Specific.type == "email"){
+				if( Specific.type === "email"){
 					var answer = this.filter_by_email( json , Specific.data )
 				}
 				this.SendData = answer;

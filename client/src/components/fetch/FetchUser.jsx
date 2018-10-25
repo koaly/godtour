@@ -6,9 +6,9 @@ export default class FetchUser{
 	constructor(){
 		console.log( "<---------- FetchUser : console ---------->")
 		this.SumLink = _start_url + _domain + ":" + _port;
-		this.PostData = [];	
-		this.SendData = []; 
-		this.SendInformation = [];
+		this.PostData = {};	
+		this.SendData = {}; 
+		this.SendInformation = {};
 		console.log("<----- FetchAllUsers : this.SumLink ----->");
 		console.log( this.SumLink );
 		console.log("<----- FetchAllUsers : this.PostData ----->");
@@ -30,10 +30,21 @@ export default class FetchUser{
 		console.log("<----- FetchUser : PostData ----->");
 		console.log( this.PostData )
 		
-		fetch( last_link , {
-			method:'POST'
-			, body : JSON.stringify( this.PostData ),
-		})
+		this.Request = new Request( last_link , 
+							{ method: 'POST' 
+							, body : JSON.stringify( 
+												 email : 'suck@gmail.com'
+												,password : '123'
+												) 
+							}
+						);
+
+		console.log("<----- FetchUser : Request ----->");
+		console.log( this.Request );
+		console.log("=====> url of request  ");
+		console.log( this.Request.url );
+
+		fetch( this.Request )
 		.then( response =>{
 			console.log( "<----- FetchUser : response ----->");
 			console.log( response );
