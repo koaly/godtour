@@ -46,7 +46,10 @@ export default class FetchAllUsers {
 			.then( json => {
 				console.log("=====> get_specific_user.json" , json);
 				if( Specific.type === "email"){
-					var answer = this.filter_by_email( json , Specific.data )
+					var answer = this.filter_by_email( json , Specific.data );
+				}
+				else if( Specific.type === "id"){
+					var answer = this.fileter_by_id( json , Specific.data );
 				}
 				this.SendData = HandleObject.convert_user_data(answer);
 				Callback( this.SendInformation , this.SendData )
@@ -55,7 +58,6 @@ export default class FetchAllUsers {
 	
 	filter_by_email( all_data , email ){
 		console.log("===============> FetchAllUsers.filter_by_email");	
-		console.log("=====> filter_by_email.all_data " , all_data);
 		var answer = {have:false};
 		for( var count = 0 ; count < all_data.users.count ; count++ ){
 			if( email === all_data.users.user[count].email ){
@@ -64,6 +66,18 @@ export default class FetchAllUsers {
 			}
 		}
 		return answer;
+	}
+
+	filter_by_id( all_data , id ){
+		console.log("===============> FetchAllUsers.fileter_by_id");
+		var answer = {have:false};
+		for( var count = 0 ; count < all_data.users.count ; count++ ){
+			if( id === all_data.users.user[count].id ){
+				answer = all_data.users.user[count];
+				break;
+			}
+		}
+		return answer;	
 	}
 
 }
