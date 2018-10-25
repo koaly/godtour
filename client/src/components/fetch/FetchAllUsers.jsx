@@ -1,8 +1,8 @@
-import Convert from "./GeneralFunction.jsx"
+import UserConvert from "./UserFunction.jsx"
 
 var {_start_url , _domain , _port} = require('./default_data.jsx')
 
-var HandleObject = new Convert();
+var HandleObject = new UserConvert();
 
 export default class FetchAllUsers {
 

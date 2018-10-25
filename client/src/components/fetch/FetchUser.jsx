@@ -1,5 +1,9 @@
+import UserConvert from "./UserFunction.jsx"
+
 var {_start_url , _domain , _port} = require('./default_data.jsx')
 var {_path } = require('./default_data.jsx')
+
+var HandleObject = new UserConvert()
 
 export default class FetchUser{
 
@@ -41,17 +45,21 @@ export default class FetchUser{
 		console.log( this.Request );
 		console.log("=====> url of request  ");
 		console.log( this.Request.url );
-
 		fetch( this.Request )
 		.then( response =>{
 			console.log( "<----- FetchUser : response ----->");
 			console.log( response );
+			this.SendInformation.status = response.status;
+			this.SendInformation.url = response.url;
 			return response.json()
 		})
 		.then( json =>{
 			console.log( "<----- FetchUser : json ----->");
 			console.log( json );
-
+			this.SendData = HandleObject.convert_user_login( json.user );
+			console.log( "<----- FetchUser : SendData ----->");
+			console.log( this.SendData );
+			callback( this.SendInformation , this.SendData );
 		})
 	}	
 }

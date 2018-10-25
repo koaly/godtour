@@ -33,6 +33,11 @@ class PostClass extends React.Component{
 		console.log( ReceiveInformation );
 		console.log("<----- FetchUser : ReceiveData ----->");
 		console.log( ReceiveData );
+		this.setState( state => ({
+			IsLoading : false,
+			Data : ReceiveData,
+			Information : ReceiveInformation
+		}));
 	}
 
 	render(){
@@ -45,9 +50,44 @@ class PostClass extends React.Component{
 					<ul>
 						<li>email is {this.email}</li>
 						<li>password is {this.password}</li>
+						<li>Now Loading....</li>
 					</ul>
 				</div>
 			);
+		}
+		else{ //  Now finish loading
+			if( ! this.state.Data.have ){
+				return(
+					<div>
+						<h1>Welcome to page for test fetch_post</h1>
+						<h2>You use login</h2>
+						<ul>
+							<li>email is {this.email}</li>
+							<li>password is {this.password}</li>
+							<li>Result is False</li>
+							<li>Please check user_email or password</li>
+						</ul>
+					</div>
+				);
+			}
+			else{
+				return(
+					<div>
+						<h1>Welcome to page for test fetc_post</h1>
+						<h2>You use login</h2>
+						<ul>
+							<li>email is {this.email}</li>
+							<li>password is {this.password}</li>
+							<li>Ressult is True</li>
+							<ul>
+								<li>ID is {this.state.Data.id}</li>
+								<li>Email is {this.state.Data.email}</li>
+								<li>token is {this.state.Data.token}</li>
+							</ul>
+						</ul>
+					</div>
+				);
+			}
 		}
 	}
 	
