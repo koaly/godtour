@@ -8,7 +8,7 @@ export default class FetchAllUsers{
 		this.SumLink = _start_url + _domain + ":" + _port + "/" + path;
 		this.SendData = [];
 		this.SendInformation = [];
-		this.ReturnCallback = callback;
+//		this.ReturnCallback = callback; // checn to send callback when you want to fetch
 		console.log("<----- FetchAllUsers : this.SumLink ----->");
 		console.log( this.SumLink );
 		console.log("<----- FetchAllUsers : this.SendData ----->");
@@ -19,7 +19,7 @@ export default class FetchAllUsers{
 		console.log( this.ReturnCallback );
 	}
 
-	get_all_users(){
+	get_all_users( Callback ){
 		console.log("<---------- FetchAllUsers : get_all_users ---------->");
 		fetch( this.SumLink )
 			.then( response =>{
@@ -35,13 +35,14 @@ export default class FetchAllUsers{
 				console.log("<----- FetchAllUsers : json ----->");
 				console.log( json )
 				this.SendData = json;
-				this.ReturnCallback( this.SendInformation , this.SendData )
+//				this.ReturnCallback( this.SendInformation , this.SendData )
+				Callback( this.SendInformation , this.SendData )
 			})			
 	}
 
 	// specific is object to assign what group do you want
 	// specific have type{ email , telephone_number} data{ strign to equal } 
-	get_specific_user( specific ){
+	get_specific_user( Specific , Callback){
 		console.log("<---------- FetchAllUsers : get_specific_user ---------->");
 		fetch( this.SumLink )
 			.then( response =>{
@@ -56,11 +57,12 @@ export default class FetchAllUsers{
 			.then( json => {
 				console.log("<----- FetchAllUsers : json ----->");
 				console.log( json );
-				if( specific.type == "email"){
-					var answer = this.filter_by_email( json , specific.data )
+				if( Specific.type == "email"){
+					var answer = this.filter_by_email( json , Specific.data )
 				}
 				this.SendData = answer;
-				this.ReturnCallback( this.SendInformation , this.SendData )
+//				this.ReturnCallback( this.SendInformation , this.SendData )
+				Callback( this.SendInformation , this.SendData )
 			})
 	}
 	

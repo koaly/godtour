@@ -1,7 +1,7 @@
 var {_start_url , _domain , _port} = require('./default_data.jsx')
 var {_path } = require('./default_data.jsx')
 
-export default FetchUser{
+export default class FetchUser{
 
 	constructor(){
 		console.log( "<---------- FetchUser : console ---------->")
@@ -23,7 +23,7 @@ export default FetchUser{
 		console.log( "<---------- FetchUser : login ---------->" );
 		console.log( "email argument is " + email );
 		console.log( "password argument is " + password );
-		var last_link += _path._login;
+		var last_link = this.SumLink + _path._login;
 		console.log( "last_link is" + last_link);
 		this.PostData.email = email;
 		this.PostData.password = password;
