@@ -13,6 +13,15 @@ const userSchema = mongoose.Schema({
         type: String,
         default: null
     },
+    username: {
+        type: String,
+        require: true,
+        unique: true,
+    },
+    displayName: {
+        type: String,
+        require: true,
+    },
     isGoogle: {
         type: Boolean,
         default: false
@@ -28,6 +37,14 @@ const userSchema = mongoose.Schema({
     status: {
         type: Number,
         default: 0
+    },
+    imgsrc: {
+        type: String,
+        default: 'http://getdrawings.com/img/facebook-profile-picture-silhouette-17.jpg?sz=50'
+    },
+    gender: {
+        type: String,
+        default: null,
     },
     upgradeRequest: {
         type: Boolean,
@@ -55,6 +72,7 @@ userSchema.methods.generateJWT = function () {
     //exprite in 1 day
     expirationDate.setDate(today.getDate() + 1);
     return jwt.sign({
+        info: this.toProfileJSON(),
         email: this.email,
         id: this._id,
         status: this.status,
@@ -63,22 +81,28 @@ userSchema.methods.generateJWT = function () {
     }, process.env.JWT_SECRET);
 }
 
+userSchema.methods.toProfileJSON = function () {
+    return {
+        _id: this.id,
+        username: this.username,
+        displayName: this.displayName,
+        status: this.status,
+        imgsrc: this.imgsrc,
+        gender: this.gender,
+        email: this.email,
+        isGoogle: this.isGoogle,
+        googleID: this.googleID,
+        upgradeRequest: this.upgradeRequest,
+        upgradeReason: this.upgradeReason,
+        registerDate: this.registerDate,
+    }
+}
 userSchema.methods.toAuthJSON = function () {
     return {
-        _id: this._id,
-        email: this.email,
-        //every time request create a new one
+        info: this.toProfileJSON(),
         token: this.generateJWT()
     }
 }
 
-userSchema.methods.toProfileJSON = function () {
-    return {
-        _id: this.id,
-        email: this.email,
-        isGoogle: this.isGoogle,
-        googleID: this.googleID,
-        registerDate: this.registerDate,
-    }
-}
+
 module.exports = mongoose.model('User', userSchema);

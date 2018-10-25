@@ -8,7 +8,7 @@ const userResponse = (users) => {
             const response = {
                 count: users.length,
                 user: users.map(user => {
-                    return user.toProfileJSON();
+                    return user.toAuthJSON();
                 })
             }
             resolve(response);
@@ -31,16 +31,16 @@ exports.getAll = async (req, res, next) => {
     }
 }
 
-exports.getOneUser = async function(req,res,next){
-    try{
+exports.getOneUser = async function (req, res, next) {
+    try {
         let user = await User.findById(req.params.id)
-        .select()
-        .exec()
+            .select()
+            .exec()
         console.log(user);
         res.status(200).json({
             user
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -72,27 +72,17 @@ exports.userLogin = (req, res, next) => {
             })
         }
         if (passportUser) {
-            console.log(passportUser)
-            const user = passportUser;
-            user.token = passportUser.generateJWT();
-
             return res.status(200).json({
-                user: user.toAuthJSON()
+                user: passportUser.toAuthJSON()
             })
         }
     })(req, res, next)
 }
 
 exports.curretUser = async (req, res, next) => {
-    const { payload: { id } } = req;
-    const user = await User.findById(id)
-    if (!user) {
-        return res.status(400).json({
-            message: "No CurrentUser",
-        })
-    }
+    const { payload: { info } } = req;
     return res.status(200).json({
-        user: user.toAuthJSON()
+        info: info
     });
 }
 
