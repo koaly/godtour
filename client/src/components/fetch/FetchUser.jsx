@@ -31,11 +31,11 @@ export default class FetchUser{
 		console.log( this.PostData )
 		
 		this.Request = new Request( last_link , 
-							{ method: 'POST' 
-							, body : JSON.stringify( 
-												 email : 'suck@gmail.com'
-												,password : '123'
-												) 
+							{ method: 'POST'
+							, headers : {
+									"Content-Type" : "application/json"
+								} 
+							, body : JSON.stringify( this.PostData ) 
 							}
 						);
 
