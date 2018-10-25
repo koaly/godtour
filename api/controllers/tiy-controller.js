@@ -5,7 +5,7 @@ const Tiy = require('../models/tiy-models');
 exports.checkOwnTiy = async (req, res, next) => {
     try{
         const { payload: { id } } = req;
-        const tiy = await Tiy.findById(req.params.id);
+        const tiy = await Tiy.findById(req.params.tiyID);
         console.log(id);
         console.log(tiy.userID);
         if(id != tiy.userID){
@@ -28,7 +28,7 @@ exports.checkOwnTiy = async (req, res, next) => {
 exports.checkOwnTiyPlus = async (req, res, next) => {
     try{
         const { payload: { id, status } } = req;
-        const tiy = await Tiy.findById(req.params.id);
+        const tiy = await Tiy.findById(req.params.tiyID);
         console.log(id);
         console.log(tiy.userID);
         if(id != tiy.userID && !status){
@@ -104,7 +104,7 @@ exports.getAccepted = async function(req,res,next){
 
 exports.getOneTiy = async function(req,res,next){
     try{
-        let tiy = await Tiy.findById(req.params.id)
+        let tiy = await Tiy.findById(req.params.tiyID)
         .select()
         .exec()
         console.log(tiy);
@@ -209,7 +209,7 @@ exports.editTiy = async function(req, res, next){
         
         console.log(req.params);
         console.log(tiy);
-        const id = {_id:req.params.id}
+        const id = {_id:req.params.tiyID}
         const result = await Tiy.findOneAndUpdate(id, tiy);
         console.log(result);
         res.status(200).json({
@@ -225,7 +225,7 @@ exports.editTiy = async function(req, res, next){
 
 exports.deleteTiy = async (req, res, next) => {
     try{
-        const id = {_id:req.params.id}
+        const id = {_id:req.params.tiyID}
         const result = await Tiy.findOneAndRemove(id);
         console.log(result);
         res.status(200).json({

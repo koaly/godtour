@@ -21,9 +21,9 @@ router.get('/create', auth.require, operatorCtrl.checkNonOperatorStatus, async (
     });
 });
 router.post('/create', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtrl.addTiy);
-router.get('/:id', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.getOneTiy);
-router.delete('/:id', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.deleteTiy);
-router.get('/:id/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
-router.put('/:id/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.editTiy);
+router.get('/:tiyID', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.getOneTiy);
+router.delete('/:tiyID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.deleteTiy);
+router.get('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
+router.put('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.editTiy);
 
 module.exports = router
