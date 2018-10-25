@@ -39,11 +39,21 @@ router.get('/secret', auth.require, async (req, res, next) => {
     })
 })
 
-router.post('/signup', auth.optional, userCtrl.userSignup);
+router.post('/signup', auth.optional, [
+    check('email')
+        .isEmail(),
+    check('password')
+        .exists(),
+    check('username')
+        .exists(),
+    check('displayName')
+        .isAlphanumeric(),
+    check('gender')
+        .isIn(['male', 'female', 'unknown'])
+], checkValidation, userCtrl.userSignup);
 
 router.post('/login', auth.optional, [
     check('email')
-        .exists()
         .isEmail(),
     check('password')
         .exists()
