@@ -1,7 +1,9 @@
 import React from "react"; // for import React.Component
 import ReactTable from "react-table"; // for using ReactTable
 
-import FetchUser extends React.Component{
+import FetchUser from "./FetchUser.jsx";
+
+class PostClass extends React.Component{
 
 	// study about lifecyces of React on 
 	//			http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
@@ -10,7 +12,7 @@ import FetchUser extends React.Component{
 		console.log("<---------- FetchUser : constructor ---------->")
 		super( props ); // requirement to use this
 		this.state = {
-			IsLoading : true; // status now are loading
+			IsLoading : true // status now are loading
 		}
 		this.email = "suck@gmail.com";
 		this.password = "123";
@@ -49,5 +51,6 @@ import FetchUser extends React.Component{
 		}
 	}
 	
-
 }
+
+export default PostClass;
