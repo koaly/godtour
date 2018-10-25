@@ -8,7 +8,7 @@ const bookingCtrl = require('../controllers/booking-controller')
 const operatorCtrl = require('../controllers/operator-controller')
 const auth = require('./auth');
 //import for validator for check
-const { check } = require('express-validator/check');
+const { body } = require('express-validator/check');
 const { checkValidation } = require('../middleware/validation')
 
 router.get('/', auth.optional, userCtrl.getAll);
@@ -40,22 +40,28 @@ router.get('/secret', auth.require, async (req, res, next) => {
 })
 
 router.post('/signup', auth.optional, [
-    check('email')
-        .isEmail(),
-    check('password')
+    body('email')
+        .isEmail()
+        .normalizeEmail(),
+    body('password')
         .exists(),
-    check('username')
-        .exists(),
-    check('displayName')
-        .isAlphanumeric(),
-    check('gender')
+    body('username')
+        .isLength({ min: 5 })
+        .trim()
+        .escape(),
+    body('displayName')
+        .isLength({ min: 5 })
+        .trim()
+        .escape(),
+    body('gender')
         .isIn(['male', 'female', 'unknown'])
 ], checkValidation, userCtrl.userSignup);
 
 router.post('/login', auth.optional, [
-    check('email')
-        .isEmail(),
-    check('password')
+    body('email')
+        .isEmail()
+        .normalizeEmail(),
+    body('password')
         .exists()
 ], checkValidation, userCtrl.userLogin)
 
