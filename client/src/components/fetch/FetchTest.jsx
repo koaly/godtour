@@ -63,9 +63,9 @@ class FetchClass extends React.Component{
 					<h3>Data</h3>
 					<ul>
 						<p>Example Users who have email suck3@gmail.com</p>
-						<p>user id is { data._id}</p>
-						<p>user email is { data.email}</p>
-						<p>user Google? is { data.isGoogle}</p>
+						<p>user id is { data.id }</p>
+						<p>user email is { data.email }</p>
+						<p>user Google? is { data.use_google_id }</p>
 					</ul>		
 				</div>
 				

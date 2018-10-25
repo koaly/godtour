@@ -1,6 +1,10 @@
+import Convert from "./GeneralFunction.jsx"
+
 var {_start_url , _domain , _port} = require('./default_data.jsx')
 
-export default class FetchAllUsers{
+var HandleObject = new Convert();
+
+export default class FetchAllUsers {
 
 	constructor( callback ){
 		console.log("<---------- FetchAllUsers : constructor ---------->")
@@ -57,8 +61,9 @@ export default class FetchAllUsers{
 				if( Specific.type === "email"){
 					var answer = this.filter_by_email( json , Specific.data )
 				}
-				this.SendData = answer;
-//				this.ReturnCallback( this.SendInformation , this.SendData )
+				console.log("<----- FetchAllUsers : answer ----->");
+				console.log( answer );
+				this.SendData = HandleObject.convert_user_data(answer);
 				Callback( this.SendInformation , this.SendData )
 			})
 	}
@@ -76,17 +81,6 @@ export default class FetchAllUsers{
 			}
 		}
 		return answer;
-	}
-
-	create_object_users( data ){
-		if( data.have ){
-			return { have : true , user_id : data._id , user_email : data.email 
-				,	user_use_google : data.isGoogle , user_google_id : data.googleID
-				,	user_register_date : data.registerDate}
-		}
-		else{
-			return { have : false}
-		}
 	}
 
 }
