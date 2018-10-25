@@ -39,31 +39,42 @@ router.get('/secret', auth.require, async (req, res, next) => {
     })
 })
 
-router.post('/signup', auth.optional, [
-    body('email')
-        .isEmail()
-        .normalizeEmail(),
-    body('password')
-        .exists(),
-    body('username')
-        .isLength({ min: 5 })
-        .trim()
-        .escape(),
-    body('displayName')
-        .isLength({ min: 5 })
-        .trim()
-        .escape(),
-    body('gender')
-        .isIn(['male', 'female', 'unknown'])
-], checkValidation, userCtrl.userSignup);
+router.post('/signup', auth.optional,
+    [
+        body('email')
+            .isEmail()
+            .normalizeEmail()
+            .withMessage('email is invaild'),
+        body('password')
+            .exists()
+            .withMessage('require password'),
+        body('username')
+            .isLength({ min: 3 })
+            .trim()
+            .escape()
+            .withMessage('require string more than 3 charater'),
+        body('displayName')
+            .isLength({ min: 3 })
+            .trim()
+            .escape()
+            .withMessage('require string more than 3 charater'),
+        body('gender')
+            .isIn(['male', 'female', 'unknown'])
+            .withMessage('request only field male female or unknow')
+    ]
+    , checkValidation, userCtrl.userSignup);
 
-router.post('/login', auth.optional, [
-    body('email')
-        .isEmail()
-        .normalizeEmail(),
-    body('password')
-        .exists()
-], checkValidation, userCtrl.userLogin)
+router.post('/login', auth.optional,
+    [
+        body('email')
+            .isEmail()
+            .normalizeEmail()
+            .withMessage('email is invaild'),
+        body('password')
+            .exists()
+            .withMessage('require password'),
+    ],
+    checkValidation, userCtrl.userLogin)
 
 /*
 router.get('/logout', (req, res) => {
