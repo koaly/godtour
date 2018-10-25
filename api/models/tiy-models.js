@@ -67,7 +67,10 @@ const tiySchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    tourID :{
+    offerID :{
+        type: String
+    },
+    operatorID :{
         type: String
     }
 });
