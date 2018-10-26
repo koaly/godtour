@@ -1,30 +1,24 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import { toast } from "react-toastify";
+import * as userService from "../services/userService";
 
 class RegisterForm extends Form {
   state = {
     data: {
-      firstname: "",
-      lastname: "",
-      username: "",
       email: "",
-      password: ""
+      password: "",
+      username: "",
+      displayName: "",
+      imgsrc: "",
+      gender: ""
     },
-    gender: [{ _id: "1", name: "Male" }, { _id: "2", name: "Female" }],
+    genderOption: [{ _id: "1", name: "Male" }, { _id: "2", name: "Female" }],
     errors: {}
   };
 
   schema = {
-    firstname: Joi.string()
-      .required()
-      .label("Firstname"),
-    lastname: Joi.string()
-      .required()
-      .label("Lastname"),
-    username: Joi.string()
-      .required()
-      .label("Username"),
     email: Joi.string()
       .required()
       .email()
@@ -33,14 +27,33 @@ class RegisterForm extends Form {
       .required()
       .min(5)
       .label("Password"),
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    displayName: Joi.string()
+      .required()
+      .label("DisplayName"),
+    imgsrc: Joi.string()
+      .required()
+      .label("Imgsrc"),
     gender: Joi.string()
       .required()
       .label("Gender")
   };
 
-  doSubmit = () => {
-    console.log("Submitted");
-    this.props.history.push("/");
+  doSubmit = async () => {
+    try {
+      await userService.register(this.state.data);
+      this.props.history.push("/");
+    } catch (ex) {
+      if (
+        ex.response &&
+        ex.response.status >= 400 &&
+        ex.response.status < 500
+      ) {
+        toast.error("Maybe email is already exist");
+      }
+    }
   };
 
   render() {
@@ -48,20 +61,27 @@ class RegisterForm extends Form {
       <div className="container">
         <div className="register form-container mgtb ">
           <div className="row">
-            <div className="register-leftside d-md-flex flex-column d-none ">
-              
-            
-            </div>
+            <div className="register-leftside d-md-flex flex-column d-none " />
             <div className="register-rightside">
               <h2>Register</h2>
               <form onSubmit={this.handleSubmit}>
-                {this.renderInput("firstname", "Firstname","text","firstname")}
-                {this.renderInput("lastname", "Lastname","text","lastname")}
-                {this.renderInput("username", "Username","text","username")}
-                {this.renderInput("email", "Email","email","to-urworld@gmail.com")}
-                {this.renderInput("password", "Password", "password", "password")}
-                {this.renderSelect("gender", "Gender", this.state.gender)}
-                <div className="mgt"></div>
+                {this.renderInput("email", "Email", "email", "email")}
+                {this.renderInput(
+                  "password",
+                  "Password",
+                  "password",
+                  "password"
+                )}
+                {this.renderInput("username", "Username", "text", "username")}
+                {this.renderInput(
+                  "displayName",
+                  "DisplayName",
+                  "text",
+                  "displayname"
+                )}
+                {this.renderInput("imgsrc", "Imgsrc", "text", "imgsrc")}
+                {this.renderSelect("gender", "Gender", this.state.genderOption)}
+                <div className="mgt" />
                 {this.renderButton("Register")}
               </form>
             </div>
