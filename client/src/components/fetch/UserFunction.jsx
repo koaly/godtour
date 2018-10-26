@@ -17,7 +17,7 @@ export default class UserConvert{
 					,	register_date	:	data.user.info.registerDate
 					,	upgrade_reason	:	data.user.info.upgradeReason
 					,	upgrade_request	:	data.user.info.upgradeRequest
-					,	token			:	data.token
+					,	token			:	data.user.token
 				};
 			}
 		}

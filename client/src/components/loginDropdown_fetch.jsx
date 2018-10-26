@@ -13,6 +13,7 @@ class LoginDropdown extends (Component, Form) {
 		this.state = {	data	: { email: "", password: "" }
 					,	errors	: { }
 					,	Loading : "NOT"
+					,	Data	: "Failure"
 		};
 
 		this.User = new FetchUser(); // inti fetch class login
@@ -40,7 +41,16 @@ class LoginDropdown extends (Component, Form) {
 	// this function for call by finish fetch data manage by branch fetch
 	FetchCallback( Receiveinformation , ReceiveData ){
 		console.log("Callback Function and data is " , ReceiveData );
-//		if( ReceiveData.have )
+		if( ReceiveData.have ){
+			console.log( "Success Login");
+			localStorage.setItem("token", ReceiveData.token);
+//			window.location = "/";
+		}
+		else{
+			console.log( "Failure Login");
+			this.setstate( {	Loading : "Finish" 
+							,	Data	: "Wrong" });
+		}
 	}
 
 	render() {
@@ -74,6 +84,9 @@ class LoginDropdown extends (Component, Form) {
 							</form>
 							{ this.state.Loading === "Loading" && 
 								<p>Now Loading</p>
+							}
+							{ this.state.Loading === "Finish" &&
+								<p>Wrong username or password</p>
 							}
 						</div>
 					</div>
