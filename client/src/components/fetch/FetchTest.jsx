@@ -1,7 +1,7 @@
 import React from "react"; // for import React.Component
 import ReactTable from "react-table"; // for using ReactTable
 
-import FetchAllUsers from "./FetchAllUsers.jsx";
+import FetchAllUsers from "./FetchAllUsers";
 
 class FetchClass extends React.Component{
 
