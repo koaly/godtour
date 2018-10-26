@@ -24,21 +24,25 @@ const NavBar = ({ user }) => {
               Tour List
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/addTour">
-              Add Tour
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/editTour">
-              Edit Tour
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/cancelBook">
-              Cancel Booking
-            </NavLink>
-          </li>
+          {user && (
+            <React.Fragment>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/addTour">
+                  Add Tour
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/editTour">
+                  Edit Tour
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/cancelBook">
+                  Cancel Booking
+                </NavLink>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
         <ul className="nav navbar-nav navbar-right">
           {!user && <LoginDropdown />}
