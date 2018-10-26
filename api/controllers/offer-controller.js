@@ -26,20 +26,9 @@ exports.checkOwnOffer = async (req, res, next) => {
     }
 }
 
-exports.acceptOffer = async (req, res, next) => {
-    try{
-
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    }
-}
-
 exports.getByTiy = async (req, res, next) => {
     try{
-        let offers = await Offer.find({tiyID: req.params.tiyID})
+        const offers = await Offer.find({tiyID: req.params.tiyID})
         .select()
         .exec()
         console.log(offers);

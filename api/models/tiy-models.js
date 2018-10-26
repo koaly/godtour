@@ -69,9 +69,6 @@ const tiySchema = mongoose.Schema({
     },
     offerID :{
         type: String
-    },
-    operatorID :{
-        type: String
     }
 });
 
