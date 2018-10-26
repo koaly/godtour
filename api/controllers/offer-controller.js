@@ -3,6 +3,28 @@ const mongoose = require('mongoose');
 const Tiy = require('../models/tiy-models');
 const Offer = require('../models/offer-models');
 
+exports.checkOwnOffer = async (req, res, next) => {
+    try{
+        const { payload: { id } } = req;
+        const offer = await Offer.findById(req.params.offerID);
+        console.log(id);
+        console.log(offer.operatorID);
+        if(id != offer.operatorID){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else{
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
 exports.getByTiy = async (req, res, next) => {
     try{
         let offers = await Offer.find({tiyID: req.params.tiyID})
