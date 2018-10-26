@@ -77,6 +77,11 @@ body {
 }
 
 .mdi-icon {
+  text-decoration: none;
+}
+
+.oyeah {
+  text-decoration: none;
 }
 
 code {
