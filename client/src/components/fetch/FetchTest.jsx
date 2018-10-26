@@ -9,6 +9,7 @@ class FetchClass extends React.Component{
 	//			http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 	// inti class process Mounting
 	constructor( props ){ 
+		console.log("===============> FetchClass.constructor");	
 		super( props ); // requirement to use this
 		this.state = {
 			IsLoading : true 
@@ -20,19 +21,18 @@ class FetchClass extends React.Component{
 
 
 	componentDidMount(){ // this function call when after render one time
-		console.log("<---------- FetchClass : componentDidMount ---------->")
+		console.log("===============> FetchClass.componentDidMount");	
+		this.target_type = "user_name";
+		this.target_data = "jui";
 		this.fetch_data = new FetchAllUsers();
-		this.fetch_data.get_specific_user( {type:"email" , data:"suck3@gmail.com"} 
+		this.fetch_data.get_specific_user( {type: this.target_type , data: this.target_data} 
 											, this.FetchCallback );	
 		
 	}
 
 	FetchCallback( ReceiveInformation , ReceiveData ){
-		console.log("<---------- FetchClass : FetchCallback ---------->")
-		console.log("<----- FetchClass : ReceiveInformation ----->")
-		console.log( ReceiveInformation )
-		console.log("<----- FetchClass : ReceiveData ----->")		
-		console.log( ReceiveData )
+		console.log("===============> FetchClass.FetchCallback");	
+		console.log("=====> FetchCallback.ReceiveData " , ReceiveData );
 		this.setState( state => ({
 			IsLoading : false,
 			Data : ReceiveData,
@@ -41,7 +41,7 @@ class FetchClass extends React.Component{
 	}
 
 	render(){
-		console.log("<---------- FetchClass : render ---------->")
+		console.log("===============> FetchClass.render");	
 		if( this.state.IsLoading ){
 			return(
 				<div>
@@ -52,6 +52,8 @@ class FetchClass extends React.Component{
 		}
 		else{
 			const data = this.state.Data;
+//	please learn about condition in html when use react
+//		on website https://reactjs.org/docs/conditional-rendering.html
 			return(
 				<div>
 					<h1>Welcome to page for testing fetch</h1>
@@ -62,10 +64,15 @@ class FetchClass extends React.Component{
 					</ul>
 					<h3>Data</h3>
 					<ul>
-						<p>Example Users who have email suck3@gmail.com</p>
-						<p>user id is { data.id }</p>
-						<p>user email is { data.email }</p>
-						<p>user Google? is { data.use_google_id }</p>
+						<p>Example Users who have {this.target_type} is { this.target_data }</p>
+						{ data.have &&
+							<p>	user id is { data.id }<br/>
+								user email is { data.email }<br/> 
+								user Google? is { data.use_google_id } </p>
+						}
+						{ ! data.have &&
+							<p>Do not have user have email {data.email}</p>
+						}
 					</ul>		
 				</div>
 				

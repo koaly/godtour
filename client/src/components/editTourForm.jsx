@@ -93,22 +93,87 @@ class AddTourForm extends Form {
       <div className="container addtour form-container mgtb">
         <h2>Edit Tour</h2>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name","text","firstname")}
-          {this.renderInput("price", "Price","number","price")}
-          {this.renderInput("destination", "Destination","text","destination")}
-          {this.renderInput("dayDuration", "DayDuration","text","day-duration")}
-          {this.renderInput("nightDuration", "NightDuration","text","night-duration")}
-          {this.renderInput("startBookDate", "StartBookDate", "date", "start-book-date")}
-          {this.renderInput("startBookTime", "StartBookTime", "time", "start-book-time")}
-          {this.renderInput("departDate", "DepartDate", "date", "depart-date")}
-          {this.renderInput("returnDate", "ReturnDate", "date", "depart-time")}
-          {this.renderInput("airline", "Airline","text","airline")}
-          {this.renderInput("maxSeat", "Max Seat","number","max-seat")}
-          {this.renderInput("currentSeat", "Current Seat","number","current-seat")}
-          {this.renderInput("food", "Food","text","food")}
-          {this.renderInput("detail", "Detail","text","detail")}
-          {this.renderInput("highlight", "Highlight","text","highlight")}
-          <div className="mgt"></div>
+          {this.renderInput("name", "Name", "text", "firstname")}
+          {this.renderInput("price", "Price", "number", "price")}
+          {this.renderInput(
+            "destination",
+            "Destination",
+            "text",
+            "destination"
+          )}
+          {this.renderInput(
+            "dayDuration",
+            "Day Duration",
+            "text",
+            "day duration"
+          )}
+          {this.renderInput(
+            "nightDuration",
+            "Night Duration",
+            "text",
+            "night duration"
+          )}
+          {this.renderInput(
+            "startBookDate",
+            "Booking Date",
+            "date",
+            "booking date"
+          )}
+          {this.renderInput(
+            "startBookTime",
+            "Booking Time",
+            "time",
+            "booking time"
+          )}
+          {this.renderInput(
+            "departDate", 
+            "Departure Date", 
+            "date", 
+            "departure date"
+          )}
+          {this.renderInput(
+            "returnDate", 
+            "Return Date", 
+            "date", 
+            "departure time"
+          )}
+          {this.renderInput(
+            "airline", 
+            "Airline", 
+            "text", 
+            "airline"
+          )}
+          {this.renderInput(
+            "maxSeat", 
+            "Max Seat", 
+            "number", 
+            "max seat"
+          )}
+          {this.renderInput(
+            "currentSeat",
+            "Current Seat",
+            "number",
+            "current seat"
+          )}
+         {this.renderInput(
+            "food", 
+            "Food", 
+            "text", 
+            "food"
+          )}
+          {this.renderTextarea(
+            "detail", 
+            "Detail", 
+            "text", 
+            "detail"
+          )}
+          {this.renderTextarea(
+            "highlight", 
+            "Highlight", 
+            "text", 
+            "highlight"
+          )}
+          <div className="mgt" />
           {this.renderButton("Confirm Edit")}
         </form>
       </div>
