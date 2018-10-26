@@ -129,11 +129,11 @@ exports.userSignup = async (req, res, next) => {
             gender,
         } = req.body;
 
-        const user = await User.find({ email: email });
+        const user = await User.find({ $or: [{ email: email }, { username: username }] });
 
         if (user.length >= 1) {
             return res.status(409).json({
-                message: "Email already existed"
+                message: "Email or Username already existed"
             })
         } else {
             const newUser = await new User();
