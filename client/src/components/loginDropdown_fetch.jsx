@@ -35,7 +35,7 @@ class LoginDropdown extends (Component, Form) {
 		const { data } = this.state;	
 		this.User.login( data.email , data.password , this.FetchCallback );
 		console.log("Now I will set state for render");
-		this.setstate( state => ({ Loading : "Loading" }));
+		this.setstate( state => ({ Loading : "Loading" }))
 	};
 
 	// this function for call by finish fetch data manage by branch fetch
@@ -44,12 +44,13 @@ class LoginDropdown extends (Component, Form) {
 		if( ReceiveData.have ){
 			console.log( "Success Login");
 			localStorage.setItem("token", ReceiveData.token);
-//			window.location = "/";
+			window.location = "/";
 		}
 		else{
 			console.log( "Failure Login");
 			this.setstate( {	Loading : "Finish" 
 							,	Data	: "Wrong" });
+			console.log( "Failure Login");
 		}
 	}
 
@@ -75,7 +76,7 @@ class LoginDropdown extends (Component, Form) {
 								</a>
 							</div>
 							or
-							<form onSubmit={this.handleSubmit.bind( this )}>
+							<form onSubmit={this.handleSubmit}>
 									{this.renderInput("email", "Email", "email", "email")}
 									{this.renderInput( "password", "Password", "password",
 														"password"
