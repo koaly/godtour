@@ -14,7 +14,10 @@ class RegisterForm extends Form {
       imgsrc: "",
       gender: ""
     },
-    genderOption: [{ _id: "1", name: "male", value: "male" }, { _id: "2", name: "female", value: "female" },],
+    genderOption: [
+      { _id: "male", name: "male" },
+      { _id: "female", name: "female" }
+    ],
     errors: {}
   };
 
@@ -47,17 +50,21 @@ class RegisterForm extends Form {
       console.log(response);
       window.location = "/";
     } catch (ex) {
-      console.log(ex.response.data)
+      console.log(ex.response.data);
       if (
         ex.response &&
         ex.response.status >= 400 &&
         ex.response.status < 500
       ) {
-        const errorRes = ex.response.data.errors
-        console.log(JSON.stringify(errorRes))
-        errorRes.forEach(error => {
-          toast.error(` ${error.param}: ${error.msg}`);
-        })
+        const errorRes = ex.response.data.errors;
+        console.log(JSON.stringify(errorRes));
+        if (errorRes) {
+          errorRes.forEach(error => {
+            toast.error(` ${error.param}: ${error.msg}`);
+          });
+        } else {
+          toast.error(`${ex.response.data.message}`);
+        }
       }
     }
   };
