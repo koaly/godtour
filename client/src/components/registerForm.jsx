@@ -44,7 +44,7 @@ class RegisterForm extends Form {
   doSubmit = async () => {
     try {
       await userService.register(this.state.data);
-      this.props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       if (
         ex.response &&
