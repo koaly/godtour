@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import { login } from "../services/authService";
+import { toast } from "react-toastify";
 
 class LoginDropdown extends (Component, Form) {
   state = {
@@ -19,8 +21,21 @@ class LoginDropdown extends (Component, Form) {
       .label("Password")
   };
 
-  doSubmit = () => {
-    console.log("Submitted");
+  doSubmit = async () => {
+    try {
+      const { data } = this.state;
+      const { data: jwt } = await login(data.email, data.password);
+      localStorage.setItem("token", jwt.user.token);
+      window.location = "/";
+    } catch (ex) {
+      if (
+        ex.response &&
+        ex.response.status >= 400 &&
+        ex.response.status < 500
+      ) {
+        toast.error("Invalid email or password");
+      }
+    }
   };
   render() {
     return (
@@ -46,12 +61,12 @@ class LoginDropdown extends (Component, Form) {
                 </div>
                 or
                 <form onSubmit={this.handleSubmit}>
-                  {this.renderInput("email", "Email", "", "Email Address")}
+                  {this.renderInput("email", "Email", "email", "email")}
                   {this.renderInput(
                     "password",
                     "Password",
                     "password",
-                    "Password"
+                    "password"
                   )}
                   {this.renderButton("Login")}
                 </form>

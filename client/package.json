@@ -8,6 +8,7 @@
     "bower": "^1.8.4",
     "font-awesome": "^4.7.0",
     "joi-browser": "^13.4.0",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "mdi-react": "^4.4.0",
     "prop-types": "^15.6.2",
@@ -16,7 +17,8 @@
     "react-responsive-carousel": "^3.1.43",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
-    "react-table": "^6.8.6"
+    "react-table": "^6.8.6",
+    "react-toastify": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

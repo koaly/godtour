@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import LoginDropdown from "./loginDropdown";
+import FetchAllUsers from "./fetch/FetchAllUsers";
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <Link className="navbar-brand" to="/">
@@ -23,29 +24,42 @@ const NavBar = () => {
               Tour List
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/addTour">
-              Add Tour
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/editTour">
-              Edit Tour
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/cancelBook">
-              Cancel Booking
-            </NavLink>
-          </li>
+          {user && (
+            <React.Fragment>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/addTour">
+                  Add Tour
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/editTour">
+                  Edit Tour
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/cancelBook">
+                  Cancel Booking
+                </NavLink>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
         <ul className="nav navbar-nav navbar-right">
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/profile">
-              Profile
-            </NavLink>
-          </li>
-          <LoginDropdown />
+          {!user && <LoginDropdown />}
+          {user && (
+            <React.Fragment>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/profile">
+                  {user.email}
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/logout">
+                  Logout
+                </NavLink>
+              </li>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </nav>
