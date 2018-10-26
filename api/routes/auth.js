@@ -1,5 +1,5 @@
 const jwt = require('express-jwt');
-
+const { check, oneOf, validationResult } = require('express-validator/check')
 const getTokenFromHeaders = (req) => {
     const { headers: { authorization } } = req;
     if (authorization && authorization.split(' ')[0] == 'JWT') {
@@ -21,7 +21,7 @@ const auth = {
         userProperty: 'payload',
         getToken: getTokenFromHeaders,
         credentialsRequired: false,
-    })
+    }),
 }
 
 module.exports = auth;

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../models/user-models');
+const { validationResult } = require('express-validator/check')
 
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
@@ -15,6 +16,7 @@ const userResponse = (users) => {
         }, 1000)
     })
 }
+
 exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find()
@@ -30,23 +32,30 @@ exports.getAll = async (req, res, next) => {
         })
     }
 }
-exports.userLogin = (req, res, next) => {
-    const { body: user } = req;
 
-    if (!user.email) {
-        return res.status(422).json({
-            error: {
-                message: "email is required"
-            }
+exports.getOneUser = async function (req, res, next) {
+    const { username } = req.params
+    try {
+        const user = await User.findOne({ username: username })
+            .select()
+            .exec()
+        if (!user) {
+            return res.status(404).json({
+                error: "user doesn't exits"
+            })
+        }
+        console.log(user);
+        return res.status(200).json({
+            user: user.toProfileJSON()
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            error: err
         });
     }
-    if (!user.password) {
-        return res.status(422).json({
-            error: {
-                message: "password is required"
-            }
-        })
-    }
+}
+exports.userLogin = (req, res, next) => {
     return passport.authenticate('local-login', { session: false }, (err, passportUser, info) => {
         console.log("local")
         if (!passportUser) {
@@ -55,35 +64,73 @@ exports.userLogin = (req, res, next) => {
             })
         }
         if (passportUser) {
-            console.log(passportUser)
-            const user = passportUser;
-            user.token = passportUser.generateJWT();
-
             return res.status(200).json({
-                user: user.toAuthJSON()
+                user: passportUser.toAuthJSON()
             })
         }
     })(req, res, next)
 }
 
-exports.curretUser = async (req, res, next) => {
-    const { payload: { id } } = req;
-    const user = await User.findById(id)
-    if (!user) {
-        return res.status(400).json({
-            message: "No CurrentUser",
-        })
-    }
+exports.currentUser = async (req, res, next) => {
+    const { payload: { info } } = req;
     return res.status(200).json({
-        user: user.toAuthJSON()
+        info: info
     });
 }
 
+exports.editCurrentUser = async (req, res, next) => {
+    try {
+        const { payload: { info } } = req;
+        const id = info.id;
 
+        const {
+            displayName,
+            imgsrc,
+            gender,
+            status,
+            upgradeRequest,
+            upgradeReason,
+        } = req.body;
+
+        const editUser = {}
+
+        editUser.displayName = displayName
+        editUser.imgsrc = imgsrc
+        editUser.gender = gender
+        editUser.status = status
+        editUser.upgradeRequest = upgradeRequest
+        editUser.upgradeReason = upgradeReason
+
+        const user = await User.findOneAndUpdate(id, editUser)
+
+        console.log(`result: ${user}`);
+        res.status(200).json({
+            sucess: true,
+            message: "current user have been update //get new token",
+            token: user.generateJWT()
+        })
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({
+            sucess: false,
+            error: err
+        })
+    }
+}
 exports.userSignup = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const {
+            email,
+            password,
+            username,
+            displayName,
+            imgsrc,
+            gender,
+        } = req.body;
+
         const user = await User.find({ email: email });
+
         if (user.length >= 1) {
             return res.status(409).json({
                 message: "Email already existed"
@@ -93,6 +140,10 @@ exports.userSignup = async (req, res, next) => {
 
             newUser.email = email;
             newUser.password = await newUser.generateHash(password);
+            newUser.username = username;
+            newUser.gender = gender;
+            newUser.displayName = displayName;
+            newUser.imgsrc = imgsrc;
 
             const result = await newUser.save();
             res.status(201).json({
@@ -107,26 +158,4 @@ exports.userSignup = async (req, res, next) => {
             error: err
         })
     }
-}
-
-exports.checkOperatorStatus = async (req, res, next) => {
-    try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        console.log(user.status);
-        if(!user.status){
-            return res.status(403).json({
-                error: {
-                    message: "Permission denied"
-                }
-            });
-        } else{
-            return next();
-        }
-    } catch(err){
-        console.log(err)
-        return res.status(500).json({
-            error: err
-        });
-    } 
 }

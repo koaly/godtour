@@ -12,6 +12,7 @@ const session = require('express-session');
 const passport = require('passport')
 const passportSetup = require('./api/config/passport-setup');
 
+const expressValidator = require('express-validator');
 
 //connect to database
 mongoose.connect("mongodb://" + process.env.MONGO_MLAB_USER + ":"
@@ -32,6 +33,25 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json())
+
+
+app.use(expressValidator({
+    errorFormatter: function (param, msg, value) {
+        var namespace = param.split('.'),
+            root = namespace.shift(),
+            formParam = root;
+
+        while (namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param: formParam,
+            msg: msg,
+            value: value
+        };
+    }
+}));
 
 app.use(session({
     secret: 'jui', // session secret
@@ -57,13 +77,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 //import routes
 const tourRoutes = require('./api/routes/tour-route');
+const tiyRoutes = require('./api/routes/tiy-route');
 const userRoutes = require('./api/routes/user-route');
-
+const adminRoutes = require('./api/routes/admin-route');
 
 // express use routes to create path
 app.use("/tours", tourRoutes);
+app.use("/tiys", tiyRoutes);
 app.use("/users", userRoutes);
-
+app.use("/admin", adminRoutes);
 
 
 //if not find path abover handling with 404
