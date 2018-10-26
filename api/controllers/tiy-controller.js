@@ -56,7 +56,7 @@ exports.checkNonAccepted = async (req, res, next) => {
         if(tiy.isAccepted && info.id != tiy.userID){
             return res.status(403).json({
                 error: {
-                    message: "Permission denied"
+                    message: "This Tour-it-yourself was accepted."
                 }
             });
         } else{

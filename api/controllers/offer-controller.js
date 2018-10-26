@@ -26,6 +26,48 @@ exports.checkOwnOffer = async (req, res, next) => {
     }
 }
 
+exports.checkOwnOfferPlus = async (req, res, next) => {
+    try{
+        const { payload: { info } } = req;
+        const tiy = await Tiy.findById(req.params.tiyID);
+        const offer = await Offer.findById(req.params.offerID);
+        console.log(info.id);
+        console.log(tiy.userID);
+        console.log(offer.operatorID);
+        if(info.id != offer.operatorID && info.id != tiy.userID){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else{
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.getOneOffer = async function(req,res,next){
+    try{
+        const offer = await Offer.findById(req.params.offerID)
+        .select()
+        .exec()
+        console.log(offer);
+        res.status(200).json({
+            offer
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.getByTiy = async (req, res, next) => {
     try{
         const offers = await Offer.find({tiyID: req.params.tiyID})
@@ -101,6 +143,22 @@ exports.editOffer = async function(req, res, next){
         console.log(result);
         res.status(200).json({
             message: "Offer updated"
+        })
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    }
+}
+
+exports.deleteOffer = async (req, res, next) => {
+    try{
+        const id = {_id:req.params.offerID}
+        const result = await Offer.findOneAndRemove(id);
+        console.log(result);
+        res.status(200).json({
+            message: "Offer deleted"
         })
     } catch(err){
         console.log(err);
