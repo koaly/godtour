@@ -16,7 +16,9 @@ class RegisterForm extends Form {
     },
     genderOption: [
       { _id: "male", name: "male" },
-      { _id: "female", name: "female" }
+      { _id: "female", name: "female" },
+      { _id: "unknown", name: "unknown" },
+
     ],
     errors: {}
   };
