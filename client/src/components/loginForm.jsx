@@ -1,13 +1,26 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import FetchUser from "./fetch/FetchUser";
 
 class LoginForm extends Form {
-  state = {
-    data: { username: "", password: "" },
-    errors: {}
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      submit: { username: "", password: "" },
+      errors: {},
+      isLoading: true,
+      data: [],
+      info: [],
+    };
 
+    this.fetchLoginCallback = this.fetchLoginCallback.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidMount() {
+    this.UserFetch = new FetchUser();
+  }
   schema = {
     username: Joi.string()
       .required()
@@ -16,11 +29,30 @@ class LoginForm extends Form {
       .required()
       .label("Password")
   };
+  handleChange(event) {
 
-  doSubmit = () => {
-    console.log("Submitted");
+  }
+  handleSubmit(event) {
+    console.log(`login with ${this.state.submit.username}:${this.state.submit.password}`);
+    /*
+    this.UserFetch.login(
+      this.state.submit.username,
+      this.state.submit.password,
+      this.fetchLoginCallback
+    )
+    event.pr
+    */
     this.props.history.push("/");
   };
+
+  //callback function from fetch
+  fetchLoginCallback(info, data) {
+    this.setState(state => ({
+      isLoading: false,
+      data: data,
+      info: info
+    }));
+  }
 
   render() {
     return (
