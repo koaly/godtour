@@ -37,6 +37,7 @@ export default class FetchUser{
 			}
 		)
 		.then( json =>	{
+				console.log("=====> FetchUser.login : json " , json );
 				this.SendData = HandleObject.convert_user_login( json.user );
 				callback( this.SendInformation , this.SendData );
 			}

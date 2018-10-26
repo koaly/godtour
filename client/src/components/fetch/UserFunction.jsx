@@ -3,8 +3,18 @@ export default class UserConvert{
 		console.log("===============> UserConvert.convert_user_login");	
 		if( data.token !== undefined){
 			return{	have			:	true
-				,	id				:	data._id
-				,	email			:	data.email				
+				,	user_name		:	data.info.username
+				,	display_name	:	data.info.displayName					
+				,	profile_image	:	data.info.imgsrc
+				,	gender			:	data.info.gender
+				,	status			:	data.info.status
+				,	id				:	data.info.id 
+				,	use_google_id	:	data.info.isGoogle
+				,	google_id		:	data.info.googleID	
+				,	email			:	data.info.email	
+				,	register_date	:	data.info.registerDate
+				,	upgrade_reason	:	data.info.upgradeReason
+				,	upgrade_request	:	data.info.upgradeRequest
 				,	token			:	data.token
 			};
 		}
