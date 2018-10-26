@@ -48,6 +48,25 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
     }
 }
 
+exports.checkNonAccepted = async (req, res, next) => {
+    try{
+        const tiy = await Tiy.findById(req.params.tiyID);
+        console.log(tiy.isAccepted);
+        if(tiy.isAccepted){
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.getAll = async function(req,res,next){
     try{
         let tiys = await Tiy.find()
