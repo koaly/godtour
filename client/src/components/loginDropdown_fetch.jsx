@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Form from "./common/form";
+import Form from "./common/form_fetch";
 import Joi from "joi-browser";
 import { login } from "../services/authService";
 import { toast } from "react-toastify";
 import FetchUser from "./fetch/FetchUser.jsx";
 
-class LoginDropdown extends (Component, Form) {
+class LoginDropdown extends Component {
 
 	constructor( props ){ // this function auto call when you init class or start class 
 		super( props );
@@ -27,14 +27,23 @@ class LoginDropdown extends (Component, Form) {
 									.label("Password")
 		};
 		// set call back when login for receive data
+		this.CallBackSubmit = this.CallBackSubmit.bind( this );
 		this.FetchCallback = this.FetchCallback.bind( this );
+		this.CallBackRender = this.CallBackRender.bind( this );
+		this.FormLogin = new Form(	props , this.schema
+									, this.CallBackSubmit , this.CallBackRender);
 	}
 
-	doSubmit = async () => { // this function call by form code by Frontend-React
+	CallBackRender(){
+		this.setstate();
+	}
+
+	CallBackSubmit(){ // this function call by form code by Frontend-React
 		console.log("This doSubmit function");
 		const { data } = this.state;	
 		this.User.login( data.email , data.password , this.FetchCallback );
 		console.log("Now I will set state for render");
+		this.state.Loading = "Loading";
 		this.setstate( state => ({ Loading : "Loading" }))
 	};
 
@@ -48,9 +57,8 @@ class LoginDropdown extends (Component, Form) {
 		}
 		else{
 			console.log( "Failure Login");
-			this.setstate( {	Loading : "Finish" 
-							,	Data	: "Wrong" });
-			console.log( "Failure Login");
+			toast.error("Invalid email or password");
+			this.setstate();
 		}
 	}
 
@@ -76,12 +84,16 @@ class LoginDropdown extends (Component, Form) {
 								</a>
 							</div>
 							or
-							<form onSubmit={this.handleSubmit}>
-									{this.renderInput("email", "Email", "email", "email")}
-									{this.renderInput( "password", "Password", "password",
-														"password"
-									)}
-									{this.renderButton("Login")}
+							<form onSubmit={this.FormLogin.handleSubmit}>
+									{this.FormLogin.renderInput(
+											"email", "Email", "email", "email"
+										)
+									}
+									{this.FormLogin.renderInput( 
+											"password", "Password", "password", "password"
+										)
+									}
+									{this.FormLogin.renderButton("Login")}
 							</form>
 							{ this.state.Loading === "Loading" && 
 								<p>Now Loading</p>
