@@ -3,8 +3,6 @@ import UserConvert from "./UserFunction.jsx"
 var {_start_url , _domain , _port} = require('./default_data.jsx')
 var {_path } = require('./default_data.jsx')
 
-var HandleObject = new UserConvert()
-
 export default class FetchUser{
 
 	constructor(){
@@ -13,6 +11,8 @@ export default class FetchUser{
 		this.PostData = {};	
 		this.SendData = {}; 
 		this.SendInformation = {};
+		this.HandleObject = new UserConvert()
+
 	}
 
 	login( email , password , callback){
@@ -38,7 +38,7 @@ export default class FetchUser{
 		)
 		.then( json =>	{
 				console.log("=====> FetchUser.login : json " , json );
-				this.SendData = HandleObject.convert_user_login( json.user );
+				this.SendData = this.HandleObject.convert_user_login( json );
 				callback( this.SendInformation , this.SendData );
 			}
 		)

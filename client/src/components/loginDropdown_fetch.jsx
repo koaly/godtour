@@ -8,13 +8,14 @@ import FetchUser from "./fetch/FetchUser.jsx";
 
 class LoginDropdown extends (Component, Form) {
 
-	constructor( props ){
+	constructor( props ){ // this function auto call when you init class or start class 
 		super( props );
 		this.state = {	data	: { email: "", password: "" }
 					,	errors	: { }
+					,	Loading : "NOT"
 		};
 
-		this.User = new FetchUser();
+		this.User = new FetchUser(); // inti fetch class login
 
 		this.schema = {	email	: Joi.string()
 									.required()
@@ -24,22 +25,22 @@ class LoginDropdown extends (Component, Form) {
 									.required()
 									.label("Password")
 		};
-
+		// set call back when login for receive data
 		this.FetchCallback = this.FetchCallback.bind( this );
 	}
 
-	doSubmit = async () => {
+	doSubmit = async () => { // this function call by form code by Frontend-React
 		console.log("This doSubmit function");
-		this.state.Loading = true;
-		const { data } = this.state;
-		// if you want to render but want same state 
+		const { data } = this.state;	
 		this.User.login( data.email , data.password , this.FetchCallback );
 		console.log("Now I will set state for render");
-		this.setstate();
+		this.setstate( state => ({ Loading : "Loading" }));
 	};
 
+	// this function for call by finish fetch data manage by branch fetch
 	FetchCallback( Receiveinformation , ReceiveData ){
 		console.log("Callback Function and data is " , ReceiveData );
+//		if( ReceiveData.have )
 	}
 
 	render() {
@@ -64,14 +65,14 @@ class LoginDropdown extends (Component, Form) {
 								</a>
 							</div>
 							or
-							<form onSubmit={this.handleSubmit}>
+							<form onSubmit={this.handleSubmit.bind( this )}>
 									{this.renderInput("email", "Email", "email", "email")}
 									{this.renderInput( "password", "Password", "password",
 														"password"
 									)}
 									{this.renderButton("Login")}
 							</form>
-							{ this.state.Loading == true && 
+							{ this.state.Loading === "Loading" && 
 								<p>Now Loading</p>
 							}
 						</div>

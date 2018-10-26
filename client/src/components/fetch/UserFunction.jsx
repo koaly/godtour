@@ -1,24 +1,28 @@
 export default class UserConvert{
 	convert_user_login( data ){
-		console.log("===============> UserConvert.convert_user_login");	
-		if( data.token !== undefined){
-			return{	have			:	true
-				,	user_name		:	data.info.username
-				,	display_name	:	data.info.displayName					
-				,	profile_image	:	data.info.imgsrc
-				,	gender			:	data.info.gender
-				,	status			:	data.info.status
-				,	id				:	data.info.id 
-				,	use_google_id	:	data.info.isGoogle
-				,	google_id		:	data.info.googleID	
-				,	email			:	data.info.email	
-				,	register_date	:	data.info.registerDate
-				,	upgrade_reason	:	data.info.upgradeReason
-				,	upgrade_request	:	data.info.upgradeRequest
-				,	token			:	data.token
-			};
+		console.log("===============> UserConvert.convert_user_login" , data );	
+		try{
+			if( data.user.token !== undefined){
+				console.log("Have Value");
+				return{	have			:	true
+					,	user_name		:	data.user.info.username
+					,	display_name	:	data.user.info.displayName					
+					,	profile_image	:	data.user.info.imgsrc
+					,	gender			:	data.user.info.gender
+					,	status			:	data.user.info.status
+					,	id				:	data.user.info.id 
+					,	use_google_id	:	data.user.info.isGoogle
+					,	google_id		:	data.user.info.googleID	
+					,	email			:	data.user.info.email	
+					,	register_date	:	data.user.info.registerDate
+					,	upgrade_reason	:	data.user.info.upgradeReason
+					,	upgrade_request	:	data.user.info.upgradeRequest
+					,	token			:	data.token
+				};
+			}
 		}
-		else{
+		catch (ex){
+			console.log( ex ); 
 			return { have : false };
 		}
 	}	
