@@ -97,35 +97,70 @@ class AddTourForm extends Form {
           )}
           {this.renderInput(
             "dayDuration",
-            "DayDuration",
+            "Day Duration",
             "text",
-            "day-duration"
+            "day duration"
           )}
           {this.renderInput(
             "nightDuration",
-            "NightDuration",
+            "Night Duration",
             "text",
-            "night-duration"
+            "night duration"
           )}
           {this.renderInput(
             "startBookDate",
-            "StartBookDate",
+            "Booking Date",
             "date",
-            "start-book-date"
+            "booking date"
           )}
           {this.renderInput(
             "startBookTime",
-            "StartBookTime",
+            "Booking Time",
             "time",
-            "start-book-time"
+            "booking"
           )}
-          {this.renderInput("departDate", "DepartDate", "date", "depart-date")}
-          {this.renderInput("returnDate", "ReturnDate", "date", "depart-time")}
-          {this.renderInput("airline", "Airline", "text", "airline")}
-          {this.renderInput("seat", "Seat", "number", "seat")}
-          {this.renderInput("food", "Food", "text", "food")}
-          {this.renderInput("detail", "Detail", "text", "detail")}
-          {this.renderInput("highlight", "Highlight", "text", "highlight")}
+          {this.renderInput(
+            "departDate", 
+            "Departure Date", 
+            "date", 
+            "departure date"
+          )}
+          {this.renderInput(
+            "returnDate", 
+            "Return Date", 
+            "date", 
+            "departure time"
+          )}
+          {this.renderInput(
+            "airline", 
+            "Airline", 
+            "text", 
+            "airline"
+          )}
+          {this.renderInput(
+            "seat", 
+            "Seat", 
+            "number", 
+            "seat"
+          )}
+          {this.renderInput(
+            "food", 
+            "Food", 
+            "text", 
+            "food"
+          )}
+          {this.renderTextarea(
+            "detail", 
+            "Detail", 
+            "text", 
+            "detail"
+          )}
+          {this.renderTextarea(
+            "highlight", 
+            "Highlight", 
+            "text", 
+            "highlight"
+          )}
           <div className="mgt" />
           {this.renderButton("Add Tour")}
         </form>
