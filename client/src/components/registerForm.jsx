@@ -14,7 +14,7 @@ class RegisterForm extends Form {
       imgsrc: "",
       gender: ""
     },
-    genderOption: [{ _id: "1", name: "Male" }, { _id: "2", name: "Female" }],
+    genderOption: [{ _id: "1", name: "male", value: "male" }, { _id: "2", name: "female", value: "female" },],
     errors: {}
   };
 
@@ -43,15 +43,21 @@ class RegisterForm extends Form {
 
   doSubmit = async () => {
     try {
-      await userService.register(this.state.data);
+      const response = await userService.register(this.state.data);
+      console.log(response);
       window.location = "/";
     } catch (ex) {
+      console.log(ex.response.data)
       if (
         ex.response &&
         ex.response.status >= 400 &&
         ex.response.status < 500
       ) {
-        toast.error("Maybe email is already exist");
+        const errorRes = ex.response.data.errors
+        console.log(JSON.stringify(errorRes))
+        errorRes.forEach(error => {
+          toast.error(` ${error.param}: ${error.msg}`);
+        })
       }
     }
   };

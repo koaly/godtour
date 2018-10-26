@@ -4,12 +4,20 @@ import { apiUrl } from "../config.json";
 const apiEndpoint = apiUrl + "/users/signup";
 
 export function register(user) {
-  return http.post(apiEndpoint, {
-    email: user.email,
-    password: user.password,
-    username: user.username,
-    displayName: user.displayName,
-    imgsrc: user.imgsrc,
-    gender: user.gender
-  });
+  const { email, password, username, displayName, imgsrc, gender } = user;
+  return http.post(apiEndpoint,
+    {
+      email,
+      password,
+      username,
+      displayName,
+      imgsrc,
+      gender,
+    })
+    .then(response => {
+      console.log(JSON.stringify(response))
+    })
+
+  //.catch()
+  //don't need to handle error interceptor will handle
 }
