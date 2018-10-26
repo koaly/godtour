@@ -24,8 +24,8 @@ class LoginDropdown extends (Component, Form) {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const { data: jsonwebtoken } = await login(data.email, data.password);
-      localStorage.setItem("token", jsonwebtoken.user.token);
+      const { data: jwt } = await login(data.email, data.password);
+      localStorage.setItem("token", jwt.user.token);
       window.location = "/";
     } catch (ex) {
       if (
