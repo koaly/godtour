@@ -50,14 +50,17 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
 
 exports.checkNonAccepted = async (req, res, next) => {
     try{
+        const { payload: { info } } = req;
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(tiy.isAccepted);
-        if(tiy.isAccepted){
+        if(tiy.isAccepted && info.id != tiy.userID){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
+        } else{
+            return next();
         }
     } catch(err){
         console.log(err);
