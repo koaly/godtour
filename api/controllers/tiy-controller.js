@@ -247,8 +247,27 @@ exports.acceptOffer = async (req, res, next) => {
         tiy.offerID = req.params.offerID;
         const result = await tiy.save();
         console.log(result);
-        res.status(201).json({
-            message: "Accept Offer"
+        res.status(200).json({
+            message: "Accepted Offer"
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.cancelOffer = async (req, res, next) => {
+    try{
+        const tiy = await Tiy.findById(req.params.tiyID);
+        console.log(tiy);
+        tiy.isAccepted = false;
+        tiy.offerID = undefined;
+        const result = await tiy.save();
+        console.log(result);
+        res.status(200).json({
+            message: "Canceled Offer"
         });
     } catch(err){
         console.log(err);
