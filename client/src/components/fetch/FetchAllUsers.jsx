@@ -10,8 +10,8 @@ export default class FetchAllUsers {
 		console.log("===============> FetchAllUsers.construction");
 		var path = "users"
 		this.SumLink = _start_url + _domain + ":" + _port + "/" + path;
-		this.SendData = [];
-		this.SendInformation = [];
+		this.SendData = {};
+		this.SendInformation = {};
 	}
 
 	get_all_users( Callback ){
