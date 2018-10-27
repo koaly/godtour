@@ -3,21 +3,22 @@ const mongoose = require('mongoose');
 const Tiy = require('../models/tiy-models');
 
 exports.checkOwnTiy = async (req, res, next) => {
-    try{
-        const { payload: { id } } = req;
+    try {
+        const { payload: { info } } = req;
+        const { id } = info
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(id);
         console.log(tiy.userID);
-        if(id != tiy.userID){
+        if (id != tiy.userID) {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
-        } else{
+        } else {
             return next();
         }
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -26,21 +27,23 @@ exports.checkOwnTiy = async (req, res, next) => {
 }
 
 exports.checkOwnTiyPlus = async (req, res, next) => {
-    try{
-        const { payload: { id, status } } = req;
+    try {
+        const { payload: { info } } = req;
+        const { id, status } = info
+
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(id);
         console.log(tiy.userID);
-        if(id != tiy.userID && !status){
+        if (id != tiy.userID && !status) {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
-        } else{
+        } else {
             return next();
         }
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -49,20 +52,25 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
 }
 
 exports.checkNonAccepted = async (req, res, next) => {
-    try{
+    try {
         const { payload: { info } } = req;
-        const tiy = await Tiy.findById(req.params.tiyID);
-        console.log(tiy.isAccepted);
-        if(tiy.isAccepted && info.id != tiy.userID){
+        const { id } = info
+
+        const { tiyID } = req.params
+
+        const { isAccepted, userID } = await Tiy.findById(tiyID);
+
+        console.log(isAccepted);
+        if (isAccepted && id != userID) {
             return res.status(403).json({
                 error: {
                     message: "This Tour-it-yourself was accepted."
                 }
             });
-        } else{
+        } else {
             return next();
         }
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -70,17 +78,17 @@ exports.checkNonAccepted = async (req, res, next) => {
     }
 }
 
-exports.getAll = async function(req,res,next){
-    try{
-        let tiys = await Tiy.find()
-        .select()
-        .exec()
+exports.getAll = async function (req, res, next) {
+    try {
+        const tiys = await Tiy.find()
+            .select()
+            .exec()
         console.log(tiys);
         res.status(200).json({
-            count : tiys.length,
+            count: tiys.length,
             tiys
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -88,17 +96,17 @@ exports.getAll = async function(req,res,next){
     }
 }
 
-exports.getNonAccepted = async function(req,res,next){
-    try{
-        let tiys = await Tiy.find({isAccepted: false})
-        .select()
-        .exec()
+exports.getNonAccepted = async function (req, res, next) {
+    try {
+        const tiys = await Tiy.find({ isAccepted: false })
+            .select()
+            .exec()
         console.log(tiys);
         res.status(200).json({
-            count : tiys.length,
+            count: tiys.length,
             tiys
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -106,17 +114,17 @@ exports.getNonAccepted = async function(req,res,next){
     }
 }
 
-exports.getAccepted = async function(req,res,next){
-    try{
-        let tiys = await Tiy.find({isAccepted: true})
-        .select()
-        .exec()
+exports.getAccepted = async function (req, res, next) {
+    try {
+        const tiys = await Tiy.find({ isAccepted: true })
+            .select()
+            .exec()
         console.log(tiys);
         res.status(200).json({
-            count : tiys.length,
+            count: tiys.length,
             tiys
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -124,16 +132,16 @@ exports.getAccepted = async function(req,res,next){
     }
 }
 
-exports.getOneTiy = async function(req,res,next){
-    try{
-        let tiy = await Tiy.findById(req.params.tiyID)
-        .select()
-        .exec()
+exports.getOneTiy = async function (req, res, next) {
+    try {
+        const tiy = await Tiy.findById(req.params.tiyID)
+            .select()
+            .exec()
         console.log(tiy);
         res.status(200).json({
             tiy
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -141,18 +149,19 @@ exports.getOneTiy = async function(req,res,next){
     }
 }
 
-exports.getOwnTiy = async function(req,res,next){
-    try{
-        const { payload: { id } } = req;
-        const tiys = await Tiy.find({userID: id})
-        .select()
-        .exec()
+exports.getOwnTiy = async function (req, res, next) {
+    try {
+        const { payload: { info } } = req;
+        const { id } = info
+        const tiys = await Tiy.find({ userID: id })
+            .select()
+            .exec()
         console.log(tiys);
         res.status(200).json({
-            count : tiys.length,
+            count: tiys.length,
             tiys
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -160,42 +169,63 @@ exports.getOwnTiy = async function(req,res,next){
     }
 }
 
-exports.addTiy = async function(req, res, next){
-    try{
-        if (req.body.maxPrice < req.body.minPrice
-            || req.body.maxDuration < req.body.minDuration
-            || req.body.maxMember < req.body.minMember){
+exports.addTiy = async function (req, res, next) {
+    try {
+
+        const {
+            minPrice,
+            maxPrice,
+            minDuration,
+            maxDuration,
+            minMember,
+            maxMember,
+            name,
+            dest,
+            startFreeDate,
+            endFreeDate,
+            food,
+            detail,
+            highlight
+        } = req.body
+
+        if (maxPrice < minPrice
+            || maxDuration < minDuration
+            || maxMember < minMember) {
             return res.status(405).json({
                 error: {
                     message: "Tried to insert max < min"
                 }
-            }); 
+            });
         }
-        const { payload: { id, email } } = req;
+
+        const { payload: { info } } = req;
+        const { id, email } = info
+
         const tiy = await new Tiy({
             _id: new mongoose.Types.ObjectId,
-            name: req.body.name,
+            name: name,
             userID: id,
             userName: email,
-            minPrice: req.body.minPrice,
-            maxPrice: req.body.maxPrice,
-            minMember: req.body.minMember,
-            maxMember: req.body.maxMember,
-            dest: req.body.dest,
-            minDuration: req.body.minDuration,
-            maxDuration: req.body.maxDuration,
-            startFreeDate: req.body.startFreeDate,
-            endFreeDate: req.body.endFreeDate,
-            food: req.body.food,
-            detail: req.body.detail,
-            highlight: req.body.highlight
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            minMember: minMember,
+            maxMember: maxMember,
+            dest: dest,
+            minDuration: minDuration,
+            maxDuration: maxDuration,
+            startFreeDate: startFreeDate,
+            endFreeDate: endFreeDate,
+            food: food,
+            detail: detail,
+            highlight: highlight
         });
         const result = await tiy.save();
+
         console.log(result);
         res.status(201).json({
             message: "Tiy added"
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -203,41 +233,63 @@ exports.addTiy = async function(req, res, next){
     }
 }
 
-exports.editTiy = async function(req, res, next){
-    try{
-        if (req.body.maxPrice < req.body.minPrice
-            || req.body.maxDuration < req.body.minDuration
-            || req.body.maxMember < req.body.minMember){
+exports.editTiy = async function (req, res, next) {
+    const {
+        minPrice,
+        maxPrice,
+        minDuration,
+        maxDuration,
+        minMember,
+        maxMember,
+        name,
+        dest,
+        startFreeDate,
+        endFreeDate,
+        food,
+        detail,
+        highlight
+    } = req.body
+    try {
+        if (maxPrice < minPrice
+            || maxDuration < minDuration
+            || maxMember < minMember) {
             return res.status(405).json({
                 error: {
                     message: "Tried to insert max < min"
                 }
-            }); 
+            });
         }
+
+        //don't need to check if you can pass if req doesn't send value
+        //will not instead value
         const tiy = {}
-        if(req.body.name) tiy.name = req.body.name
-        if(req.body.minPrice) tiy.minPrice = req.body.minPrice
-        if(req.body.maxPrice) tiy.maxPrice = req.body.maxPrice
-        if(req.body.minMember) tiy.minMember = req.body.minMember
-        if(req.body.maxMember) tiy.maxMember = req.body.maxMember
-        if(req.body.dest) tiy.dest = req.body.dest
-        if(req.body.minDuration) tiy.minDuration = req.body.minDuration
-        if(req.body.maxDuration) tiy.maxDuration = req.body.maxDuration
-        if(req.body.startFreeDate) tiy.startFreeDate = req.body.startFreeDate
-        if(req.body.endFreeDate) tiy.endFreeDate = req.body.endFreeDate
-        if(req.body.food) tiy.food = req.body.food
-        if(req.body.detail) tiy.detail = req.body.detail
-        if(req.body.highlight) tiy.highlight = req.body.highlight
-        
+        tiy.name = name
+        tiy.minPrice = minPrice
+        tiy.maxPrice = maxPrice
+        tiy.minMember = minMember
+        tiy.maxMember = maxMember
+        tiy.dest = dest
+        tiy.dest = dest
+        tiy.maxDuration = maxDuration
+        tiy.minDuration = minDuration
+        tiy.startFreeDate = startFreeDate
+        tiy.endFreeDate = endFreeDate
+        tiy.food = food
+        tiy.detail = detail
+        tiy.highlight = highlight
+
+        const { tiyID } = req.params
         console.log(req.params);
         console.log(tiy);
-        const id = {_id:req.params.tiyID}
-        const result = await Tiy.findOneAndUpdate(id, tiy);
+
+        const id = { _id: tiyID }
+
+        const result = await Tiy.findOneAndUpdate(id, tiy, { new: true });
         console.log(result);
         res.status(200).json({
             message: "Tiy updated"
         })
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -246,14 +298,14 @@ exports.editTiy = async function(req, res, next){
 }
 
 exports.deleteTiy = async (req, res, next) => {
-    try{
-        const id = {_id:req.params.tiyID}
+    try {
+        const id = { _id: req.params.tiyID }
         const result = await Tiy.findOneAndRemove(id);
         console.log(result);
         res.status(200).json({
             message: "Tiy deleted"
         })
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -262,7 +314,7 @@ exports.deleteTiy = async (req, res, next) => {
 }
 
 exports.acceptOffer = async (req, res, next) => {
-    try{
+    try {
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(tiy);
         tiy.isAccepted = true;
@@ -272,7 +324,7 @@ exports.acceptOffer = async (req, res, next) => {
         res.status(200).json({
             message: "Accepted Offer"
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -281,7 +333,7 @@ exports.acceptOffer = async (req, res, next) => {
 }
 
 exports.cancelOffer = async (req, res, next) => {
-    try{
+    try {
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(tiy);
         tiy.isAccepted = false;
@@ -291,7 +343,7 @@ exports.cancelOffer = async (req, res, next) => {
         res.status(200).json({
             message: "Canceled Offer"
         });
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err

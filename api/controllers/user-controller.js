@@ -101,14 +101,20 @@ exports.editCurrentUser = async (req, res, next) => {
         editUser.upgradeRequest = upgradeRequest
         editUser.upgradeReason = upgradeReason
 
-        const user = await User.findOneAndUpdate(id, editUser)
+        const user = await User.findOneAndUpdate({ _id: id }, editUser, { new: true })
 
         console.log(`result: ${user}`);
-        res.status(200).json({
-            sucess: true,
-            message: "current user have been update //get new token",
-            token: user.generateJWT()
-        })
+        if (!user) {
+            res.status(500).json({
+                message: "unexpecd error"
+            })
+        } else {
+            res.status(200).json({
+                sucess: true,
+                message: "current user have been update //get new token",
+                token: user.generateJWT()
+            })
+        }
     }
     catch (err) {
         console.log(err);
