@@ -171,7 +171,6 @@ exports.getOwnTiy = async function (req, res, next) {
 
 exports.addTiy = async function (req, res, next) {
     try {
-
         const {
             minPrice,
             maxPrice,
@@ -200,21 +199,21 @@ exports.addTiy = async function (req, res, next) {
         const { payload: { info } } = req;
         const tiy = await new Tiy({
             _id: new mongoose.Types.ObjectId,
-            name: req.body.name,
+            name: name,
             userID: info.id,
             userName: info.displayName,
-            minPrice: req.body.minPrice,
-            maxPrice: req.body.maxPrice,
-            minMember: req.body.minMember,
-            maxMember: req.body.maxMember,
-            dest: req.body.dest,
-            minDuration: req.body.minDuration,
-            maxDuration: req.body.maxDuration,
-            startFreeDate: req.body.startFreeDate,
-            endFreeDate: req.body.endFreeDate,
-            food: req.body.food,
-            detail: req.body.detail,
-            highlight: req.body.highlight
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            minMember: minMember,
+            maxMember: maxMember,
+            dest: dest,
+            minDuration: minDuration,
+            maxDuration: maxDuration,
+            startFreeDate: startFreeDate,
+            endFreeDate: endFreeDate,
+            food: food,
+            detail: detail,
+            highlight: highlight
         });
         const result = await tiy.save();
 
