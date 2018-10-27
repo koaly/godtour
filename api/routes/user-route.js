@@ -11,7 +11,7 @@ const auth = require('./auth');
 //import for validator for check
 const { body } = require('express-validator/check');
 const { checkValidation } = require('../middleware/validation')
-
+const val = require('./validation/user-validation')
 router.get('/', auth.optional, userCtrl.getAll);
 router.get('/current', auth.require, userCtrl.currentUser);
 router.get('/current/edit', auth.require, userCtrl.currentUser);
@@ -75,17 +75,7 @@ router.post('/signup', auth.optional,
     ]
     , checkValidation, userCtrl.userSignup);
 
-router.post('/login', auth.optional,
-    [
-        body('email')
-            .isEmail()
-            .normalizeEmail()
-            .withMessage('email is invaild'),
-        body('password')
-            .exists()
-            .withMessage('require password'),
-    ],
-    checkValidation, userCtrl.userLogin)
+router.post('/login', auth.optional, val.config.login, val.checkValidation, userCtrl.userLogin)
 
 
 /*
