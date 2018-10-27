@@ -70,7 +70,9 @@ exports.getOneOffer = async function(req,res,next){
 
 exports.getByTiy = async (req, res, next) => {
     try{
-        const offers = await Offer.find({tiyID: req.params.tiyID})
+        const { payload: { info } } = req;
+        if (info.status) const offers = await Offer.find({tiyID: req.params.tiyID, operatorID: info.id})
+        else const offers = await Offer.find({tiyID: req.params.tiyID})
         .select()
         .exec()
         console.log(offers);

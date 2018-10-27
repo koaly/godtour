@@ -40,6 +40,6 @@ router.post('/:tiyID/offers/:offerID', auth.require, tiyCtrl.checkOwnTiy, tiyCtr
 router.delete('/:tiyID/offers/:offerID', auth.require, offerCtrl.checkOwnOffer, offerCtrl.deleteOffer);
 
 router.get('/:tiyID/offers/:offerID/edit', auth.require, offerCtrl.checkOwnOffer, offerCtrl.getOneOffer);
-router.post('/:tiyID/offers/:offerID/edit', auth.require, offerCtrl.checkOwnOffer, offerCtrl.editOffer);
+router.put('/:tiyID/offers/:offerID/edit', auth.require, offerCtrl.checkOwnOffer, offerCtrl.editOffer);
 
 module.exports = router
