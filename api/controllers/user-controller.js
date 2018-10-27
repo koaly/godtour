@@ -41,7 +41,7 @@ exports.getOneUser = async function (req, res, next) {
             .exec()
         if (!user) {
             return res.status(404).json({
-                error: "user doesn't exits"
+                error: "User doesn't exist"
             })
         }
         console.log(user);

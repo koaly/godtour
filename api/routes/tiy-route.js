@@ -22,12 +22,12 @@ router.get('/create', auth.require, operatorCtrl.checkNonOperatorStatus, async (
 });
 router.post('/create', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtrl.addTiy);
 router.get('/:tiyID', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.checkNonAccepted, tiyCtrl.getOneTiy);
-router.post('/tiyID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.cancelOffer); 
+router.post('/:tiyID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.cancelOffer); 
 router.delete('/:tiyID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.deleteTiy);
 router.get('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
 router.put('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.editTiy);
 
-router.get('/:tiyID/offers', auth.require, tiyCtrl.checkOwnTiy, offerCtrl.getByTiy);
+router.get('/:tiyID/offers', auth.require, tiyCtrl.checkOwnTiyPlus, offerCtrl.getByTiy);
 router.get('/:tiyID/offers/create', auth.require, operatorCtrl.checkOperatorStatus, async (req, res) => {
     res.status(200).json({
         'message': "add offer page"

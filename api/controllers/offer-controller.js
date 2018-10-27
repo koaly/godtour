@@ -74,9 +74,9 @@ exports.getByTiy = async (req, res, next) => {
         const { status, id } = info
 
         const { tiyID } = req.params
-        const offers = {}
+        let offers = {}
         if (status)
-            offers = await Offer.find({ tiyID }, { operatorID: id })
+            offers = await Offer.find({ tiyID, operatorID: id })
         else
             offers = await Offer.find({ tiyID })
                 .select()
