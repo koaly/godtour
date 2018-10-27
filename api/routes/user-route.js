@@ -9,7 +9,7 @@ const bookingCtrl = require('../controllers/booking-controller')
 const operatorCtrl = require('../controllers/operator-controller')
 const auth = require('./auth');
 //import for validator for check
-const config = require('./validation/user-validation')
+const config = require('./validation/users-validation')
 const checkValidation = require('./validation/checkValidation')
 router.get('/', auth.optional, userCtrl.getAll);
 router.get('/current', auth.require, userCtrl.currentUser);
