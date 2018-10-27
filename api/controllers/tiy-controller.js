@@ -4,11 +4,11 @@ const Tiy = require('../models/tiy-models');
 
 exports.checkOwnTiy = async (req, res, next) => {
     try{
-        const { payload: { id } } = req;
+        const { payload: { info } } = req;
         const tiy = await Tiy.findById(req.params.tiyID);
-        console.log(id);
+        console.log(info.id);
         console.log(tiy.userID);
-        if(id != tiy.userID){
+        if(info.id != tiy.userID){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -27,11 +27,11 @@ exports.checkOwnTiy = async (req, res, next) => {
 
 exports.checkOwnTiyPlus = async (req, res, next) => {
     try{
-        const { payload: { id, status } } = req;
+        const { payload: { info } } = req;
         const tiy = await Tiy.findById(req.params.tiyID);
-        console.log(id);
+        console.log(info.id);
         console.log(tiy.userID);
-        if(id != tiy.userID && !status){
+        if(info.id != tiy.userID && !info.status){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -171,12 +171,12 @@ exports.addTiy = async function(req, res, next){
                 }
             }); 
         }
-        const { payload: { id, email } } = req;
+        const { payload: { info } } = req;
         const tiy = await new Tiy({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
-            userID: id,
-            userName: email,
+            userID: info.id,
+            userName: info.displayName,
             minPrice: req.body.minPrice,
             maxPrice: req.body.maxPrice,
             minMember: req.body.minMember,

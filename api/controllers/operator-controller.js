@@ -6,9 +6,9 @@ const Booking = require('../models/booking-models');
 
 exports.checkOperatorStatus = async (req, res, next) => {
     try{
-        const { payload: { status } } = req;
-        console.log(status);
-        if(!status){
+        const { payload: { info } } = req;
+        console.log(info.status);
+        if(!info.status){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -27,10 +27,9 @@ exports.checkOperatorStatus = async (req, res, next) => {
 
 exports.checkNonOperatorStatus = async (req, res, next) => {
     try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        console.log(user.status);
-        if(user.status){
+        const { payload: { info } } = req;
+        console.log(info.status);
+        if(info.status){
             return res.status(403).json({
                 error: {
                     message: "Already Tour-operator"
@@ -49,8 +48,8 @@ exports.checkNonOperatorStatus = async (req, res, next) => {
 
 exports.requestUpgrade = async (req, res, next) => {
     try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
+        const { payload: { info } } = req;
+        const user = await User.findById(info.id);
         user.upgradeRequest = true;
         if(req.body.upgradeReason) user.upgradeReason = req.body.upgradeReason;
         else user.upgradeReason = '';

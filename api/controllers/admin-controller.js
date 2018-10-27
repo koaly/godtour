@@ -6,9 +6,9 @@ const Booking = require('../models/booking-models');
 
 exports.checkAdminStatus = async (req, res, next) => {
     try{
-        const { payload: { status } } = req;
-        console.log(status);
-        if(status != 2){
+        const { payload: { info } } = req;
+        console.log(info.status);
+        if(info.status != 2){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"

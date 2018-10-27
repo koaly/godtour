@@ -24,9 +24,9 @@ exports.getAll = async function(req,res,next){
 
 exports.getUserBooking = async function(req,res,next){
     try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        const bookings = await Booking.find({userID: id})
+        const { payload: { info } } = req;
+        const user = await User.findById(info.id);
+        const bookings = await Booking.find({userID: info.id})
         .select()
         .exec()
         console.log(bookings);
@@ -44,7 +44,6 @@ exports.getUserBooking = async function(req,res,next){
 
 exports.getTourBooking = async function(req,res,next){
     try{
-        const tour = await User.findById(req.params.id);
         const bookings = await Booking.find({tourID: req.params.id})
         .select()
         .exec()
@@ -65,15 +64,13 @@ exports.bookTour = async (req, res, next) => {
     try{
         const session = await Tour.startSession();
         console.log(session);
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
+        const { payload: { info } } = req;
         const tour = await Tour.findById(req.params.id);
-        console.log(user);
         console.log(tour);
         const booking = await new Booking({
             _id: new mongoose.Types.ObjectId,
-            userID: user._id,
-            userName: user.email,
+            userID: info.id,
+            userName: info.displayName,
             tourID: tour._id,
             tourName: tour.name,
             amountBooking: req.body.amountBooking
@@ -129,12 +126,10 @@ exports.cancelBooking = async (req, res, next) => {
 
 exports.checkOwnBooking = async (req, res, next) => {
     try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
+        const { payload: { info } } = req;
         const booking = await Booking.findById(req.params.id);
-        console.log(user._id);
         console.log(booking.userID);
-        if(user._id != booking.userID){
+        if(info.id != booking.userID){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"

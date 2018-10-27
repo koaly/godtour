@@ -5,11 +5,11 @@ const Offer = require('../models/offer-models');
 
 exports.checkOwnOffer = async (req, res, next) => {
     try{
-        const { payload: { id } } = req;
+        const { payload: { info } } = req;
         const offer = await Offer.findById(req.params.offerID);
-        console.log(id);
+        console.log(info.id);
         console.log(offer.operatorID);
-        if(id != offer.operatorID){
+        if(info.id != offer.operatorID){
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -109,13 +109,13 @@ exports.getOwnOffer = async (req, res, next) => {
 
 exports.addOffer = async function(req, res, next){
     try{
-        const { payload: { id, email } } = req;
+        const { payload: { info } } = req;
         const offer = await new Offer({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
             tiyID: req.params.tiyID,
-            operatorID: id,
-            operatorName: email,
+            operatorID: info.id,
+            operatorName: info.displayName,
             price: req.body.price,
             dest: req.body.dest,
             dayDuration: req.body.dayDuration,
