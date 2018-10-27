@@ -9,10 +9,16 @@ import FetchUser from "./fetch/FetchUser.jsx";
 class LoginDropdown extends Component {
 
 	constructor( props ){ // this function auto call when you init class or start class 
-		console.log( "Constructor of LoginDropdown" , props)
 		super( props );
+		this.state = {	data	: { email: "", password: "" }
+					,	errors	: { }
+					,	Loading : "NOT"
+					,	Data	: "Failure"
+		};
 
-		this.Schema = {	email	: Joi.string()
+		this.User = new FetchUser(); // inti fetch class login
+
+		this.schema = {	email	: Joi.string()
 									.required()
 									.email()
 									.label("Email")
@@ -20,17 +26,12 @@ class LoginDropdown extends Component {
 									.required()
 									.label("Password")
 		};
-		this.state = {	data	: { email: "", password: "" }
-					,	errors	: { }
-					,	Loading : "NOT"
-					,	Data	: "Failure"
-		};
-		this.User = new FetchUser(); // inti fetch class login
-		this.FetchCallback = this.FetchCallback.bind( this ); // callback for get value
-		this.CallBackSubmit = this.CallBackSubmit.bind(this)
-		this.CallBackRender = this.CallBackRender.bind(this)
-		this.FormUser = new Form( props , this.Schema 
-										, this.CallBackSubmit , this.CallBackRender , this)
+		// set call back when login for receive data
+		this.CallBackSubmit = this.CallBackSubmit.bind( this );
+		this.FetchCallback = this.FetchCallback.bind( this );
+		this.CallBackRender = this.CallBackRender.bind( this );
+		this.FormLogin = new Form(	props , this.schema
+									, this.CallBackSubmit , this.CallBackRender);
 	}
 
 	CallBackRender(){
@@ -43,7 +44,7 @@ class LoginDropdown extends Component {
 		this.User.login( data.email , data.password , this.FetchCallback );
 		console.log("Now I will set state for render");
 		this.state.Loading = "Loading";
-//		this.setstate( state => ({ Loading : "Loading" }))
+		this.setstate( state => ({ Loading : "Loading" }))
 	};
 
 	// this function for call by finish fetch data manage by branch fetch
@@ -57,8 +58,7 @@ class LoginDropdown extends Component {
 		else{
 			console.log( "Failure Login");
 			toast.error("Invalid email or password");
-			this.state.Loading = "Finish";
-			this.forceUpdate();
+			this.setstate();
 		}
 	}
 
@@ -84,16 +84,16 @@ class LoginDropdown extends Component {
 								</a>
 							</div>
 							or
-							<form onSubmit={this.FormUser.handleSubmit}>
-									{this.FormUser.renderInput(
+							<form onSubmit={this.FormLogin.handleSubmit}>
+									{this.FormLogin.renderInput(
 											"email", "Email", "email", "email"
 										)
 									}
-									{this.FormUser.renderInput( 
+									{this.FormLogin.renderInput( 
 											"password", "Password", "password", "password"
 										)
 									}
-									{this.FormUser.renderButton("Login")}
+									{this.FormLogin.renderButton("Login")}
 							</form>
 							{ this.state.Loading === "Loading" && 
 								<p>Now Loading</p>
