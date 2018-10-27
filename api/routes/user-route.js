@@ -9,24 +9,16 @@ const bookingCtrl = require('../controllers/booking-controller')
 const operatorCtrl = require('../controllers/operator-controller')
 const auth = require('./auth');
 //import for validator for check
-const { body } = require('express-validator/check');
-const { checkValidation } = require('../middleware/validation')
-const val = require('./validation/user-validation')
+const config = require('./validation/user-validation')
+const checkValidation = require('./validation/checkValidation')
 router.get('/', auth.optional, userCtrl.getAll);
 router.get('/current', auth.require, userCtrl.currentUser);
 router.get('/current/edit', auth.require, userCtrl.currentUser);
-router.put('/current/edit', auth.require,
-    [
-        body('displayName')
-            .isLength({ min: 3 })
-            .trim()
-            .escape()
-            .withMessage('require string more than 3 charater'),
-        body('gender')
-            .isIn(['male', 'female', 'unknown'])
-            .withMessage('request only field male female or unknow')
-    ]
-    , checkValidation, userCtrl.editCurrentUser)
+router.put('/current/edit',
+    auth.require,
+    config.currentEdit,
+    checkValidation,
+    userCtrl.editCurrentUser)
 //show uniq user with uniq username
 router.get('/:username', auth.optional, userCtrl.getOneUser)
 
@@ -50,32 +42,17 @@ router.get('/login', auth.optional, async (req, res, next) => {
     })
 })
 
-router.post('/signup', auth.optional,
-    [
-        body('email')
-            .isEmail()
-            .normalizeEmail()
-            .withMessage('email is invaild'),
-        body('password')
-            .exists()
-            .withMessage('require password'),
-        body('username')
-            .isLength({ min: 3 })
-            .trim()
-            .escape()
-            .withMessage('require string more than 3 charater'),
-        body('displayName')
-            .isLength({ min: 3 })
-            .trim()
-            .escape()
-            .withMessage('require string more than 3 charater'),
-        body('gender')
-            .isIn(['male', 'female', 'unknown'])
-            .withMessage('request only field male female or unknow')
-    ]
-    , checkValidation, userCtrl.userSignup);
+router.post('/signup',
+    auth.optional,
+    config.signup,
+    checkValidation,
+    userCtrl.userSignup);
 
-router.post('/login', auth.optional, val.config.login, val.checkValidation, userCtrl.userLogin)
+router.post('/login',
+    auth.optional,
+    config.login,
+    checkValidation,
+    userCtrl.userLogin)
 
 
 /*
