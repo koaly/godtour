@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import LoginDropdown from "./loginDropdown_fetch";
+import LoginDropdown from "./loginDropdown";
 import FetchAllUsers from "./fetch/FetchAllUsers";
 
 const NavBar = ({ user }) => {
