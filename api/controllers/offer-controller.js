@@ -88,6 +88,25 @@ exports.getByTiy = async (req, res, next) => {
     }
 }
 
+exports.getOwnOffer = async (req, res, next) => {
+    try{
+        const { payload: { info } } = req;
+        const offers = await Offer.find({operatorID: info.id})
+        .select()
+        .exec()
+        console.log(offers);
+        res.status(200).json({
+            count : offers.length,
+            offers
+        });
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.addOffer = async function(req, res, next){
     try{
         const { payload: { id, email } } = req;

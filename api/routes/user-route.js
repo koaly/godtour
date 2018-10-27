@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/user-controller')
 const tiyCtrl = require('../controllers/tiy-controller');
+const offerCtrl = require('../controllers/offer-controller');
 const tourCtrl = require('../controllers/tour-controller')
 const bookingCtrl = require('../controllers/booking-controller')
 const operatorCtrl = require('../controllers/operator-controller')
@@ -38,6 +39,7 @@ router.get('/current/bookings/:id', auth.require, bookingCtrl.checkOwnBooking, a
 router.delete('/current/bookings/:id', auth.require, bookingCtrl.checkOwnBooking, bookingCtrl.cancelBooking);
 router.get('/current/tours', auth.require, operatorCtrl.checkOperatorStatus, tourCtrl.getOwnTour);
 router.get('/current/tiys', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtrl.getOwnTiy);
+router.get('/current/offers', auth.require, operatorCtrl.checkOperatorStatus, offerCtrl.getOwnOffer);
 
 router.get('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, userCtrl.currentUser);
 router.put('/current/request/upgrade', auth.require, operatorCtrl.checkNonOperatorStatus, operatorCtrl.requestUpgrade);

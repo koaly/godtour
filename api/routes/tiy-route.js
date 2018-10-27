@@ -4,7 +4,6 @@ const router = express.Router();
 const tiyCtrl = require('../controllers/tiy-controller');
 const operatorCtrl = require('../controllers/operator-controller');
 const adminCtrl = require('../controllers/admin-controller');
-const bookingCtrl = require('../controllers/booking-controller');
 const offerCtrl = require('../controllers/offer-controller');
 const auth = require('./auth');
 
