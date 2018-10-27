@@ -22,12 +22,12 @@ exports.getAll = async function (req, res, next) {
     }
 }
 
-exports.getOwnTour = async function(req,res,next){
-    try{
+exports.getOwnTour = async function (req, res, next) {
+    try {
         const { payload: { info } } = req;
-        const tours = await Tour.find({operatorID: info.id})
-        .select()
-        .exec()
+        const tours = await Tour.find({ operatorID: info.id })
+            .select()
+            .exec()
         console.log(tours);
         res.status(200).json({
             count: tours.length,
@@ -59,11 +59,11 @@ exports.getOneTour = async function (req, res, next) {
 }
 
 exports.checkOwnTour = async (req, res, next) => {
-    try{
+    try {
         const { payload: { info } } = req;
         const tour = await Tour.findById(req.params.id);
         console.log(tour.operatorID);
-        if(info.id != tour.operatorID){
+        if (info.id != tour.operatorID) {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
