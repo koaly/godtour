@@ -3,22 +3,13 @@ const mongoose = require('mongoose');
 const Tiy = require('../models/tiy-models');
 
 exports.checkOwnTiy = async (req, res, next) => {
-<<<<<<< HEAD
-    try{
-        const { payload: { info } } = req;
-=======
     try {
         const { payload: { info } } = req;
         const { id } = info
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(info.id);
         console.log(tiy.userID);
-<<<<<<< HEAD
-        if(info.id != tiy.userID){
-=======
         if (id != tiy.userID) {
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -36,23 +27,14 @@ exports.checkOwnTiy = async (req, res, next) => {
 }
 
 exports.checkOwnTiyPlus = async (req, res, next) => {
-<<<<<<< HEAD
-    try{
-        const { payload: { info } } = req;
-=======
     try {
         const { payload: { info } } = req;
         const { id, status } = info
 
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
         const tiy = await Tiy.findById(req.params.tiyID);
         console.log(info.id);
         console.log(tiy.userID);
-<<<<<<< HEAD
-        if(info.id != tiy.userID && !info.status){
-=======
         if (id != tiy.userID && !status) {
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -215,7 +197,6 @@ exports.addTiy = async function (req, res, next) {
                 }
             });
         }
-<<<<<<< HEAD
         const { payload: { info } } = req;
         const tiy = await new Tiy({
             _id: new mongoose.Types.ObjectId,
@@ -234,29 +215,6 @@ exports.addTiy = async function (req, res, next) {
             food: req.body.food,
             detail: req.body.detail,
             highlight: req.body.highlight
-=======
-
-        const { payload: { info } } = req;
-        const { id, email } = info
-
-        const tiy = await new Tiy({
-            _id: new mongoose.Types.ObjectId,
-            name: name,
-            userID: id,
-            userName: email,
-            minPrice: minPrice,
-            maxPrice: maxPrice,
-            minMember: minMember,
-            maxMember: maxMember,
-            dest: dest,
-            minDuration: minDuration,
-            maxDuration: maxDuration,
-            startFreeDate: startFreeDate,
-            endFreeDate: endFreeDate,
-            food: food,
-            detail: detail,
-            highlight: highlight
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
         });
         const result = await tiy.save();
 

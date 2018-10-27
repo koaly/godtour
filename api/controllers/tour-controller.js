@@ -22,23 +22,12 @@ exports.getAll = async function (req, res, next) {
     }
 }
 
-<<<<<<< HEAD
 exports.getOwnTour = async function(req,res,next){
     try{
         const { payload: { info } } = req;
         const tours = await Tour.find({operatorID: info.id})
         .select()
         .exec()
-=======
-exports.getOwnTour = async function (req, res, next) {
-    try {
-        const { payload: { info } } = req;
-        const { id } = info
-
-        const tours = await Tour.find({ operatorID: id })
-            .select()
-            .exec()
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
         console.log(tours);
         res.status(200).json({
             count: tours.length,
@@ -70,23 +59,11 @@ exports.getOneTour = async function (req, res, next) {
 }
 
 exports.checkOwnTour = async (req, res, next) => {
-<<<<<<< HEAD
     try{
         const { payload: { info } } = req;
-=======
-    try {
-        const { payload: { info } } = req;
-        const { id } = info
-
-        const user = await User.findById(id);
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
         const tour = await Tour.findById(req.params.id);
         console.log(tour.operatorID);
-<<<<<<< HEAD
         if(info.id != tour.operatorID){
-=======
-        if (user._id != tour.operatorID) {
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
@@ -103,17 +80,10 @@ exports.checkOwnTour = async (req, res, next) => {
     }
 }
 
-<<<<<<< HEAD
-exports.addTour = async function(req, res, next){
-    try{
-        const { payload: { info } } = req;
-=======
 exports.addTour = async function (req, res, next) {
     try {
         const { payload: { info } } = req;
-        const { id, email } = info
 
->>>>>>> 7119e72c6a57110356e7deaa7cd30ad44e1f448d
         const tour = await new Tour({
             _id: new mongoose.Types.ObjectId,
             name: req.body.name,
