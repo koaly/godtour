@@ -131,9 +131,9 @@ class HomePage extends Component {
           <div className="newsletterr">
             <div className="a b">
               <div className="c">
-                <span className="ab">
+                <p className="ab">
                   "Subscribe now FREE! to get our update information for the best deals and discount on your wonderful trip"
-                </span>
+                </p>
               </div>
               <div className="ac">
                 <div className="ad">
