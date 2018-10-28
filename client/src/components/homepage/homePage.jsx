@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./hompage.css";
+import Form from "../common/form";
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 class HomePage extends Component {
@@ -124,6 +125,21 @@ class HomePage extends Component {
               <span className="carousel-control-next-icon" aria-hidden="true" />
               <span className="sr-only">Next</span>
             </a>
+          </div>
+
+          <div className="newsletterr">
+            <div className="a b">
+              <div className="c">
+                <span className="ab">
+                  "Subscribe now FREE! to get our update information for the best deals and discount on your wonderful trip"
+                </span>
+              </div>
+              <div className="ac">
+                <div className="ad">
+                  {/* insert email from plz */}
+                </div>
+              </div>
+            </div>
           </div>
 
           <ul>
