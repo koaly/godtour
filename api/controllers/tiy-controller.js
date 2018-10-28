@@ -3,18 +3,18 @@ const mongoose = require('mongoose');
 const Tiy = require('../models/tiy-models');
 
 exports.checkNotNullTiy = async (req, res, next) => {
-    try{
+    try {
         const tiy = await Tiy.findById(req.params.tiyID);
         if (!tiy) {
             res.status(404).json({
-                error : {
+                error: {
                     message: "Not found"
                 }
             });
         } else {
             return next();
         }
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -26,7 +26,7 @@ exports.checkOwnTiy = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
         const { id } = info
-        const tiy = await Tiy.findById(req.params.tiyID);
+        const tiy = await Tiy.find({ _id: req.params.tiyID });
         console.log(info.id);
         console.log(tiy.userID);
         if (id != tiy.userID) {
@@ -38,10 +38,10 @@ exports.checkOwnTiy = async (req, res, next) => {
         } else {
             return next();
         }
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e.message.toString());
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -51,7 +51,7 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
         const { payload: { info } } = req;
         const { id, status } = info
 
-        const tiy = await Tiy.findById(req.params.tiyID);
+        const tiy = await Tiy.find({ _id: req.params.tiyID });
         console.log(info.id);
         console.log(tiy.userID);
         if (id != tiy.userID && !status) {
@@ -63,10 +63,10 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
         } else {
             return next();
         }
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e.message.toString());
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -78,7 +78,7 @@ exports.checkNonAccepted = async (req, res, next) => {
 
         const { tiyID } = req.params
 
-        const { isAccepted, userID } = await Tiy.findById(tiyID);
+        const { isAccepted, userID } = await Tiy.find({ _id: tiyID });
 
         console.log(isAccepted);
         if (isAccepted && id != userID) {
@@ -90,10 +90,10 @@ exports.checkNonAccepted = async (req, res, next) => {
         } else {
             return next();
         }
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -108,10 +108,10 @@ exports.getAll = async function (req, res, next) {
             count: tiys.length,
             tiys
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -126,10 +126,10 @@ exports.getNonAccepted = async function (req, res, next) {
             count: tiys.length,
             tiys
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -144,27 +144,27 @@ exports.getAccepted = async function (req, res, next) {
             count: tiys.length,
             tiys
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
 
 exports.getOneTiy = async function (req, res, next) {
     try {
-        const tiy = await Tiy.findById(req.params.tiyID)
+        const tiy = await Tiy.find({ _id: req.params.tiyID })
             .select()
             .exec()
         console.log(tiy);
         res.status(200).json({
             tiy
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -181,10 +181,10 @@ exports.getOwnTiy = async function (req, res, next) {
             count: tiys.length,
             tiys
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -241,10 +241,10 @@ exports.addTiy = async function (req, res, next) {
         res.status(201).json({
             message: "Tiy added"
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
@@ -305,10 +305,10 @@ exports.editTiy = async function (req, res, next) {
         res.status(200).json({
             message: "Tiy updated"
         })
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
@@ -321,17 +321,17 @@ exports.deleteTiy = async (req, res, next) => {
         res.status(200).json({
             message: "Tiy deleted"
         })
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
 
 exports.acceptOffer = async (req, res, next) => {
     try {
-        const tiy = await Tiy.findById(req.params.tiyID);
+        const tiy = await Tiy.find({ _id: req.params.tiyID });
         console.log(tiy);
         tiy.isAccepted = true;
         tiy.offerID = req.params.offerID;
@@ -340,17 +340,17 @@ exports.acceptOffer = async (req, res, next) => {
         res.status(200).json({
             message: "Accepted Offer"
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
 
 exports.cancelOffer = async (req, res, next) => {
     try {
-        const tiy = await Tiy.findById(req.params.tiyID);
+        const tiy = await Tiy.find({ _id: req.params.tiyID });
         console.log(tiy);
         tiy.isAccepted = false;
         tiy.offerID = undefined;
@@ -359,10 +359,10 @@ exports.cancelOffer = async (req, res, next) => {
         res.status(200).json({
             message: "Canceled Offer"
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e
         });
     }
 }

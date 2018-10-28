@@ -5,18 +5,18 @@ const User = require('../models/user-models');
 const Booking = require('../models/booking-models');
 
 exports.checkNotNullTour = async (req, res, next) => {
-    try{
+    try {
         const tour = await Tour.findById(req.params.id);
         if (!tour) {
             res.status(404).json({
-                error : {
+                error: {
                     message: "Not found"
                 }
             });
         } else {
             return next();
         }
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -34,10 +34,9 @@ exports.getAll = async function (req, res, next) {
             count: tours.length,
             tours
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -53,27 +52,28 @@ exports.getOwnTour = async function (req, res, next) {
             count: tours.length,
             tours
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
 
 exports.getOneTour = async function (req, res, next) {
     try {
-        const tour = await Tour.findById(req.params.id)
+        const { id } = req.params
+        const tour = await Tour.find({ _id: id })
             .select()
             .exec()
         console.log(tour);
         res.status(200).json({
             tour
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -81,7 +81,9 @@ exports.getOneTour = async function (req, res, next) {
 exports.checkOwnTour = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
-        const tour = await Tour.findById(req.params.id);
+        const id = req.params
+        const tour = await Tour.find({ _id: id });
+
         console.log(tour.operatorID);
         if (info.id != tour.operatorID) {
             return res.status(403).json({
@@ -92,10 +94,10 @@ exports.checkOwnTour = async (req, res, next) => {
         } else {
             return next();
         }
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e.message.toString());
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -129,10 +131,10 @@ exports.addTour = async function (req, res, next) {
         res.status(201).json({
             message: "Tour added"
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e.message.toString());
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
@@ -171,10 +173,10 @@ exports.editTour = async function (req, res, next) {
         res.status(200).json({
             message: "Tour updated"
         })
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e.message.toString());
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
@@ -187,10 +189,10 @@ exports.deleteTour = async (req, res, next) => {
         res.status(200).json({
             message: "Tour deleted"
         })
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
+        console.log(e);
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
