@@ -16,6 +16,16 @@ class Profile extends Component {
           <div className="col-md-4">
             <ProfileBar userr={user} />
           </div>
+          <div className="col-md-8 mt-5">
+            <ul>
+              <li>email: {user && user.info.email}</li>
+              <li>username: {user && user.info.username}</li>
+              <li>
+                gender:
+                {user && user.info.gender}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );
