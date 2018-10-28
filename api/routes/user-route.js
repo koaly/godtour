@@ -40,6 +40,7 @@ router.get('/current/bookings',
     bookingCtrl.getUserBooking);
 router.get('/current/bookings/:id',
     auth.require,
+    bookingCtrl.checkNotNullBooking,
     bookingCtrl.checkOwnBooking, async (req, res) => {
         res.status(200).json({
             "message": "cancel booking page"
@@ -47,6 +48,7 @@ router.get('/current/bookings/:id',
     });
 router.delete('/current/bookings/:id',
     auth.require,
+    bookingCtrl.checkNotNullBooking,
     bookingCtrl.checkOwnBooking,
     bookingCtrl.cancelBooking);
 router.get('/current/tours',
