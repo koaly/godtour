@@ -4,6 +4,26 @@ const Tour = require('../models/tour-models');
 const User = require('../models/user-models');
 const Booking = require('../models/booking-models');
 
+exports.checkNotNullBooking = async (req, res, next) => {
+    try{
+        const booking = await Booking.findById(req.params.id);
+        if (!booking) {
+            res.status(404).json({
+                error : {
+                    message: "Not found"
+                }
+            });
+        } else {
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.getAll = async function (req, res, next) {
     try {
         const bookings = await Booking.find()

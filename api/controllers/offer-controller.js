@@ -3,6 +3,26 @@ const mongoose = require('mongoose');
 const Tiy = require('../models/tiy-models');
 const Offer = require('../models/offer-models');
 
+exports.checkNotNullOffer = async (req, res, next) => {
+    try{
+        const offer = await Offer.findById(req.params.offerID);
+        if (!offer) {
+            res.status(404).json({
+                error : {
+                    message: "Not found"
+                }
+            });
+        } else {
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.checkOwnOffer = async (req, res, next) => {
     try {
         const { payload: { info } } = req;

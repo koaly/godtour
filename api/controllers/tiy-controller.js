@@ -2,6 +2,26 @@ const mongoose = require('mongoose');
 
 const Tiy = require('../models/tiy-models');
 
+exports.checkNotNullTiy = async (req, res, next) => {
+    try{
+        const tiy = await Tiy.findById(req.params.tiyID);
+        if (!tiy) {
+            res.status(404).json({
+                error : {
+                    message: "Not found"
+                }
+            });
+        } else {
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 exports.checkOwnTiy = async (req, res, next) => {
     try {
         const { payload: { info } } = req;

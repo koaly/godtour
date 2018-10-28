@@ -29,25 +29,28 @@ router.post('/create',
     tiyConfig.tiy,
     checkValidation,
     tiyCtrl.addTiy);
-router.get('/:tiyID', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.checkNonAccepted, tiyCtrl.getOneTiy);
+router.get('/:tiyID', auth.require, tiyCtrl.checkNotNullTiy, tiyCtrl.checkOwnTiyPlus, tiyCtrl.checkNonAccepted, tiyCtrl.getOneTiy);
 router.post('/:tiyID',
     auth.require,
+    tiyCtrl.checkNotNullTiy,
     tiyCtrl.checkOwnTiy,
     tiyCtrl.cancelOffer);
 router.delete('/:tiyID',
     auth.require,
+    tiyCtrl.checkNotNullTiy,
     tiyCtrl.checkOwnTiy,
     tiyCtrl.deleteTiy);
-router.get('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
+router.get('/:tiyID/edit', auth.require, tiyCtrl.checkNotNullTiy, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
 router.put('/:tiyID/edit',
     auth.require,
+    tiyCtrl.checkNotNullTiy,
     tiyCtrl.checkOwnTiy,
     tiyConfig.tiy,
     checkValidation,
     tiyCtrl.editTiy);
 
-router.get('/:tiyID/offers', auth.require, tiyCtrl.checkOwnTiyPlus, offerCtrl.getByTiy);
-router.get('/:tiyID/offers/create', auth.require, operatorCtrl.checkOperatorStatus, async (req, res) => {
+router.get('/:tiyID/offers', auth.require, tiyCtrl.checkNotNullTiy, tiyCtrl.checkOwnTiyPlus, offerCtrl.getByTiy);
+router.get('/:tiyID/offers/create', auth.require, operatorCtrl.checkOperatorStatus, tiyCtrl.checkNotNullTiy, async (req, res) => {
     res.status(200).json({
         'message': "add offer page"
     });
@@ -55,21 +58,26 @@ router.get('/:tiyID/offers/create', auth.require, operatorCtrl.checkOperatorStat
 router.post('/:tiyID/offers/create',
     auth.require,
     operatorCtrl.checkOperatorStatus,
+    tiyCtrl.checkNotNullTiy,
     offerConfig.add,
     checkValidation,
     offerCtrl.addOffer);
 
-router.get('/:tiyID/offers/:offerID', auth.require, offerCtrl.checkOwnOfferPlus, offerCtrl.getOneOffer);
+router.get('/:tiyID/offers/:offerID', auth.require, tiyCtrl.checkNotNullTiy, offerCtrl.checkNotNullOffer, offerCtrl.checkOwnOfferPlus, offerCtrl.getOneOffer);
 //donesn't need body
 router.post('/:tiyID/offers/:offerID',
     auth.require,
+    tiyCtrl.checkNotNullTiy,
+    offerCtrl.checkNotNullOffer,
     tiyCtrl.checkOwnTiy,
     tiyCtrl.acceptOffer);
-router.delete('/:tiyID/offers/:offerID', auth.require, offerCtrl.checkOwnOffer, offerCtrl.deleteOffer);
+router.delete('/:tiyID/offers/:offerID', auth.require, tiyCtrl.checkNotNullTiy, offerCtrl.checkNotNullOffer, offerCtrl.checkOwnOffer, offerCtrl.deleteOffer);
 
-router.get('/:tiyID/offers/:offerID/edit', auth.require, offerCtrl.checkOwnOffer, offerCtrl.getOneOffer);
+router.get('/:tiyID/offers/:offerID/edit', auth.require, tiyCtrl.checkNotNullTiy, offerCtrl.checkNotNullOffer, offerCtrl.checkOwnOffer, offerCtrl.getOneOffer);
 router.put('/:tiyID/offers/:offerID/edit',
     auth.require,
+    tiyCtrl.checkNotNullTiy,
+    offerCtrl.checkNotNullOffer,
     offerCtrl.checkOwnOffer,
     offerConfig.add,
     checkValidation,
