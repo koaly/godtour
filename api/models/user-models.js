@@ -101,5 +101,28 @@ userSchema.methods.toAuthJSON = function () {
     }
 }
 
+userSchema.post('find', function (doc, next) {
+    console.log('inside post middleware')
+    if (doc.length > 1) {
+        next()
+    }
+    throw new Error('not found user')
+})
+
+userSchema.post('findOne', function (doc, next) {
+    console.log('inside post middleware')
+    if (doc) {
+        next()
+    }
+    throw new Error('not found user')
+})
+
+userSchema.post('findOneAndUpdate', function (doc, next) {
+    console.log('inside post middleware')
+    if (doc) {
+        next()
+    }
+    throw new Error('not found user')
+})
 
 module.exports = mongoose.model('User', userSchema);

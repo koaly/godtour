@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../models/user-models');
-const { validationResult } = require('express-validator/check')
 
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
@@ -26,9 +25,9 @@ exports.getAll = async (req, res, next) => {
             users: response
         })
     }
-    catch (err) {
+    catch (e) {
         res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
@@ -39,19 +38,14 @@ exports.getOneUser = async function (req, res, next) {
         const user = await User.findOne({ username: username })
             .select()
             .exec()
-        if (!user) {
-            return res.status(404).json({
-                error: "User doesn't exist"
-            })
-        }
-        console.log(user);
+
+        //we don't need catch not found any more
         return res.status(200).json({
             user: user.toProfileJSON()
         });
-    } catch (err) {
-        console.log(err);
+    } catch (e) {
         return res.status(500).json({
-            error: err
+            error: e.message.toString()
         });
     }
 }
@@ -116,11 +110,10 @@ exports.editCurrentUser = async (req, res, next) => {
             })
         }
     }
-    catch (err) {
-        console.log(err);
+    catch (e) {
+        console.log(e);
         res.status(500).json({
-            sucess: false,
-            error: err
+            error: e.message.toString()
         })
     }
 }
@@ -158,10 +151,10 @@ exports.userSignup = async (req, res, next) => {
             })
         }
     }
-    catch (err) {
-        console.log(err)
+    catch (e) {
+        console.log(e)
         return res.status(500).json({
-            error: err
+            error: e.message.toString()
         })
     }
 }
