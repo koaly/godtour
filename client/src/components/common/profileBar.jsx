@@ -10,7 +10,7 @@ class ProfileBar extends Component {
         <ul className="nav flex-column nav-pills pdb pdl">
           {userr && (
             <img
-              className="profileimg pdl"
+              className="profileimg pdl mgt"
               src={userr.info.imgsrc}
               alt="no image"
             />

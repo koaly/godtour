@@ -32,7 +32,7 @@ class MyBook extends Component {
           <div className="col-md-4">
             <ProfileBar userr={user} />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-8 mgt">
             <p>{count} movies in the database.</p>
             <table className="table">
               <thead>
