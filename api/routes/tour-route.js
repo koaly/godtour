@@ -6,7 +6,7 @@ const operatorCtrl = require('../controllers/operator-controller');
 const bookingCtrl = require('../controllers/booking-controller');
 const auth = require('./auth');
 
-const config = require('./validation/tours-validation')
+const tourConfig = require('./validation/tours-validation')
 const checkValidation = require('./validation/checkValidation')
 
 router.get('/', auth.optional, async (req, res) => {
@@ -23,7 +23,7 @@ router.get('/create', auth.require, operatorCtrl.checkOperatorStatus, async (req
 router.post('/create',
     auth.require,
     operatorCtrl.checkOperatorStatus,
-    config.tour,
+    tourConfig.tour,
     checkValidation,
     tourCtrl.addTour);
 
@@ -35,7 +35,7 @@ router.get('/:id/edit', auth.require, tourCtrl.checkOwnTour, tourCtrl.getOneTour
 router.put('/:id/edit',
     auth.require,
     tourCtrl.checkOwnTour,
-    config.tour,
+    tourConfig.tour,
     checkValidation,
     tourCtrl.editTour);
 
