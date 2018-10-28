@@ -3,10 +3,18 @@ import { Link, NavLink } from "react-router-dom";
 
 class ProfileBar extends Component {
   render() {
+    const { userr } = this.props;
+    console.log(userr);
     return (
       <div>
         <ul className="nav flex-column nav-pills">
-          <div className="fakeimg">img</div>
+          {userr && (
+            <img
+              className="profileimg"
+              src={userr.info.imgsrc}
+              alt="no image"
+            />
+          )}
           <li className="nav-item">
             <NavLink className="nav-link" exact to="/profile">
               Profile
