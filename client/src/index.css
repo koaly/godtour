@@ -201,6 +201,10 @@ code {
   font-style: bold;
 }
 
+.pdl {
+  padding-left: 20px;
+}
+
 .profileimg {
   height: 270px;
 }
