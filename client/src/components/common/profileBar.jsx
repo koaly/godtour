@@ -7,7 +7,7 @@ class ProfileBar extends Component {
     console.log(userr);
     return (
       <div>
-        <ul className="nav flex-column nav-pills">
+        <ul className="nav flex-column nav-pills pdb">
           {userr && (
             <img
               className="profileimg"
@@ -17,22 +17,22 @@ class ProfileBar extends Component {
           )}
           <li className="nav-item">
             <NavLink className="nav-link" exact to="/profile">
-              Profile
+              <span className="black">Profile</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myCard">
-              My Cards
+            <span className="black">My Cards</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/purchaseList">
-              Purchase List
+            <span className="black">Purchase List</span>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myBooking">
-              My Booking
+            <span className="black">My Booking</span>
             </NavLink>
           </li>
         </ul>

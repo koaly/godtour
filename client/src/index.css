@@ -17,6 +17,8 @@ body {
   text-align: center;
 }*/
 
+
+
 .footer {
   clear: both;
   width: 100%;
@@ -153,6 +155,41 @@ code {
 
 .white {
   color: white;
+}
+
+.black {
+  margin-left: 20px;
+  color: black;
+}
+
+.bgnav {
+  background-color: #343a40;
+}
+
+.profile-head {
+  background-image: linear-gradient(90deg,#879790,#343a40);
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.bglight {
+  background-color: #ececec;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 0.3rem;
+  overflow: hidden;
+}
+
+.profile-container {
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.pdb {
+  padding-bottom: 10px;
 }
 
 .gray {

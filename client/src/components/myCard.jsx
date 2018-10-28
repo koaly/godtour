@@ -5,13 +5,15 @@ class MyCard extends Component {
   render() {
     const { user } = this.props;
     return (
-      <div className="container mgtb">
-        <h1>My Cards</h1>
+      <div className="container">
+      <div className="profile-container bglight mgtb">
+        <h1 className="profile-head">My Cards</h1>
         <div className="row">
           <div className="col-md-4">
             <ProfileBar userr={user} />
           </div>
         </div>
+      </div>
       </div>
     );
   }

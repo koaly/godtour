@@ -25,8 +25,9 @@ class MyBook extends Component {
     const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
-      <div className="container mgtb">
-        <h1>My Booking</h1>
+      <div className="container">
+      <div className="profile-container bglight mgtb">
+        <h1 className="profile-head">My Booking</h1>
         <div className="row">
           <div className="col-md-4">
             <ProfileBar userr={user} />
@@ -70,6 +71,7 @@ class MyBook extends Component {
             />
           </div>
         </div>
+      </div>
       </div>
     );
   }
