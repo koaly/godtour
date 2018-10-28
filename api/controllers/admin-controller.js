@@ -28,11 +28,6 @@ exports.checkAdminStatus = async (req, res, next) => {
 exports.checkUpgradeRequest = async (req, res, next) => {
     try{
         const user = await User.findById(req.params.id);
-        if (!user) {
-            res.status(404).json({
-                message: "Not found"
-            })
-        }
         console.log(user.upgradeRequest);
         if(!user.upgradeRequest){
             return res.status(403).json({
@@ -72,11 +67,6 @@ exports.getUpgradeRequest = async (req, res, next) => {
 exports.acceptUpgradeRequest = async (req, res, next) => {
     try{
         const user = await User.findById(req.params.id);
-        if (!user) {
-            res.status(404).json({
-                message: "Not found"
-            })
-        }
         console.log(user);
         user.upgradeRequest = false;
         user.status = 1;
@@ -96,11 +86,6 @@ exports.acceptUpgradeRequest = async (req, res, next) => {
 exports.refuseUpgradeRequest = async (req, res, next) => {
     try{
         const user = await User.findById(req.params.id);
-        if (!user) {
-            res.status(404).json({
-                message: "Not found"
-            })
-        }
         console.log(user);
         user.upgradeRequest = false;
         const result = await user.save();

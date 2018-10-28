@@ -3,6 +3,25 @@ const passport = require('passport');
 const User = require('../models/user-models');
 const { validationResult } = require('express-validator/check')
 
+exports.checkNotNullUser = async (req, res, next) => {
+    try{
+        if (!user) {
+            res.status(404).json({
+                error : {
+                    message: "Not found"
+                }
+            });
+        } else {
+            return next();
+        }
+    } catch(err){
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
