@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./hompage.css";
 import Form from "../common/form";
+import { NotificationsIcon } from "mdi-react";
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 class HomePage extends Component {
@@ -138,6 +139,11 @@ class HomePage extends Component {
                 <div className="ad">
                   {/* insert email from plz */}
                 </div>
+              </div>
+              <div className="ae">
+                <button className="ba" >
+                  <NotificationsIcon className="ayy"/>Subscribe
+                </button>
               </div>
             </div>
           </div>
