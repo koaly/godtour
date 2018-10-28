@@ -49,3 +49,34 @@
     position: relative;
     width: 100%;
 }
+
+.ae {
+    width: 16.66667%;
+    padding-left: 12px;
+    padding-right: 12px;
+    box-sizing: border-box;
+}
+
+.ayy {
+    margin-right:5px;
+    margin-bottom: 3px;
+}
+
+.ba {
+    border: none;
+    padding: 8px 16px;
+    white-space: nowrap;
+    line-height: 24px;
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    border-radius: 5px;
+    font-weight: 650;
+    color: #0770cd;
+    background-color: #f6f6f6;
+    
+    
+}
