@@ -28,26 +28,29 @@ router.post('/create',
     checkValidation,
     tourCtrl.addTour);
 
-router.get('/:id', auth.optional, tourCtrl.getOneTour);
+router.get('/:id', auth.optional, tourCtrl.checkNotNullTour, tourCtrl.getOneTour);
 
 router.post('/:id',
     auth.require,
+    tourCtrl.checkNotNullTour,
     bookingConfig.bookTour,
     checkValidation,
     bookingCtrl.bookTour);
 router.delete('/:id',
     auth.require,
+    tourCtrl.checkNotNullTour,
     tourCtrl.checkOwnTour,
     tourCtrl.deleteTour);
-router.get('/:id/edit', auth.require, tourCtrl.checkOwnTour, tourCtrl.getOneTour);
+router.get('/:id/edit', auth.require, tourCtrl.checkNotNullTour, tourCtrl.checkOwnTour, tourCtrl.getOneTour);
 
 router.put('/:id/edit',
     auth.require,
+    tourCtrl.checkNotNullTour,
     tourCtrl.checkOwnTour,
     tourConfig.tour,
     checkValidation,
     tourCtrl.editTour);
 
-router.get('/:id/bookings', auth.require, tourCtrl.checkOwnTour, bookingCtrl.getTourBooking);
+router.get('/:id/bookings', auth.require, tourCtrl.checkNotNullTour, tourCtrl.checkOwnTour, bookingCtrl.getTourBooking);
 
 module.exports = router
