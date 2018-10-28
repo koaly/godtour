@@ -7,12 +7,14 @@ import ProfileBar from "./common/profileBar";
 
 class Profile extends Component {
   render() {
+    const { user } = this.props;
+    console.log(user);
     return (
       <div className="container mgtb">
         <h1>Profile</h1>
         <div className="row">
           <div className="col-md-4">
-            <ProfileBar />
+            <ProfileBar userr={user} />
           </div>
         </div>
       </div>
