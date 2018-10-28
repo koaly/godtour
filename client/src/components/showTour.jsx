@@ -7,8 +7,11 @@ class ShowTour extends Component {
 	constructor( props ){
 		super( props )
 		this.state = {	
-			Loading		: true
+			Loading			: true
+			, Max			: false
+			, CurrentOrder	: 0
 		}
+		this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
 		this.ShowMoreCallback = this.ShowMoreCallback.bind(this)
 		this.FetchReceiveTourCallback = this.FetchReceiveTourCallback.bind(this)
 		this.FetchAllTours = new FetchAllTours();
@@ -16,32 +19,56 @@ class ShowTour extends Component {
 
 	ShowMoreCallback(){
 		console.log("===============> ShowTour:ShowMoreCallback");
-		this.setstate( state => ({
+		this.FetchAllTours.get_all_tours( this.state.CurrentOrder , 5 
+										, this.FetchReceiveTourCallback )
+		this.setState( state => ({
 			Loading		: true
 		}));	
 	}
 
 	componentDidMount(){
 		console.log("===============> ShowTour:componentDidMount");
-		this.FetchAllTours.get_all_tours( 0 , 5 , this.FetchReceiveTourCallback );
+		this.FetchAllTours.get_all_tours( this.state.CurrentOrder , 5 
+										, this.FetchReceiveTourCallback );
 	}
 
 	FetchReceiveTourCallback( ReceiveInformation , ReceiveData ){
 		console.log("===============> ShowTour.FetchReceiveTourCallback" , ReceiveData );
-		this.setState( state => ({ 
-			Loading		: false 
-		}));
+		if( ReceiveData.length == 5){
+			this.setState( state => ({ 
+				Loading			: false
+				, CurrentOrder	: this.state.CurrentOrder + 5
+			}));
+		}else{
+			this.setState( state => ({
+				Loading			: false
+				, Max			: true
+				, CurrentOrder	: this.state.CurrentOrder + ReceiveData.length
+			}));
+		}
+	}
+
+	render_one_tour( data_tour ){
+		
 	}
 
 	render() {
-		console.log("===============> Show_tour.render()")
+		console.log("===============> Show_tour.render()" , this.state );
+		if( this.state.Max ) this.condition = 0;
+		else{
+			if( this.state.Loading ) this.condition = 1;
+			else this.condition = 2;
+		}
 		return (
 			<div className="container mgtb">
 				<h1>Tour List</h1>
-				{ this.state.Loading &&	<button	className = "GeneralButtonTour" > 'Now Loading!' 
-					</button> }
-				{ ! this.state.Loading && <button className = "ButtonMoreTour GeneralButtonTour"
-						onClick = { this.ShowMoreCallback }> "More Tour!" </button>}
+				{ this.condition == 1 &&	
+					<button	className = "GeneralButtonTour" > 'Now Loading!' </button> 
+				}
+				{ this.condition == 2 && 
+					<button className = "ButtonMoreTour GeneralButtonTour"
+						onClick = { this.ShowMoreCallback }> "More Tour!" </button>
+				}
 			</div>
 		);
 	}

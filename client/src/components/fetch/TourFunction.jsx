@@ -1,8 +1,5 @@
 export default class TourConvert{
 
-	constructor(){
-	}
-
 	convert_data_tour( data ){
 		return { have : false }
 	}
