@@ -128,6 +128,8 @@ exports.addOffer = async function (req, res, next) {
             nightDuration: req.body.nightDuration,
             departDate: req.body.departDate,
             returnDate: req.body.returnDate,
+            //in model airline is require
+            //what about tour in our county
             airline: req.body.airline,
             member: req.body.member,
             food: req.body.food,

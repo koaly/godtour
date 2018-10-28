@@ -5,9 +5,12 @@ const tiyCtrl = require('../controllers/tiy-controller');
 const operatorCtrl = require('../controllers/operator-controller');
 const adminCtrl = require('../controllers/admin-controller');
 const offerCtrl = require('../controllers/offer-controller');
-const auth = require('./auth');
 
-router.get('/', auth.optional, async (req, res) =>{
+const auth = require('./auth');
+const checkValidation = require('./validation/checkValidation')
+const tiyConfig = require('./validation/tiy-validation')
+const offerConfig = require('./validation/offer-validation')
+router.get('/', auth.optional, async (req, res) => {
     res.status(200).json({
         'message': "tour-it-yourself's home page"
     })
@@ -20,12 +23,28 @@ router.get('/create', auth.require, operatorCtrl.checkNonOperatorStatus, async (
         'message': "add tiy page"
     });
 });
-router.post('/create', auth.require, operatorCtrl.checkNonOperatorStatus, tiyCtrl.addTiy);
+router.post('/create',
+    auth.require,
+    operatorCtrl.checkNonOperatorStatus,
+    tiyConfig.tiy,
+    checkValidation,
+    tiyCtrl.addTiy);
 router.get('/:tiyID', auth.require, tiyCtrl.checkOwnTiyPlus, tiyCtrl.checkNonAccepted, tiyCtrl.getOneTiy);
-router.post('/:tiyID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.cancelOffer); 
-router.delete('/:tiyID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.deleteTiy);
+router.post('/:tiyID',
+    auth.require,
+    tiyCtrl.checkOwnTiy,
+    tiyCtrl.cancelOffer);
+router.delete('/:tiyID',
+    auth.require,
+    tiyCtrl.checkOwnTiy,
+    tiyCtrl.deleteTiy);
 router.get('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.getOneTiy);
-router.put('/:tiyID/edit', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.editTiy);
+router.put('/:tiyID/edit',
+    auth.require,
+    tiyCtrl.checkOwnTiy,
+    tiyConfig.tiy,
+    checkValidation,
+    tiyCtrl.editTiy);
 
 router.get('/:tiyID/offers', auth.require, tiyCtrl.checkOwnTiyPlus, offerCtrl.getByTiy);
 router.get('/:tiyID/offers/create', auth.require, operatorCtrl.checkOperatorStatus, async (req, res) => {
@@ -33,12 +52,27 @@ router.get('/:tiyID/offers/create', auth.require, operatorCtrl.checkOperatorStat
         'message': "add offer page"
     });
 });
-router.post('/:tiyID/offers/create', auth.require,operatorCtrl.checkOperatorStatus, offerCtrl.addOffer);
+router.post('/:tiyID/offers/create',
+    auth.require,
+    operatorCtrl.checkOperatorStatus,
+    offerConfig.add,
+    checkValidation,
+    offerCtrl.addOffer);
+
 router.get('/:tiyID/offers/:offerID', auth.require, offerCtrl.checkOwnOfferPlus, offerCtrl.getOneOffer);
-router.post('/:tiyID/offers/:offerID', auth.require, tiyCtrl.checkOwnTiy, tiyCtrl.acceptOffer);
+//donesn't need body
+router.post('/:tiyID/offers/:offerID',
+    auth.require,
+    tiyCtrl.checkOwnTiy,
+    tiyCtrl.acceptOffer);
 router.delete('/:tiyID/offers/:offerID', auth.require, offerCtrl.checkOwnOffer, offerCtrl.deleteOffer);
 
 router.get('/:tiyID/offers/:offerID/edit', auth.require, offerCtrl.checkOwnOffer, offerCtrl.getOneOffer);
-router.put('/:tiyID/offers/:offerID/edit', auth.require, offerCtrl.checkOwnOffer, offerCtrl.editOffer);
+router.put('/:tiyID/offers/:offerID/edit',
+    auth.require,
+    offerCtrl.checkOwnOffer,
+    offerConfig.add,
+    checkValidation,
+    offerCtrl.editOffer);
 
 module.exports = router
