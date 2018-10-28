@@ -114,11 +114,6 @@ exports.bookTour = async (req, res, next) => {
 exports.cancelBooking = async (req, res, next) => {
     try {
         const booking = await Booking.findById(req.params.id);
-        if (!booking) {
-            return res.status(404).json({
-                message: "Not found"
-            })
-        }
         const tour = await Tour.findById(booking.tourID);
 
         console.log(booking);
@@ -146,11 +141,7 @@ exports.checkOwnBooking = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
         const booking = await Booking.findById(req.params.id);
-        if (!booking) {
-            return res.status(404).json({
-                message: "Not found"
-            })
-        }
+
         console.log(booking.userID);
 
         if (info.id != booking.userID) {
