@@ -73,9 +73,6 @@ userSchema.methods.generateJWT = function () {
     expirationDate.setDate(today.getDate() + 1);
     return jwt.sign({
         info: this.toProfileJSON(),
-        email: this.email,
-        id: this._id,
-        status: this.status,
         exp: parseInt(expirationDate.getTime() / 1000, 10)
         //another private key we must add to json that store sercet of file later
     }, process.env.JWT_SECRET);
