@@ -10,6 +10,7 @@ class ShowTour extends Component {
 			Loading			: true
 			, Max			: false
 			, CurrentOrder	: 0
+			, ListTour		: []
 		}
 		this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
 		this.ShowMoreCallback = this.ShowMoreCallback.bind(this)
@@ -34,22 +35,24 @@ class ShowTour extends Component {
 
 	FetchReceiveTourCallback( ReceiveInformation , ReceiveData ){
 		console.log("===============> ShowTour.FetchReceiveTourCallback" , ReceiveData );
+		var temporary = this.state.ListTour;
+		for( let count = 0 ; count < ReceiveData.length ; count++){
+			temporary.push( ReceiveData[count] )
+		}
 		if( ReceiveData.length == 5){
 			this.setState( state => ({ 
 				Loading			: false
 				, CurrentOrder	: this.state.CurrentOrder + 5
+				, ListTour		: temporary
 			}));
 		}else{
 			this.setState( state => ({
 				Loading			: false
 				, Max			: true
 				, CurrentOrder	: this.state.CurrentOrder + ReceiveData.length
+				, ListTour		: temporary
 			}));
 		}
-	}
-
-	render_one_tour( data_tour ){
-		
 	}
 
 	render() {
