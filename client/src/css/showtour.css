@@ -20,5 +20,13 @@
 	border: 1px solid black;
 	height: 200px;
 	margin-bottom : 2px;
-	padding: 5px;
+	padding-left: 10px;
+	padding-top : 10px;
+}
+
+.HeadTour{
+	text-transform: capitalize;
+	font-family : "Times New Roman" , Times , serif;
+	font-weight : bold;
+	color : blue;
 }
