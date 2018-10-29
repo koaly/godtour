@@ -7,14 +7,28 @@ import ProfileBar from "./common/profileBar";
 
 class Profile extends Component {
   render() {
+    const { user } = this.props;
+    console.log(user);
     return (
-      <div className="container mgtb">
-        <h1>Profile</h1>
+      <div className="container">
+      <div className="profile-container bglight mgtb">
+        <h1 className="profile-head">Profile</h1>
         <div className="row">
           <div className="col-md-4">
-            <ProfileBar />
+            <ProfileBar userr={user} />
+          </div>
+          <div className="col-md-8 mt-5">
+            <ul>
+              <li>email: {user && user.info.email}</li>
+              <li>username: {user && user.info.username}</li>
+              <li>
+                gender:
+                {user && user.info.gender}
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
       </div>
     );
   }

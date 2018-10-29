@@ -19,18 +19,20 @@ class MyBook extends Component {
     this.setState({ currentPage: page });
   };
   render() {
+    const { user } = this.props;
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, movies: allMovies } = this.state;
     const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
-      <div className="container mgtb">
-        <h1>My Booking</h1>
+      <div className="container">
+      <div className="profile-container bglight mgtb">
+        <h1 className="profile-head">My Booking</h1>
         <div className="row">
           <div className="col-md-4">
-            <ProfileBar />
+            <ProfileBar userr={user} />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-8 mgt">
             <p>{count} movies in the database.</p>
             <table className="table">
               <thead>
@@ -40,7 +42,6 @@ class MyBook extends Component {
                   <th>Stock</th>
                   <th>Rate</th>
                   <th />
-                  
                 </tr>
               </thead>
               <tbody>
@@ -70,6 +71,7 @@ class MyBook extends Component {
             />
           </div>
         </div>
+      </div>
       </div>
     );
   }

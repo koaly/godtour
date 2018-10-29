@@ -48,10 +48,22 @@ class App extends Component {
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />
-            <Route path="/profile/myBooking" component={MyBook} />
-            <Route path="/profile/myCard" component={MyCard} />
-            <Route path="/profile/purchaseList" component={PurchaseList} />
-            <Route path="/profile" component={Profile} />
+            <Route
+              path="/profile/myBooking"
+              render={() => <MyBook user={this.state.user} />}
+            />
+            <Route
+              path="/profile/myCard"
+              render={() => <MyCard user={this.state.user} />}
+            />
+            <Route
+              path="/profile/purchaseList"
+              render={() => <PurchaseList user={this.state.user} />}
+            />
+            <Route
+              path="/profile"
+              render={() => <Profile user={this.state.user} />}
+            />
             <Route path="/testfetch" component={TestFetch} />
             <Route path="/testpost" component={TestPost} />
             <Redirect to="/not-found" />

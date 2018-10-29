@@ -3,28 +3,36 @@ import { Link, NavLink } from "react-router-dom";
 
 class ProfileBar extends Component {
   render() {
+    const { userr } = this.props;
+    console.log(userr);
     return (
       <div>
-        <ul className="nav flex-column nav-pills">
-          <div className="fakeimg">img</div>
-          <li className="nav-item">
+        <ul className="nav flex-column nav-pills pdb pdl">
+          {userr && (
+            <img
+              className="profileimg pdl mgt"
+              src={userr.info.imgsrc}
+              alt="no image"
+            />
+          )}
+          <li className="nav-item pdl">
             <NavLink className="nav-link" exact to="/profile">
-              Profile
+              <span className="black">Profile</span>
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item pdl">
             <NavLink className="nav-link" to="/profile/myCard">
-              My Cards
+            <span className="black">My Cards</span>
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item pdl">
             <NavLink className="nav-link" to="/profile/purchaseList">
-              Purchase List
+            <span className="black">Purchase List</span>
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item pdl">
             <NavLink className="nav-link" to="/profile/myBooking">
-              My Booking
+            <span className="black">My Booking</span>
             </NavLink>
           </li>
         </ul>
