@@ -65,6 +65,13 @@ class ShowTour extends Component {
 		return (
 			<div className="container mgtb">
 				<h1>Tour List</h1>
+				<ul>
+					{this.state.ListTour.map( tour => 
+						<li key={tour.id} className = "BlockTour">
+							<h3>{tour.name}</h3>
+						</li>
+					)}
+				</ul>
 				{ this.condition == 1 &&	
 					<button	className = "GeneralButtonTour" > 'Now Loading!' </button> 
 				}

@@ -18,4 +18,7 @@
 
 .BlockTour{
 	border: 1px solid black;
+	height: 200px;
+	margin-bottom : 2px;
+	padding: 5px;
 }
