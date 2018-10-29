@@ -1,4 +1,4 @@
-.ButtonMoreTour{
+.GeneralButtonTour{
 	clear			: both;
 	width			: 100%;
 	border			: none;
@@ -14,4 +14,11 @@
 	background-color: FireBrick;
 	font-weight		: bold;
 	color			: DarkBlue;
+}
+
+.BlockTour{
+	border: 1px solid black;
+	height: 200px;
+	margin-bottom : 2px;
+	padding: 5px;
 }
