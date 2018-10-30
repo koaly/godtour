@@ -4,6 +4,7 @@ const Tour = require('../models/tour-models');
 const User = require('../models/user-models');
 const Booking = require('../models/booking-models');
 
+const { TourNotFoundException, HandingErorr } = require('./handingError')
 exports.checkNotNullTour = async (req, res, next) => {
     try {
         const tour = await Tour.findById(req.params.id);
@@ -26,18 +27,17 @@ exports.checkNotNullTour = async (req, res, next) => {
 
 exports.getAll = async function (req, res, next) {
     try {
-        let tours = await Tour.find()
-            .select()
-            .exec()
+        //use const we will not change varirable in const
+        const tours = await Tour.find()
+
+        if (!tours || tours.length == 0) throw new TourNotFoundException()
         console.log(tours);
         res.status(200).json({
             count: tours.length,
             tours
         });
     } catch (e) {
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -45,18 +45,15 @@ exports.getOwnTour = async function (req, res, next) {
     try {
         const { payload: { info } } = req;
         const tours = await Tour.find({ operatorID: info.id })
-            .select()
-            .exec()
+
+        if (!tours || tours.length == 0) throw new TourNotFoundException()
         console.log(tours);
         res.status(200).json({
             count: tours.length,
             tours
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -64,17 +61,14 @@ exports.getOneTour = async function (req, res, next) {
     try {
         const { id } = req.params
         const tour = await Tour.find({ _id: id })
-            .select()
-            .exec()
+
+        if (!tour || tours.length == 0) throw new TourNotFoundException()
         console.log(tour);
         res.status(200).json({
             tour
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -83,6 +77,8 @@ exports.checkOwnTour = async (req, res, next) => {
         const { payload: { info } } = req;
         const id = req.params
         const tour = await Tour.find({ _id: id });
+
+        if (!tour || tours.length == 0) throw new TourNotFoundException()
 
         console.log(tour.operatorID);
         if (info.id != tour.operatorID) {
@@ -94,11 +90,9 @@ exports.checkOwnTour = async (req, res, next) => {
         } else {
             return next();
         }
+
     } catch (e) {
-        console.log(e.message.toString());
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -132,10 +126,7 @@ exports.addTour = async function (req, res, next) {
             message: "Tour added"
         });
     } catch (e) {
-        console.log(e.message.toString());
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 
@@ -167,17 +158,18 @@ exports.editTour = async function (req, res, next) {
 
         console.log(req.params);
         console.log(tour);
+
         const id = { _id: req.params.id }
         const result = await Tour.findOneAndUpdate(id, tour);
+
+        if (!result || result.length == 0) throw new TourNotFoundException()
+
         console.log(result);
-        res.status(200).json({
+        return res.status(200).json({
             message: "Tour updated"
         })
     } catch (e) {
-        console.log(e.message.toString());
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 
@@ -185,14 +177,14 @@ exports.deleteTour = async (req, res, next) => {
     try {
         const id = { _id: req.params.id }
         const result = await Tour.findOneAndRemove(id);
+
+        if (!result || result.length == 0) throw new TourNotFoundException()
+
         console.log(result);
         res.status(200).json({
             message: "Tour deleted"
         })
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }

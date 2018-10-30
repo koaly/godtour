@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Tiy = require('../models/tiy-models');
+const { TiyNotFoundException, HandingErorr } = require('./handingError')
 
 exports.checkNotNullTiy = async (req, res, next) => {
     try {
@@ -15,7 +16,6 @@ exports.checkNotNullTiy = async (req, res, next) => {
             return next();
         }
     } catch (err) {
-        console.log(err);
         res.status(500).json({
             error: err
         });
@@ -27,8 +27,10 @@ exports.checkOwnTiy = async (req, res, next) => {
         const { payload: { info } } = req;
         const { id } = info
         const tiy = await Tiy.find({ _id: req.params.tiyID });
-        console.log(info.id);
-        console.log(tiy.userID);
+
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
+
+        console.log(`Check ${info.id} != ${tiy.userID}`);
         if (id != tiy.userID) {
             return res.status(403).json({
                 error: {
@@ -39,10 +41,7 @@ exports.checkOwnTiy = async (req, res, next) => {
             return next();
         }
     } catch (e) {
-        console.log(e.message.toString());
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -52,8 +51,11 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
         const { id, status } = info
 
         const tiy = await Tiy.find({ _id: req.params.tiyID });
-        console.log(info.id);
-        console.log(tiy.userID);
+
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
+
+        console.log(`Check ${info.id} != ${tiy.userID}`);
+
         if (id != tiy.userID && !status) {
             return res.status(403).json({
                 error: {
@@ -64,10 +66,7 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
             return next();
         }
     } catch (e) {
-        console.log(e.message.toString());
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -78,10 +77,11 @@ exports.checkNonAccepted = async (req, res, next) => {
 
         const { tiyID } = req.params
 
-        const { isAccepted, userID } = await Tiy.find({ _id: tiyID });
+        const tiy = await Tiy.find({ _id: tiyID });
 
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
         console.log(isAccepted);
-        if (isAccepted && id != userID) {
+        if (tiy.isAccepted && id != tiy.userID) {
             return res.status(403).json({
                 error: {
                     message: "This Tour-it-yourself was accepted."
@@ -91,81 +91,65 @@ exports.checkNonAccepted = async (req, res, next) => {
             return next();
         }
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
 exports.getAll = async function (req, res, next) {
     try {
         const tiys = await Tiy.find()
-            .select()
-            .exec()
+
+        if (!tiys || tiys.length == 0) throw new TiyNotFoundException()
         console.log(tiys);
         res.status(200).json({
             count: tiys.length,
             tiys
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
 exports.getNonAccepted = async function (req, res, next) {
     try {
         const tiys = await Tiy.find({ isAccepted: false })
-            .select()
-            .exec()
+
+        if (!tiys || tiys.length == 0) throw new TiyNotFoundException()
         console.log(tiys);
         res.status(200).json({
             count: tiys.length,
             tiys
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
 exports.getAccepted = async function (req, res, next) {
     try {
         const tiys = await Tiy.find({ isAccepted: true })
-            .select()
-            .exec()
+
+        if (!tiys || tiys.length == 0) throw new TiyNotFoundException()
         console.log(tiys);
         res.status(200).json({
             count: tiys.length,
             tiys
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
 exports.getOneTiy = async function (req, res, next) {
     try {
         const tiy = await Tiy.find({ _id: req.params.tiyID })
-            .select()
-            .exec()
-        console.log(tiy);
+
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
         res.status(200).json({
             tiy
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -174,18 +158,15 @@ exports.getOwnTiy = async function (req, res, next) {
         const { payload: { info } } = req;
         const { id } = info
         const tiys = await Tiy.find({ userID: id })
-            .select()
-            .exec()
+
+        if (!tiys || tiys.length == 0) throw new TiyNotFoundException()
         console.log(tiys);
         res.status(200).json({
             count: tiys.length,
             tiys
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
@@ -242,10 +223,7 @@ exports.addTiy = async function (req, res, next) {
             message: "Tiy added"
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 
@@ -301,15 +279,13 @@ exports.editTiy = async function (req, res, next) {
         const id = { _id: tiyID }
 
         const result = await Tiy.findOneAndUpdate(id, tiy, { new: true });
+        if (!result || result.length == 0) throw new TiyNotFoundException()
         console.log(result);
         res.status(200).json({
             message: "Tiy updated"
         })
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 
@@ -317,21 +293,22 @@ exports.deleteTiy = async (req, res, next) => {
     try {
         const id = { _id: req.params.tiyID }
         const result = await Tiy.findOneAndRemove(id);
+
+        if (!result || result.length == 0) throw new TiyNotFoundException()
         console.log(result);
         res.status(200).json({
             message: "Tiy deleted"
         })
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 
 exports.acceptOffer = async (req, res, next) => {
     try {
         const tiy = await Tiy.find({ _id: req.params.tiyID });
+
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
         console.log(tiy);
         tiy.isAccepted = true;
         tiy.offerID = req.params.offerID;
@@ -341,16 +318,15 @@ exports.acceptOffer = async (req, res, next) => {
             message: "Accepted Offer"
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        });
+        HandingErorr(res, e)
     }
 }
 
 exports.cancelOffer = async (req, res, next) => {
     try {
         const tiy = await Tiy.find({ _id: req.params.tiyID });
+
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
         console.log(tiy);
         tiy.isAccepted = false;
         tiy.offerID = undefined;
@@ -360,9 +336,6 @@ exports.cancelOffer = async (req, res, next) => {
             message: "Canceled Offer"
         });
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e
-        });
+        HandingErorr(res, e)
     }
 }

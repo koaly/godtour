@@ -1,6 +1,8 @@
 const passport = require('passport');
 const User = require('../models/user-models');
-const { NotFoundException } = require('./handingError')
+
+const { UserNotFoundException, EmailAlreadyExits, HandingErorr } = require('./handingError')
+
 exports.checkNotNullUser = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
@@ -21,17 +23,7 @@ exports.checkNotNullUser = async (req, res, next) => {
     }
 }
 
-const HandingErorr = function (res, e) {
-    if (e.status) {
-        return res.status(e.status).json({
-            errors: e.message.toString()
-        })
-    }
-    res.status(500).json({
-        errors: e.message.toString()
-    })
 
-}
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -65,7 +57,7 @@ exports.getOneUser = async function (req, res, next) {
     try {
         const user = await User.findOne({ username: username })
 
-        if (!user) throw new NotFoundException('user')
+        if (!user) throw new UserNotFoundException()
 
         return res.status(200).json({
             user: user.toProfileJSON()

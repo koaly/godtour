@@ -1,17 +1,56 @@
-class Exception {
-    constructor(name, status, message) {
-        this.name = name;
-        this.status = status
-        this.message = message
+/**
+ *  if we use ES6 it can't import my class
+ */
+
+
+
+/**
+ * function that can handling more error with some status 
+ * @param {response} res 
+ * @param {error} e 
+ */
+exports.HandingErorr = function (res, e) {
+    if (e.status) {
+        console.log(`${e.name}(${e.status}):${e.message}`)
+        return res.status(e.status).json({
+            errors: e.message.toString()
+        })
     }
+    console.log(`${e.name}:${e.message}`)
+    res.status(500).json({
+        errors: e.message.toString()
+    })
+
 }
-class NotFoundException extends Exception {
-    constructor(obj) {
-        super("errors", 404, `${obj} is not found`)
-    }
+exports.Exception = function (name, status, message) {
+    this.name = name;
+    this.status = status
+    this.message = message
 }
-class EmailAlreadyExits extends Exception {
-    constructor() {
-        super("errors", 409, "email is already exits")
-    }
+
+exports.NotFoundException = function (obj) {
+    this.name = "errors"
+    this.status = 404
+    this.message = `${obj} is not found`
 }
+exports.UserNotFoundException = function () {
+    this.name = "errors"
+    this.status = 404
+    this.message = "User is not found"
+}
+exports.EmailAlreadyExits = function () {
+    this.name = "errors"
+    this.status = 409
+    this.message = "email is already exits"
+}
+exports.TourNotFoundException = function () {
+    this.name = "errors"
+    this.status = 404
+    this.message = "Tour is not found"
+}
+exports.TiyNotFoundException = function () {
+    this.name = "errors"
+    this.status = 404
+    this.message = "Tour it youself is not found"
+}
+
