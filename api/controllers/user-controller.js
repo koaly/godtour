@@ -3,18 +3,18 @@ const passport = require('passport');
 const User = require('../models/user-models');
 
 exports.checkNotNullUser = async (req, res, next) => {
-    try{
+    try {
         const user = await User.findById(req.params.id);
         if (!user) {
             res.status(404).json({
-                error : {
+                error: {
                     message: "Not found"
                 }
             });
         } else {
             return next();
         }
-    } catch(err){
+    } catch (err) {
         console.log(err);
         res.status(500).json({
             error: err
@@ -35,19 +35,23 @@ const userResponse = (users) => {
         }, 1000)
     })
 }
-
 exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find()
         const response = await userResponse(users)
-
-        res.status(200).json({
+        return res.status(200).json({
             users: response
         })
     }
     catch (e) {
+
+        if (e.status == 404) {
+            return res.status(404).json({
+                errors: e.message.toString()
+            })
+        }
         res.status(500).json({
-            error: e.message.toString()
+            errors: e.message.toString()
         })
     }
 }
@@ -56,13 +60,12 @@ exports.getOneUser = async function (req, res, next) {
     const { username } = req.params
     try {
         const user = await User.findOne({ username: username })
-            .select()
-            .exec()
 
-        //we don't need catch not found any more
-        return res.status(200).json({
-            user: user.toProfileJSON()
-        });
+        if (!user)
+            //we don't need catch not found any more
+            return res.status(200).json({
+                user: user.toProfileJSON()
+            });
     } catch (e) {
         return res.status(500).json({
             error: e.message.toString()

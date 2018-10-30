@@ -101,28 +101,27 @@ userSchema.methods.toAuthJSON = function () {
     }
 }
 
-userSchema.post('find', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc.length > 0) {
-        next()
+class UserNotFoundException {
+    constructor() {
+        this.name = "errors";
+        this.status = 404;
+        this.message = "user is not found";
     }
-    throw new Error('not found user')
+}
+
+userSchema.post('find', function (doc, next) {
+    if (doc.length == 0) next()
+    throw new UserNotFoundException();
 })
 
 userSchema.post('findOne', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc) {
-        next()
-    }
-    throw new Error('not found user')
+    if (doc) next()
+    throw new UserNotFoundException();
 })
 
 userSchema.post('findOneAndUpdate', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc) {
-        next()
-    }
-    throw new Error('not found user')
+    if (doc) next()
+    throw new UserNotFoundException();
 })
 
 module.exports = mongoose.model('User', userSchema);
