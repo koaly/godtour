@@ -1,0 +1,32 @@
+.GeneralButtonTour{
+	clear			: both;
+	width			: 100%;
+	border			: none;
+	border-radius	: 12px; /* make smoth anger */
+	background-color: LightPink;
+	opacity			: .5;
+	text-align		: center;
+	display			: inline-block;
+	font-size		: 16px;
+}
+
+.ButtonMoreTour:hover{
+	background-color: FireBrick;
+	font-weight		: bold;
+	color			: DarkBlue;
+}
+
+.BlockTour{
+	border: 1px solid black;
+	height: 200px;
+	margin-bottom : 2px;
+	padding-left: 10px;
+	padding-top : 10px;
+}
+
+.HeadTour{
+	text-transform: capitalize;
+	font-family : "Times New Roman" , Times , serif;
+	font-weight : bold;
+	color : blue;
+}

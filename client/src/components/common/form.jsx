@@ -5,10 +5,10 @@ import Select from "./select";
 import Textarea from "./textarea";
 
 class Form extends Component {
-  state = {
+/*  state = {
     data: {},
     errors: {}
-  };
+  };*/
 
   validate = () => {
     const options = { abortEarly: false };
