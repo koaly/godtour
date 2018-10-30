@@ -100,7 +100,7 @@ userSchema.methods.toAuthJSON = function () {
         token: this.generateJWT()
     }
 }
-
+/*
 class UserNotFoundException {
     constructor() {
         this.name = "errors";
@@ -123,5 +123,5 @@ userSchema.post('findOneAndUpdate', function (doc, next) {
     if (doc) next()
     throw new UserNotFoundException();
 })
-
+*/
 module.exports = mongoose.model('User', userSchema);

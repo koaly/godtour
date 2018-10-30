@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require('../models/user-models');
-
+const { NotFoundException } = require('./handingError')
 exports.checkNotNullUser = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
@@ -22,6 +21,17 @@ exports.checkNotNullUser = async (req, res, next) => {
     }
 }
 
+const HandingErorr = function (res, e) {
+    if (e.status) {
+        return res.status(e.status).json({
+            errors: e.message.toString()
+        })
+    }
+    res.status(500).json({
+        errors: e.message.toString()
+    })
+
+}
 const userResponse = (users) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -39,37 +49,29 @@ exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find()
         const response = await userResponse(users)
+
         return res.status(200).json({
             users: response
         })
     }
     catch (e) {
-
-        if (e.status == 404) {
-            return res.status(404).json({
-                errors: e.message.toString()
-            })
-        }
-        res.status(500).json({
-            errors: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 
 exports.getOneUser = async function (req, res, next) {
     const { username } = req.params
+
     try {
         const user = await User.findOne({ username: username })
 
-        if (!user)
-            //we don't need catch not found any more
-            return res.status(200).json({
-                user: user.toProfileJSON()
-            });
-    } catch (e) {
-        return res.status(500).json({
-            error: e.message.toString()
+        if (!user) throw new NotFoundException('user')
+
+        return res.status(200).json({
+            user: user.toProfileJSON()
         });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 exports.userLogin = (req, res, next) => {
@@ -119,25 +121,17 @@ exports.editCurrentUser = async (req, res, next) => {
         editUser.upgradeReason = upgradeReason
 
         const user = await User.findOneAndUpdate({ _id: id }, editUser, { new: true })
+        if (!user) throw new UserNotFoundException()
 
-        console.log(`result: ${user}`);
-        if (!user) {
-            res.status(500).json({
-                message: "unexpecd error"
-            })
-        } else {
-            res.status(200).json({
-                sucess: true,
-                message: "current user have been update //get new token",
-                token: user.generateJWT()
-            })
-        }
+        return res.status(200).json({
+            user: user.toProfileJSON,
+            message: "current user have been update //get new token",
+            token: user.generateJWT()
+        })
+
     }
     catch (e) {
-        console.log(e);
-        res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
 exports.userSignup = async (req, res, next) => {
@@ -153,31 +147,23 @@ exports.userSignup = async (req, res, next) => {
 
         const user = await User.find({ $or: [{ email: email }, { username: username }] });
 
-        if (user.length >= 1) {
-            return res.status(409).json({
-                message: "Email or Username already existed"
-            })
-        } else {
-            const newUser = await new User();
+        if (user.length >= 1) throw new EmailAlreadyExits()
+        const newUser = await new User();
 
-            newUser.email = email;
-            newUser.password = await newUser.generateHash(password);
-            newUser.username = username;
-            newUser.gender = gender;
-            newUser.displayName = displayName;
-            newUser.imgsrc = imgsrc;
+        newUser.email = email;
+        newUser.password = await newUser.generateHash(password);
+        newUser.username = username;
+        newUser.gender = gender;
+        newUser.displayName = displayName;
+        newUser.imgsrc = imgsrc;
 
-            const result = await newUser.save();
-            res.status(201).json({
-                message: "New User Created",
-                user: result
-            })
-        }
+        const result = await newUser.save();
+        res.status(201).json({
+            message: "New User Created",
+            user: result
+        })
     }
     catch (e) {
-        console.log(e)
-        return res.status(500).json({
-            error: e.message.toString()
-        })
+        HandingErorr(res, e)
     }
 }
