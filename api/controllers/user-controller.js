@@ -40,6 +40,8 @@ const userResponse = (users) => {
 exports.getAll = async (req, res, next) => {
     try {
         const users = await User.find()
+        if (!users || users.length == 0) throw new UserNotFoundException()
+
         const response = await userResponse(users)
 
         return res.status(200).json({
@@ -57,7 +59,7 @@ exports.getOneUser = async function (req, res, next) {
     try {
         const user = await User.findOne({ username: username })
 
-        if (!user) throw new UserNotFoundException()
+        if (!user || user.length == 0) throw new UserNotFoundException()
 
         return res.status(200).json({
             user: user.toProfileJSON()

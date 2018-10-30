@@ -2,37 +2,15 @@ const mongoose = require('mongoose');
 
 const Tiy = require('../models/tiy-models');
 const Offer = require('../models/offer-models');
+const { TiyNotFoundException, OfferNotFoundException, HandingErorr } = require('./handingError')
 
 exports.checkNotNullOffer = async (req, res, next) => {
-    try{
+    try {
         const offer = await Offer.findById(req.params.offerID);
         if (!offer) {
             res.status(404).json({
-                error : {
-                    message: "Not found"
-                }
-            });
-        } else {
-            return next();
-        }
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
-    }
-}
-
-exports.checkOwnOffer = async (req, res, next) => {
-    try {
-        const { payload: { info } } = req;
-        const offer = await Offer.findById(req.params.offerID);
-        console.log(info.id);
-        console.log(offer.operatorID);
-        if (info.id != offer.operatorID) {
-            return res.status(403).json({
                 error: {
-                    message: "Permission denied"
+                    message: "Not found"
                 }
             });
         } else {
@@ -46,11 +24,36 @@ exports.checkOwnOffer = async (req, res, next) => {
     }
 }
 
+exports.checkOwnOffer = async (req, res, next) => {
+    try {
+        const { payload: { info } } = req;
+        const offer = await Offer.find({ _id: req.params.offerID });
+        if (!offer || offer.length == 0) throw new OfferNotFoundException()
+
+        console.log(info.id);
+        console.log(offer.operatorID);
+        if (info.id != offer.operatorID) {
+            return res.status(403).json({
+                error: {
+                    message: "Permission denied"
+                }
+            });
+        } else {
+            return next();
+        }
+    } catch (e) {
+        HandingErorr(res, e)
+    }
+}
+
 exports.checkOwnOfferPlus = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
-        const tiy = await Tiy.findById(req.params.tiyID);
+        const tiy = await Tiy.find({ _id: req.params.tiyID });
+        if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
+
         const offer = await Offer.findById(req.params.offerID);
+        if (!offer || offer.length == 0) throw new OfferNotFoundException()
         console.log(info.id);
         console.log(tiy.userID);
         console.log(offer.operatorID);
@@ -63,19 +66,16 @@ exports.checkOwnOfferPlus = async (req, res, next) => {
         } else {
             return next();
         }
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
 exports.getOneOffer = async function (req, res, next) {
     try {
-        const offer = await Offer.findById(req.params.offerID)
-            .select()
-            .exec()
+        const offer = await Offer.find({ _id: req.params.offerID })
+        if (!offer || offer.length == 0) throw new OfferNotFoundException()
+
         console.log(offer);
         res.status(200).json({
             offer
@@ -94,23 +94,21 @@ exports.getByTiy = async (req, res, next) => {
         const { status, id } = info
 
         const { tiyID } = req.params
+        //what
         let offers = {}
         if (status)
             offers = await Offer.find({ tiyID, operatorID: id })
         else
             offers = await Offer.find({ tiyID })
-                .select()
-                .exec()
+        if (!offers || offers.length == 0) throw new OfferNotFoundException()
+
         console.log(offers);
         res.status(200).json({
             count: offers.length,
             offers
         });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
@@ -118,18 +116,16 @@ exports.getOwnOffer = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
         const offers = await Offer.find({ operatorID: info.id })
-            .select()
-            .exec()
+
+        if (!offers || offers.length == 0) throw new OfferNotFoundException()
+
         console.log(offers);
         res.status(200).json({
             count: offers.length,
             offers
         });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
@@ -161,11 +157,8 @@ exports.addOffer = async function (req, res, next) {
         res.status(201).json({
             message: "Offer added"
         });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
@@ -189,15 +182,14 @@ exports.editOffer = async function (req, res, next) {
         console.log(offer);
         const id = { _id: req.params.offerID }
         const result = await Offer.findOneAndUpdate(id, offer);
+
+        if (!result || result.length == 0) throw new OfferNotFoundException()
         console.log(result);
         res.status(200).json({
             message: "Offer updated"
         })
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
@@ -205,14 +197,13 @@ exports.deleteOffer = async (req, res, next) => {
     try {
         const id = { _id: req.params.offerID }
         const result = await Offer.findOneAndRemove(id);
+
+        if (!result || result.length == 0) throw new OfferNotFoundException()
         console.log(result);
         res.status(200).json({
             message: "Offer deleted"
         })
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }

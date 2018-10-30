@@ -54,3 +54,14 @@ exports.TiyNotFoundException = function () {
     this.message = "Tour it youself is not found"
 }
 
+exports.BookNotFoundException = function () {
+    this.name = "errors"
+    this.status = 404
+    this.message = "Book is not found"
+}
+exports.OfferNotFoundException = function () {
+    this.name = "errors"
+    this.status = 404
+    this.message = "Offer is not found"
+}
+

@@ -4,69 +4,66 @@ const Tour = require('../models/tour-models');
 const User = require('../models/user-models');
 const Booking = require('../models/booking-models');
 
+const { UserNotFoundException, HandingErorr } = require('./handingError')
+
 exports.checkAdminStatus = async (req, res, next) => {
-    try{
+    try {
         const { payload: { info } } = req;
         console.log(info.status);
-        if(info.status != 2){
+        if (info.status != 2) {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
-        } else{
+        } else {
             return next();
         }
-    } catch(err){
-        console.log(err)
-        return res.status(500).json({
-            error: err
-        });
-    } 
+    } catch (e) {
+        HandingErorr(res, e)
+    }
 }
 
 exports.checkUpgradeRequest = async (req, res, next) => {
-    try{
-        const user = await User.findById(req.params.id);
+    try {
+        const user = await User.find({ _id: req.params.id });
+        if (!user || user.length == 0) throw new UserNotFoundException()
+
         console.log(user.upgradeRequest);
-        if(!user.upgradeRequest){
+        if (!user.upgradeRequest) {
             return res.status(403).json({
                 error: {
                     message: "No Request"
                 }
             });
-        } else{
+        } else {
             return next();
         }
-    } catch(err){
-        console.log(err)
-        return res.status(500).json({
-            error: err
-        });
-    } 
+    } catch (e) {
+        HandingErorr(res, e)
+    }
 }
 
 exports.getUpgradeRequest = async (req, res, next) => {
-    try{
-        const users = await User.find({upgradeRequest: true})
-        .select()
-        .exec()
+    try {
+        const users = await User.find({ upgradeRequest: true })
+
+        if (!users || users.length == 0) throw new UserNotFoundException()
         console.log(users);
         res.status(200).json({
-            count : users.length,
+            count: users.length,
             users
         });
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
 exports.acceptUpgradeRequest = async (req, res, next) => {
-    try{
-        const user = await User.findById(req.params.id);
+    try {
+        const user = await User.find({ _id: req.params.id });
+        if (!user || user.length == 0) throw new UserNotFoundException()
+
         console.log(user);
         user.upgradeRequest = false;
         user.status = 1;
@@ -75,28 +72,22 @@ exports.acceptUpgradeRequest = async (req, res, next) => {
         res.status(200).json({
             message: "accepted request"
         });
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
 exports.refuseUpgradeRequest = async (req, res, next) => {
-    try{
-        const user = await User.findById(req.params.id);
-        console.log(user);
+    try {
+        const user = await User.find({ _id: req.params.id });
+        if (!user || user.length == 0) throw new UserNotFoundException()
         user.upgradeRequest = false;
         const result = await user.save();
         console.log(result);
         res.status(200).json({
             message: "refused request"
         });
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
