@@ -34,7 +34,7 @@ class CancelBook extends Component {
         tour.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
-    const a = filtered.map(n => <li>{n.name}</li>);
+    const a = filtered.map(n => <li key={n._id}>{n.name}</li>);
     console.log(filtered);
     console.log(searchQuery);
     return (
