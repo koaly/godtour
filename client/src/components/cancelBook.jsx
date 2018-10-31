@@ -34,6 +34,7 @@ class CancelBook extends Component {
         tour.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
+    const a = filtered.map(n => <li>{n.name}</li>);
     console.log(filtered);
     console.log(searchQuery);
     return (
@@ -55,6 +56,7 @@ class CancelBook extends Component {
           </div>
           <div className="col-md-3" />
           <SearchBox value={searchQuery} onChange={this.handleSearch} />
+          <div>{a}</div>
         </div>
       </div>
     );
