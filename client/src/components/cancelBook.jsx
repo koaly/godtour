@@ -2,27 +2,39 @@ import React, { Component } from "react";
 import { TrashCanIcon, CancelIcon } from "mdi-react";
 import SearchBox from "./searchBox";
 import { getAllUsers } from "../services/allUserService";
+import { query } from "express-validator/check";
 
 class CancelBook extends Component {
   state = {
+    count: 0,
     users: [],
     searchQuery: ""
-  };
+  }
   async componentDidMount() {
-    const { data: users } = await getAllUsers();
-    this.setState({ users });
+    const { data: data } = await getAllUsers();
+    const { users } = data
+    const { count, user } = users
+
+    await this.setState({ users: user, count });
     console.log(users);
   }
   handleSearch = query => {
-    this.setState({ searchQuery: query });
+    this.setState({ searchQuery: query })
   };
+
   render() {
-    const { users, searchQuery } = this.state;
+
+    const { users, count, searchQuery } = this.state;
+    console.log(users)
+    console.log(count)
     let filtered = users;
-    if (searchQuery)
-      filtered = filtered.user.filter(f =>
-        f.username.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
+    const username = Object.keys(users).map(i => { return users[i].username })
+    if (searchQuery) {
+      filtered = username.filter(username => username.toLowerCase().startsWith(searchQuery.toLowerCase()))
+
+    }
+    console.log(filtered)
+    console.log(searchQuery);
     return (
       <div className="container">
         <div className="row">
@@ -41,10 +53,11 @@ class CancelBook extends Component {
             </div>
           </div>
           <div className="col-md-3" />
+          <SearchBox value={searchQuery} onChange={this.handleSearch} />
         </div>
-        <SearchBox value={searchQuery} onChange={this.handleSearch} />
       </div>
     );
+
   }
 }
 
