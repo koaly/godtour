@@ -23,16 +23,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
-  state = {
-
-  };
+  state = {};
   componentDidMount() {
     try {
       const jwt = localStorage.getItem("token");
       const user = jwtDecode(jwt);
       this.setState({ user, jwt });
       console.log(user);
-    } catch (ex) { }
+    } catch (ex) {}
   }
   render() {
     return (
@@ -64,7 +62,7 @@ class App extends Component {
             />
             <Route
               path="/profile"
-              render={() => <Profile />}
+              render={() => <Profile user={this.state.user} />}
             />
             <Route path="/testfetch" component={TestFetch} />
             <Route path="/testpost" component={TestPost} />
