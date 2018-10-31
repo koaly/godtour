@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator/check')
-
-exports.checkValidation = async (req, res, next) => {
+checkValidation = async (req, res, next) => {
     const errors = await validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({
@@ -9,3 +8,5 @@ exports.checkValidation = async (req, res, next) => {
     }
     next()
 }
+
+module.exports = checkValidation

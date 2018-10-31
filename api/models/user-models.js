@@ -73,9 +73,6 @@ userSchema.methods.generateJWT = function () {
     expirationDate.setDate(today.getDate() + 1);
     return jwt.sign({
         info: this.toProfileJSON(),
-        email: this.email,
-        id: this._id,
-        status: this.status,
         exp: parseInt(expirationDate.getTime() / 1000, 10)
         //another private key we must add to json that store sercet of file later
     }, process.env.JWT_SECRET);
@@ -103,6 +100,28 @@ userSchema.methods.toAuthJSON = function () {
         token: this.generateJWT()
     }
 }
+/*
+class UserNotFoundException {
+    constructor() {
+        this.name = "errors";
+        this.status = 404;
+        this.message = "user is not found";
+    }
+}
 
+userSchema.post('find', function (doc, next) {
+    if (doc.length == 0) next()
+    throw new UserNotFoundException();
+})
 
+userSchema.post('findOne', function (doc, next) {
+    if (doc) next()
+    throw new UserNotFoundException();
+})
+
+userSchema.post('findOneAndUpdate', function (doc, next) {
+    if (doc) next()
+    throw new UserNotFoundException();
+})
+*/
 module.exports = mongoose.model('User', userSchema);
