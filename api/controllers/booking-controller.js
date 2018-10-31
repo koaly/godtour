@@ -3,89 +3,112 @@ const mongoose = require('mongoose');
 const Tour = require('../models/tour-models');
 const User = require('../models/user-models');
 const Booking = require('../models/booking-models');
+const { TourNotFoundException, BookNotFoundException, HandingErorr } = require('./handingError')
 
-exports.getAll = async function(req,res,next){
-    try{
+
+exports.checkNotNullBooking = async (req, res, next) => {
+    try {
+        const booking = await Booking.findById(req.params.id);
+        if (!booking) {
+            res.status(404).json({
+                error: {
+                    message: "Not found"
+                }
+            });
+        } else {
+            return next();
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    }
+}
+
+exports.getAll = async function (req, res, next) {
+    try {
         const bookings = await Booking.find()
-        .select()
-        .exec()
+
+        if (!bookings || bookings.length == 0) throw new BookNotFoundException()
+
         console.log(bookings);
         res.status(200).json({
-            count : bookings.length,
+            count: bookings.length,
             bookings
         });
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
-exports.getUserBooking = async function(req,res,next){
-    try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        const bookings = await Booking.find({userID: id})
-        .select()
-        .exec()
+exports.getUserBooking = async function (req, res, next) {
+    try {
+        const { payload: { info } } = req;
+        const { id } = info
+
+        const bookings = await Booking.find({ userID: id })
+
+        if (!bookings || bookings.length == 0) throw new BookNotFoundException()
         console.log(bookings);
         res.status(200).json({
-            count : bookings.length,
-            bookings
+            count: bookings.length,
+            booking: bookings.map(booking => {
+                return booking.toBookingJSON();
+            })
         });
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
-exports.getTourBooking = async function(req,res,next){
-    try{
-        const tour = await User.findById(req.params.id);
-        const bookings = await Booking.find({tourID: req.params.id})
-        .select()
-        .exec()
+exports.getTourBooking = async function (req, res, next) {
+    try {
+        const { id } = req.params
+        const bookings = await Booking.find({ tourID: id })
+
+        if (!bookings || bookings.length == 0) throw new BookNotFoundException()
         console.log(bookings);
         res.status(200).json({
-            count : bookings.length,
-            bookings
+            count: bookings.length,
+            booking: bookings.map(booking => {
+                return booking.toBookingJSON();
+            })
         });
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
 exports.bookTour = async (req, res, next) => {
-    try{
+    try {
         const session = await Tour.startSession();
         console.log(session);
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        const tour = await Tour.findById(req.params.id);
-        console.log(user);
+
+        const { payload: { info } } = req;
+        const { amountBooking } = req.body
+
+        const tour = await Tour.find({ _id: req.params.id });
+        if (!tour || tour.length == 0) throw new TourNotFoundException()
+
         console.log(tour);
         const booking = await new Booking({
             _id: new mongoose.Types.ObjectId,
-            userID: user._id,
-            userName: user.email,
+            userID: info.id,
+            userName: info.displayName,
             tourID: tour._id,
             tourName: tour.name,
-            amountBooking: req.body.amountBooking
+            amountBooking: amountBooking
         });
         session.startTransaction();
-        if (tour.currentSeat - req.body.amountBooking < 0){
+
+        if (tour.currentSeat - req.body.amountBooking < 0) {
             return res.status(405).json({
                 error: {
                     message: "Attemped to book more than available"
                 }
-            }); 
-        } else{
+            });
+        } else {
             tour.currentSeat -= req.body.amountBooking;
             const bookingResult = await booking.save();
             const tourResult = await tour.save();
@@ -95,58 +118,58 @@ exports.bookTour = async (req, res, next) => {
                 message: "Book tour successful"
             });
         }
+
         await session.commitTransaction();
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
+
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
 exports.cancelBooking = async (req, res, next) => {
-    try{
-        const booking = await Booking.findById(req.params.id);
-        const tour = await Tour.findById(booking.tourID);
+    try {
+        const booking = await Booking.find({ _id: req.params.id });
+        if (!booking || booking.length == 0) throw new BookNotFoundException()
+
+        const tour = await Tour.find({ _id: booking.tourID });
+        if (!tour || tour.length == 0) throw new TourNotFoundException()
         console.log(booking);
         console.log(tour);
         tour.currentSeat += booking.amountBooking;
+
         const bookingResult = await booking.remove();
         const tourResult = await tour.save();
+
         console.log(bookingResult);
         console.log(tourResult);
         res.status(200).json({
             message: "Booking cancel successful"
         })
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
+    } catch (e) {
+        HandingErorr(res, e)
     }
 }
 
 
 exports.checkOwnBooking = async (req, res, next) => {
-    try{
-        const { payload: { id } } = req;
-        const user = await User.findById(id);
-        const booking = await Booking.findById(req.params.id);
-        console.log(user._id);
+    try {
+        const { payload: { info } } = req;
+        const booking = await Booking.find({ _id: req.params.id });
+        if (!booking || booking.length == 0) throw new BookNotFoundException(
+
+        )
         console.log(booking.userID);
-        if(user._id != booking.userID){
+
+        if (info.id != booking.userID) {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
-        } else{
+        } else {
             return next();
         }
-    } catch(err){
-        console.log(err);
-        res.status(500).json({
-            error: err
-        });
+    } catch (err) {
+        HandingErorr(res, e)
     }
 }

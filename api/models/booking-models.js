@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = mongoose.Schema({
-    _id : mongoose.Schema.Types.ObjectId,
+    _id: mongoose.Schema.Types.ObjectId,
     userID: {
         type: String,
         required: true
@@ -30,4 +30,15 @@ const bookingSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Booking',bookingSchema);
+bookingSchema.methods.toBookingJSON = function () {
+    return {
+        id: this._id,
+        userID: this.userID,
+        tourID: this.tourID,
+        tourName: this.tourName,
+        amountBooking: this.amountBooking,
+        bookingDate: this.bookingDate
+    }
+}
+
+module.exports = mongoose.model('Booking', bookingSchema);
