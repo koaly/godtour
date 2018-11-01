@@ -10,7 +10,8 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      info: undefined
+      info: undefined,
+      isLoaded: false
     };
   }
   async componentDidMount() {
@@ -24,38 +25,38 @@ class Profile extends Component {
       config
     );
     const { info } = response.data;
-    console.log(info);
-    this.setState({ info });
-    console.log(info);
-    console.log(config);
+    const isLoaded = true
+    this.setState({ info, isLoaded });
   }
   render() {
-    const { user } = this.props;
-    console.log(user);
-    const { info } = this.state;
-    console.log(info);
-    return (
-      <div className="container">
-        <div className="profile-container bglight mgtb">
-          <h1 className="profile-head">Profile</h1>
-          <div className="row">
-            <div className="col-md-4">
-              <ProfileBar userr={user} />
-            </div>
-            <div className="col-md-8 mt-5">
-              <ul>
-                <li>email: {user && user.info.email}</li>
-                <li>username: {user && user.info.username}</li>
-                <li>
-                  gender:
-                  {user && user.info.gender}
-                </li>
-              </ul>
+    const { isLoaded } = this.state
+    if (!isLoaded) {
+      return <h1>isLoading</h1>
+    } else {
+      const { user } = this.props
+      const { info } = this.state;
+      console.log(info)
+      return (
+        <div className="container">
+          <div className="profile-container bglight mgtb">
+            <h1 className="profile-head">Profile</h1>
+            <div className="row">
+              <div className="col-md-4">
+                <ProfileBar info={info} />
+              </div>
+              <div className="col-md-8 mt-5">
+                <ul>
+                  <li>email: {info.email}</li>
+                  <li>username: {info.username}</li>
+                  <li>name: {info.displayName}</li>
+                  <li>gender:{info.gender}</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
