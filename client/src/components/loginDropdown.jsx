@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Form from "./common/form";
 import Joi from "joi-browser";
-import { login } from "../services/authService";
+import auth from "../services/authService";
 import { toast } from "react-toastify";
 
 class LoginDropdown extends (Component, Form) {
@@ -24,8 +24,7 @@ class LoginDropdown extends (Component, Form) {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const { data: jwt } = await login(data.email, data.password);
-      localStorage.setItem("token", jwt.user.token);
+      await auth.login(data.email, data.password);
       window.location = "/";
     } catch (ex) {
       if (
