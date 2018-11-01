@@ -58,18 +58,16 @@ class App extends Component {
         <NavBar user={user} />
         <div>
           <Switch>
+            <Route path="/" exact to component={HomePage} />
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
-            <Route path="/" exact to component={HomePage} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />
-            <Route
-              path="/profile/myBooking"
-              render={() => <MyBook user={user} />}
+            <Route path="/profile/myBooking" render={() => <MyBook user={user} />}
             />
             <Route
               path="/profile/myCard"
