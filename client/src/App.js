@@ -23,23 +23,39 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
+
   constructor() {
     super();
+    this.state = {
+      users: [],
+      jwt: null,
+      isLoaded: false
+    }
   }
-  state = {};
-  componentDidMount() {
-    try {
-      const jwt = localStorage.getItem("token");
+
+  getJWT() {
+    const jwt = localStorage.getItem("token");
+    if (jwt) {
       const user = jwtDecode(jwt);
       this.setState({ user, jwt });
-      console.log(user);
-    } catch (ex) { }
+    }
   }
+
+  componentDidMount() {
+    this.getJWT()
+    this.setState({ isLoaded: true })
+  }
+
   render() {
+    const { user, isLoaded } = this.state
+
+    if (!isLoaded) {
+      return <h1>isLoading</h1>
+    }
     return (
       <React.Fragment>
         <ToastContainer />
-        <NavBar user={this.state.user} />
+        <NavBar user={user} />
         <div>
           <Switch>
             <Route path="/tour" component={ShowTour} />
@@ -53,19 +69,19 @@ class App extends Component {
             <Route path="/cancelBook" component={CancelBook} />
             <Route
               path="/profile/myBooking"
-              render={() => <MyBook user={this.state.user} />}
+              render={() => <MyBook user={user} />}
             />
             <Route
               path="/profile/myCard"
-              render={() => <MyCard user={this.state.user} />}
+              render={() => <MyCard user={user} />}
             />
             <Route
               path="/profile/purchaseList"
-              render={() => <PurchaseList user={this.state.user} />}
+              render={() => <PurchaseList user={user} />}
             />
             <Route
               path="/profile"
-              render={() => <Profile user={this.state.user} />}
+              render={() => <Profile user={user} />}
             />
             <Route path="/testfetch" component={TestFetch} />
             <Route path="/testpost" component={TestPost} />
