@@ -62,7 +62,7 @@ exports.getOneTour = async function (req, res, next) {
         const { id } = req.params
         const tour = await Tour.find({ _id: id })
 
-        if (!tour || tours.length == 0) throw new TourNotFoundException()
+        if (!tour || tour.length == 0) throw new TourNotFoundException()
         console.log(tour);
         res.status(200).json({
             tour

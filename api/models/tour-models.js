@@ -79,33 +79,5 @@ const tourSchema = mongoose.Schema({
         type: String
     }
 });
-tourSchema.post('find', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc.length > 0) {
-        next()
-    }
-    throw new Error('not found tour')
-})
-tourSchema.post('findOne', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc) {
-        next()
-    }
-    throw new Error('not found tour')
-})
 
-tourSchema.post('findOneAndUpdate', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc) {
-        next()
-    }
-    throw new Error('not found tour')
-})
-tourSchema.post('findOneAndRemove', function (doc, next) {
-    console.log('inside post middleware')
-    if (doc) {
-        next()
-    }
-    throw new Error('not found tour')
-})
 module.exports = mongoose.model('Tour', tourSchema);

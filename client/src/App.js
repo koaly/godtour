@@ -13,10 +13,13 @@ import Logout from "./components/logout";
 import MyBook from "./components/myBooking";
 import CancelBook from "./components/cancelBook";
 import MyCard from "./components/myCard";
+import OneTour from "./components/oneTour";
 import PurchaseList from "./components/purchaseList";
 import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
-import { Route, Switch, Redirect } from "react-router-dom";
+
+
+import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,8 +50,8 @@ class App extends Component {
   }
 
   render() {
-    const { user, isLoaded } = this.state
-
+    const { jwt, user, isLoaded } = this.state
+    console.log(jwt)
     if (!isLoaded) {
       return <h1>isLoading</h1>
     }
@@ -64,6 +67,7 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
+            <Route path="/tours/:id" render={(props) => <OneTour {...props} token={jwt} />} />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />
