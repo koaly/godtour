@@ -13,20 +13,24 @@ export default class OneTour extends Component {
     const config = {
       headers: { Authorization: "JWT " + token }
     }
+    console.log(config)
+
     const url = 'http://localhost:5000/tours/' + id
+    console.log(url)
     try {
       const result = await Axios.get(url, config)
       const { tour } = result.data
       this.setState({ tour: tour[0] })
     }
     catch (e) {
-      console.log(e)
+      console.log(e.response)
     }
 
   }
   componentDidMount() {
     const { id } = this.props.match.params
     const { token } = this.props
+    console.log(token)
 
     this.getOneTour(id, token)
     this.setState({ isLoaded: true })
