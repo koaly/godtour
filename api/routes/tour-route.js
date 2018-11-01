@@ -6,9 +6,15 @@ const operatorCtrl = require('../controllers/operator-controller');
 const bookingCtrl = require('../controllers/booking-controller');
 const auth = require('./auth');
 
+<<<<<<< HEAD
 //express-valdator
 const { body } = require('express-validator/check');
 const { checkValidation } = require('../middleware/validation');
+=======
+const tourConfig = require('./validation/tours-validation')
+const bookingConfig = require('./validation/booking-validation')
+const checkValidation = require('./validation/checkValidation')
+>>>>>>> f4d97e089aac70e0077fe574265e3d6477244699
 
 router.get('/', auth.optional, async (req, res) => {
     res.status(200).json({
@@ -21,6 +27,7 @@ router.get('/create', auth.require, operatorCtrl.checkOperatorStatus, async (req
         'message': "add tour page"
     });
 });
+<<<<<<< HEAD
 router.post('/create', auth.require, operatorCtrl.checkOperatorStatus,
     [
         body('name')
@@ -63,5 +70,38 @@ router.delete('/:id', auth.require, tourCtrl.checkOwnTour, tourCtrl.deleteTour);
 router.get('/:id/edit', auth.require, tourCtrl.checkOwnTour, tourCtrl.getOneTour);
 router.put('/:id/edit', auth.require, tourCtrl.checkOwnTour, tourCtrl.editTour);
 router.get('/:id/bookings', auth.require, tourCtrl.checkOwnTour, bookingCtrl.getTourBooking);
+=======
+router.post('/create',
+    auth.require,
+    operatorCtrl.checkOperatorStatus,
+    tourConfig.tour,
+    checkValidation,
+    tourCtrl.addTour);
+
+router.get('/:id', auth.optional, tourCtrl.checkNotNullTour, tourCtrl.getOneTour);
+
+router.post('/:id',
+    auth.require,
+    tourCtrl.checkNotNullTour,
+    bookingConfig.bookTour,
+    checkValidation,
+    bookingCtrl.bookTour);
+router.delete('/:id',
+    auth.require,
+    tourCtrl.checkNotNullTour,
+    tourCtrl.checkOwnTour,
+    tourCtrl.deleteTour);
+router.get('/:id/edit', auth.require, tourCtrl.checkNotNullTour, tourCtrl.checkOwnTour, tourCtrl.getOneTour);
+
+router.put('/:id/edit',
+    auth.require,
+    tourCtrl.checkNotNullTour,
+    tourCtrl.checkOwnTour,
+    tourConfig.tour,
+    checkValidation,
+    tourCtrl.editTour);
+
+router.get('/:id/bookings', auth.require, tourCtrl.checkNotNullTour, tourCtrl.checkOwnTour, bookingCtrl.getTourBooking);
+>>>>>>> f4d97e089aac70e0077fe574265e3d6477244699
 
 module.exports = router
