@@ -27,7 +27,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: [],
+      user: [],
       jwt: null,
       isLoaded: false
     }

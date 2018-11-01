@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import ProfileBar from "./common/profileBar";
 
-class MyCard extends Component {
+export default class MyCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: this.props.user
+    }
+    console.log(this.state.user)
+  }
   render() {
-    const { info } = this.props;
+    const { user } = this.state;
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">My Cards</h1>
           <div className="row">
             <div className="col-md-4">
-              <ProfileBar info={info} />
+              <ProfileBar user={user} />
             </div>
           </div>
         </div>
@@ -19,4 +26,3 @@ class MyCard extends Component {
   }
 }
 
-export default MyCard;
