@@ -1,0 +1,22 @@
+.Introduce {
+    /*margin-top:50px;*/
+    margin-bottom: 100px;
+}
+
+.Introduce p {
+    font-size: 22px;
+}
+
+.mgbi {
+    margin-bottom: 100px;
+}
+
+.but {
+    cursor: pointer;
+    padding:20px;
+    border-radius: 5px;
+    font-weight: 650;
+    color: #0770cd;
+    background-color: #f6f6f6;
+    margin-bottom: 100px;
+}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/navBar";
 import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
+import TourIntroduce from "./components/tourIntroduce";
 import ShowTour2 from "./components/showTour2";
 import HomePage from "./components/homepage/homePage";
 import NotFound from "./components/notFound";
@@ -67,6 +68,7 @@ class App extends Component {
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/register" component={RegisterForm} />
+            <Route path="/tourIntroduce" component={TourIntroduce} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <Route

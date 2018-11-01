@@ -41,6 +41,11 @@ const NavBar = ({ user }) => {
                   Cancel Booking
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/tourIntroduce">
+                  Tour Introduce
+                </NavLink>
+              </li>
             </React.Fragment>
           )}
         </ul>
