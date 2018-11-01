@@ -10,6 +10,7 @@ export default class OneTour extends Component {
     }
   }
   async getOneTour(id, token) {
+    this.setState({ isLoaded: false })
     const config = {
       headers: { Authorization: "JWT " + token }
     }
@@ -25,6 +26,7 @@ export default class OneTour extends Component {
     catch (e) {
       console.log(e.response)
     }
+    this.setState({ isLoaded: true })
 
   }
   componentDidMount() {
@@ -33,13 +35,12 @@ export default class OneTour extends Component {
     console.log(token)
 
     this.getOneTour(id, token)
-    this.setState({ isLoaded: true })
   }
 
   render() {
     const { tour, isLoaded } = this.state
     if (!isLoaded) {
-      return <h1>isLoaded</h1>
+      return <h1>isLoading</h1>
     }
     if (!tour || tour.length == 0) {
       return <h1>notFoundTour</h1>
