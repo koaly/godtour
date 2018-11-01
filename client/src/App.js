@@ -23,6 +23,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+  }
   state = {};
   componentDidMount() {
     try {
@@ -30,7 +33,7 @@ class App extends Component {
       const user = jwtDecode(jwt);
       this.setState({ user, jwt });
       console.log(user);
-    } catch (ex) {}
+    } catch (ex) { }
   }
   render() {
     return (
