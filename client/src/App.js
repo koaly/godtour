@@ -18,43 +18,44 @@ import OneTour from "./components/oneTour";
 import PurchaseList from "./components/purchaseList";
 import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
-
+import auth from "./services/authService";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import jwtDecode from "jwt-decode";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
-
   constructor() {
     super();
     this.state = {
       user: [],
       jwt: null,
       isLoaded: false
-    }
+    };
   }
 
-  getJWT() {
-    const jwt = localStorage.getItem("token");
-    if (jwt) {
-      const user = jwtDecode(jwt);
-      this.setState({ user, jwt });
-    }
-  }
+  // getJWT() {
+  //   const jwt = localStorage.getItem("token");
+  //   if (jwt) {
+  //     const user = jwtDecode(jwt);
+  //     this.setState({ user, jwt });
+  //   }
+  // }
 
   componentDidMount() {
-    this.getJWT()
-    this.setState({ isLoaded: true })
+    const user = auth.getCurrentUser();
+    const jwt = auth.getJwt();
+    this.setState({ user, jwt, isLoaded: true });
+    // this.getJWT();
+    // this.setState({ isLoaded: true });
   }
 
   render() {
-    const { jwt, user, isLoaded } = this.state
-    console.log(jwt)
+    const { jwt, user, isLoaded } = this.state;
+    console.log(jwt);
     if (!isLoaded) {
-      return <h1>isLoading</h1>
+      return <h1>isLoading</h1>;
     }
     return (
       <React.Fragment>
@@ -68,12 +69,20 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
-            <Route path="/tours/id=:id" render={(props) => <OneTour {...props} token={jwt} />} />
-            <Route path="/tours" render={(props) => <ShowTour2 {...props} token={jwt} />} />
+            <Route
+              path="/tours/id=:id"
+              render={props => <OneTour {...props} token={jwt} />}
+            />
+            <Route
+              path="/tours"
+              render={props => <ShowTour2 {...props} token={jwt} />}
+            />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />
-            <Route path="/profile/myBooking" render={() => <MyBook user={user} />}
+            <Route
+              path="/profile/myBooking"
+              render={() => <MyBook user={user} />}
             />
             <Route
               path="/profile/myCard"
@@ -83,10 +92,7 @@ class App extends Component {
               path="/profile/purchaseList"
               render={() => <PurchaseList user={user} />}
             />
-            <Route
-              path="/profile"
-              render={() => <Profile user={user} />}
-            />
+            <Route path="/profile" render={() => <Profile user={user} />} />
             <Route path="/testfetch" component={TestFetch} />
             <Route path="/testpost" component={TestPost} />
             <Redirect to="/not-found" />
