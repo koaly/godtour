@@ -1,31 +1,23 @@
-import Convert from "./GeneralFunction.jsx"
+import UserConvert from "./UserFunction.jsx" // import function for convert object
 
-var {_start_url , _domain , _port} = require('./default_data.jsx')
+var {_start_url , _domain , _port} = require('./default_data.jsx') // import data url
 
-var HandleObject = new Convert();
+var HandleObject = new UserConvert(); // init class of convert for user data
 
 export default class FetchAllUsers {
 
 	constructor( callback ){
-		console.log("<---------- FetchAllUsers : constructor ---------->")
+		console.log("===============> FetchAllUsers.construction");
 		var path = "users"
 		this.SumLink = _start_url + _domain + ":" + _port + "/" + path;
-		this.SendData = [];
-		this.SendInformation = [];
-		console.log("<----- FetchAllUsers : this.SumLink ----->");
-		console.log( this.SumLink );
-		console.log("<----- FetchAllUsers : this.SendData ----->");
-		console.log( this.SendData );
-		console.log("<----- FetchAllUsers : this.SendInformation ----->");
-		console.log( this.SendInformation );
+		this.SendData = {};
+		this.SendInformation = {};
 	}
 
 	get_all_users( Callback ){
-		console.log("<---------- FetchAllUsers : get_all_users ---------->");
+		console.log("===============> FetchAllUsers.get_all_users");	
 		fetch( this.SumLink )
 			.then( response =>{
-				console.log("<----- FetchAllUsers : response ----->");
-				console.log( response )
 				this.SendInformation.status = response.status;
 				this.SendInformation.url = response.url;
 				this.SendInformation.type = response.type;
@@ -33,10 +25,7 @@ export default class FetchAllUsers {
 				return response.json()
 			})
 			.then( json => {
-				console.log("<----- FetchAllUsers : json ----->");
-				console.log( json )
 				this.SendData = json;
-//				this.ReturnCallback( this.SendInformation , this.SendData )
 				Callback( this.SendInformation , this.SendData )
 			})			
 	}
@@ -44,11 +33,10 @@ export default class FetchAllUsers {
 	// specific is object to assign what group do you want
 	// specific have type{ email , telephone_number} data{ strign to equal } 
 	get_specific_user( Specific , Callback){
-		console.log("<---------- FetchAllUsers : get_specific_user ---------->");
+		console.log("===============> FetchAllUsers.get_specific_user");	
 		fetch( this.SumLink )
 			.then( response =>{
-				console.log("<----- FetchAllUsers : response ----->");
-				console.log( response )
+//				console.log("=====> get_specific_user.response" , response);
 				this.SendInformation.status = response.status;
 				this.SendInformation.url = response.url;
 				this.SendInformation.type = response.type;
@@ -56,26 +44,26 @@ export default class FetchAllUsers {
 				return response.json()
 			})
 			.then( json => {
-				console.log("<----- FetchAllUsers : json ----->");
-				console.log( json );
+				console.log("=====> get_specific_user.json" , json);
 				if( Specific.type === "email"){
-					var answer = this.filter_by_email( json , Specific.data )
+					var answer = this.filter_by_email( json , Specific.data );
 				}
-				console.log("<----- FetchAllUsers : answer ----->");
-				console.log( answer );
+				else if( Specific.type === "id"){
+					var answer = this.filter_by_id( json , Specific.data );
+				}
+				else if( Specific.type === "user_name"){
+					var answer = this.filter_by_user_name( json , Specific.data );
+				}
 				this.SendData = HandleObject.convert_user_data(answer);
 				Callback( this.SendInformation , this.SendData )
 			})
 	}
 	
 	filter_by_email( all_data , email ){
-		console.log("<---------- FetchAllUsers : filter_by_email ---------->");
-		console.log("target email is " + email);
+		console.log("===============> FetchAllUsers.filter_by_email");	
 		var answer = {have:false};
 		for( var count = 0 ; count < all_data.users.count ; count++ ){
-			if( email == all_data.users.user[count].email ){
-				console.log("found it count is " + count + " and data is" 
-								+ all_data.users.user[count].email);
+			if( email === all_data.users.user[count].email ){
 				answer = all_data.users.user[count];
 				break;
 			}
@@ -83,4 +71,27 @@ export default class FetchAllUsers {
 		return answer;
 	}
 
+	filter_by_id( all_data , id ){
+		console.log("===============> FetchAllUsers.fileter_by_id");
+		var answer = {have:false};
+		for( var count = 0 ; count < all_data.users.count ; count++ ){
+			if( id === all_data.users.user[count].id ){
+				answer = all_data.users.user[count];
+				break;
+			}
+		}
+		return answer;	
+	}
+
+	filter_by_user_name( all_data , user_name ){
+		console.log("===============> FetchAllUsers.fileter_by_user_name");
+		var answer = {have:false};
+		for( var count = 0 ; count < all_data.users.count ; count++ ){
+			if( user_name === all_data.users.user[count].username ){
+				answer = all_data.users.user[count];
+				break;
+			}
+		}
+		return answer;	
+	}
 }

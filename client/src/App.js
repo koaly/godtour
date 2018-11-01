@@ -14,8 +14,8 @@ import MyBook from "./components/myBooking";
 import CancelBook from "./components/cancelBook";
 import MyCard from "./components/myCard";
 import PurchaseList from "./components/purchaseList";
-import TestFetch from "./components/fetch/FetchTest";
-import TestPost from "./components/fetch/PostTest";
+import TestFetch from "./components/fetch/example/FetchTest";
+import TestPost from "./components/fetch/example/PostTest";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import jwtDecode from "jwt-decode";
@@ -28,7 +28,7 @@ class App extends Component {
     try {
       const jwt = localStorage.getItem("token");
       const user = jwtDecode(jwt);
-      this.setState({ user });
+      this.setState({ user, jwt });
       console.log(user);
     } catch (ex) {}
   }
