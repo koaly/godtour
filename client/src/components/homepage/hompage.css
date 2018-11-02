@@ -76,6 +76,13 @@
     
 }
 
+.blue {
+    color:#0770cd;
+    margin-bottom:5px;
+    height:35px;
+    width:35px;
+}
+
 @media(max-width: 758px){
     .newsletterr .ab
     {

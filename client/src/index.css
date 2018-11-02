@@ -208,3 +208,11 @@ code {
 .profileimg {
   height: 270px;
 }
+
+.profile-infor {
+  background-color: white;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
