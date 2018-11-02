@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const Tour = require('../models/tour-models');
 const User = require('../models/user-models');
 const Booking = require('../models/booking-models');
-const { TourNotFoundException, BookNotFoundException, HandingErorr } = require('./handingError')
+const {
+    TourNotFoundException,
+    BookNotFoundException,
+    HandingErorr
+} = require('./handingError')
 
 
 exports.checkNotNullBooking = async (req, res, next) => {
@@ -44,10 +48,18 @@ exports.getAll = async function (req, res, next) {
 
 exports.getUserBooking = async function (req, res, next) {
     try {
-        const { payload: { info } } = req;
-        const { id } = info
+        const {
+            payload: {
+                info
+            }
+        } = req;
+        const {
+            id
+        } = info
 
-        const bookings = await Booking.find({ userID: id })
+        const bookings = await Booking.find({
+            userID: id
+        })
 
         if (!bookings || bookings.length == 0) throw new BookNotFoundException()
         console.log(bookings);
@@ -64,8 +76,12 @@ exports.getUserBooking = async function (req, res, next) {
 
 exports.getTourBooking = async function (req, res, next) {
     try {
-        const { id } = req.params
-        const bookings = await Booking.find({ tourID: id })
+        const {
+            id
+        } = req.params
+        const bookings = await Booking.find({
+            tourID: id
+        })
 
         if (!bookings || bookings.length == 0) throw new BookNotFoundException()
         console.log(bookings);
@@ -85,23 +101,36 @@ exports.bookTour = async (req, res, next) => {
         const session = await Tour.startSession();
         console.log(session);
 
-        const { payload: { info } } = req;
-        const { amountBooking } = req.body
+        const {
+            payload: {
+                info
+            }
+        } = req;
+        const {
+            amountBooking
+        } = req.body
 
-        const tour = await Tour.find({ _id: req.params.id });
+        const tour = await Tour.find({
+            _id: req.params.id
+        });
         if (!tour || tour.length == 0) throw new TourNotFoundException()
 
-        console.log(tour);
+        console.log(tour)
+        const {
+            id,
+            name
+        } = tour[0]
+
         const booking = await new Booking({
             _id: new mongoose.Types.ObjectId,
             userID: info.id,
             userName: info.displayName,
-            tourID: tour._id,
-            tourName: tour.name,
+            tourID: id,
+            tourName: name,
             amountBooking: amountBooking
         });
         session.startTransaction();
-
+        console.log("after")
         if (tour.currentSeat - req.body.amountBooking < 0) {
             return res.status(405).json({
                 error: {
@@ -111,9 +140,9 @@ exports.bookTour = async (req, res, next) => {
         } else {
             tour.currentSeat -= req.body.amountBooking;
             const bookingResult = await booking.save();
-            const tourResult = await tour.save();
+            //const tourResult = await tour.save();
             console.log(bookingResult);
-            console.log(tourResult);
+            //console.log(tourResult);
             res.status(201).json({
                 message: "Book tour successful"
             });
@@ -128,10 +157,14 @@ exports.bookTour = async (req, res, next) => {
 
 exports.cancelBooking = async (req, res, next) => {
     try {
-        const booking = await Booking.find({ _id: req.params.id });
+        const booking = await Booking.find({
+            _id: req.params.id
+        });
         if (!booking || booking.length == 0) throw new BookNotFoundException()
 
-        const tour = await Tour.find({ _id: booking.tourID });
+        const tour = await Tour.find({
+            _id: booking.tourID
+        });
         if (!tour || tour.length == 0) throw new TourNotFoundException()
         console.log(booking);
         console.log(tour);
@@ -153,8 +186,14 @@ exports.cancelBooking = async (req, res, next) => {
 
 exports.checkOwnBooking = async (req, res, next) => {
     try {
-        const { payload: { info } } = req;
-        const booking = await Booking.find({ _id: req.params.id });
+        const {
+            payload: {
+                info
+            }
+        } = req;
+        const booking = await Booking.find({
+            _id: req.params.id
+        });
         if (!booking || booking.length == 0) throw new BookNotFoundException(
 
         )

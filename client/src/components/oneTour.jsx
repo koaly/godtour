@@ -1,22 +1,32 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import { toast } from "react-toastify";
 
 export default class OneTour extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
+      id: this.props.match.params.id,
       tour: [],
-      isLoaded: false
+      token: this.props.token,
+      isLoaded: false,
+      isLoadToken: false,
+      numberOfBooking: 0
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
-  async getOneTour(id, token) {
+
+  async getOneTour() {
+
+    //jui can use change this to service
     this.setState({ isLoaded: false })
     const config = {
-      headers: { Authorization: "JWT " + token }
+      headers: { Authorization: "JWT " + this.state.token }
     }
     console.log(config)
 
-    const url = 'http://localhost:5000/tours/' + id
+    const url = 'http://localhost:5000/tours/' + this.state.id
     console.log(url)
     try {
       const result = await Axios.get(url, config)
@@ -29,12 +39,45 @@ export default class OneTour extends Component {
     this.setState({ isLoaded: true })
 
   }
-  componentDidMount() {
-    const { id } = this.props.match.params
-    const { token } = this.props
-    console.log(token)
 
-    this.getOneTour(id, token)
+  async BookingOneTour() {
+
+    //jui can use change this to service
+    this.setState({ isLoaded: false })
+    const config = {
+      headers: { Authorization: "JWT " + this.state.token },
+
+    }
+    const field = {
+      amountBooking: this.state.numberOfBooking
+
+    }
+    console.log(config)
+    const url = 'http://localhost:5000/tours/' + this.state.id
+
+    try {
+      const result = await Axios.post(url, field, config)
+      toast.success(`${result.data.message}`)
+    }
+    catch (e) {
+      toast.error(`${e.response.data.message}`)
+      console.log(e.response)
+    }
+
+
+    this.setState({ isLoaded: true })
+  }
+
+  componentDidMount() {
+    this.getOneTour()
+  }
+
+  handleChange(event) {
+    this.setState({ numberOfBooking: event.target.value })
+  }
+
+  handleSubmit(event) {
+    this.BookingOneTour()
   }
 
   render() {
@@ -54,6 +97,13 @@ export default class OneTour extends Component {
         <h3>{tour.currentSeat}/{tour.maxSeat}</h3>
         <h3>by {tour.operatorName}</h3>
         <h3>fly with {tour.airline}</h3>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            amountBooking:
+          <input type="text" value={this.state.numberOfBooking} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Booking" />
+        </form>
       </div>
     )
   }

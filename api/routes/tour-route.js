@@ -32,7 +32,6 @@ router.get('/:id', auth.optional, tourCtrl.checkNotNullTour, tourCtrl.getOneTour
 
 router.post('/:id',
     auth.require,
-    tourCtrl.checkNotNullTour,
     bookingConfig.bookTour,
     checkValidation,
     bookingCtrl.bookTour);
