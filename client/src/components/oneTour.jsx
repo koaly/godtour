@@ -69,26 +69,37 @@ export default class OneTour extends Component {
     }
     console.log(tour);
     return (
-      <div>
-        <h1>{tour.name}</h1>
-        <h3>{tour.price} $</h3>
-        <h3>{tour.airline}</h3>
-        <h3>
-          {tour.currentSeat}/{tour.maxSeat}
-        </h3>
-        <h3>by {tour.operatorName}</h3>
-        <h3>fly with {tour.airline}</h3>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            amountBooking:
-            <input
-              type="text"
-              value={this.state.numberOfBooking}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Booking" />
-        </form>
+      <div className="container">
+        <div className="profile-container bglight mgtb profile-container">
+          <div className="row">
+            <div className="col-md-6 mt-4">
+              <h1 className="ml-4">img</h1>
+            </div>
+            <div className="col-md-6 mt-4 mb-4">
+              <h1 className="mgbi">{tour.name}</h1>
+              
+              <h4 className="mgbi">fly with {tour.airline}</h4>
+              <h4 className="mgbi">{tour.dayDuration} Day(s) {tour.nightDuration} Night(s)</h4>
+              <h4 className="mgbi">Price: {tour.price} $</h4>
+              <h4 className="mgbi">
+                Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+              </h4>
+              <h4 className="mgbi">Operated by {tour.operatorName}</h4>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                  <h4>Amount of Booking:</h4>
+                  <input
+                    type="text"
+                    value={this.state.numberOfBooking}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <input type="submit" value="Book Seat(s)" />
+              </form>
+              
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
