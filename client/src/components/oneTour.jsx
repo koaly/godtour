@@ -14,6 +14,7 @@ export default class OneTour extends Component {
       isLoadToken: false,
       numberOfBooking: 0
     };
+	console.log("id is " , this.state.id );
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }

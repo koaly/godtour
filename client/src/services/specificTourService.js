@@ -8,7 +8,8 @@ const config = {
 };
 
 export function getSpecificTour(id) {
-  return http.get(apiEndpoint + id, config);
+//  return http.get(apiEndpoint + id, config);
+  return http.get(apiEndpoint + id);
 }
 
 export function booking(id, field) {
