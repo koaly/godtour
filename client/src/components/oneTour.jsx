@@ -42,7 +42,7 @@ export default class OneTour extends Component {
     if (!isLoaded) {
       return <h1>isLoading</h1>
     }
-    if (!tour || tour.length == 0) {
+    if (!tour || tour.length === 0) {
       return <h1>notFoundTour</h1>
     }
     console.log(tour)
