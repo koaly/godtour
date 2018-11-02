@@ -10,6 +10,7 @@
 	font-size		: 16px;
 }
 
+
 .ButtonMoreTour:hover{
 	background-color: FireBrick;
 	font-weight		: bold;
@@ -25,8 +26,20 @@
 }
 
 .HeadTour{
-	text-transform: capitalize;
-	font-family : "Times New Roman" , Times , serif;
-	font-weight : bold;
-	color : blue;
+	text-transform	: capitalize;
+	font-family		: "Times New Roman" , Times , serif;
+	font-weight		: bold;
+	color			: blue;
+	display			: inline-block; /* make block follow text */
+}
+
+.SeatTour{
+	text-align		: right;
+	font-weight		: bold;
+	display			: inline-block;
+	float			: right;
+}
+
+.TestBlock{
+	border : 0.5px solid blue;
 }

@@ -66,9 +66,12 @@ class ShowTour extends Component {
 			<div className="container mgtb">
 				<h1>Tour List</h1>
 				<ul>
-					{this.state.ListTour.map(tour =>
-						<li key={tour.id} className="BlockTour">
-							<h3 className="HeadTour">{tour.name}</h3>
+					{this.state.ListTour.map( tour => 
+						<li key={tour.id} className = "BlockTour">
+							<h3 className="HeadTour TestBlock">{tour.name}</h3>
+							<p className="SeatTour TestBlock"> 
+								booked : {tour.free_seat}/{tour.max_seat}
+							</p>
 						</li>
 					)}
 				</ul>

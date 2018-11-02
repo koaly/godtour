@@ -8,6 +8,7 @@ export default class TourConvert{
 		return {	_v				:	data._v
 				,	id				:	data._id
 				,	airline			:	data.airline
+				,	free_seat		:	data.maxSeat - data.currentSeat
 				,	booked_seat		:	data.currentSeat
 				,	max_seat		:	data.maxSeat
 				,	name			:	data.name
