@@ -20,17 +20,17 @@ const NavBar = ({ user }) => {
       <div className="collapse navbar-collapse" id="collapsibleNavbar">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <NavLink className="nav-link" to="/tour">
-              Tour List
+            <NavLink className="nav-link" to="/tourIntroduce">
+                Tour Introduce
             </NavLink>
           </li>
           {user && (
             <React.Fragment>
-              <li className="nav-item">
+              {/*<li className="nav-item">
                 <NavLink className="nav-link" to="/addTour">
                   Add Tour
                 </NavLink>
-              </li>
+              </li>*/}
               <li className="nav-item">
                 <NavLink className="nav-link" to="/editTour">
                   Edit Tour
@@ -41,12 +41,19 @@ const NavBar = ({ user }) => {
                   Cancel Booking
                 </NavLink>
               </li>
-              <li className="nav-item">
+              {/*<li className="nav-item">
                 <NavLink className="nav-link" to="/tourIntroduce">
                   Tour Introduce
                 </NavLink>
-              </li>
+              </li>*/}
             </React.Fragment>
+          )}
+          {user && user.info.status!==0 && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/addTour">
+                  Add Tour
+                </NavLink>
+              </li>
           )}
         </ul>
         <ul className="nav navbar-nav navbar-right">
