@@ -9,7 +9,11 @@ class createTourForm extends Component{
 		};
 	}
 
-	componentDidMount() {}
+	componentDidMount() {
+		sessionStorage.setItem("tourLastLink" , "/createTour");
+		var test = sessionStorage.getItem("tourLastLink");
+		console.log("test sessionStorage is " , test);
+	}
 
 	render(){
 		return(
