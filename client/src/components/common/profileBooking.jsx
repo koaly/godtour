@@ -5,6 +5,7 @@ import { paginate } from "../../utility/paginate";
 import { Link } from "react-router-dom"
 import Pagination from "./pagination";
 import Spinner from "./spinner";
+
 export default class ProfileBooking extends Component {
     constructor(props) {
         super(props)
@@ -12,7 +13,7 @@ export default class ProfileBooking extends Component {
             booking: [],
             isLoaded: false,
 
-            pageSize: 3,
+            pageSize: 4,
             currentPage: 1,
         }
     }
@@ -63,7 +64,9 @@ export default class ProfileBooking extends Component {
         this.setState({ isLoaded: true })
 
     }
-
+    showDate(date) {
+        return date.replace('T', ' ').replace('Z', ' ')
+    }
     render() {
         const { booking, isLoaded, currentPage, pageSize } = this.state;
         const { length: count } = this.state.booking;
@@ -78,7 +81,7 @@ export default class ProfileBooking extends Component {
 
         console.log(booking)
         return (
-            <div>
+            <div className="profile-infor mr-5">
                 <p>{count} bookings</p>
                 <table className="table">
                     <thead>
@@ -91,10 +94,9 @@ export default class ProfileBooking extends Component {
                     <tbody>
                         {selectBooking.map((book, i) => (
                             <tr key={i}>
-                                <td>{book.tourName}</td>
+                                <td><Link className="text-primary" to={`/tours/id=${book.tourID}`}>{book.tourName}</Link></td>
                                 <td>{book.amountBooking}</td>
-                                <td>{book.bookingDate}</td>
-                                <td><Link className="btn btn-primary btn-sm" to={`/tours/id=${book.tourID}`}>Goto</Link></td>
+                                <td>{this.showDate(book.bookingDate)}</td>
                                 <td>
                                     <button
                                         onClick={() => this.handleDelete(book.id)}
