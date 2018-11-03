@@ -77,6 +77,12 @@ const tourSchema = mongoose.Schema({
     },
     highlight: {
         type: String
+    },
+    imgsrc: {
+        type: String
+    },
+    alternateImgsrc: {
+        type: String
     }
 });
 

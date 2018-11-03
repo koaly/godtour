@@ -123,7 +123,9 @@ exports.addTour = async function (req, res, next) {
             currentSeat: req.body.seat,
             food: req.body.food,
             detail: req.body.detail,
-            highlight: req.body.highlight
+            highlight: req.body.highlight,
+            imgsrc: req.body.imgsrc,
+            alternateImgsrc: req.body.alternateImgsrc
         });
         const result = await tour.save();
         console.log(result);
