@@ -123,7 +123,8 @@ export default class OneTour extends Component {
   }
 
   render() {
-    const { tour, isLoaded, user } = this.state;
+    const { tour, isLoaded } = this.state;
+	var user = this.state.user;
 	if (!isLoaded) {
 		return <h1>{this.state.textLoad}</h1>;
 	}
@@ -132,6 +133,8 @@ export default class OneTour extends Component {
     }
     console.log(tour);
 	var freeSeat = tour.maxSeat - tour.currentSeat;
+	console.log("Test user" , this.state.user)
+	if ( user === undefined ){
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
@@ -182,6 +185,49 @@ export default class OneTour extends Component {
           </div>
         </div>
       </div>
-    );
+    );}
+	else{return(
+      <div className="container">
+        <div className="profile-container bglight mgtb">
+          <div className="row">
+            <div className="col-md-7 mt-4">
+              <h1 className="ml-4">img</h1>
+            </div>
+            <div className="col-md-5 mt-4 mb-4">
+              <h1 className="mgbi">{tour.name}</h1>
+              <h5 className="mgbi">Fly with {tour.airline}</h5>
+              <h5 className="mgbi">{tour.dayDuration} Day(s) {tour.nightDuration} Night(s)</h5>
+              <h5 className="mgbi">Price: {tour.price} $</h5>
+              <h5 className="mgbi">
+                Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+              </h5>
+              <h5 className="mgbi">Operated by {tour.operatorName}</h5>
+              <label>
+					<h5>Amount of Booking</h5>
+					<input
+						type="number"	
+						min="0" 
+						max={freeSeat}
+						value={this.state.numberOfBooking}
+						onChange={this.handleChange}
+					/>
+					{ ! this.state.nowBooking &&
+						<button className ="btn btn-primary ml-4 mb-1" onClick={this.BookingOneTour}>
+							Book Seat(s)
+						</button>
+					}
+					{ this.state.nowBooking &&
+						<button className = "btn btn-primary" >
+							{this.state.textBooking}
+						</button>
+					}
+			  </label>
+              {/*<input type="submit" value="Delete Tour" className="btn btn-danger  mt-4" />
+            <input type="submit" value="Edit Tour" className="btn btn-primary  ml-4 mt-4" />*/}
+            </div>
+          </div>
+        </div>
+      </div>
+	);}
   }
 }
