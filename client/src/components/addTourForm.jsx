@@ -1,17 +1,21 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import { addTour } from "../services/tourService";
+import { toast } from "react-toastify";
 
 class AddTourForm extends Form {
   state = {
     data: {
       name: "",
       price: "",
-      destination: "",
+      dest: "",
       dayDuration: "",
       nightDuration: "",
       startBookDate: "",
       startBookTime: "",
+      endBookDate: "",
+      endBookTime: "",
       departDate: "",
       returnDate: "",
       airline: "",
@@ -31,7 +35,7 @@ class AddTourForm extends Form {
       .required()
       .min(0)
       .label("Price"),
-    destination: Joi.string()
+    dest: Joi.string()
       .required()
       .label("Destination"),
     dayDuration: Joi.number()
@@ -50,6 +54,12 @@ class AddTourForm extends Form {
     startBookTime: Joi.string()
       .required()
       .label("StartBookTime"),
+    endBookDate: Joi.string()
+      .required()
+      .label("EndBookDate"),
+    endBookTime: Joi.string()
+      .required()
+      .label("EndBookTime"),
     departDate: Joi.string()
       .required()
       .label("DepartDate"),
@@ -77,9 +87,29 @@ class AddTourForm extends Form {
       .label("Highlight")
   };
 
-  doSubmit = () => {
-    console.log("Submitted");
-    this.props.history.push("/");
+  doSubmit = async () => {
+    try {
+      const response = await addTour(this.state.data);
+      console.log(response);
+      window.location = "/";
+    } catch (ex) {
+      console.log(ex.response.data);
+      if (
+        ex.response &&
+        ex.response.status >= 400 &&
+        ex.response.status < 500
+      ) {
+        const errorRes = ex.response.data.errors;
+        console.log(JSON.stringify(errorRes));
+        if (errorRes) {
+          errorRes.forEach(error => {
+            toast.error(` ${error.param}: ${error.msg}`);
+          });
+        } else {
+          toast.error(`${ex.response.data.message}`);
+        }
+      }
+    }
   };
 
   render() {
@@ -89,12 +119,7 @@ class AddTourForm extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "Name", "text", "firstname")}
           {this.renderInput("price", "Price", "number", "price")}
-          {this.renderInput(
-            "destination",
-            "Destination",
-            "text",
-            "destination"
-          )}
+          {this.renderInput("dest", "Destination", "text", "destination")}
           {this.renderInput(
             "dayDuration",
             "Day Duration",
@@ -113,54 +138,36 @@ class AddTourForm extends Form {
             "date",
             "booking date"
           )}
+          {this.renderInput("startBookTime", "Booking Time", "time", "booking")}
           {this.renderInput(
-            "startBookTime",
-            "Booking Time",
-            "time",
-            "booking"
+            "endBookDate",
+            "End Booking Date",
+            "date",
+            "booking date"
           )}
           {this.renderInput(
-            "departDate", 
-            "Departure Date", 
-            "date", 
+            "endBookTime",
+            "End Booking Time",
+            "time",
+            "end booking"
+          )}
+          {this.renderInput(
+            "departDate",
+            "Departure Date",
+            "date",
             "departure date"
           )}
           {this.renderInput(
-            "returnDate", 
-            "Return Date", 
-            "date", 
+            "returnDate",
+            "Return Date",
+            "date",
             "departure time"
           )}
-          {this.renderInput(
-            "airline", 
-            "Airline", 
-            "text", 
-            "airline"
-          )}
-          {this.renderInput(
-            "seat", 
-            "Seat", 
-            "number", 
-            "seat"
-          )}
-          {this.renderInput(
-            "food", 
-            "Food", 
-            "text", 
-            "food"
-          )}
-          {this.renderTextarea(
-            "detail", 
-            "Detail", 
-            "text", 
-            "detail"
-          )}
-          {this.renderTextarea(
-            "highlight", 
-            "Highlight", 
-            "text", 
-            "highlight"
-          )}
+          {this.renderInput("airline", "Airline", "text", "airline")}
+          {this.renderInput("seat", "Seat", "number", "seat")}
+          {this.renderInput("food", "Food", "text", "food")}
+          {this.renderTextarea("detail", "Detail", "text", "detail")}
+          {this.renderTextarea("highlight", "Highlight", "text", "highlight")}
           <div className="mgt" />
           {this.renderButton("Add Tour")}
         </form>
