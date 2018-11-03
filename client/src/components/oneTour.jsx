@@ -19,7 +19,7 @@ export default class OneTour extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.changeLoading = this.changeLoading.bind(this);
-		this.intervalLoadingID = setInterval( this.changeLoading , 100 );
+		this.intervalLoadingID = setInterval( this.changeLoading , 200 );
 	}
 
 	async getOneTour() {
@@ -28,7 +28,7 @@ export default class OneTour extends Component {
 			const result = await getSpecificTour(this.state.id);
 			const { tour } = result.data;
 			this.setState({ tour: tour[0] });
-			clearInterval( this.intervalLoadingID );
+			clearInterval( this.intervalLoadingID );// use this for stoping interval
 		} catch (e) {
 			console.log(e.response);
 		}
@@ -88,13 +88,14 @@ export default class OneTour extends Component {
 
 	render() {
 		const { tour, isLoaded } = this.state;
-		console.log( this.state.textLoad)
 		if (!isLoaded) {
 			return <h1>{this.state.textLoad}</h1>;
 		}
 		if (!tour || tour.length === 0) {
 			return <h1>notFoundTour</h1>;
 		}
+		console.log( tour );
+		var freeSeat = (tour.maxSeat - tour.currentSeat).toString();
 		return (
 			<div>
 				<h1>{tour.name}</h1>
@@ -109,7 +110,9 @@ export default class OneTour extends Component {
 					<label>
 						amountBooking:
 						<input
-							type="text"
+							type="number"
+							min="0"
+							max={freeSeat}
 							value={this.state.numberOfBooking}
 							onChange={this.handleChange}
 						/>
