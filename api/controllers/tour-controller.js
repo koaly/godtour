@@ -95,10 +95,15 @@ exports.checkOwnTour = async (req, res, next) => {
         HandingErorr(res, e)
     }
 }
-
+function toDate(dateStr, timeStr) {
+    const [day, month, year] = dateStr.split(/\/|-|\./)
+    return new Date(month + '/' + day + '/' + year + ' ' + timeStr)
+}
 exports.addTour = async function (req, res, next) {
     try {
         const { payload: { info } } = req;
+        const { startBookDate, startBookTime } = req.body
+        const { endBookDate, endBookTime } = req.body
 
         const tour = await new Tour({
             _id: new mongoose.Types.ObjectId,
@@ -109,8 +114,8 @@ exports.addTour = async function (req, res, next) {
             dest: req.body.dest,
             dayDuration: req.body.dayDuration,
             nightDuration: req.body.nightDuration,
-            startBooking: req.body.startBookDate + 'T' + req.body.startBookTime,
-            endBooking: req.body.endBookDate + 'T' + req.body.endBookTime,
+            startBooking: toDate(startBookDate, startBookTime),
+            endBooking: toDate(endBookDate, endBookTime),
             departDate: req.body.departDate,
             returnDate: req.body.returnDate,
             airline: req.body.airline,
