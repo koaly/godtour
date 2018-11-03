@@ -6,7 +6,8 @@ import Pagination from "./common/pagination";
 import { paginate } from "../utility/paginate";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { showCurrentBookings } from "../services/profileService";
+import { showCurrentBookings, removeCurrentBookings } from "../services/profileService";
+import Link from "react-router-dom/Link";
 export default class MyBook extends Component {
   constructor(props) {
     super(props)
@@ -27,7 +28,7 @@ export default class MyBook extends Component {
       console.log(response)
       const { booking } = response.data
       this.setState({ booking })
-      toast.success(`request booking success!`)
+      //toast.success(`request booking success!`)
     }
     catch (e) {
       toast.error(`${e.response.data.error.message}`);
@@ -40,10 +41,26 @@ export default class MyBook extends Component {
 
     this.setState({ isLoaded: true })
   }
-  handleDelete = movie => {
-    const movies = this.state.movies.filter(m => m._id !== movie._id);
-    this.setState({ movies });
+  async removeCurrentBooking(id) {
+    this.setState({ isLoaded: false })
+    try {
+      const response = await removeCurrentBookings(id)
+      if (response.data.message) {
+        toast.success(`${response.data.message}`)
+      }
+    }
+    catch (e) {
+      toast.error(`${e.response.data.error.message}`);
+      console.log(e.response);
+    }
+    this.setState({ isLoaded: true })
+  }
+  handleDelete = async (id) => {
+    await this.removeCurrentBooking(id)
+    await this.getCurrentBooking()
   };
+
+
   handlePageChange = page => {
     this.setState({ currentPage: page });
   };
@@ -60,15 +77,15 @@ export default class MyBook extends Component {
             <div className="col-md-4">
               <ProfileBar user={user} />
             </div>
+
             <div className="col-md-8 mgt">
-              <p>{count} movies in the database.</p>
+              <p>{count} tour in the database.</p>
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Title</th>
-                    <th>Genre</th>
-                    <th>Stock</th>
-                    <th>Rate</th>
+                    <th>TourName</th>
+                    <th>Amount</th>
+                    <th>Date</th>
                     <th />
                   </tr>
                 </thead>
@@ -77,9 +94,11 @@ export default class MyBook extends Component {
                     <tr key={i}>
                       <td>{book.tourName}</td>
                       <td>{book.amountBooking}</td>
+                      <td>{book.bookingDate}</td>
+                      <td><Link className="btn btn-primary btn-sm" to={`/tours/id=${book.tourID}`}>Goto</Link></td>
                       <td>
                         <button
-                          onClick={() => this.handleDelete(book)}
+                          onClick={() => this.handleDelete(book.id)}
                           className="btn btn-danger btn-sm"
                         >
                           Delete
@@ -89,6 +108,7 @@ export default class MyBook extends Component {
                   ))}
                 </tbody>
               </table>
+
               <Pagination
                 itemsCount={count}
                 pageSize={pageSize}
