@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 
 // use cors
-app.use(cor());
+app.use(cors());
 // use morgan to tracking request
 app.use(morgan('dev'));
 
