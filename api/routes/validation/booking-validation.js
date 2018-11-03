@@ -6,7 +6,7 @@ const config = {
             .not()
             .isEmpty()
             .withMessage("require amountBooking")
-            .isNumeric({ min: 1 })
+            .isInt({ gt: 0 })
             .withMessage("require number more than zero")
     ]
 }

@@ -123,7 +123,7 @@ exports.bookTour = async (req, res, next) => {
         });
         session.startTransaction();
         console.log("after")
-        if (tour.currentSeat - req.body.amountBooking < 0) {
+        if (tour.currentSeat - amountBooking < 0) {
             return res.status(405).json({
                 error: {
                     message: "Attemped to book more than available"
