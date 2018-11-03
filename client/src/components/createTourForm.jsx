@@ -18,13 +18,20 @@ class createTourForm extends Component{
 													, adult : 0	
 												}
 							, privateTour		: true
+							, requireGuide		: false
 						  }
 		};
-//		this.handleChange = this.handleChange.bind( this );
+		this.handleChange = this.handleChange.bind( this );
 	}
 
-	handleChange( type , event ){
-		this.state.dataTour[ type ] = event.target.value;
+	handleChange( event ){
+		if( event.target.name === "requireGuide"){
+			if( event.target.value === "true") this.state.dataTour[ event.target.name ] = true;
+			else this.state.dataTour[ event.target.name ] = false;
+		}
+		else{
+			this.state.dataTour[ event.target.name ] = event.target.value;
+		}
 		console.log( "=====> handleChange.state " , this.state);
 	}
 
@@ -47,15 +54,28 @@ class createTourForm extends Component{
 				<h1>Create Tour</h1>
 				<ul>
 					<li>
-						<label>Country</label>
-						<input	type="textarea" list="listCountries" 
-								onChange={this.handleChange.bind( this , "country")}
+						<label>Country : </label>
+						<input	type="textarea" list="listCountries" name="country"
+								onChange={this.handleChange} 
 						/>
 						<datalist id="listCountries">
 							{ listCountries.map( ( country) =>
 							<option value={ country }/>
 							)}
 						</datalist>
+					</li>
+					<li>
+						<label>Province : </label>
+						<input	type="textarea" name="province"
+								onChange={this.handleChange.bind}
+						/>
+					</li>
+					<li>
+						<label>Require Guide : </label>
+						<input	type="radio" name="requireGuide" value="true" 
+								onChange={this.handleChange}/> YES
+						<input	type="radio" name="requireGuide" value="false" checked="checked"
+								onChange={this.handleChange}/> NO
 					</li>
 				</ul>
 			</div>);
