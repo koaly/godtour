@@ -12,20 +12,20 @@ class createTourForm extends Component{
 			, user		: props.user
 			, dataTour	: { country				: ""
 							, province			: ""
-							, dayDuration		: 0
-							, nightDuration		: 0
-							, sizeofYourGroup	: { child	: 0
-													, adult : 0	
-												}
+							, dayDuration		: "0"
+							, nightDuration		: "0"
+							, numberChild		: "0"
+							, numberAdult		: "0"
 							, privateTour		: true
 							, requireGuide		: false
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
+		this.conditionVale = ["privateTour" , "requireGuide"]
 	}
 
 	handleChange( event ){
-		if( event.target.name === "requireGuide"){
+		if( this.conditionVale.includes( event.target.name ) ){
 			if( event.target.value === "true") this.state.dataTour[ event.target.name ] = true;
 			else this.state.dataTour[ event.target.name ] = false;
 		}
@@ -33,13 +33,12 @@ class createTourForm extends Component{
 			this.state.dataTour[ event.target.name ] = event.target.value;
 		}
 		console.log( "=====> handleChange.state " , this.state);
+		this.forceUpdate();
 	}
 
 	componentDidMount() {
 		console.log("===============> createTourForm.componentDidMount");
 		sessionStorage.setItem("tourLastLink" , "/createTour");
-		var test = sessionStorage.getItem("tourLastLink");
-		console.log("test sessionStorage is " , test);
 	}
 
 	render(){
@@ -60,7 +59,7 @@ class createTourForm extends Component{
 						/>
 						<datalist id="listCountries">
 							{ listCountries.map( ( country) =>
-							<option value={ country }/>
+							<option key={country} value={ country }/>
 							)}
 						</datalist>
 					</li>
@@ -71,11 +70,53 @@ class createTourForm extends Component{
 						/>
 					</li>
 					<li>
-						<label>Require Guide : </label>
-						<input	type="radio" name="requireGuide" value="true" 
-								onChange={this.handleChange}/> YES
-						<input	type="radio" name="requireGuide" value="false" checked="checked"
-								onChange={this.handleChange}/> NO
+						{ this.state.dataTour.requireGuide ? (<div>
+							<label>Require Guide : </label>
+							<input	type="radio" name="requireGuide" value="true" 
+									checked="checked"
+									onChange={this.handleChange}/> YES
+							<input	type="radio" name="requireGuide" value="false" 
+									onChange={this.handleChange}/> NO
+						</div>) : (<div>
+							<label>Require Guide : </label>
+							<input	type="radio" name="requireGuide" value="true" 
+									onChange={this.handleChange}/> YES
+							<input	type="radio" name="requireGuide" value="false" 
+									checked="checked"
+									onChange={this.handleChange}/> NO
+						</div>)
+						}
+					</li>
+					<li>
+						<label>people in your group  :&emsp;</label>
+						<label>children</label>
+						<input	type="number" name="numberChild" min="0"  
+								value={this.state.dataTour.numberChild}
+								onChange={this.handleChange}
+						/>
+						<label>Adult</label>
+						<input	type="number" name="numberAdult" min="0" 
+								value={this.state.dataTour.numberAdult}
+								onChange={this.handleChange}
+						/>
+					</li>
+					<li>
+						{ this.state.dataTour.privateTour ? (<div>
+							<label>Private Tour : </label>
+							<input	type="radio" name="privateTour" value="true"
+									checked="checked"
+									onChange={ this.handleChange}/> YES
+							<input	type="radio" name="privateTour" value="false" 
+									onChange={this.handleChange}/> NO	
+						</div>) : (<div>
+							<label>Private Tour : &emsp</label>
+							<input	type="radio" name="privateTour" value="true"
+									onChange={ this.handleChange}/> YES
+							<input	type="radio" name="privateTour" value="false" 
+									checked="checked"
+									onChange={this.handleChange}/> NO	
+						</div>)
+						}
 					</li>
 				</ul>
 			</div>);
