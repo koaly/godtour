@@ -1,4 +1,4 @@
-const listCountries = [ "ThaiLand" 
+const listCountries = [ "Thailand" 
 					, "United State" 
 					, "United Kingdom"
 					, "Singapore"

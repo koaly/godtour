@@ -10,8 +10,22 @@ class createTourForm extends Component{
 		this.state={
 			isLoading	: true
 			, user		: props.user
-			, dataTour	: {}
+			, dataTour	: { country				: ""
+							, province			: ""
+							, dayDuration		: 0
+							, nightDuration		: 0
+							, sizeofYourGroup	: { child	: 0
+													, adult : 0	
+												}
+							, privateTour		: true
+						  }
 		};
+//		this.handleChange = this.handleChange.bind( this );
+	}
+
+	handleChange( type , event ){
+		this.state.dataTour[ type ] = event.target.value;
+		console.log( "=====> handleChange.state " , this.state);
 	}
 
 	componentDidMount() {
@@ -24,19 +38,26 @@ class createTourForm extends Component{
 	render(){
 		console.log("===============> createTourForm.render" , this.state );
 		if( this.state.user === null){
-			return(<div>
+			return(<div> 
 				<h1>Please Login Before Create Tour by Yourself</h1>
 			</div>);
 		}
 		else if( this.state.user.info.status === 0 ){
 			return(<div className = "mgtb container">
 				<h1>Create Tour</h1>
-				<input type="textarea" list="country"/>
-				<datalist id="country">
-					{ listCountries.map( ( country) =>
-						<option value={ country } / >
-					)}
-				</datalist>
+				<ul>
+					<li>
+						<label>Country</label>
+						<input	type="textarea" list="listCountries" 
+								onChange={this.handleChange.bind( this , "country")}
+						/>
+						<datalist id="listCountries">
+							{ listCountries.map( ( country) =>
+							<option value={ country }/>
+							)}
+						</datalist>
+					</li>
+				</ul>
 			</div>);
 		}
 		else{
@@ -45,6 +66,7 @@ class createTourForm extends Component{
 			</div>);
 		}
 	}
+
 }
 
 export default createTourForm;
