@@ -21,7 +21,7 @@ import PurchaseList from "./components/purchaseList";
 import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
 import auth from "./services/authService";
-import createTourForm from "./components/createTourForm";
+import CreateTourForm from "./components/createTourForm";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -89,7 +89,8 @@ class App extends Component {
               render={props => <ShowUser {...props} token={jwt} />}
             />
 			<Route
-			  path="/createTour"
+			  path="/createTour" 
+			  render={() => <CreateTourForm user={user} />}
 			/>
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />

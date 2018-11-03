@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "../css/showtour.css"
 
 class createTourForm extends Component{
 
@@ -14,9 +12,11 @@ class createTourForm extends Component{
 	componentDidMount() {}
 
 	render(){
-		return(<div className = "mgtb container">
-			<h1>Create Tour</h1>
-		</div>)
+		return(
+			<div className = "mgtb container">
+				<h1>Create Tour</h1>
+			</div>
+		);
 	}
 }
 
