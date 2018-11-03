@@ -15,7 +15,7 @@ export default class OneTour extends Component {
       isLoadToken: false,
       numberOfBooking: 0,
       textLoad: "Now Loading",
-      textBooking: "Booking",
+      textBooking: "Now Booking",
       nowBooking: false,
       user: this.props.user
     };
@@ -70,7 +70,7 @@ export default class OneTour extends Component {
     }
     clearInterval(this.intervalBookingID);// use this for stoping interval
     this.setState(state => ({
-      textBook: "Booking",
+      textBook: "Now Booking",
       nowBooking: false
     }));
   }
@@ -125,7 +125,7 @@ export default class OneTour extends Component {
       this.count = 0;
     }
     this.setState(state => ({
-      textBooking: "Booking" + addingText
+      textBooking: "Now Booking" + addingText
     }));
   }
 
