@@ -43,3 +43,8 @@
 .TestBlock{
 	border : 0.5px solid blue;
 }
+
+.ReadMore{
+	float			: right;
+	vertical-align	: bottom;
+}

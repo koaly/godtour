@@ -5,29 +5,9 @@ export default class TourConvert{
 	}
 
 	convert_individual_tour( data ){
-		return {	_v				:	data._v
-				,	id				:	data._id
-				,	airline			:	data.airline
-				,	free_seat		:	data.maxSeat - data.currentSeat
-				,	booked_seat		:	data.currentSeat
-				,	max_seat		:	data.maxSeat
-				,	name			:	data.name
-				,	day_duration	:	data.dayDuration
-				,	night_duration	:	data.nightDuration
-				,	start_booking	:	data.startBooking
-				,	last_booking	:	data.endBooking
-				,	food			:	data.food
-				,	hightlight		:	data.hightlight
-				,	rating			:	data.rating
-				,	amont_rate		:	data.ratingCount
-				,	start_day_trip	:	data.departDate
-				,	end_day_trip	:	data.returnDate
-				,	destination		:	data.dest
-				,	detail			:	data.detail
-				,	price			:	data.price
-				,	operator_id		:	data.operatorID
-				,	operator_name	:	data.operatorName
-		}
+		var answer = data;
+		answer.freeSeat = data.maxSeat - data.currentSeat;
+		return answer;
 	}
 
 	manage_group_tour_order( data , start , range ){
