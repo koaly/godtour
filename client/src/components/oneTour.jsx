@@ -15,7 +15,8 @@ export default class OneTour extends Component {
 			isLoadToken: false,
 			numberOfBooking: 0,
 			textLoad : "Now Loading",
-			textBooking : "Booking"
+			textBooking : "Booking",
+			nowBooking : false
 		};
 		this.count = 0 ;
 		this.handleChange = this.handleChange.bind(this);
@@ -31,34 +32,35 @@ export default class OneTour extends Component {
 			const result = await getSpecificTour(this.state.id);
 			const { tour } = result.data;
 			this.setState({ tour: tour[0] });
-			clearInterval( this.intervalLoadingID );// use this for stoping interval
 		} catch (e) {
-			console.log(e.response);
+//			console.log(e.response);
 		}
+		clearInterval( this.intervalLoadingID );// use this for stoping interval
 		this.setState({ isLoaded: true });
 	}	
 
 	async BookingOneTour() {
-		this.intervalBookingID = setInterval( this.changeBooking , 200 );
+		this.intervalBookingID = setInterval( this.changeBooking , 10 );
+		console.log("Booking One Tour")
+		this.setState( state => ({
+			nowBooking : true
+		}));
 		const field = {
 			amountBooking: this.state.numberOfBooking
 		};
 		try {
 			const result = await booking(this.state.id, field);
 			toast.success(`${result.data.message}`);
-			clearInterval( this.intervalBookingID );// use this for stoping interval
-			this.setState( state => ({
-				textBook : "Booking"
-			}));
 		} catch (e) {
 //			toast.error(`${e.response.data.message}`);
 			toast.error("Please Login...");
-			console.log(e.response);
-			clearInterval( this.intervalBookingID );// use this for stoping interval
-			this.setState( state => ({
-				textBook : "Booking"
-			}));
+//			console.log(e.response);
 		}
+		clearInterval( this.intervalBookingID );// use this for stoping interval
+		this.setState( state => ({
+			textBook : "Booking",
+			nowBooking : false
+		}));
 	}
 
 	componentDidMount() {
@@ -123,8 +125,6 @@ export default class OneTour extends Component {
 		if (!tour || tour.length === 0) {
 			return <h1>notFoundTour</h1>;
 		}
-		console.log( tour );
-		console.log( "text book is " , this.state.textBook);
 		var freeSeat = (tour.maxSeat - tour.currentSeat).toString();
 /*	tour have data follow  database so have _v , _id , airline , currentSeat , dayDuration ,
 	departDate , dest , ddetail , endBooking , food , freeSeat , highlight , maxSeat , name ,
@@ -149,9 +149,16 @@ export default class OneTour extends Component {
 						value={this.state.numberOfBooking}
 						onChange={this.handleChange}
 					/>
-					<button className ="TestBlock" onClick={this.BookingOneTour}>
-						{this.state.textBooking}
-					</button>
+					{ ! this.state.nowBooking &&
+						<button className ="TestBlock" onClick={this.BookingOneTour}>
+							Booking
+						</button>
+					}
+					{ this.state.nowBooking &&
+						<button className = "TestBlock" >
+							Now Booking
+						</button>
+					}
 				</label>
 			</div>
 		);
