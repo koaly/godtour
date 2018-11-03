@@ -36,19 +36,27 @@ export default class ShowUser extends Component {
       return <h1>notFoundUser</h1>;
     }
     return (
-      <div>
-        <h1>User List</h1>
-        <ul>
-          {users.map((user, i) => (
-            <li key={i}>
-              <h3>
-                {user.username}
-                {user.displayName}
-                <Link to={`/users/${user.username}`}>next</Link>
-              </h3>
-            </li>
-          ))}
-        </ul>
+      <div className="container mgtb">
+        <div className="profile-container bgdark">
+            <h1 className="user-head">User List</h1>
+            <ul>
+            {users.map((user, i) => (
+                <li key={i}>
+                <div className="user-content">
+                    <p>
+                        Display Name : {user.displayName}
+                    </p>
+                    <p>
+                        Email Address : {user.email}
+                    </p>
+                    <p>
+                        <Link to={`/users/${user.username}`}>See more</Link>
+                    </p>
+                </div>
+                </li>
+            ))}
+            </ul>
+        </div>
       </div>
     );
   }

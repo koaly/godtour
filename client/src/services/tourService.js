@@ -32,7 +32,8 @@ export function addTour(tour) {
     seat,
     food,
     detail,
-    highlight
+    highlight,
+    imgsrc
   } = tour;
   return http.post(
     tourAddEndpoint,
@@ -52,7 +53,8 @@ export function addTour(tour) {
       seat,
       food,
       detail,
-      highlight
+      highlight,
+      imgsrc
     },
     config
   );
