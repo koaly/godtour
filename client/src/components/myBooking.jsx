@@ -48,10 +48,9 @@ export default class MyBook extends Component {
     this.setState({ currentPage: page });
   };
   render() {
-    const { user, booking } = this.state;
+    const { user, booking: totalBooking, currentPage, pageSize } = this.state;
     const { length: count } = this.state.booking;
-    const { pageSize, currentPage, movies: allMovies } = this.state;
-    const movies = paginate(allMovies, currentPage, pageSize);
+    const booking = paginate(totalBooking, currentPage, pageSize);
 
     return (
       <div className="container">
@@ -74,9 +73,10 @@ export default class MyBook extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {booking.map(book => (
-                    <tr key={book._id}>
-                      <td>{book.UserID}</td>
+                  {booking.map((book, i) => (
+                    <tr key={i}>
+                      <td>{book.tourName}</td>
+                      <td>{book.amountBooking}</td>
                       <td>
                         <button
                           onClick={() => this.handleDelete(book)}
