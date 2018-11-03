@@ -8,5 +8,5 @@ const config = {
 };
 
 export function getAllTours() {
-  return http.get(apiEndpoint);
+  return http.get(apiEndpoint , config);
 }

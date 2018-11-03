@@ -20,7 +20,7 @@ const NavBar = ({ user }) => {
       <div className="collapse navbar-collapse" id="collapsibleNavbar">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <NavLink className="nav-link" to="/tour">
+            <NavLink className="nav-link" to="/tours">
               Tour List
             </NavLink>
           </li>

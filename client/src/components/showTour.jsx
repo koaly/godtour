@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../css/showtour.css"
 import FetchAllTours from "./fetch/FetchAllTours";
 
@@ -66,12 +67,19 @@ class ShowTour extends Component {
 			<div className="container mgtb">
 				<h1>Tour List</h1>
 				<ul>
+{/* tour have data follow  database so have _v , _id , airline , currentSeat , dayDuration ,
+ departDate , dest , ddetail , endBooking , food , freeSeat , highlight , maxSeat , name ,
+ nightDuration , operatorID , operatorName , price , rating , ratineCount , returnDate ,
+ startBooking */}
 					{this.state.ListTour.map( tour => 
-						<li key={tour.id} className = "BlockTour">
+						<li key={tour._id} className = "BlockTour">
 							<h3 className="HeadTour TestBlock">{tour.name}</h3>
 							<p className="SeatTour TestBlock"> 
-								booked : {tour.free_seat}/{tour.max_seat}
+								booked : {tour.currentSeat}/{tour.maxSeat}
 							</p>
+							<Link className="ReadMore TestBlock" to={`/tours/id=${tour._id}`}>
+								Read More...
+							</Link>
 						</li>
 					)}
 				</ul>
