@@ -59,13 +59,12 @@ class RegisterForm extends Form {
         ex.response.status < 500
       ) {
         const errorRes = ex.response.data.errors;
-        console.log(JSON.stringify(errorRes));
         if (errorRes) {
           errorRes.forEach(error => {
             toast.error(` ${error.param}: ${error.msg}`);
           });
         } else {
-          toast.error(`${ex.response.data.message}`);
+          toast.error(`${ex.response.data.error.message}`);
         }
       }
     }

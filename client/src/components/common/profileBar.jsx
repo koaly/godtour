@@ -57,7 +57,7 @@ export default class ProfileBar extends Component {
             </NavLink>
           </li>
           < li className="nav-item">
-            <NavLink className="nav-link" to="/profile/myCard">
+            <NavLink className="nav-link" to="/profile/myTour">
               <span className="black">My Tour</span>
             </NavLink>
           </li>
