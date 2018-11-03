@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import ProfileBar from "./common/profileBar";
-import { MailIcon } from "mdi-react";
-import getStatus from "./common/status"
+import OwnTour from "./common/ownTour";
+import ProfileBar from "./common/profileBar"
 //import { Route, Switch, Redirect } from "react-router-dom";
 
-export default class Profile extends Component {
+export default class myTour extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,17 +18,6 @@ export default class Profile extends Component {
 
   render() {
     const { user, isLoaded } = this.state;
-    const {
-      displayName,
-      username,
-      email,
-      gender,
-      registerDate,
-      status,
-    } = user.info
-
-    const Rank = getStatus(status)
-    const timeDate = registerDate.replace('T', ' ').replace('Z', ' ')
 
     if (!isLoaded) {
       return <h1>isLoading</h1>
@@ -45,15 +33,7 @@ export default class Profile extends Component {
             </div>
             <div className="col-md-8 mt-2">
               <div className="profile-infor mr-5">
-                <div className="profile-infor ">
-                  <h4>{displayName} ({Rank})</h4>
-                  <h5>@{username}</h5>
-                  <h5>Gender: {gender}</h5>
-                </div>
-                <div className="profile-infor ">
-                  <h4><MailIcon className="blue mr-2" />{email}</h4>
-                  <h5>เป็นสมาชิกตั้งแต่ {timeDate}</h5>
-                </div>
+                <OwnTour />
               </div>
             </div>
           </div>

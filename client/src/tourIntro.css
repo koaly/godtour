@@ -33,3 +33,31 @@
 .moretour {
     background:#ececec;
 }
+
+.bgdark {
+    background-color:#343a40;
+    color:silver;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 0.3rem;
+    overflow: hidden;
+}
+
+.user-head {
+    margin-left:25px;
+}
+
+.user-content {
+    color:black;
+    background:#ececec;
+    border: 1px solid rgba(0, 0, 0, .2);
+    margin-bottom:0px;
+}
+
+.user-content p{
+    margin-top:20px;
+    font-size:20px;
+    margin-left: 25px;
+}
+.hh{
+    height:100px;
+}

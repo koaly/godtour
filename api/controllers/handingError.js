@@ -45,7 +45,7 @@ exports.UserNotFoundException = function () {
 exports.EmailAlreadyExits = function () {
     this.name = "errors"
     this.status = 409
-    this.message = "email is already exits"
+    this.message = "Email or Username is already exits"
 }
 exports.TourNotFoundException = function () {
     this.name = "errors"

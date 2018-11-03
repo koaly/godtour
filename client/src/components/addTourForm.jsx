@@ -22,7 +22,8 @@ class AddTourForm extends Form {
       seat: "",
       food: "",
       detail: "",
-      highlight: ""
+      highlight: "",
+      imgsrc: ""
     },
     errors: {}
   };
@@ -84,7 +85,10 @@ class AddTourForm extends Form {
       .label("Detail"),
     highlight: Joi.string()
       .required()
-      .label("Highlight")
+      .label("Highlight"),
+    imgsrc: Joi.string()
+      .required()
+      .label("Imgsrc")
   };
 
   doSubmit = async () => {
@@ -168,6 +172,7 @@ class AddTourForm extends Form {
           {this.renderInput("food", "Food", "text", "food")}
           {this.renderTextarea("detail", "Detail", "text", "detail")}
           {this.renderTextarea("highlight", "Highlight", "text", "highlight")}
+          {this.renderInput("imgsrc", "Imgsrc", "text", "imgsrc")}
           <div className="mgt" />
           {this.renderButton("Add Tour")}
         </form>
