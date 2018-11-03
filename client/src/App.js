@@ -4,6 +4,7 @@ import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
 import TourIntroduce from "./components/tourIntroduce";
 import ShowTour2 from "./components/showTour2";
+import ShowUser from "./components/showUser";
 import HomePage from "./components/homepage/homePage";
 import NotFound from "./components/notFound";
 import Profile from "./components/profile";
@@ -81,6 +82,10 @@ class App extends Component {
             <Route
               path="/tours"
               render={props => <ShowTour2 {...props} token={jwt} />}
+            />
+            <Route
+              path="/users"
+              render={props => <ShowUser {...props} token={jwt} />}
             />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
