@@ -95,9 +95,8 @@ exports.checkOwnTour = async (req, res, next) => {
         HandingErorr(res, e)
     }
 }
-function toDate(dateStr, timeStr) {
-    const [day, month, year] = dateStr.split(/\/|-|\./)
-    return new Date(month + '/' + day + '/' + year + ' ' + timeStr)
+toDate = (dateStr, timeStr) => {
+    return new Date(dateStr + ' ' + timeStr)
 }
 exports.addTour = async function (req, res, next) {
     try {
