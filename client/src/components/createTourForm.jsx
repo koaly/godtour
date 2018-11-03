@@ -18,6 +18,8 @@ class createTourForm extends Component{
 							, numberAdult		: "0"
 							, privateTour		: true
 							, requireGuide		: false
+							, startPeriodTour	: ""
+							, endPeriodTour		: ""
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
@@ -89,7 +91,7 @@ class createTourForm extends Component{
 					</li>
 					<li>
 						<label>people in your group  :&emsp;</label>
-						<label>children</label>
+						<label>Children</label>
 						<input	type="number" name="numberChild" min="0"  
 								value={this.state.dataTour.numberChild}
 								onChange={this.handleChange}
@@ -118,6 +120,31 @@ class createTourForm extends Component{
 						</div>)
 						}
 					</li>
+					<li>
+						<label>Length Tour :&emsp;</label>
+						<label>Day</label>
+						<input	type="number" name="dayDuration" min="0"  
+								value={this.state.dataTour.dayDuration}
+								onChange={this.handleChange}
+						/>
+						<label>Night</label>
+						<input	type="number" name="nightDuration" min="0" 
+								value={this.state.dataTour.nightDuration}
+								onChange={this.handleChange}
+						/>
+					</li>
+					<li>
+						<label>Priod Tour :&emsp;</label>
+						<label>Start</label>
+						<input	type="date" name="startPeriodTour"
+								onChange={this.handleChange}
+						/>
+						<label>End</label>
+						<input	type="date" name="endPeriodTour"
+								onChange={this.handleChange}
+						/>
+					</li>
+					
 				</ul>
 			</div>);
 		}
