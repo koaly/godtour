@@ -20,6 +20,8 @@ class createTourForm extends Component{
 							, requireGuide		: false
 							, startPeriodTour	: ""
 							, endPeriodTour		: ""
+							, maxPrice			: "1000"
+							, specificDetail	: "Pleas Let me know what you want most in this tours"
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
@@ -53,7 +55,7 @@ class createTourForm extends Component{
 		else if( this.state.user.info.status === 0 ){
 			return(<div className = "mgtb container">
 				<h1>Create Tour</h1>
-				<ul>
+				<form><ul>
 					<li>
 						<label>Country : </label>
 						<input	type="textarea" list="listCountries" name="country"
@@ -144,8 +146,22 @@ class createTourForm extends Component{
 								onChange={this.handleChange}
 						/>
 					</li>
-					
-				</ul>
+					<li>
+						<label>Max Price:&ensp;&ensp;</label>
+						<input	type="number" name="maxPrice"
+								onChange={this.handleChange}
+								value={this.state.dataTour.maxPrice}
+								min="0"
+						/>
+					</li>
+					<li>
+						<p>Message to Tourism</p>
+						<textarea	name="specificDetail" cols="60" rows="5" 
+									onChange={this.handleChange}>
+							{this.state.dataTour.specificDetail}	
+						</textarea>
+					</li>	
+				</ul></form>
 			</div>);
 		}
 		else{
