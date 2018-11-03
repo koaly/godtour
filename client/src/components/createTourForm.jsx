@@ -21,7 +21,7 @@ class createTourForm extends Component{
 							, startPeriodTour	: ""
 							, endPeriodTour		: ""
 							, maxPrice			: "1000"
-							, specificDetail	: "Pleas Let me know what you want most in this tours"
+							, specificDetail	: "Let us know what you want most in your tour"
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
@@ -37,7 +37,7 @@ class createTourForm extends Component{
 			this.state.dataTour[ event.target.name ] = event.target.value;
 		}
 		console.log( "=====> handleChange.state " , this.state);
-		this.forceUpdate();
+		this.setState();
 	}
 
 	componentDidMount() {
@@ -55,11 +55,11 @@ class createTourForm extends Component{
 		else if( this.state.user.info.status === 0 ){
 			return(<div className = "mgtb container">
 				<h1>Create Tour</h1>
-				<form><ul>
+				<form action=""><ul>
 					<li>
 						<label>Country : </label>
 						<input	type="textarea" list="listCountries" name="country"
-								onChange={this.handleChange} 
+								onChange={this.handleChange} required 
 						/>
 						<datalist id="listCountries">
 							{ listCountries.map( ( country) =>
@@ -160,7 +160,8 @@ class createTourForm extends Component{
 									onChange={this.handleChange}>
 							{this.state.dataTour.specificDetail}	
 						</textarea>
-					</li>	
+					</li>
+					<input type="submit"/>	
 				</ul></form>
 			</div>);
 		}
