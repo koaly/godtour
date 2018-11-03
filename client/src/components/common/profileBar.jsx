@@ -51,6 +51,16 @@ export default class ProfileBar extends Component {
               <span className="black">My Booking</span>
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/profile/myCard">
+              <span className="black">Offers</span>
+            </NavLink>
+          </li>
+          < li className="nav-item">
+            <NavLink className="nav-link" to="/profile/myCard">
+              <span className="black">My Tour</span>
+            </NavLink>
+          </li>
         </ul>
       </div>
     );
