@@ -164,7 +164,7 @@ export default class OneTour extends Component {
 					}
 					{ this.state.nowBooking &&
 						<button className = "TestBlock" >
-							Now Booking
+							{this.state.textBooking}
 						</button>
 					}
 			  </label>
