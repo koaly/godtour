@@ -1,10 +1,11 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import auth from "./authService";
 
-const apiEndpoint = apiUrl + "/tours/";
+const apiEndpoint = "/tours/";
 const config = {
-  headers: { Authorization: "JWT " + auth.getJwt() }
+  headers: {
+    Authorization: "JWT " + auth.getJwt()
+  }
 };
 
 export function getSpecificTour(id) {
