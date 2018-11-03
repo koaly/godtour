@@ -64,6 +64,21 @@
   display: none !important;
 }
 
+.onet-container {
+  background-color: #ececec;
+  padding:15px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 0.3rem;
+}
+
+.onet-infor {
+  line-height: 20px;
+}
+
+.ll {
+  height: 50px;
+  width: 50px;
+}
 
 @media (min-width: 768px){
   .d-md-flex {

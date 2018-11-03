@@ -12,7 +12,8 @@ export default class OneTour extends Component {
       token: this.props.token,
       isLoaded: false,
       isLoadToken: false,
-      numberOfBooking: 0
+      numberOfBooking: 0,
+      user: this.props.user
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -60,7 +61,7 @@ export default class OneTour extends Component {
   }
 
   render() {
-    const { tour, isLoaded } = this.state;
+    const { tour, isLoaded, user } = this.state;
     if (!isLoaded) {
       return <h1>isLoading</h1>;
     }
@@ -69,26 +70,45 @@ export default class OneTour extends Component {
     }
     console.log(tour);
     return (
-      <div>
-        <h1>{tour.name}</h1>
-        <h3>{tour.price} $</h3>
-        <h3>{tour.airline}</h3>
-        <h3>
-          {tour.currentSeat}/{tour.maxSeat}
-        </h3>
-        <h3>by {tour.operatorName}</h3>
-        <h3>fly with {tour.airline}</h3>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            amountBooking:
-            <input
-              type="text"
-              value={this.state.numberOfBooking}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Booking" />
-        </form>
+      <div className="container">
+        <div className="profile-container bglight mgtb">
+          <div className="row">
+            <div className="col-md-7 mt-4">
+              <h1 className="ml-4">img</h1>
+            </div>
+            <div className="col-md-5 mt-4 mb-4">
+              <h1 className="mgbi">{tour.name}</h1>
+              <h5 className="mgbi">Fly with {tour.airline}</h5>
+              <h5 className="mgbi">{tour.dayDuration} Day(s) {tour.nightDuration} Night(s)</h5>
+              <h5 className="mgbi">Price: {tour.price} $</h5>
+              <h5 className="mgbi">
+                Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+              </h5>
+              <h5 className="mgbi">Operated by {tour.operatorName}</h5>
+              {user.info.status===0 && <form onSubmit={this.handleSubmit}>
+                <label >
+                  <h5>Amount of Booking:</h5>
+                  <input
+                    type="text"
+                    value={this.state.numberOfBooking}
+                    onChange={this.handleChange}
+                  />
+                </label>
+                <input type="submit" value="Book Seat(s)" className="btn btn-primary ml-4 mb-1" />
+              </form>
+              }
+              {user.info.status!==0 && 
+                <React.Fragment>
+                  <input type="submit" value="Delete Tour" className="btn btn-danger  mt-4" />
+                  <input type="submit" value="Edit Tour" className="btn btn-primary  ml-4 mt-4" />
+                </React.Fragment>
+              }
+
+              {/*<input type="submit" value="Delete Tour" className="btn btn-danger  mt-4" />
+            <input type="submit" value="Edit Tour" className="btn btn-primary  ml-4 mt-4" />*/}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
