@@ -68,7 +68,7 @@ class App extends Component {
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/register" component={RegisterForm} />
-            <Route 
+            <Route
               path="/tourIntroduce"
               render={() => <TourIntroduce user={user} />}
             />
@@ -87,7 +87,7 @@ class App extends Component {
             <Route path="/cancelBook" component={CancelBook} />
             <Route
               path="/profile/myBooking"
-              render={() => <MyBook user={user} />}
+              render={props => <MyBook {...props} user={user} token={jwt} />}
             />
             <Route
               path="/profile/myCard"

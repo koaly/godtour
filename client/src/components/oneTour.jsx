@@ -85,7 +85,7 @@ export default class OneTour extends Component {
                 Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
               </h5>
               <h5 className="mgbi">Operated by {tour.operatorName}</h5>
-              {user.info.status===0 && <form onSubmit={this.handleSubmit}>
+              {user.info.status === 0 && <form onSubmit={this.handleSubmit}>
                 <label >
                   <h5>Amount of Booking:</h5>
                   <input
@@ -97,7 +97,7 @@ export default class OneTour extends Component {
                 <input type="submit" value="Book Seat(s)" className="btn btn-primary ml-4 mb-1" />
               </form>
               }
-              {user.info.status!==0 && 
+              {user.info.status !== 0 &&
                 <React.Fragment>
                   <input type="submit" value="Delete Tour" className="btn btn-danger  mt-4" />
                   <input type="submit" value="Edit Tour" className="btn btn-primary  ml-4 mt-4" />

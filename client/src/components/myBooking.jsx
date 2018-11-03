@@ -4,7 +4,9 @@ import ProfileBar from "./common/profileBar";
 import { getMovies } from "../services/Test";
 import Pagination from "./common/pagination";
 import { paginate } from "../utility/paginate";
-
+import Axios from "axios";
+import { toast } from "react-toastify";
+import { showCurrentBookings } from "../services/profileService";
 export default class MyBook extends Component {
   constructor(props) {
     super(props)
@@ -12,12 +14,31 @@ export default class MyBook extends Component {
       movies: getMovies(),
       pageSize: 3,
       currentPage: 1,
-      user: this.props.user
-    };
+      user: this.props.user,
+      isLoaded: false,
+      booking: [],
+    }
 
   }
+  async getCurrentBooking() {
+    this.setState({ isLoaded: false })
+    try {
+      const response = await showCurrentBookings()
+      console.log(response)
+      const { booking } = response.data
+      this.setState({ booking })
+      toast.success(`request booking success!`)
+    }
+    catch (e) {
+      toast.error(`${e.response.data.error.message}`);
+      console.log(e.response);
+    }
+    this.setState({ isLoaded: true })
+  }
   componentDidMount() {
+    this.getCurrentBooking()
 
+    this.setState({ isLoaded: true })
   }
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
@@ -27,8 +48,8 @@ export default class MyBook extends Component {
     this.setState({ currentPage: page });
   };
   render() {
-    const { user } = this.state;
-    const { length: count } = this.state.movies;
+    const { user, booking } = this.state;
+    const { length: count } = this.state.booking;
     const { pageSize, currentPage, movies: allMovies } = this.state;
     const movies = paginate(allMovies, currentPage, pageSize);
 
@@ -53,15 +74,12 @@ export default class MyBook extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {movies.map(movie => (
-                    <tr key={movie._id}>
-                      <td>{movie.title}</td>
-                      <td>{movie.genre.name}</td>
-                      <td>{movie.numberInStock}</td>
-                      <td>{movie.dailyRentalRate}</td>
+                  {booking.map(book => (
+                    <tr key={book._id}>
+                      <td>{book.UserID}</td>
                       <td>
                         <button
-                          onClick={() => this.handleDelete(movie)}
+                          onClick={() => this.handleDelete(book)}
                           className="btn btn-danger btn-sm"
                         >
                           Delete
