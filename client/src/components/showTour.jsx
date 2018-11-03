@@ -65,11 +65,14 @@ class ShowTour extends Component {
 			else this.condition = 2;
 		}
 		return (
+			
 			<div className="container mgtb">
-				<div className="tourlist">
-					<h1 className="mb-5">Tour List</h1>
-				</div>
-				
+			{this.condition!==1 &&
+				<React.Fragment>
+					<div className="tourlist">
+						<h1 className="mb-5">Tour List</h1>
+					</div>
+				</React.Fragment>}
 				<ul>
 {/* tour have data follow  database so have _v , _id , airline , currentSeat , dayDuration ,
  departDate , dest , ddetail , endBooking , food , freeSeat , highlight , maxSeat , name ,
@@ -97,12 +100,15 @@ class ShowTour extends Component {
 					)}
 				</ul>
 				{this.condition === 1 &&
-					<button className="GeneralButtonTour" > 'Now Loading!' </button>
+					<button className="GeneralButtonTour mgb" > 'Now Loading!' </button>
 				}
 				{this.condition === 2 &&
 					<button className="ButtonMoreTour GeneralButtonTour"
 						onClick={this.ShowMoreCallback}> "More Tour!" </button>
 				}
+				
+			
+			
 			</div>
 		);
 	}
