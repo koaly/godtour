@@ -101,25 +101,17 @@ exports.bookTour = async (req, res, next) => {
         const session = await Tour.startSession();
         console.log(session);
 
-        const {
-            payload: {
-                info
-            }
-        } = req;
-        const {
-            amountBooking
-        } = req.body
+        const { payload: { info } } = req;
+        const { amountBooking } = req.body
 
-        const tour = await Tour.find({
+        const tour = await Tour.findOne({
             _id: req.params.id
         });
+
         if (!tour || tour.length == 0) throw new TourNotFoundException()
 
         console.log(tour)
-        const {
-            id,
-            name
-        } = tour[0]
+        const { id, name } = tour
 
         const booking = await new Booking({
             _id: new mongoose.Types.ObjectId,
@@ -140,9 +132,9 @@ exports.bookTour = async (req, res, next) => {
         } else {
             tour.currentSeat -= req.body.amountBooking;
             const bookingResult = await booking.save();
-            //const tourResult = await tour.save();
+            const tourResult = await tour.save();
             console.log(bookingResult);
-            //console.log(tourResult);
+            console.log(tourResult);
             res.status(201).json({
                 message: "Book tour successful"
             });
