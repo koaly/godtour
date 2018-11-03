@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../css/showtour.css"
 import FetchAllTours from "./fetch/FetchAllTours";
+import {ClockIcon, PlaneShieldIcon, AirlineSeatReclineNormalIcon, AirplaneIcon} from "mdi-react";
 
 class ShowTour extends Component {
 
@@ -65,21 +66,33 @@ class ShowTour extends Component {
 		}
 		return (
 			<div className="container mgtb">
-				<h1>Tour List</h1>
+				<div className="tourlist">
+					<h1 className="mb-5">Tour List</h1>
+				</div>
+				
 				<ul>
 {/* tour have data follow  database so have _v , _id , airline , currentSeat , dayDuration ,
  departDate , dest , ddetail , endBooking , food , freeSeat , highlight , maxSeat , name ,
  nightDuration , operatorID , operatorName , price , rating , ratineCount , returnDate ,
  startBooking */}
 					{this.state.ListTour.map( tour => 
-						<li key={tour._id} className = "BlockTour">
-							<h3 className="HeadTour TestBlock">{tour.name}</h3>
-							<p className="SeatTour TestBlock"> 
-								booked : {tour.currentSeat}/{tour.maxSeat}
-							</p>
-							<Link className="ReadMore TestBlock" to={`/tours/id=${tour._id}`}>
-								Read More...
-							</Link>
+						<li key={tour._id} className = "card mb-5 card-size">
+							<img src="https://d1nabgopwop1kh.cloudfront.net/hotel-asset/30000002100149018_wh_32" alt="sample image" className="mb-3"/>
+							<div className="showtour-content">
+								<h3 className="mb-3">{tour.name}</h3>
+								<p> 
+									<ClockIcon className="mr-3 mb-1"/>{tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+								</p>
+								<p> 
+									<AirplaneIcon className="mr-3 mb-1"/>Fly with {tour.airline}
+								</p>
+								<p> 
+									<AirlineSeatReclineNormalIcon className="mr-3 mb-1"/>Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+								</p>
+								<Link className="" to={`/tours/id=${tour._id}`}>
+									Read More...
+								</Link>
+							</div>
 						</li>
 					)}
 				</ul>
