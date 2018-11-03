@@ -157,12 +157,12 @@ exports.bookTour = async (req, res, next) => {
 
 exports.cancelBooking = async (req, res, next) => {
     try {
-        const booking = await Booking.find({
+        const booking = await Booking.findOne({
             _id: req.params.id
         });
         if (!booking || booking.length == 0) throw new BookNotFoundException()
 
-        const tour = await Tour.find({
+        const tour = await Tour.findOne({
             _id: booking.tourID
         });
         if (!tour || tour.length == 0) throw new TourNotFoundException()
@@ -191,13 +191,11 @@ exports.checkOwnBooking = async (req, res, next) => {
                 info
             }
         } = req;
-        const booking = await Booking.find({
+        const booking = await Booking.findOne({
             _id: req.params.id
         });
-        if (!booking || booking.length == 0) throw new BookNotFoundException(
-
-        )
-        console.log(booking.userID);
+        if (!booking || booking.length == 0) throw new BookNotFoundException()
+        console.log(booking)
 
         if (info.id != booking.userID) {
             return res.status(403).json({
