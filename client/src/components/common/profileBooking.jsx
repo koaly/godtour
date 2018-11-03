@@ -4,6 +4,7 @@ import { toast } from "react-toastify"
 import { paginate } from "../../utility/paginate";
 import { Link } from "react-router-dom"
 import Pagination from "./pagination";
+import Spinner from "./spinner";
 export default class ProfileBooking extends Component {
     constructor(props) {
         super(props)
@@ -69,12 +70,15 @@ export default class ProfileBooking extends Component {
         const selectBooking = paginate(booking, currentPage, pageSize)
 
         if (!isLoaded) {
-            return <div>Loading</div>
+
+            return (
+                <Spinner />
+            )
         }
 
         console.log(booking)
         return (
-            <div className="col-md-8 mgt">
+            <div>
                 <p>{count} bookings</p>
                 <table className="table">
                     <thead>

@@ -25,7 +25,9 @@ export default class MyBook extends Component {
             <div className="col-md-4">
               <ProfileBar user={user} />
             </div>
-            <ProfileBooking />
+            <div className="col-md-8 mgt">
+              <ProfileBooking />
+            </div>
           </div>
         </div>
       </div>
