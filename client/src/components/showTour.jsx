@@ -93,7 +93,7 @@ class ShowTour extends Component {
  startBooking */}
           {this.state.ListTour.map(tour => (
             <li key={tour._id} className="card mb-5 card-size">
-              <img src={tour.imgsrc} alt="sample image" className="mb-3" />
+              <img src={tour.imgsrc} alt="sample image" className="mb-3" height="350px" />
               <div className="showtour-content">
                 <h3 className="mb-3">{tour.name}</h3>
                 <p>
