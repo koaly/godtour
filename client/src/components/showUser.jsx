@@ -15,9 +15,9 @@ export default class ShowUser extends Component {
     this.setState({ isLoaded: false });
     try {
       const result = await getAllUsers();
-      console.log(result.data);
-      const { users } = result.data;
-      this.setState({ users: users });
+      console.log(result.data.users);
+      const { user } = result.data.users;
+      this.setState({ users: user });
     } catch (e) {
       console.log(e);
     }
@@ -39,10 +39,11 @@ export default class ShowUser extends Component {
       <div>
         <h1>User List</h1>
         <ul>
-          {users.map(user => (
-            <li key={user.username}>
+          {users.map((user, i) => (
+            <li key={i}>
               <h3>
-                {user.name}
+                {user.username}
+                {user.displayName}
                 <Link to={`/users/${user.username}`}>next</Link>
               </h3>
             </li>

@@ -48,7 +48,6 @@ router.get('/current/bookings/:id',
     });
 router.delete('/current/bookings/:id',
     auth.require,
-    bookingCtrl.checkNotNullBooking,
     bookingCtrl.checkOwnBooking,
     bookingCtrl.cancelBooking);
 router.get('/current/tours',

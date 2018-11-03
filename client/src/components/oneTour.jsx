@@ -149,7 +149,7 @@ export default class OneTour extends Component {
               </h5>
               <h5 className="mgbi">Operated by {tour.operatorName}</h5>
               {user.info.status === 0 && <label>
-					Booking:
+					<h5>Amount of Booking</h5>
 					<input
 						type="number"	
 						min="0" 
@@ -158,12 +158,12 @@ export default class OneTour extends Component {
 						onChange={this.handleChange}
 					/>
 					{ ! this.state.nowBooking &&
-						<button className ="TestBlock" onClick={this.BookingOneTour}>
-							Booking
+						<button className ="btn btn-primary ml-4 mb-1" onClick={this.BookingOneTour}>
+							Book Seat(s)
 						</button>
 					}
 					{ this.state.nowBooking &&
-						<button className = "TestBlock" >
+						<button className = "btn btn-primary" >
 							{this.state.textBooking}
 						</button>
 					}
