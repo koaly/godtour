@@ -66,7 +66,10 @@ class ShowTour extends Component {
 		}
 		return (
 			<div className="container mgtb">
-				<h1>Tour List</h1>
+				<div className="tourlist">
+					<h1 className="mb-5">Tour List</h1>
+				</div>
+				
 				<ul>
 {/* tour have data follow  database so have _v , _id , airline , currentSeat , dayDuration ,
  departDate , dest , ddetail , endBooking , food , freeSeat , highlight , maxSeat , name ,

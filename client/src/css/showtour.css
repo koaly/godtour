@@ -1,20 +1,25 @@
 .GeneralButtonTour{
+	cursor			: pointer;
 	clear			: both;
 	width			: 100%;
 	border			: none;
-	border-radius	: 12px; /* make smoth anger */
-	background-color: LightPink;
-	opacity			: .5;
+	border-radius	: 3px; /* make smoth anger */
+	padding-top		: 10px;
+	padding-bottom		: 10px;
+	background-color: white;
+	/*opacity			: .5;*/
 	text-align		: center;
 	display			: inline-block;
 	font-size		: 16px;
+	font-weight		: bold;
+	color			: DarkBlue;
 }
 
 
 .ButtonMoreTour:hover{
-	background-color: FireBrick;
-	font-weight		: bold;
-	color			: DarkBlue;
+	background-color: #f6f6f6;
+	/*font-weight		: bold;
+	color			: DarkBlue;*/
 }
 
 .BlockTour{
@@ -47,4 +52,14 @@
 .ReadMore{
 	float			: right;
 	vertical-align	: bottom;
+}
+
+.tourlist {
+	background:white;
+	border-radius	: 3px;
+	padding-botom:3px;
+	padding-top:3px;
+	padding-left:6px;
+	height:60px;
+	margin-bottom: 25px;
 }
