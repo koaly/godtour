@@ -33,9 +33,12 @@ class TourIntroduce extends Component {
                             <h3>Can Create Your Own Tour</h3>
                             <p>We will make your dream trip come true, just tell me your wish.</p>
                         </div>
-                        <button className="but" >
-                                Book Tour Now
-                        </button>
+                        <a href="/tour">
+                            <button className="but" >
+                                 Book Tour Now
+                            </button>
+                        </a>
+                        
                         
                         {/*{user.info.status===0 && <a href="/tour">
                             <button className="but" >
