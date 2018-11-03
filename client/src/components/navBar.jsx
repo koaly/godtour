@@ -27,11 +27,6 @@ const NavBar = ({ user }) => {
           {user && (
             <React.Fragment>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/addTour">
-                  Add Tour
-                </NavLink>
-              </li>
-              <li className="nav-item">
                 <NavLink className="nav-link" to="/editTour">
                   Edit Tour
                 </NavLink>
