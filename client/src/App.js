@@ -87,7 +87,7 @@ class App extends Component {
             />
             <Route
               path="/users"
-              render={props => <ShowUser {...props} token={jwt} />}
+              render={props => <ShowUser {...props} token={jwt} userr={user}/>}
             />
             <Route
               path="/createTour"

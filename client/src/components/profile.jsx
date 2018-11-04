@@ -44,7 +44,7 @@ export default class Profile extends Component {
               <ProfileBar user={user} />
             </div>
             <div className="col-md-8 mt-2">
-              <div className="profile-infor mr-5">
+              <div className="profile-infor mr-5 ml-4">
                 <div className="profile-infor ">
                   <h4>{displayName} ({Rank})</h4>
                   <h5>@{username}</h5>

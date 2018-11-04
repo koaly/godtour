@@ -101,8 +101,16 @@ export default class OneTour extends Component {
       //   }
       // });
     } catch (ex) {
-      if (ex.response && ex.response.status >= 400 && ex.response.status < 500)
-        toast.error("This Tour has already been deleted.");
+      // if (ex.response && ex.response.status >= 400 && ex.response.status < 500)
+      //   toast.error("This Tour has already been deleted.");
+      const errorRes = ex.response.data.errors;
+      if (errorRes) {
+        errorRes.forEach(error => {
+          toast.error(` ${error.param}: ${error.msg}`);
+        });
+      } else {
+        toast.error(`${ex.response.data.error.message}`);
+      }
     }
   };
 
