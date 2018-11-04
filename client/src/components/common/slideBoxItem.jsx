@@ -28,14 +28,15 @@ export default class SlideBoxItem extends Component {
                         src={tour.imgsrc}
                         alt={tour.name}
                     />
-                    <div className="carousel-caption d-none d-md-block panel-transparent">
-                        <div className="panel-body">
-                            <h5>{tour.name}</h5>
-                            <p>{tour.highlight}</p>
-                        </div>
 
-                    </div>
                 </Link>
+                <div className="carousel-caption d-none d-md-block panel-transparent">
+                    <div className="panel-body">
+                        <h5>{tour.name}</h5>
+                        <p>{tour.highlight}</p>
+                    </div>
+
+                </div>
             </div>
         )
     }
