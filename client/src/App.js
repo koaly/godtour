@@ -89,10 +89,10 @@ class App extends Component {
               path="/users"
               render={props => <ShowUser {...props} token={jwt} userr={user}/>}
             />
-            <Route
-              path="/createTour"
-              render={() => <CreateTourForm user={user} />}
-            />
+			<Route
+			  path="/createTour" 
+			  render={props => <CreateTourForm {...props} token={jwt} user={user} />}
+			/>
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />

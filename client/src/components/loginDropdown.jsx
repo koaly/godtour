@@ -25,7 +25,13 @@ class LoginDropdown extends (Component, Form) {
     try {
       const { data } = this.state;
       await auth.login(data.email, data.password);
-      window.location = "/";
+	  let redirectLink = sessionStorage.getItem("tourLastLink");
+	  if( redirectLink === null){
+		window.location = "/";
+	  }
+	  else{
+		window.location = redirectLink;
+	  }
     } catch (ex) {
       if (
         ex.response &&

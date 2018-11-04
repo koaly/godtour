@@ -1,0 +1,9 @@
+
+{ 
+    "root": "build/", 
+    "proxy": {
+        "/api": {
+            "target": "http://localhost:5000"
+        }
+    }
+}
