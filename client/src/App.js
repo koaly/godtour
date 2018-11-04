@@ -17,6 +17,7 @@ import MyBook from "./components/myBooking";
 import CancelBook from "./components/cancelBook";
 import MyCard from "./components/myCard";
 import OneTour from "./components/oneTour";
+import OneUser from "./components/oneUser";
 import PurchaseList from "./components/purchaseList";
 import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
@@ -81,6 +82,10 @@ class App extends Component {
             <Route
               path="/tours/id=:id"
               render={props => <OneTour {...props} token={jwt} user={user} />}
+            />
+            <Route
+              path="/users/:username"
+              render={props => <OneUser {...props} token={jwt} user={user} />}
             />
             <Route
               path="/tours"
