@@ -24,13 +24,21 @@ const NavBar = ({ user }) => {
               Tour Introduce
             </NavLink>
           </li>
-          {user && (
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/users">
-                Users
+          {user &&
+            user.info.status === 0 && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/users">
+                  Tour Operator
                 </NavLink>
-            </li>
-          )}
+              </li>
+            )}
+          {user &&
+            user.info.status !== 0 && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/users">
+                  Users
+                </NavLink>
+              </li>)}
           {user &&
             user.info.status !== 0 && (
               <li className="nav-item">
