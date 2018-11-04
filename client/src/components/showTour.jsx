@@ -24,6 +24,8 @@ class ShowTour extends Component {
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
     this.FetchReceiveTourCallback = this.FetchReceiveTourCallback.bind(this);
     this.FetchAllTours = new FetchAllTours();
+	this.numberShowMore = 5;
+	this.dataAllTours = [];
   }
   handleSearch = query => {
     this.setState({ searchQuery: query });
@@ -43,13 +45,47 @@ class ShowTour extends Component {
 
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
-    this.FetchAllTours.get_all_tours(
-      this.state.CurrentOrder,
-      5,
-      this.FetchReceiveTourCallback
-    );
+    this.FetchAllTours.get_all_tours( this.FetchReceiveTourCallback );
   }
 
+  handleShowMore(){
+	console.log("===============> ShowTour:handleShowMore" , this.state);
+	if( this.state.CurrentOrder + this.numberShowMore < this.dataAllTours.length ){
+		console.log("Add show 5")
+		let temporary = this.state.ListTour;
+		let limitOrder = this.state.ListTour.length + this.numberShowMore ;
+		for( let count = this.state.CurrentOrder  ; count < limitOrder ; count++ ){
+			temporary.push( this.dataAllTours[ count ]);
+		}
+		this.setState(state => ({
+			Loading: false,
+			CurrentOrder: this.state.ListTour.length,
+			ListTour: temporary
+		}));	
+	}
+	else{
+		let temporary = this.state.ListTour;
+		let limitOrder = this.state.dataAllTours.length;
+		for( let count = this.state.CurrentOrder  ; count <= limitOrder ; count++ ){
+			temporary.push( this.dataAllTours[ count ]);
+		}
+		this.setState(state => ({
+			Loading: false,
+			Max: true,
+			CurrentOrder: this.dataAllTours.lenth - 1,
+			ListTour: temporary
+		}));
+	}
+
+  }
+
+  FetchReceiveTourCallback( ReceiveInformation , ReceiveData ){
+	console.log("=====> FetchReceiveTourCallback.ReceiveData" , ReceiveData );
+	this.dataAllTours = ReceiveData;
+	this.handleShowMore();
+  }
+
+/*
   FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
     console.log(
       "===============> ShowTour.FetchReceiveTourCallback",
@@ -74,9 +110,10 @@ class ShowTour extends Component {
       }));
     }
   }
-
+*/
   render() {
-    console.log("===============> Show_tour.render()", this.state);
+    console.log("===============> Show_tour.render()", this.state , this.dataAllTours);
+	console.log("After filter")
     const { ListTour, searchQuery } = this.state;
     let filtered = ListTour;
     if (searchQuery) {
