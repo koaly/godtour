@@ -44,7 +44,7 @@ class RequestStatusForm extends Form {
   render() {
     return (
       <div className="container">
-        <h2>Add Tour</h2>
+        <h2>Upgrade Status Request</h2>
         <form onSubmit={this.handleSubmit}>
           {this.renderTextarea(
             "reasonToUpgrade",
