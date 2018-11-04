@@ -1,10 +1,14 @@
 .Introduce {
     /*margin-top:50px;*/
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .Introduce p {
     font-size: 22px;
+}
+
+.Introduce h3 {
+    margin-top: 20px;
 }
 
 .mgbi {
@@ -13,6 +17,11 @@
 
 .mgbii {
     margin-bottom: 50px;
+}
+
+.mg-card {
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .but {
@@ -50,6 +59,14 @@
     color:black;
     background:#ececec;
     border: 1px solid rgba(0, 0, 0, .2);
+    margin-bottom:0px;
+}
+
+.carda {
+    color:black;
+    background:white;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 3px;
     margin-bottom:0px;
 }
 

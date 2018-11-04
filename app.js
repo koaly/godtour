@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -28,7 +30,9 @@ mongoose.connect("mongodb://" + process.env.MONGO_MLAB_USER + ":"
 
 mongoose.Promise = global.Promise;
 
+app.use(express.static(path.join(__dirname, 'client/build')));
 // use morgan to tracking request
+app.use(cors());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -88,6 +92,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/", homeRoutes);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 //if not find path abover handling with 404
 app.use((req, res, next) => {

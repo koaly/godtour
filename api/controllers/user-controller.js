@@ -88,21 +88,25 @@ exports.deleteUser = async (req, res, next) => {
         if (!user || user.length == 0) throw new UserNotFoundException()
 
         const { _id } = user
+        console.log(_id)
         const tour = await Tour.find({ operatorID: _id })
-        const booking = await Booking.find({ UserID: _id })
-
-        // user.remove()
-        // tour.forEach(t => {
-        //     t.remove()
-        // })
-        // booking.forEach(b => {
-        //     b.remove()
-        // })
-        console.log(user)
-        console.log(tour)
+        const booking = await Booking.find({ userID: _id })
         console.log(booking)
+        user.remove()
+        tour.forEach(async t => {
+            console.log(t._id)
+            let bookingInTour = await Booking.find({ tourID: t._id })
+            await bookingInTour.forEach(async b => {
+                b.remove()
+            })
+
+            t.remove()
+        })
+        booking.forEach(async b => {
+            b.remove()
+        })
         return res.status(200).json({
-            message: "sucess"
+            message: "sucess remove"
         })
 
     }

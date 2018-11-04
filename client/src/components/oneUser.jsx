@@ -59,7 +59,7 @@ export default class OneUser extends Component {
   handleDelete = async user => {
     try {
       console.log(user.id);
-      await deleteSpecificUser(user.id);
+      await deleteSpecificUser(user.username);
       toast.success("Delete success");
       window.location = "/users";
     } catch (ex) {
