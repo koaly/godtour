@@ -199,13 +199,13 @@ export default class OneTour extends Component {
             </div>
             <div className="col-md-6 mt-2 mb-2">
               <h2 className="mgbi">{tour.name}</h2>
+              <h5 className="mgbi">Hightlight : {tour.highlight} </h5>
               <h5 className="mgbi">Fly with {tour.airline}</h5>
               <h5 className="mgbi">
                 {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
               </h5>
               <h5 className="mgbi">Price: {tour.price} $</h5>
               <h5 className="mgbi">Detail: {tour.detail} </h5>
-              <h5 className="mgbi">Hightlight : {tour.highlight} </h5>
               <h5 className="mgbi">
                 Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
               </h5>
