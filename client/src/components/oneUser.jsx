@@ -3,7 +3,7 @@ import Axios from "axios";
 import { toast } from "react-toastify";
 import { getSpecificUser, booking } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
-import getStatus from "./common/status";
+
 
 export default class OneUser extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ export default class OneUser extends Component {
       token: this.props.token,
       isLoaded: false,
       isLoadToken: false,
-      user: this.props.user
     };
   }
 
@@ -36,16 +35,6 @@ export default class OneUser extends Component {
 
   render() {
     const { user, isLoaded } = this.state;
-    const {
-        displayName,
-        username,
-        email,
-        gender,
-        registerDate,
-        status,
-      } = user.info; 
-    const Rank = getStatus(status)
-    const timeDate = registerDate.replace('T', ' ').replace('Z', ' ')
     
     if (!isLoaded) {
       return <h1>isLoading</h1>;
@@ -57,11 +46,11 @@ export default class OneUser extends Component {
     return (
       <div className="container">
             <div className="profile-container bglight mgtb">
-                <h1 className="profile-head">{user.info.displayName}</h1>
+                <h1 className="profile-head">{user.displayName}</h1>
                 <div className="row">
                     <div className="col-md-6 mt-2 mb-3">
                         <img
-                            src={user.info.imgsrc}
+                            src={user.imgsrc}
                             alt="sample image"
                             height="350px"
                             width="500px"
@@ -72,13 +61,13 @@ export default class OneUser extends Component {
                     
                         <div className="profile-infor mr-5 mt-1 ">
                             <div className="profile-infor ">
-                                <h4>{displayName} ({Rank})</h4>
-                                <h5>@{username}</h5>
-                                <h5>Gender: {gender}</h5>
+                                <h4>{user.displayName}</h4>
+                                <h5>@{user.username}</h5>
+                                <h5>Gender: {user.gender}</h5>
                             </div>
                             <div className="profile-infor ">
-                                <h4><MailIcon className="blue mr-2" />{email}</h4>
-                                <h5>เป็นสมาชิกตั้งแต่ {timeDate}</h5>
+                                <h4><MailIcon className="blue mr-2" />{user.email}</h4>
+                                
                             </div>
                         </div>
                     </div>
