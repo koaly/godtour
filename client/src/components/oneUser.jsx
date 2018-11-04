@@ -4,8 +4,7 @@ import { toast } from "react-toastify";
 import { getSpecificUser, deleteSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
-import getStatus from "./common/status";
-
+import getStatus from "./common/status"
 export default class OneUser extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +87,7 @@ export default class OneUser extends Component {
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
-      );
+      )
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
@@ -102,7 +101,7 @@ export default class OneUser extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">{user.displayName}</h1>
           <div className="row">
-            <div className="col-md-6 mt-2 mb-3">
+            <div className="col-md-6 mt-2 mb-3 ">
               <img
                 src={user.imgsrc}
                 alt="sample image"
@@ -119,16 +118,13 @@ export default class OneUser extends Component {
                   </h4>
                   <h5>@{user.username}</h5>
                   <h5>Gender: {user.gender}</h5>
-                  <h5>
-                    RegisterDate:
-                    {registerDateWithoutTZ}
-                  </h5>
                 </div>
                 <div className="profile-infor ">
                   <h4>
                     <MailIcon className="blue mr-2" />
                     {user.email}
                   </h4>
+                  <h5>เป็นสมาชิกตั้งแต่ {registerDateWithoutTZ}</h5>
                 </div>
                 {currentUser.info.status === 2 && (
                   <React.Fragment>
