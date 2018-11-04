@@ -1,7 +1,7 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiMiddlePoint = "/api/tiy";
+const apiMiddlePoint = "/api/tiys";
 
 const config = {
 	headers: {
@@ -15,10 +15,7 @@ export function sendDataCeateTourByUser(data) {
 		, 'Authorization': "JWT" + auth.getJwt()
 	}
 	let apiEndPoint = "/create"
-	http.post(apiMiddlePoint + apiEndPoint
+	return http.post(apiMiddlePoint + apiEndPoint
 		, data
-		, { headers: headers }
-	).then((response) => {
-		console.log("=====> sendDataCeateTourByUser.response ", response);
-	})
+		, config )
 }

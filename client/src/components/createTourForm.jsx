@@ -104,6 +104,14 @@ class createTourForm extends Component{
 						/>
 					</li>
 					<li>
+						<label>Your Destination : </label>
+						<input	type="textarea" 
+								id = "createTourForm" 
+								name="dest" required
+								onChange={this.handleChange}  
+						/>
+					</li>
+					<li>
 						{ this.state.dataTour.requireGuide ? (<div>
 							<label>Require Guide : </label>
 							<input	type="radio" name="requireGuide" value="true" 
