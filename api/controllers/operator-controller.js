@@ -59,7 +59,7 @@ exports.requestUpgrade = async (req, res, next) => {
         const result = await user.save();
         console.log(result);
         res.status(200).json({
-            message: "Request upgrade successful"
+            message: "Request Upgrade successful"
         });
     } catch (e) {
         HandingErorr(res, e)
