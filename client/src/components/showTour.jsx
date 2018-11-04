@@ -67,7 +67,7 @@ class ShowTour extends Component {
 	else{
 		let temporary = this.state.ListTour;
 		let limitOrder = this.dataAllTours.length;
-		for( let count = this.state.CurrentOrder  ; count <= limitOrder ; count++ ){
+		for( let count = this.state.CurrentOrder  ; count < limitOrder ; count++ ){
 			temporary.push( this.dataAllTours[ count ]);
 		}
 		this.setState(state => ({
