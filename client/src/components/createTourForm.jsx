@@ -12,25 +12,28 @@ class createTourForm extends Component{
 		this.state={
 			fillingForm	: true
 			, user		: props.user
-			, dataTour	: { country				: ""
-							, province			: ""
-							, dayDuration		: 0
-							, nightDuration		: 0
-							, numberChild		: 0
-							, numberAdult		: 0
-							, privateTour		: true
+			, dataTour	: { name				: ""
+							, dest				: ""
+							, minPrice			: 0
+							, maxPrice			: 0
+							, minDuration		: 0
+							, maxDuration		: 0
+							, minMember			: 0
+							, maxMember			: 0
+							, food				: 0
+							, startFreeDate		: null
+							, endFreeDate		: null
 							, requireGuide		: false
-							, startPeriodTour	: null
-							, endPeriodTour		: null
-							, maxPrice			: "1000"
-							, specificDetail	: "Let us know what you want most in your tour"
+							, detail			: ""
+							, highlight			: ""
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
 		this.handleSubmitData = this.handleSubmitData.bind( this );
 		this.notReloadFunction = this.notReloadFunction.bind( this );
-		this.conditionValue = ["privateTour" , "requireGuide"]
-		this.numericalValue = [	"dayDuration" , "nightDuration" , "numberChild" , "numberAdult"];
+		this.conditionValue = [ "requireGuide"]
+		this.numericalValue = [	"dayDuration" , "nightDuration" , "minMember" , "maxMember"
+								, "food" , "minPrice" , "maxPrice"];
 	}
 
 	notReloadFunction(){
@@ -50,14 +53,14 @@ class createTourForm extends Component{
 			var startPeriod = new Date( this.state.dataTour.startPeriodTour );
 			var endPeriod = new Date( this.state.dataTour.endPeriodTour );
 			var freePeriod = findDiffDay(endPeriod , startPeriod);
-			if( this.state.dataTour.dayDuration > freePeriod ){
+			if( this.state.dataTour.maxDuration > freePeriod ){
 				toast.error("Day of tour must less more than period of tour");
 			}
 		}
 		if( result ){
-			this.setState( state => ({
-				fillingForm : false
-			}))
+			var submitDataTour = this.state.dataTour;
+			localStorage.setItem("submitDataTour" , JSON.stringify(submitDataTour) );
+			window.location="/sumDataCreateTour";
 		}
 		return false;
 	}
@@ -93,22 +96,11 @@ class createTourForm extends Component{
 				<h1>Create Tour</h1>
 				<ul>
 					<li>
-						<label>Country : </label>
-						<input	type="textarea" list="listCountries"
+						<label>Your Tour Name : </label>
+						<input	type="textarea" 
 								id = "createTourForm" 
-								name="country" required
+								name="name" required
 								onChange={this.handleChange}  
-						/>
-						<datalist id="listCountries">
-							{ listCountries.map( ( country) =>
-								<option key={country} value={ country }/>
-							)}
-						</datalist>
-					</li>
-					<li>
-						<label>Province : </label>
-						<input	type="textarea" name="province"
-								onChange={this.handleChange}
 						/>
 					</li>
 					<li>
@@ -130,62 +122,53 @@ class createTourForm extends Component{
 						}
 					</li>
 					<li>
-						<label>people in your group  :&emsp;</label>
-						<label>Children</label>
-						<input	type="number" name="numberChild" min="0"  
-								value={this.state.dataTour.numberChild}
+						<label>Many you group  :&emsp;</label>
+						<label>MIN</label>
+						<input	type="number" name="minMember" min="0"  
+								value={this.state.dataTour.minMember}
 								onChange={this.handleChange}
 						/>
-						<label>Adult</label>
-						<input	type="number" name="numberAdult" min="0" 
-								value={this.state.dataTour.numberAdult}
+						<label>MAX</label>
+						<input	type="number" name="maxMember" 
+								min={this.state.dataTour.minMember.toString()} 
+								value={this.state.dataTour.maxMember}
 								onChange={this.handleChange}
 						/>
 					</li>
 					<li>
-						{ this.state.dataTour.privateTour ? (<div>
-							<label>Private Tour : </label>
-							<input	type="radio" name="privateTour" value="true"
-									checked="checked"
-									onChange={ this.handleChange}/> YES
-							<input	type="radio" name="privateTour" value="false" 
-									onChange={this.handleChange}/> NO	
-						</div>) : (<div>
-							<label>Private Tour : &emsp</label>
-							<input	type="radio" name="privateTour" value="true"
-									onChange={ this.handleChange}/> YES
-							<input	type="radio" name="privateTour" value="false" 
-									checked="checked"
-									onChange={this.handleChange}/> NO	
-						</div>)
-						}
-					</li>
-					<li>
-						<label>Length Tour :&emsp;</label>
-						<label>Day&emsp;</label>
-						<input	type="number" name="dayDuration" min="0"  
-								value={this.state.dataTour.dayDuration}
+						<label>Duration Tour :&emsp;</label>
+						<label>MIN&emsp;</label>
+						<input	type="number" name="minDuration" min="0"  
+								value={this.state.dataTour.minDuration}
 								onChange={this.handleChange}
 						/>
-						<label>Night&emsp;</label>
-						<input	type="number" name="nightDuration" min="0" 
-								value={this.state.dataTour.nightDuration}
+						<label>MAX&emsp;</label>
+						<input	type="number" name="maxDuration" 
+								min={this.state.dataTour.minDuration} 
+								value={this.state.dataTour.maxDuration.toString()}
 								onChange={this.handleChange}
 						/>
 					</li>
 					<li>
 						<label>Period Tour :&emsp;</label>
 						<label>Start&emsp;</label>
-						<input	type="date" name="startPeriodTour"
+						<input	type="date" name="startFreeDate"
 								onChange={this.handleChange}
 						/>
 						<label>End&emsp;</label>
-						<input	type="date" name="endPeriodTour"
+						<input	type="date" name="endFreeDate"
 								onChange={this.handleChange}
 						/>
 					</li>
 					<li>
-						<label>Max Price:&ensp;&ensp;</label>
+						<label>Price:&emsp;</label>
+						<label>&ensp;MIN</label>
+						<input	type="number" name="maxPrice"
+								onChange={this.handleChange}
+								value={this.state.dataTour.maxPrice}
+								min="0"
+						/>
+						<label>&ensp;MAX</label>
 						<input	type="number" name="maxPrice"
 								onChange={this.handleChange}
 								value={this.state.dataTour.maxPrice}
@@ -194,25 +177,19 @@ class createTourForm extends Component{
 					</li>
 					<li>
 						<p>Message to Tourism</p>
-						<textarea	name="specificDetail" cols="60" rows="5" 
+						<textarea	name="datail" cols="60" rows="5" 
 									onChange={this.handleChange}
-									placeholder="Let us know what special do you want"
+									placeholder="Let us know about your desired"
+						></textarea>
+					</li>
+					<li>
+						<p>Message special detail of this tour</p>
+						<textarea	name="highlight" cols="60" rows="5" 
+									onChange={this.handleChange}
+									placeholder="Let us know about your desired"
 						></textarea>
 					</li>
 					<button onClick={this.handleSubmitData}>SUBMIT</button>	
-				</ul>
-			</div>);
-		}
-		else if( this.state.user.info.status === 0 ){
-			const tour = this.state.dataTour; 
-			return(<div>
-				<h1>Summany request create tour by {this.state.user.info.displayName}</h1>
-				<ul>
-					<li>Country  : {tour.country}</li>
-					<li>Province : {tour.province==="" ? "-" : tour.province }</li>
-					<li>
-						Duration Tour : {tour.dayDuration} Day(s) : {tour.nightDuration} night(s)
-					</li>
 				</ul>
 			</div>);
 		}
