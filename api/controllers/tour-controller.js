@@ -81,14 +81,14 @@ exports.checkOwnTour = async (req, res, next) => {
         if (!tour || tour.length == 0) throw new TourNotFoundException()
 
         console.log(tour.operatorID);
-        if (info.status != 2 && info.id != tour.operatorID) {
+        if ((info.status == 2) || (info.id == tour.operatorID)) {
+            return next();
+        } else {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
-        } else {
-            return next();
         }
 
     } catch (e) {
