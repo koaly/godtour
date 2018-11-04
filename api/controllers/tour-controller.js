@@ -180,10 +180,17 @@ exports.editTour = async function (req, res, next) {
 
 exports.deleteTour = async (req, res, next) => {
     try {
-        const id = { _id: req.params.id }
-        const result = await Tour.findOneAndRemove(id);
+        const { id } = req.params
+        const result = await Tour.findOneAndRemove({ _id: id });
 
         if (!result || result.length == 0) throw new TourNotFoundException()
+
+        const bookingResult = await Booking.find({ tourID: id })
+        console.log("find", bookingResult.length)
+
+        bookingResult.forEach(book => {
+            book.remove()
+        })
 
         console.log(result);
         res.status(200).json({
