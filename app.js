@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -29,6 +30,7 @@ mongoose.connect("mongodb://" + process.env.MONGO_MLAB_USER + ":"
 mongoose.Promise = global.Promise;
 
 // use morgan to tracking request
+app.use(cors());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
