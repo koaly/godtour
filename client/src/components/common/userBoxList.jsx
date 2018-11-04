@@ -5,8 +5,8 @@ import Spinner from "./spinner";
 import Link from "react-router-dom/Link";
 import { paginate } from "../../utility/paginate";
 import Pagination from "./pagination";
-
-
+import "./userBoxList.css"
+import getStatus from "./status"
 export default class UserBoxList extends Component {
     constructor(props) {
         super(props);
@@ -40,7 +40,6 @@ export default class UserBoxList extends Component {
     handlePageChange = (page) => {
         this.setState({ currentPage: page })
     }
-
     render() {
         const { users, isLoaded, currentPage, pageSize } = this.state
         const { length: count } = this.state.users
@@ -58,23 +57,38 @@ export default class UserBoxList extends Component {
 
         return (
             <div className="profile-continer bgdark">
-                <div className="user-content m-1">
+                <div className="user-content mx-3 my-1">
                     <h1 className="user-head">{count} Users in database</h1>
                 </div>
                 <ul>
                     {selectUsers.map((user, i) => (
                         <li key={i}>
                             <div className="user-content mx-3 my-3">
-                                <div className="profile-infor mx-3 my-3">
-                                    <h5>
-                                        Display Name : {user.displayName}
-                                    </h5>
-                                    <h5>
-                                        Email Address : {user.email}
-                                    </h5>
-                                    <h5>
-                                        <Link to={`/users/${user.username}`}>See more</Link>
-                                    </h5>
+                                <div className="profile-infor mx-1 my-1">
+                                    <div className="row">
+                                        <div className="col-sm-12 col-lg-3 text-aligin ubl-imgbox mb-2">
+                                            <img
+                                                className="profileimg mgt img-thumbnail rounded"
+                                                src={user.imgsrc}
+                                                alt="profile"
+                                            />
+                                        </div>
+                                        <div className="col-sm-12 col-lg-9 my-3">
+                                            <h5>
+                                                {user.displayName} ({getStatus(user.status)})
+                                            </h5>
+                                            <h6>@{user.username}</h6>
+                                            <h6>
+                                                Email: {user.email}
+                                            </h6>
+                                            <br></br>
+                                            <h5>
+                                                <Link to={`/users/${user.username}`}>See more</Link>
+                                            </h5>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                             </div>
                         </li>
