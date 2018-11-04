@@ -86,10 +86,10 @@ const userRoutes = require('./api/routes/user-route');
 const adminRoutes = require('./api/routes/admin-route');
 
 // express use routes to create path
-app.use("/tours", tourRoutes);
-app.use("/tiys", tiyRoutes);
-app.use("/users", userRoutes);
-app.use("/admin", adminRoutes);
+app.use("/api/tours", tourRoutes);
+app.use("/api/tiys", tiyRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
 
 
 //if not find path abover handling with 404
