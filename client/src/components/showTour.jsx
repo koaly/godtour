@@ -24,6 +24,7 @@ class ShowTour extends Component {
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
     this.FetchReceiveTourCallback = this.FetchReceiveTourCallback.bind(this);
     this.FetchAllTours = new FetchAllTours();
+	this.handleShowMore = this.handleShowMore.bind( this );
 	this.numberShowMore = 5;
 	this.dataAllTours = [];
   }
@@ -65,7 +66,7 @@ class ShowTour extends Component {
 	}
 	else{
 		let temporary = this.state.ListTour;
-		let limitOrder = this.state.dataAllTours.length;
+		let limitOrder = this.dataAllTours.length;
 		for( let count = this.state.CurrentOrder  ; count <= limitOrder ; count++ ){
 			temporary.push( this.dataAllTours[ count ]);
 		}
@@ -115,7 +116,7 @@ class ShowTour extends Component {
     console.log("===============> Show_tour.render()", this.state , this.dataAllTours);
 	console.log("After filter")
     const { ListTour, searchQuery } = this.state;
-    let filtered = ListTour;
+    let filtered = this.dataAllTours;
     if (searchQuery) {
       filtered = ListTour.filter(tour =>
         tour.name.toLowerCase().startsWith(searchQuery.toLowerCase())
@@ -207,7 +208,7 @@ class ShowTour extends Component {
         {this.condition === 2 && (
           <button
             className="ButtonMoreTour GeneralButtonTour"
-            onClick={this.ShowMoreCallback}
+            onClick={this.handleShowMore}
           >
             {" "}
             "More Tour!"{" "}
