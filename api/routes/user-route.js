@@ -13,7 +13,7 @@ const config = require('./validation/users-validation')
 const checkValidation = require('./validation/checkValidation')
 
 router.get('/',
-    auth.optional,
+    auth.require,
     userCtrl.getAll);
 
 router.get('/current',

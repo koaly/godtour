@@ -37,9 +37,21 @@ const userResponse = (users) => {
         }, 1000)
     })
 }
+
 exports.getAll = async (req, res, next) => {
     try {
-        const users = await User.find()
+        const { payload: { info } } = req;
+        const { status } = info
+        let querry = null;
+
+        if (status === 2) {
+            querry = {}
+        } else if (status == 1) {
+            querry = { $or: [{ status: 0 }, { status: 1 }] }
+        } else {
+            querry = { status: 1 }
+        }
+        const users = await User.find(querry)
         if (!users || users.length == 0) throw new UserNotFoundException()
 
         const response = await userResponse(users)
@@ -52,7 +64,6 @@ exports.getAll = async (req, res, next) => {
         HandingErorr(res, e)
     }
 }
-
 exports.getOneUser = async function (req, res, next) {
     const { username } = req.params
 
