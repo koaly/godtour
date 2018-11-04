@@ -23,7 +23,7 @@ export function deleteTour(tourId) {
 }
 
 export function getAllTours() {
-  return http.get(apiEndpoint, config);
+  return http.get(apiEndpoint);
 }
 export function getOwnTours() {
   return http.get(ownTourEndpoint, config);

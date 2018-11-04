@@ -9,6 +9,11 @@ import {
   AirlineSeatReclineNormalIcon,
   AirplaneIcon
 } from "mdi-react";
+import { getAllTours } from "../services/tourService";
+import InformationConvert from "./fetch/InformationFunction.jsx"
+import TourConvert from "./fetch/TourFunction.jsx" // import function for convert object
+var HandleObject = new TourConvert();
+
 
 class ShowTour extends Component {
   constructor(props) {
@@ -46,7 +51,22 @@ class ShowTour extends Component {
 
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
-    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
+//    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
+	this.getAllData();
+  }
+
+  async getAllData(){
+	try{
+		const result = await getAllTours();
+		console.log( "getAllData" ,result);
+		const value = result.data;
+		console.log( "getAllData" ,value);
+		this.dataAllTours = HandleObject.manage_group_tour_order( value , 0 , value.count )
+		this.handleShowMore();
+	}
+    catch{
+
+	}
   }
 
   handleShowMore() {
