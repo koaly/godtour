@@ -76,7 +76,7 @@ exports.checkOwnTour = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
         const id = req.params
-        const tour = await Tour.find({ _id: id });
+        const tour = await Tour.findOne({ _id: id });
 
         if (!tour || tours.length == 0) throw new TourNotFoundException()
 

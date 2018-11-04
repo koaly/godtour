@@ -6,8 +6,6 @@ export default class MyBook extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pageSize: 3,
-      currentPage: 1,
       user: this.props.user,
 
     }

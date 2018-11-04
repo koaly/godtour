@@ -37,7 +37,6 @@ router.post('/:id',
     bookingCtrl.bookTour);
 router.delete('/:id',
     auth.require,
-    tourCtrl.checkNotNullTour,
     tourCtrl.checkOwnTour,
     tourCtrl.deleteTour);
 router.get('/:id/edit', auth.require, tourCtrl.checkNotNullTour, tourCtrl.checkOwnTour, tourCtrl.getOneTour);

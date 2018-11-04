@@ -3,7 +3,10 @@ import auth from "./authService";
 
 const apiEndpoint = "/tours/browse";
 const tourAddEndpoint = "/tours/create";
+
 const tourDeleteEndpoint = "/tours";
+
+const ownTourEndpoint = "/users/current/tours";
 
 const config = {
   headers: {
@@ -22,7 +25,9 @@ export function deleteTour(tourId) {
 export function getAllTours() {
   return http.get(apiEndpoint, config);
 }
-
+export function getOwnTours() {
+  return http.get(ownTourEndpoint, config);
+}
 export function addTour(tour) {
   console.log(tour);
   console.log(config);
