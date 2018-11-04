@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getSpecificUser, booking } from "../services/specificUser";
+import { getSpecificUser} from "../services/specificUser";
 import { MailIcon } from "mdi-react";
-
+import Spinner from "./common/spinner";
 
 export default class OneUser extends Component {
   constructor(props) {
@@ -12,7 +12,10 @@ export default class OneUser extends Component {
       username: this.props.match.params.username,
       user: [],
       isLoaded: false,
+      textLoad: "Now Loading"
     };
+    this.count = 0;
+    this.changeLoading = this.changeLoading.bind(this);
   }
 
   async getOneUser() {
@@ -33,11 +36,36 @@ export default class OneUser extends Component {
     this.getOneUser();
   }
 
+  changeLoading() {
+    let addingText = "";
+    if (this.count === 0) {
+      addingText = "";
+      this.count = 1;
+    } else if (this.count === 1) {
+      addingText = ".";
+      this.count = 2;
+    } else if (this.count === 2) {
+      addingText = "..";
+      this.count = 3;
+    } else {
+      addingText = "...";
+      this.count = 0;
+    }
+    this.setState(state => ({
+      textLoad: "Now Loading" + addingText
+    }));
+  }
+
   render() {
     const { user, isLoaded } = this.state;
 
     if (!isLoaded) {
-      return <h1>isLoading</h1>;
+      return (
+                <div className="text-align mgtb">
+                    <Spinner />
+                    <h1>{this.state.textLoad}</h1>
+                </div>
+      )
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
