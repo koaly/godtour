@@ -1,6 +1,6 @@
 import http from "./httpService";
 
-const apiEndpoint = "/users/mika";
+const apiEndpoint = "/api/users/mika";
 
 export function getAllUsers() {
   return http.get(apiEndpoint);

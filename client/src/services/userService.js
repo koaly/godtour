@@ -1,8 +1,8 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiEndpoint = "/users/signup";
-const allUserEndpoint = "/users"
+const apiEndpoint = "/api/users/signup";
+const allUserEndpoint = "/api/users"
 
 const config = {
   headers: {
