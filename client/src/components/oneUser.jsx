@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getSpecificUser} from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
+import getStatus from "./common/status"
 
 export default class OneUser extends Component {
   constructor(props) {
@@ -58,6 +59,8 @@ export default class OneUser extends Component {
 
   render() {
     const { user, isLoaded } = this.state;
+    const {registerDate} = user;
+    const Rank = getStatus(user.status);
 
     if (!isLoaded) {
       return (
@@ -89,13 +92,13 @@ export default class OneUser extends Component {
 
               <div className="profile-infor mr-5 mt-1 ">
                 <div className="profile-infor ">
-                  <h4>{user.displayName}</h4>
+                  <h4>{user.displayName}({Rank})</h4>
                   <h5>@{user.username}</h5>
                   <h5>Gender: {user.gender}</h5>
                 </div>
                 <div className="profile-infor ">
                   <h4><MailIcon className="blue mr-2" />{user.email}</h4>
-
+                  
                 </div>
               </div>
             </div>
