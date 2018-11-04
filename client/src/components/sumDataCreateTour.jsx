@@ -35,10 +35,17 @@ class sumDataCreateTour extends Component{
 			</div>)
 		}
 		return(<div>
-			<h1>{this.dataTour.name}</h1>
+			<h1>&emsp;Tour Name : {this.dataTour.name}</h1>
 			<ul>
-				<li>minPrice : {this.dataTour.minPrice}</li>
-				<li>maxPrice : {this.dataTour.maxPrice}</li>
+				<li>Destination : {this.dataTour.dest}</li>
+				<li>Duration : {this.dataTour.minDuration} - {this.dataTour.maxDuration}</li>
+				<li>Member : {this.dataTour.minMember} - {this.dataTour.minMember}</li>
+				<li>Price : {this.dataTour.minPrice} - {this.dataTour.maxPrice}</li>
+				<li>Free Date : {this.dataTour.startFreeDate} to {this.dataTour.endFreeDate}</li>
+				<li>food : {this.dataTour.food}</li>
+				<li>Require Guide : {this.dataTour.requireGuide ? "YES":"NO"}</li>
+				<li>Detail : {this.dataTour.detail}</li>
+				<li>Highlight	: {this.dataTour.highlight}</li>
 			</ul>
 			<button onClick={this.handleSendData}>Send Data</button>	
 		</div>)
