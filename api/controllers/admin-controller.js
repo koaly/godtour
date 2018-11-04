@@ -79,7 +79,7 @@ exports.acceptUpgradeRequest = async (req, res, next) => {
 
 exports.refuseUpgradeRequest = async (req, res, next) => {
     try {
-        const user = await User.find({ _id: req.params.id });
+        const user = await User.findOne({ _id: req.params.id });
         if (!user || user.length == 0) throw new UserNotFoundException()
         user.upgradeRequest = false;
         const result = await user.save();
