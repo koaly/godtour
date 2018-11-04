@@ -15,7 +15,7 @@ const config = {
 };
 
 function tourUrl(id) {
-  return "http://localhost:5000" + "/tours/" + id;
+  return tourDeleteEndpoint + "/" + id;
 }
 
 export function deleteTour(tourId) {
