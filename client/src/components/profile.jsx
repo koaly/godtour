@@ -55,7 +55,9 @@ export default class Profile extends Component {
                   <h4><MailIcon className="blue mr-2" />{email}</h4>
                   <h5>เป็นสมาชิกตั้งแต่ {timeDate}</h5>
                 </div>
-                <button className="btn btn-primary"><Link to={`/request`} >Request</Link></button>
+                <Link to={`/request`} >
+                  <button className="btn btn-primary">Request</button>
+                </Link>
               </div>
             </div>
           </div>
