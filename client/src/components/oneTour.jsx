@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { getSpecificTour, booking } from "../services/specificTourService";
 import "../css/showtour.css";
 import { deleteTour } from "../services/tourService";
+import Spinner from "./common/spinner";
 
 export default class OneTour extends Component {
   constructor(props) {
@@ -160,7 +161,13 @@ export default class OneTour extends Component {
     }
     var user = this.state.user;
     if (!isLoaded) {
-      return <h1>{this.state.textLoad}</h1>;
+      return (
+        <div className="text-align">
+          <Spinner />
+          <h1>{this.state.textLoad}</h1>
+        </div>
+      )
+
     }
     if (!tour || tour.length === 0) {
       return <h1>notFoundTour</h1>;

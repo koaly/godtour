@@ -50,14 +50,17 @@ router.delete('/current/bookings/:id',
     auth.require,
     bookingCtrl.checkOwnBooking,
     bookingCtrl.cancelBooking);
+
 router.get('/current/tours',
     auth.require,
     operatorCtrl.checkOperatorStatus,
     tourCtrl.getOwnTour);
+
 router.get('/current/tiys',
     auth.require,
     operatorCtrl.checkNonOperatorStatus,
     tiyCtrl.getOwnTiy);
+
 router.get('/current/offers',
     auth.require,
     operatorCtrl.checkOperatorStatus,
@@ -67,6 +70,7 @@ router.get('/current/request/upgrade',
     auth.require,
     operatorCtrl.checkNonOperatorStatus,
     userCtrl.currentUser);
+
 router.put('/current/request/upgrade',
     auth.require,
     operatorCtrl.checkNonOperatorStatus,
