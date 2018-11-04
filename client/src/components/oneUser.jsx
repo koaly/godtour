@@ -4,7 +4,12 @@ import { toast } from "react-toastify";
 import { getSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
+<<<<<<< HEAD
 import getStatus from "./common/status"
+=======
+import getStatus from "./common/status";
+
+>>>>>>> 099a541d88b09730a6dfedc236c2bdba50ac6e8b
 export default class OneUser extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +30,7 @@ export default class OneUser extends Component {
       const { user } = result.data;
       this.setState({ user });
 
-      toast.info('LoadOneUser Success')
+      toast.info("LoadOneUser Success");
     } catch (e) {
       console.log(e.response);
     }
@@ -67,12 +72,19 @@ export default class OneUser extends Component {
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
+<<<<<<< HEAD
       )
+=======
+      );
+>>>>>>> 099a541d88b09730a6dfedc236c2bdba50ac6e8b
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
     }
     console.log(user);
+    const registerDateWithoutTZ = registerDate
+      .replace("T", " ")
+      .replace("Z", " ");
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
@@ -88,16 +100,25 @@ export default class OneUser extends Component {
               />
             </div>
             <div className="col-md-6 mt-2 mb-3">
-
               <div className="profile-infor mr-5 mt-1 ">
                 <div className="profile-infor ">
-                  <h4>{user.displayName}({Rank})</h4>
+                  <h4>
+                    {user.displayName}({Rank})
+                  </h4>
                   <h5>@{user.username}</h5>
                   <h5>Gender: {user.gender}</h5>
                 </div>
                 <div className="profile-infor ">
+<<<<<<< HEAD
                   <h4><MailIcon className="blue mr-2" />{user.email}</h4>
 
+=======
+                  <h4>
+                    <MailIcon className="blue mr-2" />
+                    {user.email}
+                  </h4>
+                  <h5>เป็นสมาชิกตั้งแต่ {registerDateWithoutTZ}</h5>
+>>>>>>> 099a541d88b09730a6dfedc236c2bdba50ac6e8b
                 </div>
               </div>
             </div>
