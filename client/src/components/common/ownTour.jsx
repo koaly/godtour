@@ -29,7 +29,7 @@ export default class OwnTour extends Component {
         }
         catch (e) {
             const { message } = e.response.data.error
-            toast.error(`${message}`)
+            //toast.error(`${message}`)
         }
 
 
