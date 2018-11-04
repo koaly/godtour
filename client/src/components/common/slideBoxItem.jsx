@@ -20,6 +20,13 @@ export default class SlideBoxItem extends Component {
         console.log(tour)
         return (
             <div className={name}>
+                <div className="carousel-caption d-none d-md-block panel-transparent">
+                    <div className="panel-body">
+                        <h5>{tour.name}</h5>
+                        <p>{tour.highlight}</p>
+                    </div>
+
+                </div>
                 <Link to={`/tours/id=${tour._id}`}>
                     <img
                         className="d-block w-100"
@@ -30,13 +37,6 @@ export default class SlideBoxItem extends Component {
                     />
 
                 </Link>
-                <div className="carousel-caption d-none d-md-block panel-transparent">
-                    <div className="panel-body">
-                        <h5>{tour.name}</h5>
-                        <p>{tour.highlight}</p>
-                    </div>
-
-                </div>
             </div>
         )
     }
