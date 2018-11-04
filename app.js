@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -29,6 +30,7 @@ mongoose.connect("mongodb://" + process.env.MONGO_MLAB_USER + ":"
 
 mongoose.Promise = global.Promise;
 
+app.use(express.static(path.join(__dirname, 'client/build')));
 // use morgan to tracking request
 app.use(cors());
 app.use(morgan('dev'));
@@ -107,5 +109,8 @@ app.use((err, req, res, next) => {
     })
 })
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 //export to server.js
 module.exports = app;
