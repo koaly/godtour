@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import { getAllUsers } from "../services/allUserService";
+import { getAllUsers } from "../services/userService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Spinner from "./common/spinner";
 
 export default class ShowUser extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export default class ShowUser extends Component {
         if (!isLoaded) {
             return (
                 <div className="container text-align">
-
+                    <Spinner />
                 </div>
             )
         }
