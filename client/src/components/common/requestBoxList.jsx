@@ -22,10 +22,9 @@ export default class RequestBoxList extends Component {
     async getUser() {
         try {
             const result = await getUserRequest()
-            const { user } = result.data.users;
-
+            const { users } = result.data;
             toast.info("Update UserList")
-            this.setState({ users: user });
+            this.setState({ users: users });
         } catch (e) {
             const { message } = e.response.data.error
             toast.error(`${message}`)
@@ -73,7 +72,7 @@ export default class RequestBoxList extends Component {
                                                 alt="profile"
                                             />
                                         </div>
-                                        <div className="col-sm-12 col-lg-9 my-3">
+                                        <div className="col-sm-8 col-lg-5 my-3">
                                             <h5>
                                                 {user.displayName} ({getStatus(user.status)})
                                             </h5>
@@ -81,11 +80,15 @@ export default class RequestBoxList extends Component {
                                             <h6>
                                                 Email: {user.email}
                                             </h6>
+                                            <h6>Request: {user.upgradeReason}</h6>
                                             <br></br>
                                             <h5>
                                                 <Link to={`/users/${user.username}`}>See more</Link>
                                             </h5>
                                         </div>
+                                        <div className="col-sm-4 col-lg-4 my-3">
+                                        </div>
+
 
 
                                     </div>
