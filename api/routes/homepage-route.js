@@ -14,10 +14,20 @@ router.get('/',
             if (!tours || tours.length === 0)
                 throw new TourNotFoundException()
 
-            tours = tours[Math.floor(Math.random(5) * tours.length)]
-            console.log(tours)
+            let show = [];
+            let i = 0
+            let newTour = null;
+            for (i = 0; i < Math.min(3, tours.length); i++) {
+                newTour = tours[Math.floor(Math.random() * tours.length)]
+                for (let j = 0; j < i; j++) {
+                    while (show[j] === newTour) {
+                        newTour = tours[Math.floor(Math.random() * tours.length)]
+                    }
+                }
+                show[i] = newTour
+            }
             return res.status(200).json({
-                tours: tours
+                tours: show
             })
         }
 

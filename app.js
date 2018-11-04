@@ -86,7 +86,7 @@ app.use("/tours", tourRoutes);
 app.use("/tiys", tiyRoutes);
 app.use("/users", userRoutes);
 app.use("/admin", adminRoutes);
-app.use("/", homeRoutes);
+app.use("/api/", homeRoutes);
 
 
 //if not find path abover handling with 404
