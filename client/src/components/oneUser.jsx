@@ -4,12 +4,7 @@ import { toast } from "react-toastify";
 import { getSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
-<<<<<<< HEAD
 import getStatus from "./common/status"
-=======
-import getStatus from "./common/status";
-
->>>>>>> 099a541d88b09730a6dfedc236c2bdba50ac6e8b
 export default class OneUser extends Component {
   constructor(props) {
     super(props);
@@ -72,11 +67,7 @@ export default class OneUser extends Component {
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
-<<<<<<< HEAD
       )
-=======
-      );
->>>>>>> 099a541d88b09730a6dfedc236c2bdba50ac6e8b
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
@@ -109,16 +100,11 @@ export default class OneUser extends Component {
                   <h5>Gender: {user.gender}</h5>
                 </div>
                 <div className="profile-infor ">
-<<<<<<< HEAD
-                  <h4><MailIcon className="blue mr-2" />{user.email}</h4>
-
-=======
                   <h4>
                     <MailIcon className="blue mr-2" />
                     {user.email}
                   </h4>
                   <h5>เป็นสมาชิกตั้งแต่ {registerDateWithoutTZ}</h5>
->>>>>>> 099a541d88b09730a6dfedc236c2bdba50ac6e8b
                 </div>
               </div>
             </div>
