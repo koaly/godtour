@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
