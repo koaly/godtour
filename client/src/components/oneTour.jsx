@@ -91,16 +91,17 @@ export default class OneTour extends Component {
 
     try {
       console.log(tour._id);
-      // await deleteTour(tour._id);
-      await Axios.delete("http://localhost:5000/tours/" + this.state.tour._id, {
-        headers: {
-          Authorization: "JWT " + this.state.token
-        }
-      });
+      await deleteTour(tour._id);
+      toast.success("Delete success");
+      window.location = "/tours";
+      // await Axios.delete("http://localhost:5000/tours/" + this.state.tour._id, {
+      //   headers: {
+      //     Authorization: "JWT " + this.state.token
+      //   }
+      // });
     } catch (ex) {
       if (ex.response && ex.response.status >= 400 && ex.response.status < 500)
-        console.log("x");
-      toast.error("This Tour has already been deleted.");
+        toast.error("This Tour has already been deleted.");
     }
   };
 
