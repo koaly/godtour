@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Spinner from "./spinner";
 import Link from "react-router-dom/Link";
 import { paginate } from "../../utility/paginate";
+import Pagination from "./pagination";
 
 
 export default class UserBoxList extends Component {
@@ -48,7 +49,7 @@ export default class UserBoxList extends Component {
         if (!isLoaded) {
             return (
                 <div className="container text-align">
-                    <div className="user-content">
+                    <div className="user-content mx-3 my-3">
                         <Spinner />
                     </div>
                 </div>
@@ -57,7 +58,9 @@ export default class UserBoxList extends Component {
 
         return (
             <div className="profile-continer bgdark">
-                <h1 className="user-head">User List</h1>
+                <div className="user-content m-1">
+                    <h1 className="user-head">{count} Users in database</h1>
+                </div>
                 <ul>
                     {selectUsers.map((user, i) => (
                         <li key={i}>
@@ -77,6 +80,14 @@ export default class UserBoxList extends Component {
                         </li>
                     ))}
                 </ul>
+                <div className="mx-3 my-3">
+                    <Pagination
+                        itemsCount={count}
+                        pageSize={pageSize}
+                        onPageChange={this.handlePageChange}
+                        currentPage={currentPage}
+                    />
+                </div>
             </div >
         )
     }
