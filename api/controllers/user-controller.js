@@ -1,5 +1,7 @@
 const passport = require('passport');
 const User = require('../models/user-models');
+const Tour = require('../models/tour-models');
+const Booking = require('../models/booking-models');
 
 const { UserNotFoundException, EmailAlreadyExits, HandingErorr } = require('./handingError')
 
@@ -37,9 +39,21 @@ const userResponse = (users) => {
         }, 1000)
     })
 }
+
 exports.getAll = async (req, res, next) => {
     try {
-        const users = await User.find()
+        const { payload: { info } } = req;
+        const { status } = info
+        let querry = null;
+
+        if (status === 2) {
+            querry = {}
+        } else if (status == 1) {
+            querry = { $or: [{ status: 0 }, { status: 1 }] }
+        } else {
+            querry = { status: 1 }
+        }
+        const users = await User.find(querry)
         if (!users || users.length == 0) throw new UserNotFoundException()
 
         const response = await userResponse(users)
@@ -52,7 +66,6 @@ exports.getAll = async (req, res, next) => {
         HandingErorr(res, e)
     }
 }
-
 exports.getOneUser = async function (req, res, next) {
     const { username } = req.params
 
@@ -65,6 +78,39 @@ exports.getOneUser = async function (req, res, next) {
             user: user.toProfileJSON()
         });
     } catch (e) {
+        HandingErorr(res, e)
+    }
+}
+exports.deleteUser = async (req, res, next) => {
+    const { username } = req.params
+    try {
+        const user = await User.findOne({ username: username })
+        if (!user || user.length == 0) throw new UserNotFoundException()
+
+        const { _id } = user
+        console.log(_id)
+        const tour = await Tour.find({ operatorID: _id })
+        const booking = await Booking.find({ userID: _id })
+        console.log(booking)
+        user.remove()
+        tour.forEach(async t => {
+            console.log(t._id)
+            let bookingInTour = await Booking.find({ tourID: t._id })
+            await bookingInTour.forEach(async b => {
+                b.remove()
+            })
+
+            t.remove()
+        })
+        booking.forEach(async b => {
+            b.remove()
+        })
+        return res.status(200).json({
+            message: "sucess remove"
+        })
+
+    }
+    catch (e) {
         HandingErorr(res, e)
     }
 }

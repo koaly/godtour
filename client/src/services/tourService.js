@@ -1,12 +1,12 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiEndpoint = "/tours/browse";
-const tourAddEndpoint = "/tours/create";
+const apiEndpoint = "/api/tours/browse";
+const tourAddEndpoint = "/api/tours/create";
 
-const tourDeleteEndpoint = "/tours";
+const tourDeleteEndpoint = "/api/tours";
 
-const ownTourEndpoint = "/users/current/tours";
+const ownTourEndpoint = "/api/users/current/tours";
 
 const config = {
   headers: {

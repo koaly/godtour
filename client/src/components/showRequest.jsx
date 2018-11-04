@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import UserBoxList from "./common/userBoxList";
+import RequestBoxList from "./common/requestBoxList";
 
-export default class ShowUser extends Component {
+export default class ShowRequest extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,7 @@ export default class ShowUser extends Component {
         return (
             <div className="container mgtb">
                 <div className="profile-container bgdark">
-                    <UserBoxList />
+                    <RequestBoxList />
                 </div>
             </div>
         );

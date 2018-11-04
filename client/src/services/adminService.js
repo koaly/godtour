@@ -1,16 +1,15 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiEndpoint = "/api/users/current/bookings";
+const apiEndpoint = "/api/admin/request/upgrade";
+
+
 const config = {
     headers: {
         Authorization: "JWT " + auth.getJwt()
     }
 };
 
-export function removeCurrentBookings(id) {
-    return http.delete(apiEndpoint + '/' + id, config)
-}
-export function showCurrentBookings() {
+export function getUserRequest() {
     return http.get(apiEndpoint, config);
 }
