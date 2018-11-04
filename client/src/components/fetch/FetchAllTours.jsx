@@ -1,9 +1,9 @@
 import TourConvert from "./TourFunction.jsx" // import function for convert object
 import InformationConvert from "./InformationFunction.jsx"
+var HandleObject = new TourConvert();
 
 var {_start_url , _domain , _port , _path} = require('./default_data.jsx') // import data for url
 
-var HandleObject = new TourConvert();
 var HandleInformation = new InformationConvert();
 
 export default class FetchAllTours{

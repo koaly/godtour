@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ProfileBar from "./common/profileBar";
 import { MailIcon } from "mdi-react";
 import getStatus from "./common/status"
+import Link from "react-router-dom/Link";
 //import { Route, Switch, Redirect } from "react-router-dom";
 
 export default class Profile extends Component {
@@ -54,6 +55,7 @@ export default class Profile extends Component {
                   <h4><MailIcon className="blue mr-2" />{email}</h4>
                   <h5>เป็นสมาชิกตั้งแต่ {timeDate}</h5>
                 </div>
+                <button className="btn btn-primary"><Link to={`/request`} >Request</Link></button>
               </div>
             </div>
           </div>
