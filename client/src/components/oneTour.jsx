@@ -3,6 +3,7 @@ import Axios from "axios";
 import { toast } from "react-toastify";
 import { getSpecificTour, booking } from "../services/specificTourService";
 import "../css/showtour.css";
+import { deleteTour } from "../services/tourService";
 
 export default class OneTour extends Component {
   constructor(props) {
@@ -82,6 +83,26 @@ export default class OneTour extends Component {
   handleChange(event) {
     this.setState({ numberOfBooking: event.target.value });
   }
+
+  handleDelete = async tour => {
+    // const originalTour = this.state.tour;
+    // const tour = originalTour.filter(t => t._id !== tour._id);
+    // this.setState({ tour });
+
+    try {
+      console.log(tour._id);
+      // await deleteTour(tour._id);
+      await Axios.delete("http://localhost:5000/tours/" + this.state.tour._id, {
+        headers: {
+          Authorization: "JWT " + this.state.token
+        }
+      });
+    } catch (ex) {
+      if (ex.response && ex.response.status >= 400 && ex.response.status < 500)
+        console.log("x");
+      toast.error("This Tour has already been deleted.");
+    }
+  };
 
   changeLoading() {
     let addingText = "";
@@ -197,11 +218,17 @@ export default class OneTour extends Component {
               )}
               {user.info.status !== 0 && (
                 <React.Fragment>
-                  <input
+                  {/* <input
                     type="submit"
                     value="Delete Tour"
                     className="btn btn-danger  mt-4"
-                  />
+									/> */}
+                  <button
+                    onClick={() => this.handleDelete(tour)}
+                    className="btn btn-danger mt-4"
+                  >
+                    Delete Tour
+                  </button>
                   <input
                     type="submit"
                     value="Edit Tour"

@@ -3,11 +3,21 @@ import auth from "./authService";
 
 const apiEndpoint = "/tours/browse";
 const tourAddEndpoint = "/tours/create";
+const tourDeleteEndpoint = "/tours";
+
 const config = {
   headers: {
     Authorization: "JWT " + auth.getJwt()
   }
 };
+
+function tourUrl(id) {
+  return "http://localhost:5000" + "/tours/" + id;
+}
+
+export function deleteTour(tourId) {
+  return http.delete(tourUrl(tourId), config);
+}
 
 export function getAllTours() {
   return http.get(apiEndpoint, config);
