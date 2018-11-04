@@ -28,9 +28,6 @@ class createTourForm extends Component{
 		this.conditionVale = ["privateTour" , "requireGuide"]
 	}
 
-	async submitDataCreateTour(){
-
-	}
 
 	handleChange( event ){
 		if( this.conditionVale.includes( event.target.name ) ){
