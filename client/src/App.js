@@ -85,7 +85,9 @@ class App extends Component {
             />
             <Route
               path="/users/:username"
-              render={props => <OneUser {...props} token={jwt} user={user} />}
+              render={props => (
+                <OneUser {...props} token={jwt} currentUser={user} />
+              )}
             />
             <Route
               path="/tours"
@@ -97,7 +99,9 @@ class App extends Component {
             />
             <Route
               path="/createTour"
-              render={props => <CreateTourForm {...props} token={jwt} user={user} />}
+              render={props => (
+                <CreateTourForm {...props} token={jwt} user={user} />
+              )}
             />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
