@@ -7,7 +7,7 @@ const offerCtrl = require('../controllers/offer-controller');
 const tourCtrl = require('../controllers/tour-controller')
 const bookingCtrl = require('../controllers/booking-controller')
 const operatorCtrl = require('../controllers/operator-controller')
-
+const adminCtrl = require('../controllers/admin-controller')
 const auth = require('./auth');
 const config = require('./validation/users-validation')
 const checkValidation = require('./validation/checkValidation')
@@ -34,7 +34,11 @@ router.put('/current/edit',
 router.get('/:username',
     auth.optional,
     userCtrl.getOneUser)
-
+router.delete('/:username',
+    auth.require,
+    adminCtrl.checkAdminStatus,
+    userCtrl.deleteUser
+)
 router.get('/current/bookings',
     auth.require,
     bookingCtrl.getUserBooking);

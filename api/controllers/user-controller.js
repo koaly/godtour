@@ -1,5 +1,7 @@
 const passport = require('passport');
 const User = require('../models/user-models');
+const Tour = require('../models/tour-models');
+const Booking = require('../models/booking-models');
 
 const { UserNotFoundException, EmailAlreadyExits, HandingErorr } = require('./handingError')
 
@@ -76,6 +78,35 @@ exports.getOneUser = async function (req, res, next) {
             user: user.toProfileJSON()
         });
     } catch (e) {
+        HandingErorr(res, e)
+    }
+}
+exports.deleteUser = async (req, res, next) => {
+    const { username } = req.params
+    try {
+        const user = await User.findOne({ username: username })
+        if (!user || user.length == 0) throw new UserNotFoundException()
+
+        const { _id } = user
+        const tour = await Tour.find({ operatorID: _id })
+        const booking = await Booking.find({ UserID: _id })
+
+        // user.remove()
+        // tour.forEach(t => {
+        //     t.remove()
+        // })
+        // booking.forEach(b => {
+        //     b.remove()
+        // })
+        console.log(user)
+        console.log(tour)
+        console.log(booking)
+        return res.status(200).json({
+            message: "sucess"
+        })
+
+    }
+    catch (e) {
         HandingErorr(res, e)
     }
 }
