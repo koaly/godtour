@@ -26,13 +26,15 @@ class createTourForm extends Component{
 							, requireGuide		: false
 							, detail			: ""
 							, highlight			: ""
+							, userID			: props.user.info.id
+							, userName			: props.user.info.username
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
 		this.handleSubmitData = this.handleSubmitData.bind( this );
 		this.notReloadFunction = this.notReloadFunction.bind( this );
 		this.conditionValue = [ "requireGuide"]
-		this.numericalValue = [	"dayDuration" , "nightDuration" , "minMember" , "maxMember"
+		this.numericalValue = [	"minDuration" , "maxDuration" , "minMember" , "maxMember"
 								, "food" , "minPrice" , "maxPrice"];
 	}
 
@@ -171,21 +173,21 @@ class createTourForm extends Component{
 					<li>
 						<label>Price:&emsp;</label>
 						<label>&ensp;MIN</label>
-						<input	type="number" name="maxPrice"
+						<input	type="number" name="minPrice"
 								onChange={this.handleChange}
-								value={this.state.dataTour.maxPrice}
+								value={this.state.dataTour.minPrice}
 								min="0"
 						/>
 						<label>&ensp;MAX</label>
 						<input	type="number" name="maxPrice"
 								onChange={this.handleChange}
 								value={this.state.dataTour.maxPrice}
-								min="0"
+								min={this.state.dataTour.minPrice.toString()}
 						/>
 					</li>
 					<li>
 						<p>Message to Tourism</p>
-						<textarea	name="datail" cols="60" rows="5" 
+						<textarea	name="detail" cols="60" rows="5" 
 									onChange={this.handleChange}
 									placeholder="Let us know about your desired"
 						></textarea>

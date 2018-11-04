@@ -21,7 +21,8 @@ class sumDataCreateTour extends Component{
 
 	componentDidMount(){
 		this.dataTour = JSON.parse(localStorage.getItem("submitDataTour"));
-		console.log( this.dataTour );
+		console.log("Information of user " , this.state.user )
+		console.log("Information of dataTour" , this.dataTour );
 		this.setState( state => ({
 			isLoading : false
 		}));

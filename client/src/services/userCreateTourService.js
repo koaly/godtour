@@ -6,6 +6,7 @@ const apiMiddlePoint = "/api/tiys";
 const config = {
 	headers: {
 		Authorization: "JWT " + auth.getJwt()
+		, 'Content-Type' : 'application/json'
 	}
 };
 
