@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getSpecificUser} from "../services/specificUser";
+import { getSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
-import getStatus from "./common/status"
+import getStatus from "./common/status";
 
 export default class OneUser extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class OneUser extends Component {
       const { user } = result.data;
       this.setState({ user });
 
-      toast.info('LoadOneUser Success')
+      toast.info("LoadOneUser Success");
     } catch (e) {
       console.log(e.response);
     }
@@ -59,21 +59,24 @@ export default class OneUser extends Component {
 
   render() {
     const { user, isLoaded } = this.state;
-    const {registerDate} = user;
+    const { registerDate } = user;
     const Rank = getStatus(user.status);
 
     if (!isLoaded) {
       return (
-                <div className="text-align mgtb">
-                    <Spinner />
-                    <h1>{this.state.textLoad}</h1>
-                </div>
-      )
+        <div className="text-align mgtb">
+          <Spinner />
+          <h1>{this.state.textLoad}</h1>
+        </div>
+      );
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
     }
     console.log(user);
+    const registerDateWithoutTZ = registerDate
+      .replace("T", " ")
+      .replace("Z", " ");
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
@@ -89,16 +92,23 @@ export default class OneUser extends Component {
               />
             </div>
             <div className="col-md-6 mt-2 mb-3">
-
               <div className="profile-infor mr-5 mt-1 ">
                 <div className="profile-infor ">
-                  <h4>{user.displayName}({Rank})</h4>
+                  <h4>
+                    {user.displayName}({Rank})
+                  </h4>
                   <h5>@{user.username}</h5>
                   <h5>Gender: {user.gender}</h5>
+                  <h5>
+                    RegisterDate:
+                    {registerDateWithoutTZ}
+                  </h5>
                 </div>
                 <div className="profile-infor ">
-                  <h4><MailIcon className="blue mr-2" />{user.email}</h4>
-                  
+                  <h4>
+                    <MailIcon className="blue mr-2" />
+                    {user.email}
+                  </h4>
                 </div>
               </div>
             </div>
