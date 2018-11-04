@@ -99,16 +99,13 @@ export default class OneUser extends Component {
                   </h4>
                   <h5>@{user.username}</h5>
                   <h5>Gender: {user.gender}</h5>
-                  <h5>
-                    RegisterDate:
-                    {registerDateWithoutTZ}
-                  </h5>
                 </div>
                 <div className="profile-infor ">
                   <h4>
                     <MailIcon className="blue mr-2" />
                     {user.email}
                   </h4>
+                  <h5>เป็นสมาชิกตั้งแต่ {registerDateWithoutTZ}</h5>
                 </div>
               </div>
             </div>

@@ -204,6 +204,8 @@ export default class OneTour extends Component {
                 {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
               </h5>
               <h5 className="mgbi">Price: {tour.price} $</h5>
+              <h5 className="mgbi">Detail: {tour.detail} </h5>
+              <h5 className="mgbi">Hightlight : {tour.highlight} </h5>
               <h5 className="mgbi">
                 Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
               </h5>
