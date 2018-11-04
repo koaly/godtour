@@ -18,3 +18,8 @@ export function requestStatus(data) {
   const { reasonToUpgrade } = data;
   return http.put(requestStatusEndpoint, { reasonToUpgrade }, config);
 }
+
+export function refuseStatus(id) {
+  return http.get(apiEndpoint + id + "/refuse", config);
+  //how to use put bro
+}
