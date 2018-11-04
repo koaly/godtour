@@ -95,7 +95,8 @@ class AddTourForm extends Form {
     try {
       const response = await addTour(this.state.data);
       console.log(response);
-      window.location = "/";
+      window.location = "/tours";
+      toast.success("Added Success");
     } catch (ex) {
       console.log(ex.response.data);
       if (
