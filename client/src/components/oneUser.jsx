@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getSpecificUser } from "../services/specificUser";
+import { getSpecificUser, deleteSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
 import getStatus from "./common/status";
@@ -57,9 +57,29 @@ export default class OneUser extends Component {
     }));
   }
 
+  handleDelete = async user => {
+    try {
+      console.log(user.id);
+      await deleteSpecificUser(user.id);
+      toast.success("Delete success");
+      window.location = "/users";
+    } catch (ex) {
+      const errorRes = ex.response.data.errors;
+      if (errorRes) {
+        errorRes.forEach(error => {
+          toast.error(` ${error.param}: ${error.msg}`);
+        });
+      } else {
+        toast.error(`${ex.response.data.error.message}`);
+      }
+    }
+  };
+
   render() {
     const { user, isLoaded } = this.state;
     const { registerDate } = user;
+    const { currentUser } = this.props;
+    console.log(currentUser);
     const Rank = getStatus(user.status);
 
     if (!isLoaded) {
@@ -110,6 +130,16 @@ export default class OneUser extends Component {
                     {user.email}
                   </h4>
                 </div>
+                {currentUser.info.status === 2 && (
+                  <React.Fragment>
+                    <button
+                      onClick={() => this.handleDelete(user)}
+                      className="btn btn-danger "
+                    >
+                      Delete User
+                    </button>
+                  </React.Fragment>
+                )}
               </div>
             </div>
           </div>
