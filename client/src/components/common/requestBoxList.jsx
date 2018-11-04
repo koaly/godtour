@@ -7,8 +7,7 @@ import { paginate } from "../../utility/paginate";
 import Pagination from "./pagination";
 import "./userBoxList.css";
 import getStatus from "./status";
-import acceptStatusButton from "./acceptStatusButton";
-import { acceptStatus } from "../../services/requestStatusService";
+import AcceptStatusButton from "./acceptStatusButton";
 export default class RequestBoxList extends Component {
   constructor(props) {
     super(props);
@@ -84,10 +83,10 @@ export default class RequestBoxList extends Component {
                       <br />
                       <h5>
                         <Link to={`/users/${user.username}`}>See more</Link>
-                        {/* <acceptStatusButton id={user.id} acceptStatus= /> */}
                       </h5>
                     </div>
                     <div className="col-sm-4 col-lg-4 my-3" />
+                    <AcceptStatusButton id={user._id} acceptStatus={this.getUser.bind(this)} />
                   </div>
                 </div>
               </div>

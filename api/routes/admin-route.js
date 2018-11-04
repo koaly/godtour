@@ -17,13 +17,13 @@ router.get('/request/upgrade/:id',
     userCtrl.getOneUser);
 
 //no body require don't need to validation
-router.put('/request/upgrade/:id/accept',
+router.get('/request/upgrade/:id/accept',
     auth.require,
     adminCtrl.checkAdminStatus,
     adminCtrl.checkUpgradeRequest,
     adminCtrl.acceptUpgradeRequest);
 //no body require don't need to validation
-router.put('/request/upgrade/:id/refuse',
+router.get('/request/upgrade/:id/refuse',
     auth.require,
     adminCtrl.checkAdminStatus,
     adminCtrl.checkUpgradeRequest,

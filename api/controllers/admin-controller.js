@@ -26,7 +26,7 @@ exports.checkAdminStatus = async (req, res, next) => {
 
 exports.checkUpgradeRequest = async (req, res, next) => {
     try {
-        const user = await User.find({ _id: req.params.id });
+        const user = await User.findOne({ _id: req.params.id });
         if (!user || user.length == 0) throw new UserNotFoundException()
 
         console.log(user.upgradeRequest);
@@ -61,7 +61,7 @@ exports.getUpgradeRequest = async (req, res, next) => {
 
 exports.acceptUpgradeRequest = async (req, res, next) => {
     try {
-        const user = await User.find({ _id: req.params.id });
+        const user = await User.findOne({ _id: req.params.id });
         if (!user || user.length == 0) throw new UserNotFoundException()
 
         console.log(user);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { toast } from "react-toastify";
 import { acceptStatus } from "../../services/requestStatusService";
 
-export default class acceptStatusButton extends Component {
+export default class AcceptStatusButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ export default class acceptStatusButton extends Component {
     const { acceptStatus } = this.state;
     this.setState({ isAccepting: true });
 
-    await this.upgradeStatusById(id);
+    await this.acceptStatusById(id);
     await acceptStatus();
     this.setState({ isAccepting: false });
   };

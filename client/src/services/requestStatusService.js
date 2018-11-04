@@ -1,7 +1,7 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiEndpoint = "/request/upgrade/";
+const apiEndpoint = "/api/admin/request/upgrade/";
 const config = {
   headers: {
     Authorization: "JWT " + auth.getJwt()
@@ -9,6 +9,6 @@ const config = {
 };
 
 export function acceptStatus(id) {
-  return http.put(apiEndpoint + id, config);
+  return http.get(apiEndpoint + id + "/accept", config);
   //how to use put bro
 }
