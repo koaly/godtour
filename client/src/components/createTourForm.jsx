@@ -26,8 +26,6 @@ class createTourForm extends Component{
 							, requireGuide		: false
 							, detail			: ""
 							, highlight			: ""
-							, userID			: props.user.info.id
-							, userName			: props.user.info.username
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
