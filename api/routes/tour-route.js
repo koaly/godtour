@@ -43,7 +43,6 @@ router.get('/:id/edit', auth.require, tourCtrl.checkNotNullTour, tourCtrl.checkO
 
 router.put('/:id/edit',
     auth.require,
-    tourCtrl.checkNotNullTour,
     tourCtrl.checkOwnTour,
     tourConfig.tour,
     checkValidation,
