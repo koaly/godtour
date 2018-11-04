@@ -121,24 +121,6 @@ class createTourForm extends Component{
 						/>
 					</li>
 					<li>
-						{ this.state.dataTour.requireGuide ? (<div>
-							<label>Require Guide : </label>
-							<input	type="radio" name="requireGuide" value="true" 
-									checked="checked"
-									onChange={this.handleChange}/> YES
-							<input	type="radio" name="requireGuide" value="false" 
-									onChange={this.handleChange}/> NO
-						</div>) : (<div>
-							<label>Require Guide : </label>
-							<input	type="radio" name="requireGuide" value="true" 
-									onChange={this.handleChange}/> YES
-							<input	type="radio" name="requireGuide" value="false" 
-									checked="checked"
-									onChange={this.handleChange}/> NO
-						</div>)
-						}
-					</li>
-					<li>
 						<label>Many you group  :&emsp;</label>
 						<label>MIN</label>
 						<input	type="number" name="minMember" min="0"  
@@ -191,6 +173,32 @@ class createTourForm extends Component{
 								value={this.state.dataTour.maxPrice}
 								min={this.state.dataTour.minPrice.toString()}
 						/>
+					</li>
+					<li>
+						<label>Food:&emsp;</label>
+						<input type="number" name="food"
+								onChange={this.handleChange}
+								value={this.state.dataTour.food}
+								min="0"
+						/>
+					</li>
+					<li>
+						{ this.state.dataTour.requireGuide ? (<div>
+							<label>Require Guide : </label>
+							<input	type="radio" name="requireGuide" value="true" 
+									checked="checked"
+									onChange={this.handleChange}/> YES
+							<input	type="radio" name="requireGuide" value="false" 
+									onChange={this.handleChange}/> NO
+						</div>) : (<div>
+							<label>Require Guide : </label>
+							<input	type="radio" name="requireGuide" value="true" 
+									onChange={this.handleChange}/> YES
+							<input	type="radio" name="requireGuide" value="false" 
+									checked="checked"
+									onChange={this.handleChange}/> NO
+						</div>)
+						}
 					</li>
 					<li>
 						<p>Message to Tourism</p>
