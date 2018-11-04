@@ -46,7 +46,7 @@ class ShowTour extends Component {
 
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
-    this.FetchAllTours.get_all_tours( this.FetchReceiveTourCallback );
+    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
   }
 
   handleShowMore(){
@@ -77,16 +77,15 @@ class ShowTour extends Component {
 			ListTour: temporary
 		}));
 	}
-
   }
 
-  FetchReceiveTourCallback( ReceiveInformation , ReceiveData ){
-	console.log("=====> FetchReceiveTourCallback.ReceiveData" , ReceiveData );
-	this.dataAllTours = ReceiveData;
-	this.handleShowMore();
+  FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
+    console.log("=====> FetchReceiveTourCallback.ReceiveData", ReceiveData);
+    this.dataAllTours = ReceiveData;
+    this.handleShowMore();
   }
 
-/*
+  /*
   FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
     console.log(
       "===============> ShowTour.FetchReceiveTourCallback",
@@ -113,16 +112,49 @@ class ShowTour extends Component {
   }
 */
   render() {
-    console.log("===============> Show_tour.render()", this.state , this.dataAllTours);
-	console.log("After filter")
+    console.log(
+      "===============> Show_tour.render()",
+      this.state,
+      this.dataAllTours
+    );
+    console.log("After filter");
     const { ListTour, searchQuery } = this.state;
     let filtered = this.dataAllTours;
     if (searchQuery) {
-      filtered = ListTour.filter(tour =>
+      filtered = this.dataAllTours.filter(tour =>
         tour.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
-    const showListTour = filtered.map(tour => (
+    const showlistTour = ListTour.map(tour => (
+      <li key={tour._id} className="card mb-5 card-size">
+        <img
+          src={tour.imgsrc}
+          alt="sample image"
+          className="mb-3"
+          height="350px"
+        />
+        <div className="showtour-content">
+          <h3 className="mb-3">{tour.name}</h3>
+          <p>
+            <ClockIcon className="mr-3 mb-1" />
+            {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+          </p>
+          <p>
+            <AirplaneIcon className="mr-3 mb-1" />
+            Fly with {tour.airline}
+          </p>
+          <p>
+            <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
+            Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
+          </p>
+          <Link className="" to={`/tours/id=${tour._id}`}>
+            Read More...
+          </Link>
+        </div>
+      </li>
+    ));
+
+    const showfilterTour = filtered.map(tour => (
       <li key={tour._id} className="card mb-5 card-size">
         <img
           src={tour.imgsrc}
@@ -165,7 +197,8 @@ class ShowTour extends Component {
             <div className="tourlist">
               <h1 className="mb-5">Tour List</h1>
             </div>
-            <div>{showListTour}</div>
+            {searchQuery !== "" && <div>{showfilterTour}</div>}
+            {searchQuery === "" && <div>{showlistTour}</div>}
           </React.Fragment>
         )}
         <ul>
