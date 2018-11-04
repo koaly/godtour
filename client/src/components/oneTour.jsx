@@ -204,7 +204,7 @@ export default class OneTour extends Component {
               </h5>
               <h5 className="mgbi">Price: {tour.price} $</h5>
               <h5 className="mgbi">
-                Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+                Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
               </h5>
               <h5 className="mgbi">Operated by {tour.operatorName}</h5>
               {user.info.status === 0 && (
