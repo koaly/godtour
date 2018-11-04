@@ -24,9 +24,9 @@ class ShowTour extends Component {
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
     this.FetchReceiveTourCallback = this.FetchReceiveTourCallback.bind(this);
     this.FetchAllTours = new FetchAllTours();
-	this.handleShowMore = this.handleShowMore.bind( this );
-	this.numberShowMore = 5;
-	this.dataAllTours = [];
+    this.handleShowMore = this.handleShowMore.bind(this);
+    this.numberShowMore = 5;
+    this.dataAllTours = [];
   }
   handleSearch = query => {
     this.setState({ searchQuery: query });
@@ -49,34 +49,36 @@ class ShowTour extends Component {
     this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
   }
 
-  handleShowMore(){
-	console.log("===============> ShowTour:handleShowMore" , this.state);
-	if( this.state.CurrentOrder + this.numberShowMore < this.dataAllTours.length ){
-		console.log("Add show 5")
-		let temporary = this.state.ListTour;
-		let limitOrder = this.state.ListTour.length + this.numberShowMore ;
-		for( let count = this.state.CurrentOrder  ; count < limitOrder ; count++ ){
-			temporary.push( this.dataAllTours[ count ]);
-		}
-		this.setState(state => ({
-			Loading: false,
-			CurrentOrder: this.state.ListTour.length,
-			ListTour: temporary
-		}));	
-	}
-	else{
-		let temporary = this.state.ListTour;
-		let limitOrder = this.dataAllTours.length;
-		for( let count = this.state.CurrentOrder  ; count < limitOrder ; count++ ){
-			temporary.push( this.dataAllTours[ count ]);
-		}
-		this.setState(state => ({
-			Loading: false,
-			Max: true,
-			CurrentOrder: this.dataAllTours.lenth - 1,
-			ListTour: temporary
-		}));
-	}
+  handleShowMore() {
+    console.log("===============> ShowTour:handleShowMore", this.state);
+    if (
+      this.state.CurrentOrder + this.numberShowMore <
+      this.dataAllTours.length
+    ) {
+      console.log("Add show 5");
+      let temporary = this.state.ListTour;
+      let limitOrder = this.state.ListTour.length + this.numberShowMore;
+      for (let count = this.state.CurrentOrder; count < limitOrder; count++) {
+        temporary.push(this.dataAllTours[count]);
+      }
+      this.setState(state => ({
+        Loading: false,
+        CurrentOrder: this.state.ListTour.length,
+        ListTour: temporary
+      }));
+    } else {
+      let temporary = this.state.ListTour;
+      let limitOrder = this.dataAllTours.length;
+      for (let count = this.state.CurrentOrder; count < limitOrder; count++) {
+        temporary.push(this.dataAllTours[count]);
+      }
+      this.setState(state => ({
+        Loading: false,
+        Max: true,
+        CurrentOrder: this.dataAllTours.lenth - 1,
+        ListTour: temporary
+      }));
+    }
   }
 
   FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
@@ -238,15 +240,16 @@ class ShowTour extends Component {
         {this.condition === 1 && (
           <button className="GeneralButtonTour mgb"> 'Now Loading!' </button>
         )}
-        {this.condition === 2 && (
-          <button
-            className="ButtonMoreTour GeneralButtonTour"
-            onClick={this.handleShowMore}
-          >
-            {" "}
-            "More Tour!"{" "}
-          </button>
-        )}
+        {searchQuery === "" &&
+          this.condition === 2 && (
+            <button
+              className="ButtonMoreTour GeneralButtonTour"
+              onClick={this.handleShowMore}
+            >
+              {" "}
+              "More Tour!"{" "}
+            </button>
+          )}
       </div>
     );
   }
