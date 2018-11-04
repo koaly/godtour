@@ -24,8 +24,8 @@ class ShowTour extends Component {
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
     this.FetchReceiveTourCallback = this.FetchReceiveTourCallback.bind(this);
     this.FetchAllTours = new FetchAllTours();
-	this.numberShowMore = 5;
-	this.dataAllTours = [];
+    this.numberShowMore = 5;
+    this.dataAllTours = [];
   }
   handleSearch = query => {
     this.setState({ searchQuery: query });
@@ -45,47 +45,48 @@ class ShowTour extends Component {
 
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
-    this.FetchAllTours.get_all_tours( this.FetchReceiveTourCallback );
+    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
   }
 
-  handleShowMore(){
-	console.log("===============> ShowTour:handleShowMore" , this.state);
-	if( this.state.CurrentOrder + this.numberShowMore < this.dataAllTours.length ){
-		console.log("Add show 5")
-		let temporary = this.state.ListTour;
-		let limitOrder = this.state.ListTour.length + this.numberShowMore ;
-		for( let count = this.state.CurrentOrder  ; count < limitOrder ; count++ ){
-			temporary.push( this.dataAllTours[ count ]);
-		}
-		this.setState(state => ({
-			Loading: false,
-			CurrentOrder: this.state.ListTour.length,
-			ListTour: temporary
-		}));	
-	}
-	else{
-		let temporary = this.state.ListTour;
-		let limitOrder = this.state.dataAllTours.length;
-		for( let count = this.state.CurrentOrder  ; count <= limitOrder ; count++ ){
-			temporary.push( this.dataAllTours[ count ]);
-		}
-		this.setState(state => ({
-			Loading: false,
-			Max: true,
-			CurrentOrder: this.dataAllTours.lenth - 1,
-			ListTour: temporary
-		}));
-	}
-
+  handleShowMore() {
+    console.log("===============> ShowTour:handleShowMore", this.state);
+    if (
+      this.state.CurrentOrder + this.numberShowMore <
+      this.dataAllTours.length
+    ) {
+      console.log("Add show 5");
+      let temporary = this.state.ListTour;
+      let limitOrder = this.state.ListTour.length + this.numberShowMore;
+      for (let count = this.state.CurrentOrder; count < limitOrder; count++) {
+        temporary.push(this.dataAllTours[count]);
+      }
+      this.setState(state => ({
+        Loading: false,
+        CurrentOrder: this.state.ListTour.length,
+        ListTour: temporary
+      }));
+    } else {
+      let temporary = this.state.ListTour;
+      let limitOrder = this.state.dataAllTours.length;
+      for (let count = this.state.CurrentOrder; count <= limitOrder; count++) {
+        temporary.push(this.dataAllTours[count]);
+      }
+      this.setState(state => ({
+        Loading: false,
+        Max: true,
+        CurrentOrder: this.dataAllTours.lenth - 1,
+        ListTour: temporary
+      }));
+    }
   }
 
-  FetchReceiveTourCallback( ReceiveInformation , ReceiveData ){
-	console.log("=====> FetchReceiveTourCallback.ReceiveData" , ReceiveData );
-	this.dataAllTours = ReceiveData;
-	this.handleShowMore();
+  FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
+    console.log("=====> FetchReceiveTourCallback.ReceiveData", ReceiveData);
+    this.dataAllTours = ReceiveData;
+    this.handleShowMore();
   }
 
-/*
+  /*
   FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
     console.log(
       "===============> ShowTour.FetchReceiveTourCallback",
@@ -112,16 +113,49 @@ class ShowTour extends Component {
   }
 */
   render() {
-    console.log("===============> Show_tour.render()", this.state , this.dataAllTours);
-	console.log("After filter")
+    console.log(
+      "===============> Show_tour.render()",
+      this.state,
+      this.dataAllTours
+    );
+    console.log("After filter");
     const { ListTour, searchQuery } = this.state;
-    let filtered = ListTour;
+    let filtered = this.dataAllTours;
     if (searchQuery) {
-      filtered = ListTour.filter(tour =>
+      filtered = this.dataAllTours.filter(tour =>
         tour.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     }
-    const showListTour = filtered.map(tour => (
+    const showlistTour = ListTour.map(tour => (
+      <li key={tour._id} className="card mb-5 card-size">
+        <img
+          src={tour.imgsrc}
+          alt="sample image"
+          className="mb-3"
+          height="350px"
+        />
+        <div className="showtour-content">
+          <h3 className="mb-3">{tour.name}</h3>
+          <p>
+            <ClockIcon className="mr-3 mb-1" />
+            {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+          </p>
+          <p>
+            <AirplaneIcon className="mr-3 mb-1" />
+            Fly with {tour.airline}
+          </p>
+          <p>
+            <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
+            Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
+          </p>
+          <Link className="" to={`/tours/id=${tour._id}`}>
+            Read More...
+          </Link>
+        </div>
+      </li>
+    ));
+
+    const showfilterTour = filtered.map(tour => (
       <li key={tour._id} className="card mb-5 card-size">
         <img
           src={tour.imgsrc}
@@ -164,7 +198,8 @@ class ShowTour extends Component {
             <div className="tourlist">
               <h1 className="mb-5">Tour List</h1>
             </div>
-            <div>{showListTour}</div>
+            {searchQuery !== "" && <div>{showfilterTour}</div>}
+            {searchQuery === "" && <div>{showlistTour}</div>}
           </React.Fragment>
         )}
         <ul>
