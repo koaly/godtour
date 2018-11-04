@@ -46,7 +46,7 @@ exports.requestUpgrade = async (req, res, next) => {
         const { payload: { info } } = req;
         const { upgradeReason } = req.body;
 
-        const user = await User.find({ _id: info.id });
+        const user = await User.findOne({ _id: info.id });
         if (!user || user.length == 0) throw new UserNotFoundException()
 
         user.upgradeRequest = true;
@@ -54,7 +54,7 @@ exports.requestUpgrade = async (req, res, next) => {
         if (upgradeReason)
             user.upgradeReason = upgradeReason;
         else
-            user.upgradeReason = null;
+            user.upgradeReason = "Just request";
 
         const result = await user.save();
         console.log(result);
