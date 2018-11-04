@@ -26,8 +26,12 @@ exports.checkOwnTiy = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
         const { id } = info
-        const tiy = await Tiy.find({ _id: req.params.tiyID });
+        const tiy = await Tiy.findById(req.params.tiyID);
 
+        console.log(1);
+        console.log(tiy);
+        console.log(req.params.tiyID);
+        console.log(tiy.userID);
         if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
 
         console.log(`Check ${info.id} != ${tiy.userID}`);
@@ -50,7 +54,7 @@ exports.checkOwnTiyPlus = async (req, res, next) => {
         const { payload: { info } } = req;
         const { id, status } = info
 
-        const tiy = await Tiy.find({ _id: req.params.tiyID });
+        const tiy = await Tiy.findById(req.params.tiyID);
 
         if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
 
@@ -77,7 +81,7 @@ exports.checkNonAccepted = async (req, res, next) => {
 
         const { tiyID } = req.params
 
-        const tiy = await Tiy.find({ _id: tiyID });
+        const tiy = await Tiy.findById(tiyID);
 
         if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
         console.log(isAccepted);
@@ -142,11 +146,11 @@ exports.getAccepted = async function (req, res, next) {
 
 exports.getOneTiy = async function (req, res, next) {
     try {
-        const tiy = await Tiy.find({ _id: req.params.tiyID })
+        const tiy = await Tiy.findById({ _id: req.params.tiyID })
 
         if (!tiy || tiy.length == 0) throw new TiyNotFoundException()
         res.status(200).json({
-            tiy
+            tiyu
         });
     } catch (e) {
         HandingErorr(res, e)

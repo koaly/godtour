@@ -48,12 +48,12 @@ class RequestStatusForm extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderTextarea(
             "reasonToUpgrade",
-            "ReasonToUpgrade",
+            "Reason to be Tour Operator",
             "text",
-            "give me a good reason bro"
+            "Reason is needed for decision of administrator"
           )}
           <div className="mgt" />
-          {this.renderButton("Please upgrade my status")}
+          {this.renderButton("Send Request")}
         </form>
       </div>
     );

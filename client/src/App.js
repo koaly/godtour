@@ -23,8 +23,10 @@ import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
 import auth from "./services/authService";
 import CreateTourForm from "./components/createTourForm";
+import SumDataCreateTour from "./components/sumDataCreateTour";
 import MyTour from "./components/myTour";
 import RequestStatusForm from "./components/requestStatusForm";
+import MyTiy from "./components/myTiy";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -111,6 +113,12 @@ class App extends Component {
                 <CreateTourForm {...props} token={jwt} user={user} />
               )}
             />
+            <Route
+              path="/sumDataCreateTour"
+              render={props => (
+                <SumDataCreateTour {...props} token={jwt} user={user} />
+              )}
+            />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />
@@ -134,6 +142,7 @@ class App extends Component {
               path="/profile/purchaseList"
               render={() => <PurchaseList user={user} />}
             />
+            <Route path="/profile/myTiy" render={() => <MyTiy user={user} />} />
             <Route path="/profile" render={() => <Profile user={user} />} />
             <Route path="/testfetch" component={TestFetch} />
             <Route path="/testpost" component={TestPost} />

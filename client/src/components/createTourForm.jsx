@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import listCountries from "./common/dataList";
+import findDiffDay from "./common/otherFunction"; 
+import { toast } from "react-toastify";
 
 class createTourForm extends Component{
 
@@ -8,45 +10,85 @@ class createTourForm extends Component{
 		super( props );
 		console.log("=====> constructor.props " , props);
 		this.state={
-			isLoading	: true
+			fillingForm	: true
 			, user		: props.user
-			, dataTour	: { country				: ""
-							, province			: ""
-							, dayDuration		: "0"
-							, nightDuration		: "0"
-							, numberChild		: "0"
-							, numberAdult		: "0"
-							, privateTour		: true
+			, dataTour	: { name				: ""
+							, dest				: ""
+							, minPrice			: 0
+							, maxPrice			: 0
+							, minDuration		: 0
+							, maxDuration		: 0
+							, minMember			: 0
+							, maxMember			: 0
+							, food				: 0
+							, startFreeDate		: null
+							, endFreeDate		: null
 							, requireGuide		: false
-							, startPeriodTour	: ""
-							, endPeriodTour		: ""
-							, maxPrice			: "1000"
-							, specificDetail	: "Let us know what you want most in your tour"
+							, detail			: ""
+							, highlight			: ""
 						  }
 		};
 		this.handleChange = this.handleChange.bind( this );
-		this.conditionVale = ["privateTour" , "requireGuide"]
+		this.handleSubmitData = this.handleSubmitData.bind( this );
+		this.notReloadFunction = this.notReloadFunction.bind( this );
+		this.conditionValue = [ "requireGuide"]
+		this.numericalValue = [	"minDuration" , "maxDuration" , "minMember" , "maxMember"
+								, "food" , "minPrice" , "maxPrice"];
 	}
 
-	async submitDataCreateTour(){
+	notReloadFunction(){
+		return false;
+	}
 
+	handleSubmitData( event ){
+		var result = true;
+		if( ! document.getElementById("tourName").checkValidity() ){
+			toast.error("require your tour name");
+			result = false;
+		}
+		if( ! document.getElementById("yourDestination").checkValidity()){
+			toast.error("require your destination");
+			result = false;
+		}
+		if( this.state.dataTour.startFreeDate === null 
+					|| this.state.dataTour.endFreeDate === null){
+			toast.error("require period free date");
+			result = false;
+		}
+		else{ 
+			var startPeriod = new Date( this.state.dataTour.startFreeDate );
+			var endPeriod = new Date( this.state.dataTour.endFreeDate );
+			var freePeriod = findDiffDay(endPeriod , startPeriod);
+			if( this.state.dataTour.maxDuration > freePeriod ){
+				toast.error("Day of tour must less more than period of tour");
+				result = false;
+			}
+		}
+		if( result ){
+			var submitDataTour = this.state.dataTour;
+			localStorage.setItem("submitDataTour" , JSON.stringify(submitDataTour) );
+			window.location="/sumDataCreateTour";
+		}
+		return false;
 	}
 
 	handleChange( event ){
-		if( this.conditionVale.includes( event.target.name ) ){
+		if( this.conditionValue.includes( event.target.name ) ){
 			if( event.target.value === "true") this.state.dataTour[ event.target.name ] = true;
 			else this.state.dataTour[ event.target.name ] = false;
+		}
+		else if( this.numericalValue.includes( event.target.name ) ){
+			this.state.dataTour[ event.target.name ] = parseInt(event.target.value);
 		}
 		else{
 			this.state.dataTour[ event.target.name ] = event.target.value;
 		}
+		this.forceUpdate();
 		console.log( "=====> handleChange.state " , this.state);
-		this.setState();
 	}
 
 	componentDidMount() {
 		console.log("===============> createTourForm.componentDidMount");
-		sessionStorage.setItem("tourLastLink" , "/createTour");
 	}
 
 	render(){
@@ -56,25 +98,86 @@ class createTourForm extends Component{
 				<h1>Please Login Before Create Tour by Yourself</h1>
 			</div>);
 		}
-		else if( this.state.user.info.status === 0 ){
+		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
 			return(<div className = "mgtb container">
 				<h1>Create Tour</h1>
-				<form action=""><ul>
+				<ul>
 					<li>
-						<label>Country : </label>
-						<input	type="textarea" list="listCountries" name="country"
-								onChange={this.handleChange} required 
+						<label>Your Tour Name : </label>
+						<input	type="textarea" 
+								id = "tourName" 
+								name="name" required
+								onChange={this.handleChange}  
 						/>
-						<datalist id="listCountries">
-							{ listCountries.map( ( country) =>
-							<option key={country} value={ country }/>
-							)}
-						</datalist>
 					</li>
 					<li>
-						<label>Province : </label>
-						<input	type="textarea" name="province"
-								onChange={this.handleChange.bind}
+						<label>Your Destination : </label>
+						<input	type="textarea" 
+								id = "yourDestination" 
+								name="dest" required
+								onChange={this.handleChange}  
+						/>
+					</li>
+					<li>
+						<label>Many you group  :&emsp;</label>
+						<label>MIN</label>
+						<input	type="number" name="minMember" min="0"  
+								value={this.state.dataTour.minMember}
+								onChange={this.handleChange}
+						/>
+						<label>MAX</label>
+						<input	type="number" name="maxMember" 
+								min={this.state.dataTour.minMember.toString()} 
+								value={this.state.dataTour.maxMember}
+								onChange={this.handleChange}
+						/>
+					</li>
+					<li>
+						<label>Duration Tour :&emsp;</label>
+						<label>MIN&emsp;</label>
+						<input	type="number" name="minDuration" min="0"  
+								value={this.state.dataTour.minDuration}
+								onChange={this.handleChange}
+						/>
+						<label>MAX&emsp;</label>
+						<input	type="number" name="maxDuration" 
+								min={this.state.dataTour.minDuration} 
+								value={this.state.dataTour.maxDuration.toString()}
+								onChange={this.handleChange}
+						/>
+					</li>
+					<li>
+						<label>Period Tour :&emsp;</label>
+						<label>Start&emsp;</label>
+						<input	type="date" name="startFreeDate"
+								onChange={this.handleChange}
+						/>
+						<label>End&emsp;</label>
+						<input	type="date" name="endFreeDate"
+								onChange={this.handleChange}
+						/>
+					</li>
+					<li>
+						<label>Price:&emsp;</label>
+						<label>&ensp;MIN</label>
+						<input	type="number" name="minPrice"
+								onChange={this.handleChange}
+								value={this.state.dataTour.minPrice}
+								min="0"
+						/>
+						<label>&ensp;MAX</label>
+						<input	type="number" name="maxPrice"
+								onChange={this.handleChange}
+								value={this.state.dataTour.maxPrice}
+								min={this.state.dataTour.minPrice.toString()}
+						/>
+					</li>
+					<li>
+						<label>Food:&emsp;</label>
+						<input type="number" name="food"
+								onChange={this.handleChange}
+								value={this.state.dataTour.food}
+								min="0"
 						/>
 					</li>
 					<li>
@@ -96,77 +199,21 @@ class createTourForm extends Component{
 						}
 					</li>
 					<li>
-						<label>people in your group  :&emsp;</label>
-						<label>Children</label>
-						<input	type="number" name="numberChild" min="0"  
-								value={this.state.dataTour.numberChild}
-								onChange={this.handleChange}
-						/>
-						<label>Adult</label>
-						<input	type="number" name="numberAdult" min="0" 
-								value={this.state.dataTour.numberAdult}
-								onChange={this.handleChange}
-						/>
-					</li>
-					<li>
-						{ this.state.dataTour.privateTour ? (<div>
-							<label>Private Tour : </label>
-							<input	type="radio" name="privateTour" value="true"
-									checked="checked"
-									onChange={ this.handleChange}/> YES
-							<input	type="radio" name="privateTour" value="false" 
-									onChange={this.handleChange}/> NO	
-						</div>) : (<div>
-							<label>Private Tour : &emsp</label>
-							<input	type="radio" name="privateTour" value="true"
-									onChange={ this.handleChange}/> YES
-							<input	type="radio" name="privateTour" value="false" 
-									checked="checked"
-									onChange={this.handleChange}/> NO	
-						</div>)
-						}
-					</li>
-					<li>
-						<label>Length Tour :&emsp;</label>
-						<label>Day</label>
-						<input	type="number" name="dayDuration" min="0"  
-								value={this.state.dataTour.dayDuration}
-								onChange={this.handleChange}
-						/>
-						<label>Night</label>
-						<input	type="number" name="nightDuration" min="0" 
-								value={this.state.dataTour.nightDuration}
-								onChange={this.handleChange}
-						/>
-					</li>
-					<li>
-						<label>Priod Tour :&emsp;</label>
-						<label>Start</label>
-						<input	type="date" name="startPeriodTour"
-								onChange={this.handleChange}
-						/>
-						<label>End</label>
-						<input	type="date" name="endPeriodTour"
-								onChange={this.handleChange}
-						/>
-					</li>
-					<li>
-						<label>Max Price:&ensp;&ensp;</label>
-						<input	type="number" name="maxPrice"
-								onChange={this.handleChange}
-								value={this.state.dataTour.maxPrice}
-								min="0"
-						/>
-					</li>
-					<li>
 						<p>Message to Tourism</p>
-						<textarea	name="specificDetail" cols="60" rows="5" 
-									onChange={this.handleChange}>
-							{this.state.dataTour.specificDetail}	
-						</textarea>
+						<textarea	name="detail" cols="60" rows="5" 
+									onChange={this.handleChange}
+									placeholder="Let us know about your desired"
+						></textarea>
 					</li>
-					<input type="submit"/>	
-				</ul></form>
+					<li>
+						<p>Message special detail of this tour</p>
+						<textarea	name="highlight" cols="60" rows="5" 
+									onChange={this.handleChange}
+									placeholder="Let us know about your desired"
+						></textarea>
+					</li>
+					<button onClick={this.handleSubmitData}>SUBMIT</button>	
+				</ul>
 			</div>);
 		}
 		else{

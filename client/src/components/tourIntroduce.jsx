@@ -17,7 +17,7 @@ class TourIntroduce extends Component {
                         <div className="Introduce">
                             <div className="carda mg-card">
                                 <h3>Can Create Your Own Tour</h3>
-                                <p>We will make your dream trip come true, just tell me us wish.</p>
+                                <p>We will make your dream trip come true, just tell us your wish.</p>
                                 <img src="https://cdn4.iconfinder.com/data/icons/world-travel-guide/512/travel-13-512.png"  height="200px" width="200px" className="mb-3"/>
                             </div>
                         </div>
