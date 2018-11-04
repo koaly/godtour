@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { toast } from "react-toastify";
-import { getSpecificUser } from "../services/specificUser";
+import { getSpecificUser, deleteSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
-import getStatus from "./common/status";
-
+import getStatus from "./common/status"
 export default class OneUser extends Component {
   constructor(props) {
     super(props);
@@ -57,9 +56,29 @@ export default class OneUser extends Component {
     }));
   }
 
+  handleDelete = async user => {
+    try {
+      console.log(user.id);
+      await deleteSpecificUser(user.id);
+      toast.success("Delete success");
+      window.location = "/users";
+    } catch (ex) {
+      const errorRes = ex.response.data.errors;
+      if (errorRes) {
+        errorRes.forEach(error => {
+          toast.error(` ${error.param}: ${error.msg}`);
+        });
+      } else {
+        toast.error(`${ex.response.data.error.message}`);
+      }
+    }
+  };
+
   render() {
     const { user, isLoaded } = this.state;
     const { registerDate } = user;
+    const { currentUser } = this.props;
+    console.log(currentUser);
     const Rank = getStatus(user.status);
 
     if (!isLoaded) {
@@ -68,7 +87,7 @@ export default class OneUser extends Component {
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
-      );
+      )
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
@@ -82,7 +101,7 @@ export default class OneUser extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">{user.displayName}</h1>
           <div className="row">
-            <div className="col-md-6 mt-2 mb-3">
+            <div className="col-md-6 mt-2 mb-3 ">
               <img
                 src={user.imgsrc}
                 alt="sample image"
@@ -107,6 +126,16 @@ export default class OneUser extends Component {
                   </h4>
                   <h5>เป็นสมาชิกตั้งแต่ {registerDateWithoutTZ}</h5>
                 </div>
+                {currentUser.info.status === 2 && (
+                  <React.Fragment>
+                    <button
+                      onClick={() => this.handleDelete(user)}
+                      className="btn btn-danger "
+                    >
+                      Delete User
+                    </button>
+                  </React.Fragment>
+                )}
               </div>
             </div>
           </div>

@@ -3,8 +3,8 @@ import NavBar from "./components/navBar";
 import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
 import TourIntroduce from "./components/tourIntroduce";
-import ShowTour2 from "./components/showTour2";
 import ShowUser from "./components/showUser";
+import ShowRequest from "./components/showRequest";
 import HomePage from "./components/homepage/homePage";
 import NotFound from "./components/notFound";
 import Profile from "./components/profile";
@@ -85,7 +85,9 @@ class App extends Component {
             />
             <Route
               path="/users/:username"
-              render={props => <OneUser {...props} token={jwt} user={user} />}
+              render={props => (
+                <OneUser {...props} token={jwt} currentUser={user} />
+              )}
             />
             <Route
               path="/tours"
@@ -96,8 +98,14 @@ class App extends Component {
               render={props => <ShowUser {...props} token={jwt} userr={user} />}
             />
             <Route
+              path="/admin/request"
+              render={props => <ShowRequest {...props} token={jwt} userr={user} />}
+            />
+            <Route
               path="/createTour"
-              render={props => <CreateTourForm {...props} token={jwt} user={user} />}
+              render={props => (
+                <CreateTourForm {...props} token={jwt} user={user} />
+              )}
             />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
