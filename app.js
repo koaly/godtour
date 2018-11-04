@@ -79,6 +79,9 @@ app.use((req, res, next) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 //import routes
 const tourRoutes = require('./api/routes/tour-route');
 const tiyRoutes = require('./api/routes/tiy-route');
@@ -109,8 +112,5 @@ app.use((err, req, res, next) => {
     })
 })
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
 //export to server.js
 module.exports = app;
