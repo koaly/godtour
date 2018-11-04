@@ -155,7 +155,7 @@ class ShowTour extends Component {
                 </p>
                 <p>
                   <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
-                  Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+                  Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
                 </p>
                 <Link className="" to={`/tours/id=${tour._id}`}>
                   Read More...
