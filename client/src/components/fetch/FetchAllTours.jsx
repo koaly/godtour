@@ -10,13 +10,13 @@ export default class FetchAllTours{
 
 	constructor(){
 		this.FrontLink = _start_url + _domain + ":" + _port;
-		this.SendData = {};
+		this.SendData = [];
 		this.SendInfomation = {};
 		this.PostData = {};
 	}
 
-	get_all_tours( start , range , Callback ){
-		console.log("===============> FetchAllTours.get_all_tours ");
+	get_tours( start , range ,  Callback ){
+		console.log("===============> FetchAllTours.get_tours ");
 		fetch( this.FrontLink + _path._all_tours )
 			.then( response => {
 				console.log("=====> get_all_tours.response" , response);
@@ -30,5 +30,21 @@ export default class FetchAllTours{
 				Callback( this.SendInfomation , this.SendData)	
 			})
 	}	
+
+	get_all_tours( Callback ){
+		console.log("===============> FetchAllTours.get_all_tours")
+		this.SendData = [];
+		fetch( this.FrontLink + _path._all_tours )
+			.then( response => {
+				this.SendInfomation = HandleInformation.convert_response( response );
+				return response.json();
+			})
+			.then( json =>{
+				console.log("=====> get_all_tours.json" , json)
+				this.SendData = HandleObject.manage_group_tour_order( json , 0 , json.count )
+				console.log("=====> get_all_tours.SendData" , this.SendData );
+				Callback( this.SendInfomation , this.SendData );	
+			})
+	}
 
 }

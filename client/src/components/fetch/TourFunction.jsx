@@ -23,6 +23,5 @@ export default class TourConvert{
 			}
 		}
 		return answer;
-
 	}
 } 
