@@ -25,23 +25,11 @@ const NavBar = ({ user }) => {
             </NavLink>
           </li>
           {user && (
-            <React.Fragment>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/editTour">
-                  Edit Tour
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/users">
+                Users
                 </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/cancelBook">
-                  Cancel Booking
-                </NavLink>
-              </li>
-              {/*<li className="nav-item">
-                <NavLink className="nav-link" to="/tourIntroduce">
-                  Tour Introduce
-                </NavLink>
-              </li>*/}
-            </React.Fragment>
+            </li>
           )}
           {user &&
             user.info.status !== 0 && (
@@ -49,6 +37,14 @@ const NavBar = ({ user }) => {
                 <NavLink className="nav-link" to="/addTour">
                   Add Tour
                 </NavLink>
+              </li>
+            )}
+          {user &&
+            user.info.status === 2 && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin/request">
+                  Request
+                  </NavLink>
               </li>
             )}
         </ul>
