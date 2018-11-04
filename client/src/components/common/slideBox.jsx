@@ -27,7 +27,15 @@ export default class SlideBox extends Component {
         await this.getTour()
         this.setState({ isLoaded: true })
     }
+    createTab = (max) => {
+        let result = []
 
+        // Outer loop to create parent
+        for (let i = 1; i < max; i++) {
+            result.push(<li data-target="#carouselExampleIndicators" data-slide-to={i} />)
+        }
+        return result
+    }
     render() {
         const { isLoaded, tours } = this.state
         console.log(tours)
@@ -49,8 +57,7 @@ export default class SlideBox extends Component {
                         data-slide-to="0"
                         className="active"
                     />
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1" />
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2" />
+                    {this.createTab(tours.length)}
                 </ol>
                 <div className="carousel-inner">
                     {tours.map((tour, i) => (

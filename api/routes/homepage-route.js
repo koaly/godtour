@@ -17,7 +17,7 @@ router.get('/',
             let show = [];
             let i = 0
             let newTour = null;
-            for (i = 0; i < Math.min(3, tours.length); i++) {
+            for (i = 0; i < Math.min(5, tours.length); i++) {
                 newTour = tours[Math.floor(Math.random() * tours.length)]
                 for (let j = 0; j < i; j++) {
                     while (show[j] === newTour) {
