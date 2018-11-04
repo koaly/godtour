@@ -24,6 +24,7 @@ import TestPost from "./components/fetch/example/PostTest";
 import auth from "./services/authService";
 import CreateTourForm from "./components/createTourForm";
 import MyTour from "./components/myTour";
+import RequestStatusForm from "./components/requestStatusForm";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -73,6 +74,7 @@ class App extends Component {
             <Route path="/tour" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/register" component={RegisterForm} />
+            <Route path="/request" component={RequestStatusForm} />
             <Route
               path="/tourIntroduce"
               render={() => <TourIntroduce user={user} />}
@@ -99,7 +101,9 @@ class App extends Component {
             />
             <Route
               path="/admin/request"
-              render={props => <ShowRequest {...props} token={jwt} userr={user} />}
+              render={props => (
+                <ShowRequest {...props} token={jwt} userr={user} />
+              )}
             />
             <Route
               path="/createTour"
