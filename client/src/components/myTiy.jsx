@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import ProfileBar from "./common/profileBar";
-import { getOwnTiy } from "../services/tiyService";
+import { getOwnTiy, removeTiy } from "../services/tiyService";
 import Spinner from "./common/spinner";
+import { Link } from "react-router-dom";
 
 export default class MyBook extends Component {
   constructor(props) {
@@ -18,6 +19,13 @@ export default class MyBook extends Component {
     console.log(data);
     this.setState({ isLoaded: true, data });
   }
+  handleDelete = async id => {
+    this.setState({ isLoaded: false });
+
+    await removeTiy(id);
+    await getOwnTiy();
+    this.setState({ isLoaded: true });
+  };
 
   render() {
     const { user, isLoaded, data } = this.state;
@@ -25,6 +33,7 @@ export default class MyBook extends Component {
       return <Spinner />;
     }
     console.log(data);
+    const { count } = data;
     const showData = data.tiys.map(d => (
       <li key={d._id}>
         <h5>
@@ -81,7 +90,53 @@ export default class MyBook extends Component {
             <div className="col-md-4">
               <ProfileBar user={user} />
             </div>
-            <div className="col-md-8 mt-2 ">{showData}</div>
+
+            <div className="col-md-8 mt-2 ">
+              <Link className="btn btn-primary" to="/createTour">
+                create TIY
+              </Link>
+              <div className="profile-infor mr-5">
+                <p>{count} Tiys</p>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>TourName</th>
+                      <th>MinPrice/MaxPrice</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.tiys.map(d => (
+                      <tr key={d._id}>
+                        <td>
+                          {/* <Link
+                            className="text-primary"
+                            to={`/tours/id=${book.tourID}`}
+                          >
+                            {book.tourName}
+                          </Link> */}
+                          {d.name}
+                        </td>
+                        <td>
+                          {d.minPrice}/{d.maxPrice}
+                        </td>
+                        <td>
+                          {d.startFreeDate}/{d.endFreeDate}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => this.handleDelete(d._id)}
+                            className="btn btn-danger btn-sm"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>

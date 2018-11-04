@@ -3,6 +3,7 @@ import auth from "./authService";
 
 const apiEndpoint = "/api/users/current/offers";
 const tiyEndpoint = "/api/users/current/tiys";
+const tiyDeleteEndpoint = "/api/tiys/";
 
 const config = {
   headers: {
@@ -16,4 +17,8 @@ export function getOwnOffer() {
 
 export function getOwnTiy() {
   return http.get(tiyEndpoint, config);
+}
+
+export function removeTiy(id) {
+  return http.delete(tiyDeleteEndpoint + id, config);
 }
