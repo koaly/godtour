@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./hompage.css";
 import Form from "../common/form";
 import { NotificationsIcon } from "mdi-react";
+import Spinner from "../common/spinner";
 
 const URL = "https://jsonplaceholder.typicode.com/users";
 class HomePage extends Component {
@@ -41,7 +42,7 @@ class HomePage extends Component {
   render() {
     const { isLoaded, users } = this.state;
     if (!isLoaded) {
-      return <h1>Loading</h1>;
+      return <Spinner />
     } else {
       return (
         <div className="HomePage">
@@ -73,7 +74,7 @@ class HomePage extends Component {
                   className="d-block w-100"
                   width="640"
                   height="360"
-                  src="https://www.japan-guide.com/thumb/XYZeXYZe2172_1680.jpg"
+                  src="https://i.ytimg.com/vi/ThL503sFZmw/maxresdefault.jpg"
                   alt="First slide"
                 />
                 <div className="carousel-caption d-none d-md-block">
@@ -142,7 +143,7 @@ class HomePage extends Component {
               </div>
               <div className="ae">
                 <button className="ba" >
-                  <NotificationsIcon className="ayy"/>Subscribe
+                  <NotificationsIcon className="ayy" />Subscribe
                 </button>
               </div>
             </div>
