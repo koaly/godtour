@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import { acceptStatus } from "../../services/requestStatusService";
+import { refuseStatus } from "../../services/requestStatusService";
 
-export default class AcceptStatusButton extends Component {
+export default class RefuseStatusButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,9 +12,9 @@ export default class AcceptStatusButton extends Component {
     };
     console.log(this.state.updateStatus)
   }
-  acceptStatusById = async id => {
+  refuseStatusById = async id => {
     try {
-      const response = await acceptStatus(id);
+      const response = await refuseStatus(id);
       const { message } = response.data;
 
       toast.success(`${message}`);
@@ -29,7 +29,7 @@ export default class AcceptStatusButton extends Component {
     const { updateStatus } = this.state;
     this.setState({ isAccepting: true });
 
-    await this.acceptStatusById(id);
+    await this.refuseStatusById(id);
     await updateStatus();
     this.setState({ isAccepting: false });
   };
@@ -41,13 +41,13 @@ export default class AcceptStatusButton extends Component {
       return (
         <button
           onClick={() => this.handleAccept(id)}
-          className="btn btn-success btn"
+          className="btn btn-danger btn"
         >
-          Accept
+          Refuse
         </button>
       );
     } else {
-      return <button className="btn btn-success btn-sm">Loading</button>;
+      return <button className="btn btn-danger btn-sm">Loading</button>;
     }
   }
 }

@@ -10,7 +10,7 @@ export default class DeleteTourBar extends Component {
             updateTour: this.props.updateTour,
             isDeleting: false
         }
-
+        console.log(this.state.updateTour)
     }
     removeTourById = async (id) => {
         try {

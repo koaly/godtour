@@ -8,6 +8,7 @@ import Pagination from "./pagination";
 import "./userBoxList.css";
 import getStatus from "./status";
 import AcceptStatusButton from "./acceptStatusButton";
+import RefuseStatusButton from "./refuseStatusButton";
 export default class RequestBoxList extends Component {
   constructor(props) {
     super(props);
@@ -20,20 +21,21 @@ export default class RequestBoxList extends Component {
     };
   }
 
-  async getUser() {
+  async getRequest() {
     try {
       const result = await getUserRequest();
       const { users } = result.data;
-      toast.info("Update UserList");
+      toast.info("Update RequestList");
       this.setState({ users: users });
     } catch (e) {
       const { message } = e.response.data.error;
-      toast.error(`${message}`);
+      console.log(message)
+      //toast.error(`${message}`);
     }
   }
 
   async componentDidMount() {
-    await this.getUser();
+    await this.getRequest();
     this.setState({ isLoaded: true });
   }
 
@@ -85,8 +87,16 @@ export default class RequestBoxList extends Component {
                         <Link to={`/users/${user.username}`}>See more</Link>
                       </h5>
                     </div>
-                    <div className="col-sm-4 col-lg-4 my-3" />
-                    <AcceptStatusButton id={user._id} acceptStatus={this.getUser.bind(this)} />
+                    <div className="col-sm-4 col-lg-4 my-3" >
+                      <div className="row">
+                        <div className="col-6">
+                          <AcceptStatusButton id={user._id} acceptStatus={this.getRequest.bind(this)} />
+                        </div>
+                        <div className="col-6">
+                          <RefuseStatusButton id={user._id} acceptStatus={this.getRequest.bind(this)} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -101,7 +111,7 @@ export default class RequestBoxList extends Component {
             currentPage={currentPage}
           />
         </div>
-      </div>
+      </div >
     );
   }
 }

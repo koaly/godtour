@@ -12,3 +12,7 @@ export function acceptStatus(id) {
   return http.get(apiEndpoint + id + "/accept", config);
   //how to use put bro
 }
+export function refuseStatus(id) {
+  return http.get(apiEndpoint + id + "/refuse", config);
+  //how to use put bro
+}
