@@ -20,14 +20,12 @@ router.get('/request/upgrade/:id',
 router.put('/request/upgrade/:id/accept',
     auth.require,
     adminCtrl.checkAdminStatus,
-    userCtrl.checkNotNullUser,
     adminCtrl.checkUpgradeRequest,
     adminCtrl.acceptUpgradeRequest);
 //no body require don't need to validation
 router.put('/request/upgrade/:id/refuse',
     auth.require,
     adminCtrl.checkAdminStatus,
-    userCtrl.checkNotNullUser,
     adminCtrl.checkUpgradeRequest,
     adminCtrl.refuseUpgradeRequest);
 
