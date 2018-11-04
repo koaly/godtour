@@ -1,7 +1,7 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiMiddlePoint = "/tiy";
+const apiMiddlePoint = "/api/tiy";
 
 const config = {
   headers: {

@@ -1,7 +1,7 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiEndpoint = "/users/current/bookings";
+const apiEndpoint = "/api/users/current/bookings";
 const config = {
     headers: {
         Authorization: "JWT " + auth.getJwt()

@@ -1,7 +1,7 @@
 import http from "./httpService";
 import auth from "./authService";
 
-const apiEndpoint = "/users/current/offers";
+const apiEndpoint = "/api/users/current/offers";
 
 const config = {
     headers: {
