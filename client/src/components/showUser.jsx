@@ -4,11 +4,12 @@ import { getAllUsers } from "../services/allUserService";
 import { Link } from "react-router-dom";
 
 export default class ShowUser extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       users: [],
-      isLoaded: false
+      isLoaded: false,
+      userr: this.props.userr
     };
   }
   async getUser() {
@@ -27,7 +28,9 @@ export default class ShowUser extends Component {
     this.getUser();
   }
   render() {
-    const { users, isLoaded } = this.state;
+    const { users, isLoaded, userr } = this.state;
+    const userzero = users.filter(u => u.status === 1);
+    const operator = users.filter(u => u.status !== 2);
     if (!isLoaded) {
       return <h1>isLoaded</h1>;
     }
@@ -39,6 +42,44 @@ export default class ShowUser extends Component {
       <div className="container mgtb">
         <div className="profile-container bgdark">
             <h1 className="user-head">User List</h1>
+            {userr.info.status===0 &&
+            <ul>
+            {userzero.map((user, i) => (
+                <li key={i}>
+                <div className="user-content">
+                    <p>
+                        Display Name : {user.displayName}
+                    </p>
+                    <p>
+                        Email Address : {user.email}
+                    </p>
+                    <p>
+                        <Link to={`/users/${user.username}`}>See more</Link>
+                    </p>
+                </div>
+                </li>
+            ))}
+            </ul>}
+            {userr.info.status===1 &&
+            <ul>
+            {operator.map((user, i) => (
+                <li key={i}>
+                
+                <div className="user-content">
+                    <p>
+                        Display Name : {user.displayName}
+                    </p>
+                    <p>
+                        Email Address : {user.email}
+                    </p>
+                    <p>
+                        <Link to={`/users/${user.username}`}>See more</Link>
+                    </p>
+                </div>
+                </li>
+            ))}
+            </ul>}
+            {userr.info.status===2 &&
             <ul>
             {users.map((user, i) => (
                 <li key={i}>
@@ -55,7 +96,7 @@ export default class ShowUser extends Component {
                 </div>
                 </li>
             ))}
-            </ul>
+            </ul>}
         </div>
       </div>
     );
