@@ -33,6 +33,10 @@ body {
   color: white;
 }
 
+#font-wow{
+  font-family: 'Mali', cursive;
+}
+
 #login-dp {
   min-width: 250px;
   padding: 14px 14px 0;
