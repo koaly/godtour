@@ -40,11 +40,6 @@ export default class LinkProfileBar extends Component {
                             <span className="black">My Booking</span>
                         </NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/profile/myCard">
-                            <span className="black">Offers</span>
-                        </NavLink>
-                    </li>
                 </ul>
             )
         } else if (status === 1) {
@@ -71,7 +66,7 @@ export default class LinkProfileBar extends Component {
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/profile/myCard">
+                        <NavLink className="nav-link" to="/profile/myOffer">
                             <span className="black">My Offers</span>
                         </NavLink>
                     </li>
@@ -106,7 +101,7 @@ export default class LinkProfileBar extends Component {
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/profile/myCard">
+                        <NavLink className="nav-link" to="/profile/myOffer">
                             <span className="black">My Offers</span>
                         </NavLink>
                     </li>
