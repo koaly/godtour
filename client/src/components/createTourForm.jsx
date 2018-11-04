@@ -43,20 +43,27 @@ class createTourForm extends Component{
 	}
 
 	handleSubmitData( event ){
-		console.log( "===============>createTourForm.handleSubmitData " );
-		var result = document.getElementById("createTourForm").checkValidity();
-		console.log( "=====> handleSubmitData.result " , result );
-		if( this.state.dataTour.startPeriodTour === null 
-					|| this.state.dataTour.endPeriodTour === null){
-			toast.error("require period tour");
+		var result = true;
+		if( ! document.getElementById("tourName").checkValidity() ){
+			toast.error("require your tour name");
+			result = false;
+		}
+		if( ! document.getElementById("yourDestination").checkValidity()){
+			toast.error("require your destination");
+			result = false;
+		}
+		if( this.state.dataTour.startFreeDate === null 
+					|| this.state.dataTour.endFreeDate === null){
+			toast.error("require period free date");
 			result = false;
 		}
 		else{ 
-			var startPeriod = new Date( this.state.dataTour.startPeriodTour );
-			var endPeriod = new Date( this.state.dataTour.endPeriodTour );
+			var startPeriod = new Date( this.state.dataTour.startFreeDate );
+			var endPeriod = new Date( this.state.dataTour.endFreeDate );
 			var freePeriod = findDiffDay(endPeriod , startPeriod);
 			if( this.state.dataTour.maxDuration > freePeriod ){
 				toast.error("Day of tour must less more than period of tour");
+				result = false;
 			}
 		}
 		if( result ){
@@ -100,7 +107,7 @@ class createTourForm extends Component{
 					<li>
 						<label>Your Tour Name : </label>
 						<input	type="textarea" 
-								id = "createTourForm" 
+								id = "tourName" 
 								name="name" required
 								onChange={this.handleChange}  
 						/>
@@ -108,7 +115,7 @@ class createTourForm extends Component{
 					<li>
 						<label>Your Destination : </label>
 						<input	type="textarea" 
-								id = "createTourForm" 
+								id = "yourDestination" 
 								name="dest" required
 								onChange={this.handleChange}  
 						/>
