@@ -170,7 +170,7 @@ export default class OneTour extends Component {
     var user = this.state.user;
     if (!isLoaded) {
       return (
-        <div className="text-align">
+        <div className="text-align mgtb">
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
@@ -187,17 +187,18 @@ export default class OneTour extends Component {
       <div className="container">
         <div className="profile-container bglight mgtb">
           <div className="row">
-            <div className="col-md-7 mt-4">
+            <div className="col-md-6 mt-2 mb-2">
               {/* <h1 className="ml-4">img</h1> */}
               <img
                 src={tour.imgsrc}
                 alt="sample image"
-                height="320px"
-                width="400px"
+                height="350px"
+                width="500px"
+                className="ml-3 mt-1"
               />
             </div>
-            <div className="col-md-5 mt-4 mb-4">
-              <h1 className="mgbi">{tour.name}</h1>
+            <div className="col-md-6 mt-2 mb-2">
+              <h2 className="mgbi">{tour.name}</h2>
               <h5 className="mgbi">Fly with {tour.airline}</h5>
               <h5 className="mgbi">
                 {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
@@ -241,14 +242,14 @@ export default class OneTour extends Component {
 									/> */}
                   <button
                     onClick={() => this.handleDelete(tour)}
-                    className="btn btn-danger mt-4"
+                    className="btn btn-danger "
                   >
                     Delete Tour
                   </button>
                   <input
                     type="submit"
                     value="Edit Tour"
-                    className="btn btn-primary  ml-4 mt-4"
+                    className="btn btn-primary  ml-4 "
                   />
                 </React.Fragment>
               )}
