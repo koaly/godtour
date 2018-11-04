@@ -75,20 +75,20 @@ exports.getOneTour = async function (req, res, next) {
 exports.checkOwnTour = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
-        const id = req.params
-        const tour = await Tour.find({ _id: id });
+        const { id } = req.params
+        const tour = await Tour.findOne({ _id: id });
 
-        if (!tour || tours.length == 0) throw new TourNotFoundException()
+        if (!tour || tour.length == 0) throw new TourNotFoundException()
 
         console.log(tour.operatorID);
-        if (info.id != tour.operatorID) {
+        if ((info.status == 2) || (info.id == tour.operatorID)) {
+            return next();
+        } else {
             return res.status(403).json({
                 error: {
                     message: "Permission denied"
                 }
             });
-        } else {
-            return next();
         }
 
     } catch (e) {
@@ -180,10 +180,17 @@ exports.editTour = async function (req, res, next) {
 
 exports.deleteTour = async (req, res, next) => {
     try {
-        const id = { _id: req.params.id }
-        const result = await Tour.findOneAndRemove(id);
+        const { id } = req.params
+        const result = await Tour.findOneAndRemove({ _id: id });
 
         if (!result || result.length == 0) throw new TourNotFoundException()
+
+        const bookingResult = await Booking.find({ tourID: id })
+        console.log("find", bookingResult.length)
+
+        bookingResult.forEach(book => {
+            book.remove()
+        })
 
         console.log(result);
         res.status(200).json({

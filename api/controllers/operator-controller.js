@@ -27,7 +27,7 @@ exports.checkNonOperatorStatus = async (req, res, next) => {
     try {
         const { payload: { info } } = req;
         console.log(info.status);
-        if (info.status) {
+        if (info.status == 1) {
             return res.status(403).json({
                 error: {
                     message: "Already Tour-operator"

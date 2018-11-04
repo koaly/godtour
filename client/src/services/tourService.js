@@ -3,18 +3,30 @@ import auth from "./authService";
 
 const apiEndpoint = "/tours/browse";
 const tourAddEndpoint = "/tours/create";
-const ownTourEndpoint = "/users/current/tours"
+
+const tourDeleteEndpoint = "/tours";
+
+const ownTourEndpoint = "/users/current/tours";
+
 const config = {
   headers: {
     Authorization: "JWT " + auth.getJwt()
   }
 };
 
+function tourUrl(id) {
+  return tourDeleteEndpoint + "/" + id;
+}
+
+export function deleteTour(tourId) {
+  return http.delete(tourUrl(tourId), config);
+}
+
 export function getAllTours() {
   return http.get(apiEndpoint, config);
 }
 export function getOwnTours() {
-  return http.get(ownTourEndpoint, config)
+  return http.get(ownTourEndpoint, config);
 }
 export function addTour(tour) {
   console.log(tour);

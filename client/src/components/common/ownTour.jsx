@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import Spinner from "./spinner";
 import { paginate } from "../../utility/paginate";
 import Link from "react-router-dom/Link";
+import Pagination from "./pagination";
+import DeleteTourBar from "./deleteTourBar";
 
 export default class OwnTour extends Component {
     constructor(props) {
@@ -12,12 +14,11 @@ export default class OwnTour extends Component {
             tours: [],
             isLoaded: false,
 
-            pageSize: 4,
+            pageSize: 5,
             currentPage: 1,
         }
     }
     async getOwnTour() {
-        this.setState({ isLoaded: false })
 
         try {
             const response = await getOwnTours()
@@ -28,13 +29,18 @@ export default class OwnTour extends Component {
         }
         catch (e) {
             const { message } = e.response.data.error
-            toast.error(`${message}`)
+            //toast.error(`${message}`)
         }
 
+
+    }
+    async componentDidMount() {
+        await this.getOwnTour()
         this.setState({ isLoaded: true })
     }
-    componentDidMount() {
-        this.getOwnTour()
+
+    handlePageChange = (page) => {
+        this.setState({ currentPage: page })
     }
     render() {
         const { tours, isLoaded, currentPage, pageSize } = this.state
@@ -48,19 +54,28 @@ export default class OwnTour extends Component {
             <div>
                 <p>{count} ownTour</p>
                 <table className="table">
-                    <thread>
+                    <thead>
                         <tr>
                             <th>TourName</th>
+                            <th>RemainingSeat</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         {selectTours.map((tour, i) => (
                             <tr key={i}>
                                 <td><Link className="text-primary" to={`/tours/id=${tour._id}`}>{tour.name}</Link></td>
+                                <td>{tour.currentSeat}</td>
+                                <td><DeleteTourBar id={tour._id} updateTour={this.getOwnTour.bind(this)} /></td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <Pagination
+                    itemsCount={count}
+                    pageSize={pageSize}
+                    onPageChange={this.handlePageChange}
+                    currentPage={currentPage}
+                />
             </div>
         )
     }

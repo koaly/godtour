@@ -95,7 +95,8 @@ class AddTourForm extends Form {
     try {
       const response = await addTour(this.state.data);
       console.log(response);
-      window.location = "/";
+      window.location = "/tours";
+      toast.success("Added Success");
     } catch (ex) {
       console.log(ex.response.data);
       if (
@@ -121,7 +122,7 @@ class AddTourForm extends Form {
       <div className="container addtour form-container mgtb">
         <h2>Add Tour</h2>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name", "text", "firstname")}
+          {this.renderInput("name", "Name", "text", "name of tour")}
           {this.renderInput("price", "Price", "number", "price")}
           {this.renderInput("dest", "Destination", "text", "destination")}
           {this.renderInput(

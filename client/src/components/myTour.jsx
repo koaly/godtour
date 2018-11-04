@@ -32,7 +32,7 @@ export default class myTour extends Component {
               <ProfileBar user={user} />
             </div>
             <div className="col-md-8 mt-2">
-              <div className="profile-infor mr-5">
+              <div className="profile-infor mr-5 ml-4">
                 <OwnTour />
               </div>
             </div>

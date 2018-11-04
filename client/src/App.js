@@ -28,6 +28,7 @@ import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import MyOffer from "./components/myOffer";
 
 class App extends Component {
   constructor() {
@@ -87,12 +88,12 @@ class App extends Component {
             />
             <Route
               path="/users"
-              render={props => <ShowUser {...props} token={jwt} />}
+              render={props => <ShowUser {...props} token={jwt} userr={user} />}
             />
-			<Route
-			  path="/createTour" 
-			  render={props => <CreateTourForm {...props} token={jwt} user={user} />}
-			/>
+            <Route
+              path="/createTour"
+              render={props => <CreateTourForm {...props} token={jwt} user={user} />}
+            />
             <Route path="/addTour" component={AddTourForm} />
             <Route path="/editTour" component={EditTourForm} />
             <Route path="/cancelBook" component={CancelBook} />
@@ -103,6 +104,10 @@ class App extends Component {
             <Route
               path="/profile/myTour"
               render={props => <MyTour {...props} user={user} />}
+            />
+            <Route
+              path="/profile/myOffer"
+              render={props => <MyOffer {...props} user={user} />}
             />
             <Route
               path="/profile/myCard"

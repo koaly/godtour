@@ -23,7 +23,7 @@ export default class MyBook extends Component {
             <div className="col-md-4">
               <ProfileBar user={user} />
             </div>
-            <div className="col-md-8 mt-2">
+            <div className="col-md-8 mt-2 ">
               <ProfileBooking />
             </div>
           </div>
