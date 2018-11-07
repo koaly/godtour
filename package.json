@@ -42,6 +42,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "supertest": "^3.3.0"
   }
 }
