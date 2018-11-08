@@ -29,7 +29,7 @@ router.put(
 );
 //show uniq user with uniq username
 
-router.get("/:username", auth.optional, usercontroller.getOneUser);
+router.get("/username=:username", auth.optional, usercontroller.getOneUser);
 router.delete(
   "/:username",
   auth.require,
