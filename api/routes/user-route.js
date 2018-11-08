@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const userCtrl = require("../controllers/user-controller");
-const getFilterUsers = require("../controllers/users/getFilterUsers");
+const usercontroller = require("../controllers/users/");
+
 const tiyCtrl = require("../controllers/tiy-controller");
 const offerCtrl = require("../controllers/offer-controller");
 const tourCtrl = require("../controllers/tour-controller");
@@ -13,7 +14,7 @@ const auth = require("./auth");
 const config = require("./validation/users-validation");
 const checkValidation = require("./validation/checkValidation");
 
-router.get("/", auth.require, getFilterUsers);
+router.get("/", auth.require, usercontroller.getFilterUser);
 
 router.get("/current", auth.require, userCtrl.currentUser);
 
@@ -28,7 +29,7 @@ router.put(
 );
 //show uniq user with uniq username
 
-router.get("/:username", auth.optional, userCtrl.getOneUser);
+router.get("/:username", auth.optional, usercontroller.getOneUser);
 router.delete(
   "/:username",
   auth.require,

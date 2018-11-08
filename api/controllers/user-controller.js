@@ -32,56 +32,6 @@ exports.checkNotNullUser = async (req, res, next) => {
   }
 };
 
-const userResponse = users => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const response = {
-        count: users.length,
-        user: users.map(user => {
-          return user.toProfileJSON();
-        })
-      };
-      resolve(response);
-    }, 1000);
-  });
-};
-const getQueryForStatusUser = status => {
-  let querry = new Promise((resolve, reject) => {
-    switch (status) {
-      case 2:
-        resolve({});
-      case 1:
-        resolve({ $or: [{ status: 0 }, { status: 1 }] });
-      case 0:
-        resolve({ status: 1 });
-      default:
-        reject("status is not corret");
-    }
-  });
-  return querry;
-};
-exports.getAll = async (req, res, next) => {
-  try {
-    const {
-      payload: { info }
-    } = req;
-    const { status } = info;
-    const querry = await getQueryForStatusUser(3).catch(err =>
-      console.log(err)
-    );
-
-    const users = await User.find(querry);
-    if (!users || users.length == 0) throw new UserNotFoundException();
-
-    const response = await userResponse(users);
-
-    return res.status(200).json({
-      users: response
-    });
-  } catch (e) {
-    HandingErorr(res, e);
-  }
-};
 exports.getOneUser = async function(req, res, next) {
   const { username } = req.params;
 

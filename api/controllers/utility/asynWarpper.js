@@ -2,7 +2,7 @@
  *  Warps express.js async function with catch error
  * @param {Function} asyncFn async function for express
  * @param {Object} req  express request object
- * @param {Object} res express reponse object
+ * @param {Object} res express response object
  * @returns {void}
  */
 exports.asynWrapper = (asyncFn, req, res) => {
