@@ -3,16 +3,9 @@ const { asynWrapper } = require("../utility/asynWarpper");
 const { UserNotFoundException } = require("./exception");
 
 const handle = async (req, res) => {
-  const { username } = req.params;
-  const querry = { username: username };
-
-  const user = await User.findOne(querry);
-
-  if (!user) throw new UserNotFoundException(username);
-
-  return res.status(200).json({
-    user: user.toProfileJSON()
-  });
+  /**
+   * working must use other component to sucess
+   */
 };
 
 module.exports = asynWrapper.bind(null, handle);
