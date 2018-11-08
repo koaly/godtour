@@ -34,7 +34,7 @@ const handler = async (req, res) => {
   } = req;
 
   const { status } = info;
-  const querry = await getQueryForStatusUser(info);
+  const querry = await getQueryForStatusUser(status);
   const users = await User.find(querry);
 
   if (!users || users.length == 0) throw new UserNotFoundException();
