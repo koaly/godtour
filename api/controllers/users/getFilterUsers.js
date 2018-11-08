@@ -20,7 +20,7 @@ const getMapUser = users => {
   return new Promise((resolve, reject) => {
     const result = {
       count: users.length,
-      user: users.map(u => {
+      users: users.map(u => {
         return u.toProfileJSON();
       })
     };
@@ -40,9 +40,7 @@ const handler = async (req, res) => {
   if (!users || users.length == 0) throw new UserNotFoundException();
   const usersList = await getMapUser(users);
 
-  return res.status(200).json({
-    users: usersList
-  });
+  return res.status(200).json(usersList);
 };
 
 module.exports = asynWrapper.bind(null, handler);
