@@ -63,9 +63,9 @@ const handler = async (req, res) => {
   if (!users || users.length == 0) throw new UserNotFoundException();
 
   users = await getPaginate(users, page, limit);
-  const usersList = await getMapUser(users);
+  users = await getMapUser(users);
 
-  return res.status(200).json(usersList);
+  return res.status(200).json(users);
 };
 
 module.exports = asynWrapper.bind(null, handler);
