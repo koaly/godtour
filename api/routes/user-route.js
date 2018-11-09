@@ -14,7 +14,12 @@ const auth = require("./auth");
 const config = require("./validation/users-validation");
 const checkValidation = require("./validation/checkValidation");
 
-router.get("/", auth.require, usercontroller.getFilterUser);
+router.get("/", auth.optional, (req, res) => {
+  res.status(200).json({
+    message: "go to /browse"
+  });
+});
+router.get("/browse", auth.require, usercontroller.getFilterUser);
 
 router.get("/current", auth.require, userCtrl.currentUser);
 

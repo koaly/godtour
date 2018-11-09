@@ -27,17 +27,42 @@ const getMapUser = users => {
     resolve(result);
   });
 };
+/**
+ * promise function that filter paginate of array object return with promise
+ * @param {Array} users users arrays of total object
+ * @param {Int32Array} page pages index
+ * @param {Int32Array} limit limit of page index
+ * @return {Promise}
+ */
+const getPaginate = (obj, page = 1, limit = 5) => {
+  //array can init with const and assign with address of that array
+  return new Promise((resolve, reject) => {
+    const objList = [];
+
+    const start = (page - 1) * limit;
+    const final = Math.min(obj.length, limit * page);
+    for (let i = start; i < final; i++) {
+      objList.push(obj[i]);
+    }
+    resolve(objList);
+  });
+};
 
 const handler = async (req, res) => {
+  //req.query.page from url browse/?page=3
+  //both from url browse/?page=3&limit=5
+
   const {
-    payload: { info }
+    payload: { info },
+    query: { page, limit }
   } = req;
 
   const { status } = info;
   const querry = await getQueryForStatusUser(status);
-  const users = await User.find(querry);
-
+  let users = await User.find(querry);
   if (!users || users.length == 0) throw new UserNotFoundException();
+
+  users = await getPaginate(users, page, limit);
   const usersList = await getMapUser(users);
 
   return res.status(200).json(usersList);
