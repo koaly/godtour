@@ -3,10 +3,10 @@ const { asynWrapper } = require("../utility/");
 const { UserNotFoundException } = require("./exception");
 
 const handle = async (req, res) => {
-  const { username } = req.params;
-  const querry = { username: username };
-
-  const user = await User.findOne(querry);
+  const {
+    query: { username }
+  } = req;
+  const user = await User.findOne({ username });
 
   if (!user) throw new UserNotFoundException(username);
 

@@ -14,11 +14,8 @@ const auth = require("./auth");
 const config = require("./validation/users-validation");
 const checkValidation = require("./validation/checkValidation");
 
-router.get("/", auth.optional, (req, res) => {
-  res.status(200).json({
-    message: "go to /browse"
-  });
-});
+//doesn't protect routes at this moment
+router.get("/", auth.optional, usercontroller.getOneUser);
 router.get("/browse", auth.require, usercontroller.getFilterUser);
 
 router.get("/current", auth.require, userCtrl.currentUser);
@@ -34,7 +31,7 @@ router.put(
 );
 //show uniq user with uniq username
 
-router.get("/username=:username", auth.optional, usercontroller.getOneUser);
+router.get("/?username=:username", auth.optional, usercontroller.getOneUser);
 router.delete(
   "/:username",
   auth.require,
