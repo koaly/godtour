@@ -5,9 +5,10 @@
  * @param {Object} res express response object
  * @returns {void}
  */
-exports.asynWrapper = (asyncFn, req, res) => {
+const asynWrapper = (asyncFn, req, res) => {
   asyncFn(req, res).catch(e => {
     console.log(e);
     res.status(e.status || 500).json({ message: e.message });
   });
 };
+module.exports = asynWrapper;

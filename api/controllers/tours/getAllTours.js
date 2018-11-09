@@ -1,5 +1,5 @@
 const Tour = require("../../models/tour-models");
-const { asynWrapper } = require("../utility/asynWarpper");
+const { asynWrapper } = require("../utility/");
 const { TourNotFoundException } = require("./exception");
 
 const getMapTour = tours => {

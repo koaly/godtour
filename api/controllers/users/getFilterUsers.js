@@ -1,5 +1,5 @@
 const User = require("../../models/user-models");
-const { asynWrapper } = require("../utility/asynWarpper");
+const { asynWrapper } = require("../utility/");
 const { UserNotFoundException, StatusIsNotVaild } = require("./exception");
 
 const getQueryForStatusUser = status => {

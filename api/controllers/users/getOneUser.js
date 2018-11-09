@@ -1,5 +1,5 @@
 const User = require("../../models/user-models");
-const { asynWrapper } = require("../utility/asynWarpper");
+const { asynWrapper } = require("../utility/");
 const { UserNotFoundException } = require("./exception");
 
 const handle = async (req, res) => {
