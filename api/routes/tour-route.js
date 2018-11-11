@@ -11,11 +11,7 @@ const tourConfig = require("./validation/tours-validation");
 const bookingConfig = require("./validation/booking-validation");
 const checkValidation = require("./validation/checkValidation");
 
-router.get("/", auth.optional, async (req, res) => {
-  res.status(200).json({
-    message: "tour's home page"
-  });
-});
+router.get("/", auth.optional, tourController.getOneTour);
 router.get("/browse", auth.optional, tourController.getAllTours);
 //router.get("/browse", auth.optional, tourCtrl.getAll);
 router.get(
