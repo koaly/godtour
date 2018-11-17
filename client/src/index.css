@@ -221,3 +221,9 @@ code {
   border-radius: 6px;
   border: 1px solid rgba(0, 0, 0, .2);
 }
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.ovft {
+  overflow-x:auto;
+}

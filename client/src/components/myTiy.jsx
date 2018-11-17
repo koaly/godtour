@@ -87,16 +87,17 @@ export default class MyBook extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">My Booking</h1>
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-5 d-md-flex flex-column">
               <ProfileBar user={user} />
             </div>
 
-            <div className="col-md-8 mt-2 ">
-              <Link className="btn btn-primary" to="/createTour">
+            <div className="container col-md-7 mt-2 flex-column">
+              <Link className="btn btn-primary ml-3" to="/createTour">
                 create TIY
               </Link>
-              <div className="profile-infor mr-5">
+              <div className="profile-infor mx-3 ">
                 <p>{count} Tiys</p>
+                <div className="ovft">
                 <table className="table">
                   <thead>
                     <tr>
@@ -135,6 +136,7 @@ export default class MyBook extends Component {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>
