@@ -23,7 +23,6 @@ export default class SlideBoxItem extends Component {
         <Link to={`/tours/id=${tour._id}`}>
           <img
             className="d-block w-100"
-            max-width="100%"
             style={{ maxHeight: 600 }}
             src={tour.imgsrc}
             alt={tour.name}
