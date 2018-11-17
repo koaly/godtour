@@ -187,7 +187,7 @@ export default class OneTour extends Component {
       <div className="container">
         <div className="profile-container bglight mgtb">
           <div className="row ot-container">
-            <div className="col-12 onetour-leftside d-md-flex flex-column mt-2">
+            <div className="col-12 d-md-flex flex-column mt-2">
               {/* <h1 className="ml-4">img</h1> */}
               <center>
                 <img
@@ -197,7 +197,7 @@ export default class OneTour extends Component {
                 />
               </center>
             </div>
-            <div className="col-12 onetour-rightside ml-1 mt-4">
+            <div className="col-12 ml-1 mt-4">
               
               <h2 className="mgbi mx-5">{tour.name}</h2>
               <h5 className="mgbi mx-5">Hightlight : {tour.highlight} </h5>
