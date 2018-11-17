@@ -13,7 +13,9 @@ class TourIntroduce extends Component {
       <div className="container">
         <div className="profile-container bglight mgtb">
           <center>
-            <h2 className="mt-5 mgbii">Why Tour With To-ur world ?</h2>
+            <h2 className="mt-5 ml-2 mr-2 mgbii">
+              Why Tour With To-ur world ?
+            </h2>
             <div className="Introduce">
               <div className="carda mg-card">
                 <h3>Can Create Your Own Tour</h3>
