@@ -33,6 +33,7 @@ export default class OneTour extends Component {
     this.setState({ isLoaded: false });
     try {
       const result = await getSpecificTour(this.state.id);
+      console.log(result);
       const { tour } = result.data;
       this.setState({ tour: tour[0] });
     } catch (e) {
@@ -174,8 +175,7 @@ export default class OneTour extends Component {
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
-      )
-
+      );
     }
     if (!tour || tour.length === 0) {
       return <h1>notFoundTour</h1>;
