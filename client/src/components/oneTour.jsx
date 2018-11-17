@@ -186,39 +186,41 @@ export default class OneTour extends Component {
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
-          <div className="row">
-            <div className="col-md-6 mt-2 mb-2">
+          <div className="row ot-container">
+            <div className="col-12 onetour-leftside d-md-flex flex-column mt-2">
               {/* <h1 className="ml-4">img</h1> */}
-              <img
-                src={tour.imgsrc}
-                alt="sample image"
-                height="350px"
-                width="500px"
-                className="ml-3 mt-1"
-              />
+              <center>
+                <img
+                  src={tour.imgsrc}
+                  alt="sample image"
+                  className="mt-3 onetourr-leftside"
+                />
+              </center>
             </div>
-            <div className="col-md-6 mt-2 mb-2">
-              <h2 className="mgbi">{tour.name}</h2>
-              <h5 className="mgbi">Hightlight : {tour.highlight} </h5>
-              <h5 className="mgbi">Fly with {tour.airline}</h5>
-              <h5 className="mgbi">
+            <div className="col-12 onetour-rightside ml-1 mt-4">
+              
+              <h2 className="mgbi mx-5">{tour.name}</h2>
+              <h5 className="mgbi mx-5">Hightlight : {tour.highlight} </h5>
+              <h5 className="mgbi mx-5">Fly with {tour.airline}</h5>
+              <h5 className="mgbi mx-5">
                 {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
               </h5>
-              <h5 className="mgbi">Price: {tour.price} $</h5>
-              <h5 className="mgbi">Detail: {tour.detail} </h5>
-              <h5 className="mgbi">
+              <h5 className="mgbi mx-5">Price: {tour.price} $</h5>
+              <h5 className="mgbi mx-5">Detail: {tour.detail} </h5>
+              <h5 className="mgbi mx-5">
                 Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
               </h5>
-              <h5 className="mgbi">Operated by {tour.operatorName}</h5>
+              <h5 className="mgbi mx-5">Operated by {tour.operatorName}</h5>
               {user.info.status === 0 && (
                 <label>
-                  <h5>Amount of Booking</h5>
+                  <h5 className="mx-5">Amount of Booking</h5>
                   <input
                     type="number"
                     min="0"
                     max={freeSeat}
                     value={this.state.numberOfBooking}
                     onChange={this.handleChange}
+                    className="mx-5"
                   />
                   {!this.state.nowBooking && (
                     <button
@@ -234,7 +236,9 @@ export default class OneTour extends Component {
                     </button>
                   )}
                 </label>
+                
               )}
+              
               {user.info.status !== 0 && (
                 <React.Fragment>
                   {/* <input
