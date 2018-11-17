@@ -101,7 +101,7 @@ export default class OneUser extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">{user.displayName}</h1>
           <div className="row">
-            <div className="col-md-6 d-md-flex flex-column user-leftside mt-2 mb-3 ">
+            <div className="col-md-6 d-md-flex flex-column mt-2 mb-3 ">
               <img
                 src={user.imgsrc}
                 alt="sample image"
@@ -109,7 +109,7 @@ export default class OneUser extends Component {
               />
             </div>
             <div className="col-md-6 d-md-flex flex-column mt-2 mb-3">
-              <div className="user-rightside profile-infor mr-5 mt-1 mx-5">
+              <div className="profile-infor mr-5 mt-1 mx-5">
                 <div className="profile-infor ">
                   <h4>
                     {user.displayName}({Rank})
