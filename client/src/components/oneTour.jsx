@@ -5,6 +5,15 @@ import { getSpecificTour, booking } from "../services/specificTourService";
 import "../css/showtour.css";
 import { deleteTour } from "../services/tourService";
 import Spinner from "./common/spinner";
+import {
+  ClockIcon,
+  AirlineSeatReclineNormalIcon,
+  AirplaneIcon,
+  StarIcon,
+  CoinIcon,
+  FileDocumentIcon,
+  HumanMaleIcon
+} from "mdi-react";
 
 export default class OneTour extends Component {
   constructor(props) {
@@ -193,24 +202,26 @@ export default class OneTour extends Component {
                 <img
                   src={tour.imgsrc}
                   alt="sample image"
-                  className="mt-3 onetourr-leftside"
+                  className="mt-3 onetourr-leftside rounded img-thumbnail"
                 />
               </center>
             </div>
             <div className="col-12 ml-1 mt-4">
               
               <h2 className="mgbi mx-5">{tour.name}</h2>
-              <h5 className="mgbi mx-5">Hightlight : {tour.highlight} </h5>
-              <h5 className="mgbi mx-5">Fly with {tour.airline}</h5>
+              <h5 className="mgbi mx-5"><StarIcon className="mr-3 mb-1"/>Hightlight : {tour.highlight} </h5>
               <h5 className="mgbi mx-5">
+                <ClockIcon className="mr-3 mb-1" />
                 {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
               </h5>
-              <h5 className="mgbi mx-5">Price: {tour.price} $</h5>
-              <h5 className="mgbi mx-5">Detail: {tour.detail} </h5>
+              <h5 className="mgbi mx-5"><AirplaneIcon className="mr-3 mb-1" />Fly with {tour.airline}</h5>
               <h5 className="mgbi mx-5">
+                <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
                 Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
               </h5>
-              <h5 className="mgbi mx-5">Operated by {tour.operatorName}</h5>
+              <h5 className="mgbi mx-5"><CoinIcon className="mr-3 mb-1"/>Price: {tour.price} $</h5>
+              <h5 className="mgbi mx-5"><FileDocumentIcon className="mr-3 mb-1"/>Detail: {tour.detail} </h5>
+              <h5 className="mgbi mx-5"><HumanMaleIcon className="mr-3 mb-1"/>Operated by {tour.operatorName}</h5>
               {user.info.status === 0 && (
                 <label>
                   <h5 className="mx-5">Amount of Booking</h5>
