@@ -10,10 +10,9 @@ import {
   AirplaneIcon
 } from "mdi-react";
 import { getAllTours } from "../services/tourService";
-import InformationConvert from "./fetch/InformationFunction.jsx"
-import TourConvert from "./fetch/TourFunction.jsx" // import function for convert object
+import InformationConvert from "./fetch/InformationFunction.jsx";
+import TourConvert from "./fetch/TourFunction.jsx"; // import function for convert object
 var HandleObject = new TourConvert();
-
 
 class ShowTour extends Component {
   constructor(props) {
@@ -51,22 +50,23 @@ class ShowTour extends Component {
 
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
-//    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
-	this.getAllData();
+    //    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
+    this.getAllData();
   }
 
-  async getAllData(){
-	try{
-		const result = await getAllTours();
-		console.log( "getAllData" ,result);
-		const value = result.data;
-		console.log( "getAllData" ,value);
-		this.dataAllTours = HandleObject.manage_group_tour_order( value , 0 , value.count )
-		this.handleShowMore();
-	}
-    catch{
-
-	}
+  async getAllData() {
+    try {
+      const result = await getAllTours();
+      console.log("getAllData", result);
+      const value = result.data;
+      console.log("getAllData", value);
+      this.dataAllTours = HandleObject.manage_group_tour_order(
+        value,
+        0,
+        value.count
+      );
+      this.handleShowMore();
+    } catch {}
   }
 
   handleShowMore() {
@@ -153,7 +153,8 @@ class ShowTour extends Component {
           src={tour.imgsrc}
           alt="sample image"
           className="mb-3"
-          height="350px"
+          width="100%"
+          height="auto"
         />
         <div className="showtour-content">
           <h3 className="mb-3">{tour.name}</h3>
@@ -182,7 +183,8 @@ class ShowTour extends Component {
           src={tour.imgsrc}
           alt="sample image"
           className="mb-3"
-          height="350px"
+          width="100%"
+          height="auto"
         />
         <div className="showtour-content">
           <h3 className="mb-3">{tour.name}</h3>

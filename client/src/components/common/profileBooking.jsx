@@ -81,8 +81,9 @@ export default class ProfileBooking extends Component {
 
         console.log(booking)
         return (
-            <div className="profile-infor mr-5">
+            <div className="profile-infor mx-3">
                 <p>{count} bookings</p>
+                <div className="ovft">
                 <table className="table">
                     <thead>
                         <tr>
@@ -109,6 +110,7 @@ export default class ProfileBooking extends Component {
                         ))}
                     </tbody>
                 </table>
+                </div>
                 <Pagination
                     itemsCount={count}
                     pageSize={pageSize}

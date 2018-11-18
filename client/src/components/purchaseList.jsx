@@ -15,7 +15,7 @@ class PurchaseList extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">Purchase List</h1>
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-5">
               <ProfileBar user={user} />
             </div>
           </div>
