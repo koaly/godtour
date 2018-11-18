@@ -33,6 +33,32 @@
   background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/%E0%B9%80%E0%B8%AA%E0%B8%B2%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B8%8A%E0%B9%89%E0%B8%B2_%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%AF.JPG/1200px-%E0%B9%80%E0%B8%AA%E0%B8%B2%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B8%8A%E0%B9%89%E0%B8%B2_%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E%E0%B8%AF.JPG) no-repeat center/cover;
 }
 
+.user-leftside {
+  display: block;
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.user-rightside {
+  display: block;
+  -webkit-box-flex: 0;
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin:auto;
+}
+
+.onetourr-leftside {
+  width: 90%;
+  background: no-repeat center/cover;
+}
+
+.ot-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .register-rightside {
   width:50%;
   margin:auto;

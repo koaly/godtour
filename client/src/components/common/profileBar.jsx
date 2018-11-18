@@ -25,7 +25,7 @@ export default class ProfileBar extends Component {
       return <h1>Login</h1>
     }
     return (
-      <div className="container text-center profile-infor mt-2 ml-3 mb-3 mr-5">
+      <div className="text-center profile-infor mt-2 mb-3 mx-3">
         <LinkProfileBar user={user} />
       </div>
     );

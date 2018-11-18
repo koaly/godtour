@@ -41,12 +41,12 @@ export default class Profile extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">Profile</h1>
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-5">
               <ProfileBar user={user} />
             </div>
-            <div className="col-md-8 mt-2">
-              <div className="profile-infor mr-5 ml-4">
-                <div className="profile-infor ">
+            <div className="col-md-7 mt-2">
+              <div className="profile-infor mx-3">
+                <div className="profile-infor">
                   <h4>{displayName} ({Rank})</h4>
                   <h5>@{username}</h5>
                   <h5>Gender: {gender}</h5>

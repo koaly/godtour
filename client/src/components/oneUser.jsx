@@ -101,17 +101,18 @@ export default class OneUser extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">{user.displayName}</h1>
           <div className="row">
-            <div className="col-md-6 mt-2 mb-3 ">
+            <div className="col-md-5 d-md-flex flex-column mb-3 mt-2 text-center">
+              <div className="nav flex-column">
               <img
+                className="profileimg img-thumbnail rounded mx-3"
                 src={user.imgsrc}
+                
                 alt="sample image"
-                height="350px"
-                width="500px"
-                className="ml-3 mt-1"
               />
+              </div>
             </div>
-            <div className="col-md-6 mt-2 mb-3">
-              <div className="profile-infor mr-5 mt-1 ">
+            <div className="col-md-7 d-md-flex flex-column mt-2 mb-3">
+              <div className="profile-infor mt-1 mx-3">
                 <div className="profile-infor ">
                   <h4>
                     {user.displayName}({Rank})
