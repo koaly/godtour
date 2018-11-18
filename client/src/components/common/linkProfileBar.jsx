@@ -14,7 +14,7 @@ export default class LinkProfileBar extends Component {
 
     if (status === 0) {
       return (
-        <ul className="nav flex-column nav-pills pdb pdl">
+        <ul className="nav flex-column nav-pills">
           <img
             className="profileimg mgt img-thumbnail rounded"
             src={user.info.imgsrc}
@@ -22,34 +22,44 @@ export default class LinkProfileBar extends Component {
           />
           <li className="nav-item">
             <NavLink className="nav-link" exact to="/profile">
+              <center>
               <span className="black">Profile</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myCard">
+            <center>
               <span className="black">My Cards</span>
+            </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/purchaseList">
+            <center>
               <span className="black">Purchase List</span>
+            </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myBooking">
+            <center>
               <span className="black">My Booking</span>
+            </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myTiy">
-              <span className="black">My TIYs</span>
+              <center>
+                <span className="black">My TIYs</span>
+              </center>
             </NavLink>
           </li>
         </ul>
       );
     } else if (status === 1) {
       return (
-        <ul className="nav flex-column nav-pills pdb pdl">
+        <ul className="nav flex-column nav-pills">
           <img
             className="profileimg mgt img-thumbnail rounded"
             src={user.info.imgsrc}
@@ -57,29 +67,37 @@ export default class LinkProfileBar extends Component {
           />
           <li className="nav-item">
             <NavLink className="nav-link" exact to="/profile">
-              <span className="black">Profile</span>
+              <center>
+                <span className="black">Profile</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myCard">
-              <span className="black">My Cards</span>
+              <center>
+                <span className="black">My Cards</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myTour">
-              <span className="black">My Tour</span>
+              <center>
+                <span className="black">My Tour</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myOffer">
-              <span className="black">My Offers</span>
+              <center>
+                <span className="black">My Offers</span>
+              </center>
             </NavLink>
           </li>
         </ul>
       );
     } else {
       return (
-        <ul className="nav flex-column nav-pills pdb pdl">
+        <ul className="nav flex-column nav-pills">
           <img
             className="profileimg mgt img-thumbnail rounded"
             src={user.info.imgsrc}
@@ -87,32 +105,44 @@ export default class LinkProfileBar extends Component {
           />
           <li className="nav-item">
             <NavLink className="nav-link" exact to="/profile">
+            <center>
               <span className="black">Profile</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myCard">
+            <center>
               <span className="black">My Cards</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/purchaseList">
+            <center>
               <span className="black">Purchase List</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myBooking">
+            <center>
               <span className="black">My Booking</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myOffer">
+            <center>
               <span className="black">My Offers</span>
+              </center>
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/profile/myTour">
+            <center>
               <span className="black">My Tour</span>
+              </center>
             </NavLink>
           </li>
         </ul>
