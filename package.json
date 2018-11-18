@@ -10,7 +10,8 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server \" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "test": "nodemon --watch . --exec 'mocha || true'"
+    "test": "mocha ./test/test.js",
+    "test-watch": "nodemon --exec 'npm test'"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "mocha": "^5.2.0",
+    "should": "^13.2.3",
     "supertest": "^3.3.0"
   }
 }

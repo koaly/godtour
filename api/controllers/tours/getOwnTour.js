@@ -2,6 +2,7 @@ const Tour = require("../../models/tour-models");
 const { asynWrapper, getPaginate } = require("../utility/");
 const { TourNotFoundException } = require("./exception");
 const getMapTour = require("./getMapTour");
+
 const handle = async (req, res) => {
   const {
     payload: {
