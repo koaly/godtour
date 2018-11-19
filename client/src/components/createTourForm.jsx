@@ -103,97 +103,92 @@ class createTourForm extends FormInput {
 				<ul>
 					<li>
 						<label>Your Tour Name : </label>
-						{ this.createForm(	"textarea"			, "tourName" 
-											, "name"			, true	
-											, this.handleChange
+						{ this.formHandle['textarea'](	"tourName"			, "name"
+														, this.handleChange	, true
 						)}
 					</li>
 					<li>
 						<label>Your Destination : </label>
-						{ this.createForm(	"textarea"			, "yourDestination"
-											, "dest"			, true
-											, this.handleChange
-						)}
+						{ this.formHandle['textarea'](	"yourDestination"	, "dest"
+														, this.handleChange , true
+						) }
 					</li>
 					<li>
 						<label>Many you group  :&emsp;</label>
 						<label>MIN</label>
-						<input	type="number" name="minMember" min="0"  
-								value={this.state.dataTour.minMember}
-								onChange={this.handleChange}
-						/>
+						{ this.formHandle['number']( "minMember"		, "minMember" 
+													, this.handleChange , false
+													, this.state.dataTour.minMember
+													, "0"
+						)}
 						<label>MAX</label>
-						<input	type="number" name="maxMember" 
-								min={this.state.dataTour.minMember.toString()} 
-								value={this.state.dataTour.maxMember}
-								onChange={this.handleChange}
-						/>
+						{ this.formHandle['number']( "maxMember"		, "maxMember"
+													, this.handleChange , false
+													, this.state.dataTour.maxMember
+													, this.state.dataTour.minMember.toString()
+						)}
 					</li>
 					<li>
 						<label>Duration Tour :&emsp;</label>
 						<label>MIN&emsp;</label>
-						<input	type="number" name="minDuration" min="0"  
-								value={this.state.dataTour.minDuration}
-								onChange={this.handleChange}
-						/>
+						{ this.formHandle["number"]( "minDuration"		, "minDuration"
+													, this.handleChange , false
+													, this.state.dataTour.minDuration.toString()
+													, "0"
+						)}
 						<label>MAX&emsp;</label>
-						<input	type="number" name="maxDuration" 
-								min={this.state.dataTour.minDuration} 
-								value={this.state.dataTour.maxDuration.toString()}
-								onChange={this.handleChange}
-						/>
+						{ this.formHandle["number"]( "maxDuration"		, "maxDuration"
+													, this.handleChange , false
+													, this.state.dataTour.maxDuration.toString()
+													, this.state.dataTour.minDuration.toString()
+						)}
 					</li>
 					<li>
 						<label>Period Tour :&emsp;</label>
 						<label>Start&emsp;</label>
-						<input	type="date" name="startFreeDate"
-								onChange={this.handleChange}
-						/>
+						{ this.formHandle["date"]( "startFreeDate"		, "startFreeDate"
+													, this.handleChange , false
+						)}
 						<label>End&emsp;</label>
-						<input	type="date" name="endFreeDate"
-								onChange={this.handleChange}
-						/>
+						{ this.formHandle["date"]( "endFreeDate"		, "endFreeDate"
+													, this.handleChange , false
+						)}
 					</li>
 					<li>
 						<label>Price:&emsp;</label>
 						<label>&ensp;MIN</label>
-						<input	type="number" name="minPrice"
-								onChange={this.handleChange}
-								value={this.state.dataTour.minPrice}
-								min="0"
-						/>
+						{ this.formHandle["number"]( "minPrice"			, "minPrice"
+													, this.handleChange , false
+													, this.state.dataTour.minPrice.toString()
+													, "0"
+						)}
 						<label>&ensp;MAX</label>
-						<input	type="number" name="maxPrice"
-								onChange={this.handleChange}
-								value={this.state.dataTour.maxPrice}
-								min={this.state.dataTour.minPrice.toString()}
-						/>
+						{ this.formHandle["number"]( "maxPrice"			, "maxPrice"
+													, this.handleChange , false
+													, this.state.dataTour.maxPrice.toString()
+													, this.state.dataTour.minPrice.toString()
+						)}
 					</li>
 					<li>
 						<label>Food:&emsp;</label>
-						<input type="number" name="food"
-								onChange={this.handleChange}
-								value={this.state.dataTour.food}
-								min="0"
-						/>
+						{ this.formHandle["number"]( "food"				, "food"	
+													, this.handleChange , false
+													, this.state.dataTour.food
+													, "0"
+						)}
 					</li>
 					<li>
-						{ this.state.dataTour.requireGuide ? (<div>
-							<label>Require Guide : </label>
-							<input	type="radio" name="requireGuide" value="true" 
-									checked="checked"
-									onChange={this.handleChange}/> YES
-							<input	type="radio" name="requireGuide" value="false" 
-									onChange={this.handleChange}/> NO
-						</div>) : (<div>
-							<label>Require Guide : </label>
-							<input	type="radio" name="requireGuide" value="true" 
-									onChange={this.handleChange}/> YES
-							<input	type="radio" name="requireGuide" value="false" 
-									checked="checked"
-									onChange={this.handleChange}/> NO
-						</div>)
-						}
+						<label>Want Guide&ensp;</label>
+						{ this.formHandle["radio"]( "radio"				, "requireGuide"
+													, this.handleChange	
+													, this.state.dataTour.requireGuide 
+													, "true" 
+						)} YES 
+						{ this.formHandle["radio"]( "radio"				, "requireGuide"
+													, this.handleChange	
+													, ! this.state.dataTour.requireGuide 
+													, "false" 
+						)} NO 
 					</li>
 					<li>
 						<p>Message to Tourism</p>
