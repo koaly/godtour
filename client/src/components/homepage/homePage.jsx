@@ -6,6 +6,7 @@ import Spinner from "../common/spinner";
 import { showRandomTour } from "../../services/homeService";
 import { toast } from "react-toastify";
 import SlideBox from "./slideBox";
+import TourIn from "./tourIntro";
 
 class HomePage extends Component {
   constructor(props) {
@@ -39,6 +40,10 @@ class HomePage extends Component {
         <div className="HomePage">
           <SlideBox />
         </div>
+        <center>
+          <h1 className="mb-5">Why Tour with To-ur World?</h1>
+        </center>
+        <TourIn/>
       </div>
     );
   }
