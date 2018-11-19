@@ -5,6 +5,7 @@ const apiEndpoint = "/api/tours/browse";
 const tourAddEndpoint = "/api/tours/create";
 
 const tourDeleteEndpoint = "/api/tours";
+const tourEditEndpoint = "/api/tours";
 
 const ownTourEndpoint = "/api/users/current/tours";
 
@@ -66,6 +67,55 @@ export function addTour(tour) {
       returnDate,
       airline,
       seat,
+      food,
+      detail,
+      highlight,
+      imgsrc
+    },
+    config
+  );
+}
+
+export function editTour(tour) {
+  console.log(tour);
+  console.log(config);
+  const {
+    name,
+    price,
+    dest,
+    dayDuration,
+    nightDuration,
+    startBookDate,
+    startBookTime,
+    endBookDate,
+    endBookTime,
+    departDate,
+    returnDate,
+    airline,
+    maxSeat,
+    currentSeat,
+    food,
+    detail,
+    highlight,
+    imgsrc
+  } = tour;
+  return http.put(
+    tourEditEndpoint + "/" + tour.id + "/edit",
+    {
+      name,
+      price,
+      dest,
+      dayDuration,
+      nightDuration,
+      startBookDate,
+      startBookTime,
+      endBookDate,
+      endBookTime,
+      departDate,
+      returnDate,
+      airline,
+      maxSeat,
+      currentSeat,
       food,
       detail,
       highlight,

@@ -1,6 +1,8 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import { editTour } from "../services/tourService";
+import { toast } from "react-toastify";
 
 class EditTourForm extends Form {
   constructor(props) {
@@ -113,9 +115,32 @@ class EditTourForm extends Form {
       .label("Imgsrc")
   };
 
-  doSubmit = () => {
-    console.log("Submitted");
-    this.props.history.push("/");
+  doSubmit = async () => {
+    try {
+      const response = await editTour(this.state.data);
+      console.log(response);
+      window.location = "/tours";
+      toast.success("Edited Success");
+    } catch (ex) {
+      console.log(ex.response.data);
+      if (
+        ex.response &&
+        ex.response.status >= 400 &&
+        ex.response.status < 500
+      ) {
+        const errorRes = ex.response.data.errors;
+        console.log(JSON.stringify(errorRes));
+        if (errorRes) {
+          errorRes.forEach(error => {
+            toast.error(` ${error.param}: ${error.msg}`);
+          });
+        } else {
+          toast.error(`${ex.response.data.message}`);
+        }
+      }
+    }
+    // console.log("Submitted");
+    // this.props.history.push("/");
   };
 
   render() {

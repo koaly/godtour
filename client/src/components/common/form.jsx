@@ -79,7 +79,7 @@ class Form extends Component {
       <Input
         type={type}
         name={name}
-        value={defaultVal || data[name]}
+        value={data[name] || defaultVal}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}
@@ -93,7 +93,7 @@ class Form extends Component {
       <Textarea
         type={type}
         name={name}
-        value={defaultVal || data[name]}
+        value={data[name] || defaultVal}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}
