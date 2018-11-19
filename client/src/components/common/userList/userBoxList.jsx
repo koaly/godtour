@@ -7,6 +7,8 @@ import { paginate } from "../../../utility/paginate";
 import Pagination from "../pagination";
 import "./userBoxList.css";
 import getStatus from "../status";
+import "./../../../css/showtour.css";
+
 export default class UserBoxList extends Component {
   constructor(props) {
     super(props);
@@ -68,10 +70,15 @@ export default class UserBoxList extends Component {
                   <div className="row">
                     <div className="col-sm-12 col-lg-3 mb-2">
                       <img
-                        className="profileimg mgt img-thumbnail rounded"
+                        className="sizeIMG roundIMG"
                         src={user.imgsrc}
                         alt="profile"
                       />
+{/*                      <img
+                        className="profileimg mgt img-thumbnail rounded"
+                        src={user.imgsrc}
+                        alt="profile"
+                      />*/}
                     </div>
                     <div className="col-sm-12 col-lg-9 my-3">
                       <h5>
