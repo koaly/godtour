@@ -2,7 +2,7 @@ const Tour = require("../../models/tour-models");
 const { asynWrapper, getPaginate } = require("../utility/");
 const { TourNotFoundException } = require("./exception");
 const getMapTour = require("./getMapTour");
-
+/*
 const selectPrice = (lt, gt) => {
   let query = "";
 
@@ -11,16 +11,15 @@ const selectPrice = (lt, gt) => {
 
   return "price: " + query;
 };
-
+*/
 const handle = async (req, res) => {
   const {
     query: { page, limit, gt, lt }
   } = req;
 
-  const price = selectPrice(lt, gt);
-  const tourQuery = JSON.stringify(price);
-  console.log(price);
-  let tours = await Tour.find(tourQuery);
+  //const price = selectPrice(lt, gt);
+  //const tourQuery = JSON.stringify(price);
+  let tours = await Tour.find({});
 
   if (!tours || tours.length == 0) throw new TourNotFoundException();
 
