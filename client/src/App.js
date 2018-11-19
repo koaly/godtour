@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/navBar";
 import Footer from "./components/footer";
 import ShowTour from "./components/showTour";
-import TourIntroduce from "./components/tourIntroduce";
+import TourIntroduce from "./components/common/tour/tourIntroduce";
 import ShowUser from "./components/showUser";
 import ShowRequest from "./components/showRequest";
 import HomePage from "./components/homepage/homePage";
@@ -149,7 +149,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </div>
-        <Footer/>
+        <Footer />
       </React.Fragment>
     );
   }
