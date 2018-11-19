@@ -120,7 +120,12 @@ class App extends Component {
               )}
             />
             <Route path="/addTour" component={AddTourForm} />
-            <Route path="/editTour" component={EditTourForm} />
+            <Route
+              path="/editTour/:id"
+              render={props => (
+                <EditTourForm {...props} token={jwt} user={user} />
+              )}
+            />
             <Route path="/cancelBook" component={CancelBook} />
             <Route
               path="/profile/myBooking"

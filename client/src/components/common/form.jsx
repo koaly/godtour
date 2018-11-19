@@ -5,7 +5,7 @@ import Select from "./select";
 import Textarea from "./textarea";
 
 class Form extends Component {
-/*  state = {
+  /*  state = {
     data: {},
     errors: {}
   };*/
@@ -72,14 +72,14 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text", placeholder) {
+  renderInput(name, label, type = "text", placeholder, defaultVal) {
     const { data, errors } = this.state;
 
     return (
       <Input
         type={type}
         name={name}
-        value={data[name]}
+        value={defaultVal || data[name]}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}
@@ -87,13 +87,13 @@ class Form extends Component {
       />
     );
   }
-  renderTextarea(name, label, type = "text", placeholder) {
+  renderTextarea(name, label, type = "text", placeholder, defaultVal) {
     const { data, errors } = this.state;
     return (
       <Textarea
         type={type}
         name={name}
-        value={data[name]}
+        value={defaultVal || data[name]}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}

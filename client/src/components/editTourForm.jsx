@@ -2,27 +2,54 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 
-class AddTourForm extends Form {
-  state = {
-    data: {
-      name: "",
-      price: "",
-      destination: "",
-      dayDuration: "",
-      nightDuration: "",
-      startBookDate: "",
-      startBookTime: "",
-      departDate: "",
-      returnDate: "",
-      airline: "",
-      maxSeat: "",
-      currentSeat: "",
-      food: "",
-      detail: "",
-      highlight: ""
-    },
-    errors: {}
-  };
+class EditTourForm extends Form {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.match.params.id,
+      token: this.props.token,
+      user: this.props.user,
+      data: {
+        name: "",
+        price: "",
+        destination: "",
+        dayDuration: "",
+        nightDuration: "",
+        startBookDate: "",
+        startBookTime: "",
+        departDate: "",
+        returnDate: "",
+        airline: "",
+        maxSeat: "",
+        currentSeat: "",
+        food: "",
+        detail: "",
+        highlight: "",
+        imgsrc: ""
+      },
+      errors: {}
+    };
+  }
+  // state = {
+  //   data: {
+  //     name: "",
+  //     price: "",
+  //     destination: "",
+  //     dayDuration: "",
+  //     nightDuration: "",
+  //     startBookDate: "",
+  //     startBookTime: "",
+  //     departDate: "",
+  //     returnDate: "",
+  //     airline: "",
+  //     maxSeat: "",
+  //     currentSeat: "",
+  //     food: "",
+  //     detail: "",
+  //     highlight: ""
+  //   },
+  //   errors: {}
+  // };
 
   schema = {
     name: Joi.string()
@@ -80,7 +107,10 @@ class AddTourForm extends Form {
       .label("Detail"),
     highlight: Joi.string()
       .required()
-      .label("Highlight")
+      .label("Highlight"),
+    imgsrc: Joi.string()
+      .required()
+      .label("Imgsrc")
   };
 
   doSubmit = () => {
@@ -89,29 +119,35 @@ class AddTourForm extends Form {
   };
 
   render() {
+    const { tour } = this.props.location.state;
+    console.log(tour);
+    console.log(this.state);
     return (
       <div className="container addtour form-container mgtb">
         <h2>Edit Tour</h2>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name", "text", "firstname")}
-          {this.renderInput("price", "Price", "number", "price")}
+          {this.renderInput("name", "Name", "text", "firstname", tour.name)}
+          {this.renderInput("price", "Price", "number", "price", tour.price)}
           {this.renderInput(
             "destination",
             "Destination",
             "text",
-            "destination"
+            "destination",
+            tour.dest
           )}
           {this.renderInput(
             "dayDuration",
             "Day Duration",
             "text",
-            "day duration"
+            "day duration",
+            tour.dayDuration
           )}
           {this.renderInput(
             "nightDuration",
             "Night Duration",
             "text",
-            "night duration"
+            "night duration",
+            tour.nightDuration
           )}
           {this.renderInput(
             "startBookDate",
@@ -126,52 +162,61 @@ class AddTourForm extends Form {
             "booking time"
           )}
           {this.renderInput(
-            "departDate", 
-            "Departure Date", 
-            "date", 
-            "departure date"
+            "departDate",
+            "Departure Date",
+            "date",
+            "departure date",
+            tour.departDate
           )}
           {this.renderInput(
-            "returnDate", 
-            "Return Date", 
-            "date", 
-            "departure time"
+            "returnDate",
+            "Return Date",
+            "date",
+            "departure time",
+            tour.returnDate
           )}
           {this.renderInput(
-            "airline", 
-            "Airline", 
-            "text", 
-            "airline"
+            "airline",
+            "Airline",
+            "text",
+            "airline",
+            tour.airline
           )}
           {this.renderInput(
-            "maxSeat", 
-            "Max Seat", 
-            "number", 
-            "max seat"
+            "maxSeat",
+            "Max Seat",
+            "number",
+            "max seat",
+            tour.maxSeat
           )}
           {this.renderInput(
             "currentSeat",
             "Current Seat",
             "number",
-            "current seat"
+            "current seat",
+            tour.currentSeat
           )}
-         {this.renderInput(
-            "food", 
-            "Food", 
-            "text", 
-            "food"
-          )}
-          {this.renderTextarea(
-            "detail", 
-            "Detail", 
-            "text", 
-            "detail"
+          {this.renderInput("food", "Food", "text", "food", tour.food)}
+          {this.renderInput(
+            "imgsrc",
+            "Imgsrc",
+            "string",
+            "imgsrc",
+            tour.imgsrc
           )}
           {this.renderTextarea(
-            "highlight", 
-            "Highlight", 
-            "text", 
-            "highlight"
+            "detail",
+            "Detail",
+            "text",
+            "detail",
+            tour.detail
+          )}
+          {this.renderTextarea(
+            "highlight",
+            "Highlight",
+            "text",
+            "highlight",
+            tour.highlight
           )}
           <div className="mgt" />
           {this.renderButton("Confirm Edit")}
@@ -181,4 +226,4 @@ class AddTourForm extends Form {
   }
 }
 
-export default AddTourForm;
+export default EditTourForm;
