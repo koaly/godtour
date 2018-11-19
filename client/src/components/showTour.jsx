@@ -107,32 +107,6 @@ class ShowTour extends Component {
     this.handleShowMore();
   }
 
-  /*
-  FetchReceiveTourCallback(ReceiveInformation, ReceiveData) {
-    console.log(
-      "===============> ShowTour.FetchReceiveTourCallback",
-      ReceiveData
-    );
-    var temporary = this.state.ListTour;
-    for (let count = 0; count < ReceiveData.length; count++) {
-      temporary.push(ReceiveData[count]);
-    }
-    if (ReceiveData.length === 5) {
-      this.setState(state => ({
-        Loading: false,
-        CurrentOrder: this.state.CurrentOrder + 5,
-        ListTour: temporary
-      }));
-    } else {
-      this.setState(state => ({
-        Loading: false,
-        Max: true,
-        CurrentOrder: this.state.CurrentOrder + ReceiveData.length,
-        ListTour: temporary
-      }));
-    }
-  }
-*/
   render() {
     console.log(
       "===============> Show_tour.render()",
