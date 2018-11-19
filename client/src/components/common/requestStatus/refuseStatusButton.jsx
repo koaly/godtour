@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import { refuseStatus } from "../../services/requestStatusService";
+import { refuseStatus } from "../../../services/requestStatusService";
 
 export default class RefuseStatusButton extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ export default class RefuseStatusButton extends Component {
       updateStatus: this.props.acceptStatus,
       isAccepting: false
     };
-    console.log(this.state.updateStatus)
+    console.log(this.state.updateStatus);
   }
   refuseStatusById = async id => {
     try {

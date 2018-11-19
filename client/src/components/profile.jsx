@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ProfileBar from "./common/profileBar";
+import ProfileBar from "./common/profile/profileBar";
 import { MailIcon } from "mdi-react";
-import getStatus from "./common/status"
+import getStatus from "./common/status";
 import Link from "react-router-dom/Link";
 //import { Route, Switch, Redirect } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export default class Profile extends Component {
   }
 
   async componentDidMount() {
-    this.setState({ isLoaded: true })
+    this.setState({ isLoaded: true });
   }
 
   render() {
@@ -26,16 +26,16 @@ export default class Profile extends Component {
       email,
       gender,
       registerDate,
-      status,
-    } = user.info
+      status
+    } = user.info;
 
-    const Rank = getStatus(status)
-    const timeDate = registerDate.replace('T', ' ').replace('Z', ' ')
+    const Rank = getStatus(status);
+    const timeDate = registerDate.replace("T", " ").replace("Z", " ");
 
     if (!isLoaded) {
-      return <h1>isLoading</h1>
+      return <h1>isLoading</h1>;
     }
-    console.log(user)
+    console.log(user);
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
@@ -47,15 +47,20 @@ export default class Profile extends Component {
             <div className="col-md-7 mt-2">
               <div className="profile-infor mx-3">
                 <div className="profile-infor">
-                  <h4>{displayName} ({Rank})</h4>
+                  <h4>
+                    {displayName} ({Rank})
+                  </h4>
                   <h5>@{username}</h5>
                   <h5>Gender: {gender}</h5>
                 </div>
                 <div className="profile-infor ">
-                  <h4><MailIcon className="blue mr-2" />{email}</h4>
+                  <h4>
+                    <MailIcon className="blue mr-2" />
+                    {email}
+                  </h4>
                   <h5>เป็นสมาชิกตั้งแต่ {timeDate}</h5>
                 </div>
-                <Link to={`/request`} >
+                <Link to={`/request`}>
                   <button className="btn btn-primary">Request</button>
                 </Link>
               </div>
@@ -66,4 +71,3 @@ export default class Profile extends Component {
     );
   }
 }
-

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { getUserRequest } from "../../services/adminService";
+import { getUserRequest } from "../../../services/adminService";
 import { toast } from "react-toastify";
-import Spinner from "./spinner";
+import Spinner from "../spinner";
 import Link from "react-router-dom/Link";
-import { paginate } from "../../utility/paginate";
-import Pagination from "./pagination";
-import "./userBoxList.css";
-import getStatus from "./status";
+import { paginate } from "../../../utility/paginate";
+import Pagination from "../pagination";
+import "../userList/userBoxList.css";
+import getStatus from "../status";
 import AcceptStatusButton from "./acceptStatusButton";
 import RefuseStatusButton from "./refuseStatusButton";
 export default class RequestBoxList extends Component {
@@ -29,7 +29,7 @@ export default class RequestBoxList extends Component {
       this.setState({ users: users });
     } catch (e) {
       const { message } = e.response.data.error;
-      console.log(message)
+      console.log(message);
       //toast.error(`${message}`);
     }
   }
@@ -58,7 +58,7 @@ export default class RequestBoxList extends Component {
     }
 
     return (
-      <div className="profile-continer bgdark">
+      <div className="profile-container bgdark">
         <div className="user-content mx-3 my-1">
           <h1 className="user-head">{count} Users in database</h1>
         </div>
@@ -87,13 +87,19 @@ export default class RequestBoxList extends Component {
                         <Link to={`/users/${user.username}`}>See more</Link>
                       </h5>
                     </div>
-                    <div className="col-sm-4 col-lg-4 my-3" >
+                    <div className="col-sm-4 col-lg-4 my-3">
                       <div className="row">
                         <div className="col-6">
-                          <AcceptStatusButton id={user._id} acceptStatus={this.getRequest.bind(this)} />
+                          <AcceptStatusButton
+                            id={user._id}
+                            acceptStatus={this.getRequest.bind(this)}
+                          />
                         </div>
                         <div className="col-6">
-                          <RefuseStatusButton id={user._id} acceptStatus={this.getRequest.bind(this)} />
+                          <RefuseStatusButton
+                            id={user._id}
+                            acceptStatus={this.getRequest.bind(this)}
+                          />
                         </div>
                       </div>
                     </div>
@@ -111,7 +117,7 @@ export default class RequestBoxList extends Component {
             currentPage={currentPage}
           />
         </div>
-      </div >
+      </div>
     );
   }
 }

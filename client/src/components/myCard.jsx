@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import ProfileBar from "./common/profileBar";
+import ProfileBar from "./common/profile/profileBar";
 
 export default class MyCard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       user: this.props.user
-    }
-    console.log(this.state.user)
+    };
+    console.log(this.state.user);
   }
   render() {
     const { user } = this.state;
@@ -25,4 +25,3 @@ export default class MyCard extends Component {
     );
   }
 }
-
