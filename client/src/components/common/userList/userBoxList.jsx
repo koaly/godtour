@@ -56,7 +56,7 @@ export default class UserBoxList extends Component {
     }
 
     return (
-      <div className="profile-continer bgdark">
+      <div className="profile-container">
         <div className="user-content mx-3 my-1">
           <h1 className="user-head">{count} Users in database</h1>
         </div>
@@ -66,7 +66,7 @@ export default class UserBoxList extends Component {
               <div className="user-content mx-3 my-3">
                 <div className="profile-infor mx-1 my-1">
                   <div className="row">
-                    <div className="col-sm-12 col-lg-3  mb-2">
+                    <div className="col-sm-12 col-lg-3 mb-2">
                       <img
                         className="profileimg mgt img-thumbnail rounded"
                         src={user.imgsrc}

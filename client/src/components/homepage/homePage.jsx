@@ -39,25 +39,6 @@ class HomePage extends Component {
         <div className="HomePage">
           <SlideBox />
         </div>
-        <div className="newsletterr">
-          <div className="a b">
-            <div className="c">
-              <p className="ab">
-                "Subscribe now FREE! to get our update information for the best
-                deals and discount on your wonderful trip"
-              </p>
-            </div>
-            <div className="ac">
-              <div className="ad">{/* insert email from plz */}</div>
-            </div>
-            <div className="ae">
-              <button className="ba">
-                <NotificationsIcon className="ayy" />
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

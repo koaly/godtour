@@ -11,7 +11,7 @@ export default class ShowUser extends Component {
   render() {
     return (
       <div className="container mgtb">
-        <div className="profile-container bgdark">
+        <div className="profile-container">
           <UserBoxList />
         </div>
       </div>

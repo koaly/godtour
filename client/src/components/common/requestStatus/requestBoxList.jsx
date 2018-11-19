@@ -58,7 +58,7 @@ export default class RequestBoxList extends Component {
     }
 
     return (
-      <div className="profile-continer bgdark">
+      <div className="profile-container bgdark">
         <div className="user-content mx-3 my-1">
           <h1 className="user-head">{count} Users in database</h1>
         </div>

@@ -17,8 +17,6 @@ body {
   text-align: center;
 }*/
 
-
-
 .footer {
   clear: both;
   width: 100%;
@@ -33,8 +31,8 @@ body {
   color: white;
 }
 
-#font-wow{
-  font-family: 'Athiti', sans-serif;
+#font-wow {
+  font-family: "Athiti", sans-serif;
 }
 
 #login-dp {
@@ -162,7 +160,6 @@ code {
 }
 
 .black {
-  margin-left: 20px;
   color: black;
 }
 
@@ -171,16 +168,26 @@ code {
 }
 
 .profile-head {
-  background-image: linear-gradient(90deg,#879790,#343a40);
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply;
   padding-left: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
-
 .bglight {
   background-color: #ececec;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   overflow: hidden;
 }
@@ -211,19 +218,21 @@ code {
 }
 
 .profileimg {
-  height: 270px;
+  height: 500px;
 }
 
 .profile-infor {
   background-color: white;
-  padding:10px;
-  margin-bottom:10px;
+  padding: 10px;
+  margin-bottom: 10px;
   border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
 .ovft {
-  overflow-x:auto;
+  overflow-x: auto;
 }
