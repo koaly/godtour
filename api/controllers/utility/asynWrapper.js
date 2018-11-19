@@ -5,6 +5,7 @@
  * @param {Object} res express response object
  * @returns {void}
  */
+
 const asynWrapper = (asyncFn, req, res) => {
   asyncFn(req, res).catch(e => {
     console.log(e);

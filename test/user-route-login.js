@@ -69,7 +69,6 @@ describe("Users login with JWT", function() {
       .set("Accept", "application/json")
       .set("Authorization", token)
       .end((err, res) => {
-        console.log(res.body.info.username);
         expect(res.body.info.username).to.equal("suck");
         expect(res.statusCode).to.equal(200);
         done(err);

@@ -30,7 +30,7 @@ router.post(
   operatorCtrl.checkOperatorStatus,
   tourConfig.tour,
   checkValidation,
-  tourCtrl.addTour
+  tourController.addTour
 );
 
 router.get(
