@@ -5,6 +5,9 @@ import { getSpecificTour, booking } from "../services/specificTourService";
 import "../css/showtour.css";
 import { deleteTour } from "../services/tourService";
 import Spinner from "./common/spinner";
+import { Link } from "react-router-dom";
+import EditTourForm from "./editTourForm";
+
 import {
   ClockIcon,
   AirlineSeatReclineNormalIcon,
@@ -207,21 +210,35 @@ export default class OneTour extends Component {
               </center>
             </div>
             <div className="col-12 ml-1 mt-4">
-              
               <h2 className="mgbi mx-5">{tour.name}</h2>
-              <h5 className="mgbi mx-5"><StarIcon className="mr-3 mb-1"/>Hightlight : {tour.highlight} </h5>
+              <h5 className="mgbi mx-5">
+                <StarIcon className="mr-3 mb-1" />
+                Hightlight : {tour.highlight}{" "}
+              </h5>
               <h5 className="mgbi mx-5">
                 <ClockIcon className="mr-3 mb-1" />
                 {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
               </h5>
-              <h5 className="mgbi mx-5"><AirplaneIcon className="mr-3 mb-1" />Fly with {tour.airline}</h5>
+              <h5 className="mgbi mx-5">
+                <AirplaneIcon className="mr-3 mb-1" />
+                Fly with {tour.airline}
+              </h5>
               <h5 className="mgbi mx-5">
                 <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
                 Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
               </h5>
-              <h5 className="mgbi mx-5"><CoinIcon className="mr-3 mb-1"/>Price: {tour.price} $</h5>
-              <h5 className="mgbi mx-5"><FileDocumentIcon className="mr-3 mb-1"/>Detail: {tour.detail} </h5>
-              <h5 className="mgbi mx-5"><HumanMaleIcon className="mr-3 mb-1"/>Operated by {tour.operatorName}</h5>
+              <h5 className="mgbi mx-5">
+                <CoinIcon className="mr-3 mb-1" />
+                Price: {tour.price} $
+              </h5>
+              <h5 className="mgbi mx-5">
+                <FileDocumentIcon className="mr-3 mb-1" />
+                Detail: {tour.detail}{" "}
+              </h5>
+              <h5 className="mgbi mx-5">
+                <HumanMaleIcon className="mr-3 mb-1" />
+                Operated by {tour.operatorName}
+              </h5>
               {user.info.status === 0 && (
                 <label>
                   <h5 className="mx-5">Amount of Booking</h5>
@@ -247,9 +264,8 @@ export default class OneTour extends Component {
                     </button>
                   )}
                 </label>
-                
               )}
-              
+
               {user.info.status !== 0 && (
                 <React.Fragment>
                   {/* <input
@@ -263,11 +279,31 @@ export default class OneTour extends Component {
                   >
                     Delete Tour
                   </button>
-                  <input
+                  {/* <input
                     type="submit"
                     value="Edit Tour"
                     className="btn btn-primary  ml-4 "
-                  />
+                  /> */}
+                  {/* <Link
+                    className="btn btn-primary ml-4"
+                    to={`/editTour/${this.state.id}`}
+                    render={props => <EditTourForm />}
+                    class="<EditTourForm />"
+                    // params={{ testvalue: this.state.id }}
+                  >
+                    Edit Tour
+                  </Link> */}
+                  <Link
+                    className="btn btn-primary ml-4"
+                    to={{
+                      pathname: `/editTour/${this.state.id}`,
+                      state: {
+                        tour: this.state.tour
+                      }
+                    }}
+                  >
+                    Edit Tour
+                  </Link>
                 </React.Fragment>
               )}
 
