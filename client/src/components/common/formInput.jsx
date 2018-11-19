@@ -11,6 +11,7 @@ class FormInput extends Component{
 							, number	: this.formNumber 
 							, date		: this.formDate
 							, radio		: this.formRadio
+							, manyText	: this.formManyText
 		}
 	}
 
@@ -83,6 +84,26 @@ class FormInput extends Component{
 							value = {value}
 		/>}
 	}
+
+	formManyText( id , name , handleChange , mustHave , column , row , placeHolder ){
+		if( mustHave ){
+			return < textarea	id = { id }
+								name = { name }
+								onChange = { handleChange.bind( this ) }
+								cols = { column.toString() }	
+								rows = { row.toString() }
+								placeholder = { placeHolder }
+		/>}
+		else{
+			return < textarea	id = { id }
+								name = { name }
+								onChange = { handleChange.bind( this ) }
+								cols = { column.toString() }	
+								rows = { row.toString() }
+								placeholder = { placeHolder }
+		/>}
+	}
+
 } 
 
 export default FormInput;

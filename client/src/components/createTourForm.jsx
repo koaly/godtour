@@ -192,17 +192,19 @@ class createTourForm extends FormInput {
 					</li>
 					<li>
 						<p>Message to Tourism</p>
-						<textarea	name="detail" cols="60" rows="5" 
-									onChange={this.handleChange}
-									placeholder="Let us know about your desired"
-						></textarea>
+						{ this.formHandle["manyText"]( "detail"			, "detail"
+													, this.handleChange	, false
+													, "60"				, "5"
+													, "Let us know about your desired"
+						)}
 					</li>
 					<li>
 						<p>Message special detail of this tour</p>
-						<textarea	name="highlight" cols="60" rows="5" 
-									onChange={this.handleChange}
-									placeholder="Let us know about your desired"
-						></textarea>
+						{ this.formHandle["manyText"]( "highlight"		, "highlight"
+													, this.handleChange , false
+													, "60"				, "5"
+													, "Let us know about your desired"
+						)}
 					</li>
 					<button onClick={this.handleSubmitData}>SUBMIT</button>	
 				</ul>
