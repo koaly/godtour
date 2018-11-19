@@ -22,6 +22,9 @@ const tourSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  destCounty: {
+    type: String
+  },
   dayDuration: {
     type: Number,
     required: true
@@ -114,7 +117,8 @@ tourSchema.methods.toProfileJSON = function() {
     name: this.name,
     operatorID: this.operatorID,
     operatorName: this.operatorName,
-    info: this.toInformationJSON()
+    info: this.toInformationJSON(),
+    GET: `/api/tours?id=${this._id}`
   };
 };
 module.exports = mongoose.model("Tour", tourSchema);

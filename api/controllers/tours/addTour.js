@@ -1,10 +1,6 @@
 const Tour = require("../../models/tour-models");
 const { asynWrapper } = require("../utility/");
 const mongoose = require("mongoose");
-const {
-  TourNotFoundException,
-  ObjectIdIsNotValidException
-} = require("./exception");
 
 const handle = async (req, res) => {
   const {
@@ -38,6 +34,7 @@ const handle = async (req, res) => {
     operatorName: userDisplayName,
     price,
     dest,
+    destCounty,
     dayDuration,
     nightDuration,
     startBooking,
