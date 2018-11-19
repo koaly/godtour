@@ -118,7 +118,8 @@ tourSchema.methods.toProfileJSON = function() {
     operatorID: this.operatorID,
     operatorName: this.operatorName,
     info: this.toInformationJSON(),
-    GET: `/api/tours?id=${this._id}`
+    GET: `/api/tours?id=${this._id}`,
+    DELETE: `/api/tours?id=${this._id}`
   };
 };
 module.exports = mongoose.model("Tour", tourSchema);

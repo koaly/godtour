@@ -47,7 +47,12 @@ router.post(
   checkValidation,
   bookingCtrl.bookTour
 );
-router.delete("/:id", auth.require, tourCtrl.checkOwnTour, tourCtrl.deleteTour);
+router.delete(
+  "/",
+  auth.require,
+  //tourCtrl.checkOwnTour,
+  tourController.deleteTour
+);
 router.get(
   "/:id/edit",
   auth.require,
