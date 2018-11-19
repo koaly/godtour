@@ -28,6 +28,7 @@ body {
   color: #fff;
   text-align: center;
 }
+
 .footer {
   clear: both;
   width: 100%;
@@ -229,7 +230,7 @@ code {
 }
 
 .profileimg {
-  height: 500px;
+  height: 270px;
 }
 
 .profile-infor {
