@@ -14,7 +14,7 @@ userCredentials = {
 };
 
 // UNIT test begin
-describe("Gust No login", function() {
+describe("Guest No login", function() {
   //should return error of current users
   it("/users/current should return error", function(done) {
     this.timeout(2000);
