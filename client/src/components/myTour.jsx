@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import OwnTour from "./common/ownTour";
-import ProfileBar from "./common/profileBar"
+import OwnTour from "./common/profile/ownTour";
+import ProfileBar from "./common/profile/profileBar";
 //import { Route, Switch, Redirect } from "react-router-dom";
 
 export default class myTour extends Component {
@@ -13,16 +13,16 @@ export default class myTour extends Component {
   }
 
   async componentDidMount() {
-    this.setState({ isLoaded: true })
+    this.setState({ isLoaded: true });
   }
 
   render() {
     const { user, isLoaded } = this.state;
 
     if (!isLoaded) {
-      return <h1>isLoading</h1>
+      return <h1>isLoading</h1>;
     }
-    console.log(user)
+    console.log(user);
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
@@ -42,4 +42,3 @@ export default class myTour extends Component {
     );
   }
 }
-

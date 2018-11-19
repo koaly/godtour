@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import ProfileBar from "./common/profileBar";
-import ProfileBooking from "./common/profileBooking"
+import ProfileBar from "./common/profile/profileBar";
+import ProfileBooking from "./common/profile/profileBooking";
 
 export default class MyBook extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      user: this.props.user,
-
-    }
-
+      user: this.props.user
+    };
   }
 
   render() {
@@ -32,4 +30,3 @@ export default class MyBook extends Component {
     );
   }
 }
-

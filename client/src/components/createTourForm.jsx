@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import listCountries from "./common/dataList";
 import findDiffDay from "./common/otherFunction"; 
 import { toast } from "react-toastify";
+import FormInput from "./common/formInput";
 
-class createTourForm extends Component{
+class createTourForm extends FormInput {
 
 	constructor( props ){
-		console.log("===============> createTourForm.constructor");
 		super( props );
-		console.log("=====> constructor.props " , props);
 		this.state={
 			fillingForm	: true
 			, user		: props.user
@@ -99,16 +98,17 @@ class createTourForm extends Component{
 			</div>);
 		}
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
-			return(<div className = "mgtb container">
+			return( <div className = "mgtb container">
 				<h1>Create Tour</h1>
 				<ul>
 					<li>
 						<label>Your Tour Name : </label>
-						<input	type="textarea" 
-								id = "tourName" 
+						{ this.createForm( "textarea" , "tourName" , "name" , this.handleChange)}
+{/*						<input	type="textarea" 
+								id = "tourName"
 								name="name" required
 								onChange={this.handleChange}  
-						/>
+						/>*/}
 					</li>
 					<li>
 						<label>Your Destination : </label>
@@ -226,16 +226,3 @@ class createTourForm extends Component{
 }
 
 export default createTourForm;
-
-// Detail For Create Tour By YourSelf what is to should have
-// Requirement Data
-// maxPrice "The Most Price Costumer Can pay for this tour"
-// Day & Night Duration "How many Day or Night Customer want to go for this tour"
-// Period time for this Trip
-// Country
-// Province
-// RequireGuide
-// sizeOfYourGroup
-// privateOrPublic
-// Addition Select
-

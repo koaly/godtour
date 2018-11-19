@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOwnTiy, removeTiy } from "../../services/tiyService";
+import { getOwnTiy, removeTiy } from "../../../services/tiyService";
 
 class MyTiyTable extends Component {
   constructor(props) {

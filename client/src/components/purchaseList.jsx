@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ProfileBar from "./common/profileBar";
+import ProfileBar from "./common/profile/profileBar";
 
 class PurchaseList extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       user: this.props.user
-    }
+    };
   }
   render() {
     const { user } = this.state;

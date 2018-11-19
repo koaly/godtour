@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ProfileBar from "./common/profileBar";
+import ProfileBar from "./common/profile/profileBar";
 
 import { Link } from "react-router-dom";
-import MyTiyTable from "./common/myTiyTable";
+import MyTiyTable from "./common/profile/myTiyTable";
 
 export default class MyBook extends Component {
   constructor(props) {
