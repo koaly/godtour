@@ -5,14 +5,20 @@ import Textarea from "./textarea";
 
 class FormInput extends Component{
 
-	createForm( type , id , name , handleChange ){
-		return(
-			<input	type ={type}
-					id = {id}
-					name = {name}
-					onChange = { handleChange.bind( this ) }
-			/>
-		)
+	createForm( type , id , name , mustHave , handleChange ){
+		if( mustHave ){
+			return <input	type = {type}
+							id = {id}
+							name = {name}
+							required
+							onChange = { handleChange.bind( this ) }/>
+		}
+		else{
+			return <input	type ={type}
+							id = {id}
+							name = {name}
+							onChange = { handleChange.bind( this ) } />
+		}
 	}	
 
 } 

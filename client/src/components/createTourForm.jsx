@@ -103,20 +103,17 @@ class createTourForm extends FormInput {
 				<ul>
 					<li>
 						<label>Your Tour Name : </label>
-						{ this.createForm( "textarea" , "tourName" , "name" , this.handleChange)}
-{/*						<input	type="textarea" 
-								id = "tourName"
-								name="name" required
-								onChange={this.handleChange}  
-						/>*/}
+						{ this.createForm(	"textarea"			, "tourName" 
+											, "name"			, true	
+											, this.handleChange
+						)}
 					</li>
 					<li>
 						<label>Your Destination : </label>
-						<input	type="textarea" 
-								id = "yourDestination" 
-								name="dest" required
-								onChange={this.handleChange}  
-						/>
+						{ this.createForm(	"textarea"			, "yourDestination"
+											, "dest"			, true
+											, this.handleChange
+						)}
 					</li>
 					<li>
 						<label>Many you group  :&emsp;</label>
