@@ -6,7 +6,7 @@ export default class TourIn extends Component {
   render() {
     return (
       <div>
-        <div id="boxes">
+        <div id="boxes" className="container-fluid">
           <div className="row">
             <div className="box col-md-3">
               <img
