@@ -4,12 +4,14 @@
  * @return {Promise} tourslist mapping list
  */
 
-const getMapTour = tours => {
+const getMapTour = (tours, total, page, limit) => {
   return new Promise((resolve, reject) => {
     const result = {
       count: tours.length,
+      total: total,
+      next: page * limit < total ? true : false,
       tours: tours.map(t => {
-        return t.toProfileJSON();
+        if (t) return t.toProfileJSON();
       })
     };
     resolve(result);

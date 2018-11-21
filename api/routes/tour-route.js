@@ -11,7 +11,7 @@ const tourConfig = require("./validation/tours-validation");
 const bookingConfig = require("./validation/booking-validation");
 const checkValidation = require("./validation/checkValidation");
 
-router.get("/", auth.optional, tourController.getOneTour);
+router.get("/", auth.require, tourController.getOneTour);
 router.get("/browse", auth.optional, tourController.getAllTours);
 //router.get("/browse", auth.optional, tourCtrl.getAll);
 router.get(

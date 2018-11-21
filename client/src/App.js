@@ -73,7 +73,7 @@ class App extends Component {
         <div>
           <Switch>
             <Route path="/" exact to component={HomePage} />
-            <Route path="/tour" component={ShowTour} />
+            <Route path="/tours?page=1" component={ShowTour} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/request" component={RequestStatusForm} />
