@@ -1,0 +1,11 @@
+.panel-transparent {
+  background: none;
+}
+
+.panel-heading {
+  background: rgba(46, 51, 56, 0.2) !important;
+}
+
+.panel-transparent .panel-body {
+  background: rgba(46, 51, 56, 0.3) !important;
+}
