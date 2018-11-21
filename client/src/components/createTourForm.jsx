@@ -91,8 +91,49 @@ class createTourForm extends FormInput {
 		console.log("===============> createTourForm.componentDidMount");
 	}
 
+	updateData(){
+/*	this.formData is array to collect information for create form it is 2 dimension array
+		First Dimension tell many form have to fill data and have 2 component
+		In each order have 2 component first component is type of form
+			and second is array to input data to function create input form
+*/
+		this.formData = [
+			[ "textarea" , ["Your Tour Name :", "name" , this.handleChange , true ] ] 
+		,	[ "textarea" , ["Your Destination :" , "dest" , this.handleChange , true ] ]
+		,	[ "doubleNumber" ,	[ "Many member your group : " , this.handleChange , "MIN"
+									, "minMember" , this.state.dataTour.minMember , false , "MAX"
+									, "maxMember" , this.state.dataTour.maxMember , false
+								] ]
+		,	[ "doubleNumber" ,	[ "Duration Tour :" , this.handleChange , "MIN" , "minDuration"
+									, this.state.dataTour.minDuration.toString() , false , "MAX"
+									, "maxDuration" , this.state.dataTour.maxDuration , false
+								] ]
+		,	[ "doubleDate" , [ "Period Tour :" , this.handleChange ,
+									, "Start" , "startFreeDate" , false
+									, "End" , "endFreeDate" , false
+								] ]
+		,	[ "doubleNumber" ,	[ "Price :" , this.handleChange , "MIN" , "minPrice" ,
+									, this.state.dataTour.minPrice , false , "MAX" , "maxPrice"
+									, this.state.dataTour.maxPrice , false 
+								] ] 
+		,	[ "number" , [ "Food" , "food" , this.handleChange , false 
+									, this.state.dataTour.food , 0 ] ]
+		,	[ "doubleRadio" , [  "Want Guide" , this.handleChange , "requireGuide" 
+								, this.state.dataTour.requireGuide , "YES"	, "NO"
+								] ]
+		,	["manyText" , [ "Message to Tourism" , "detail" , this.handleChange	, false
+									, "60"	, "5" , "Let us know about your desired"
+								] ]
+		,	["manyText" , [ "Message special detail of this tour" , "highlight"
+									, this.handleChange , false , "60"	, "5"
+									, "Let us know about your desired"
+								] ]
+		]
+	}
+
 	render(){
 		console.log("===============> createTourForm.render" , this.state );
+		this.updateData()
 		if( this.state.user === null){
 			return(<div> 
 				<h1>Please Login Before Create Tour by Yourself</h1>
@@ -116,10 +157,10 @@ class createTourForm extends FormInput {
 					<li>
 						{ this.formHandle["doubleNumber"]( "Many member your grorp :" 
 														, this.handleChange 
-														, "MIN"				, "maxMember"
+														, "MIN"				, "minMember"
 														, this.state.dataTour.minMember
 														, false
-														, "MAX"				, "minMember"
+														, "MAX"				, "maxMember"
 														, this.state.dataTour.maxMember
 														, false
 
@@ -136,13 +177,10 @@ class createTourForm extends FormInput {
 						)}
 					</li>
 					<li>
-						<label>Period Tour :&emsp;</label>
-						{ this.formHandle["date"]( "Start"		, "startFreeDate"
-													, this.handleChange , false
-						)}
-						{ this.formHandle["date"]( "End"		, "endFreeDate"
-													, this.handleChange , false
-						)}
+						{ this.formHandle["doubleDate"]( "Period Tour :" , this.handleChange
+									, "Start" , "startFreeDate" , false
+									, "End" , "endFreeDate" , false
+								)}
 					</li>
 					<li>
 						{ this.formHandle["doubleNumber"]( "Price : "	, this.handleChange

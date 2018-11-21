@@ -14,7 +14,15 @@ class FormInput extends Component{
 							, manyText		: this.formManyText.bind(this)
 							, doubleNumber	: this.formDoubleNumber.bind(this)
 							, doubleRadio	: this.formDoubleRadio.bind(this)
+							, doubleDate	: this.formDoubleDate.bind(this)
 		}
+	}
+
+	formDoubleDate( label, handleChange, label1, name1, mustHave1, label2, name2, mustHave2){
+		return	<label>{label}&ensp;
+				{this.formHandle['date']( label1 , name1 , handleChange.bind(this) , mustHave1)}
+				{this.formHandle['date']( label2 , name2 , handleChange.bind(this) , mustHave2)}
+		</label>
 	}
 
 	formDoubleRadio( label , handleChange , name , value , labelTrue , labelFalse ){
@@ -39,16 +47,16 @@ class FormInput extends Component{
 		if( mustHave ){
 			return	<label>{label}&ensp;
 					<input	type = "textarea"
-							id = {name}
-							name = {name}
+							id = {name.toString()}
+							name = {name.toString()}
 							required
 							onChange = { handleChange.bind( this ) }/>
 		&ensp;</label>}
 		else{
 			return	<label>{label}&ensp;
 					<input	type ="textarea"
-							id = {name}
-							name = {name}
+							id = {name.toString()}
+							name = {name.toString()}
 							onChange = { handleChange.bind( this ) } />
 		&ensp;</label>}
 	}
@@ -57,21 +65,21 @@ class FormInput extends Component{
 		if( mustHave ){
 			return	(<label>{label}&ensp; 
 					<input	type = "number"
-							id	= {name}
-							name = {name}
+							id	= {name.toString()}
+							name = {name.toString()}
 							required
 							onChange = { handleChange.bind( this ) }
-							min = {min}
-							value = {value} 
+							min = {min.toString()}
+							value = {value.toString()} 
 		/>&ensp;</label>)}
 		else{
 			return	<label>{label}&ensp;
 					< input	type = "number"
-							id	= {name}
-							name = {name}
+							id	= {name.toString()}
+							name = {name.toString()}
 							onChange = { handleChange.bind( this ) }
-							min = {min}
-							value = {value}
+							min = {min.toString()}
+							value = {value.toString()}
 		/>&ensp;</label>}
 	}	
 
@@ -79,16 +87,16 @@ class FormInput extends Component{
 		if( mustHave ){
 			return	<label>{label}&ensp;
 					< input	type = "date"
-							id = {name}
-							name = {name}
+							id = {name.toString()}
+							name = {name.toString()}
 							required
 							onChange = { handleChange.bind( this ) }
 		/>&ensp;</label>}
 		else{
 			return	<label>{label}&ensp;
 					< input	type = "date"
-							id = {name}
-							name = {name}
+							id = {name.toString()}
+							name = {name.toString()}
 							onChange = { handleChange.bind( this ) }
 		/>&ensp;</label>}
 	}
@@ -97,27 +105,27 @@ class FormInput extends Component{
 		if( check ){
 			return	<label>{label}&ensp;
 					< input	type = "radio"
-							id = {name}
-							name = {name}
+							id = {name.toString()}
+							name = {name.toString()}
 							onChange = {handleChange.bind( this ) }
 							checked = "checked"	
-							value = {value}
+							value = {value.toString()}
 		/>&ensp;</label>} 
 		else{
 			return	< label>{label}&ensp;
 					< input	type = "radio"
-							id = {name}
-							name = {name}
+							id = {name.toString()}
+							name = {name.toString()}
 							onChange = { handleChange.bind( this )}
-							value = {value}
+							value = {value.toString()}
 		/>&ensp;</label>}
 	}
 
 	formManyText( label , name , handleChange , mustHave , column , row , placeHolder ){
 		if( mustHave ){
 			return	<p>{label}
-					< textarea	id = { name }
-								name = { name }
+					< textarea	id = { name.toString() }
+								name = { name.toString() }
 								onChange = { handleChange.bind( this ) }
 								cols = { column.toString() }	
 								rows = { row.toString() }
@@ -125,8 +133,8 @@ class FormInput extends Component{
 		/></p>}
 		else{
 			return	<p>{label}
-					< textarea	id = { name }
-								name = { name }
+					< textarea	id = { name.toString() }
+								name = { name.toString() }
 								onChange = { handleChange.bind( this ) }
 								cols = { column.toString() }	
 								rows = { row.toString() }
