@@ -12,8 +12,7 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 //import "bootstrap/dist/js/bootstrap.js";
 import "font-awesome/css/font-awesome.css";
-import "react-responsive-carousel/lib/styles/carousel.css"
-
+import "react-responsive-carousel/lib/styles/carousel.css";
 
 ReactDOM.render(
   <BrowserRouter>
