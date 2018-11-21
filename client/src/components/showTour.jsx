@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/showtour.css";
 import FetchAllTours from "./fetch/FetchAllTours";
 import SearchBox from "./searchBox";
+import Pagination from "./common/pagination";
 import queryString from "query-string";
 
 import {
@@ -29,7 +30,8 @@ class ShowTour extends Component {
       limit: values.limit,
       currentPage: values.page,
       hasNextPage: false,
-      hasPrevPage: false
+      total: 0,
+      pageSize: 0
     };
     this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
@@ -66,10 +68,11 @@ class ShowTour extends Component {
     let currentPageInt = parseInt(currentPage, 10);
     if (currentPageInt > 1) {
       this.setState({ currentPage: currentPageInt - 1, hasPrevPage: true });
-    } else {
-      this.setState({ hasPrevPage: false });
     }
     console.log(currentPage);
+  };
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
   };
 
   componentDidMount() {
@@ -87,8 +90,9 @@ class ShowTour extends Component {
       console.log("getAllData", result);
       const value = result.data;
       const { next: hasNextPage } = value;
+      const { count, total } = value;
       console.log("getAllData", value);
-      this.setState({ hasNextPage });
+      this.setState({ hasNextPage, total, count });
       this.dataAllTours = HandleObject.manage_group_tour_order(
         value,
         0,
@@ -154,7 +158,8 @@ class ShowTour extends Component {
       currentPage,
       limit,
       hasNextPage,
-      hasPrevPage
+      count,
+      total
     } = this.state;
     console.log(ListTour);
     let filtered = this.dataAllTours;
@@ -293,7 +298,7 @@ class ShowTour extends Component {
         </button> */}
         {currentPage !== "1" && (
           <a
-            className="btn btn-primary"
+            className="btn btn-primary mb-2 mr-2"
             href={`/tours/?page=${currentPage}&limit=${limit}`}
             onClick={this.handlePrevPage}
           >
@@ -302,13 +307,20 @@ class ShowTour extends Component {
         )}
         {hasNextPage && (
           <a
-            className="btn btn-primary ml-2"
+            className="btn btn-primary mb-2"
             href={`/tours/?page=${currentPage}&limit=${limit}`}
             onClick={this.handleNextPage}
           >
             Next Page
           </a>
         )}
+        <Pagination
+          itemsCount={total}
+          pageSize={count}
+          onPageChange={this.handlePageChange}
+          currentPage={parseInt(currentPage, 10)}
+          hrefTo={`/tours/?page=${currentPage}&limit=${limit}`}
+        />
       </div>
     );
   }
