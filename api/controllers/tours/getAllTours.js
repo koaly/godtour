@@ -14,20 +14,17 @@ const selectPrice = (lt, gt) => {
 */
 const handle = async (req, res) => {
   const {
-    payload: {
-      info: { id }
-    },
     query: { page, limit, gt, lt }
   } = req;
 
   //const price = selectPrice(lt, gt);
   //const tourQuery = JSON.stringify(price);
   let tours = await Tour.find({});
-
+  let total = tours.length;
   if (!tours || tours.length == 0) throw new TourNotFoundException();
 
   tours = await getPaginate(tours, page, limit);
-  tours = await getMapTour(tours);
+  tours = await getMapTour(tours, total, limit, page);
 
   return res.status(200).json(tours);
 };
