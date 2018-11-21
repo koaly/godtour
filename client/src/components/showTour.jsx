@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../css/showtour.css";
 import FetchAllTours from "./fetch/FetchAllTours";
 import SearchBox from "./searchBox";
+import queryString from "query-string";
+
 import {
   ClockIcon,
   PlaneShieldIcon,
@@ -17,12 +19,15 @@ var HandleObject = new TourConvert();
 class ShowTour extends Component {
   constructor(props) {
     super(props);
+    const values = queryString.parse(this.props.location.search);
     this.state = {
       Loading: true,
       Max: false,
       CurrentOrder: 0,
       ListTour: [],
-      searchQuery: ""
+      searchQuery: "",
+      limit: values.limit,
+      currentPage: values.page
     };
     this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
@@ -48,6 +53,13 @@ class ShowTour extends Component {
     }));
   }
 
+  handlePageChange = () => {
+    const { currentPage } = this.state;
+    let currentPageInt = parseInt(currentPage, 10);
+    this.setState({ currentPage: currentPageInt + 1 });
+    console.log(currentPage);
+  };
+
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
     //    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
@@ -56,7 +68,10 @@ class ShowTour extends Component {
 
   async getAllData() {
     try {
-      const result = await getAllTours();
+      const result = await getAllTours(
+        this.state.limit,
+        this.state.currentPage
+      );
       console.log("getAllData", result);
       const value = result.data;
       console.log("getAllData", value);
@@ -66,6 +81,10 @@ class ShowTour extends Component {
         value.count
       );
       this.handleShowMore();
+      console.log(this.props.location.search);
+      const values = queryString.parse(this.props.location.search);
+      console.log(values);
+      console.log(values.page);
     } catch {}
   }
 
@@ -114,7 +133,7 @@ class ShowTour extends Component {
       this.dataAllTours
     );
     console.log("After filter");
-    const { ListTour, searchQuery } = this.state;
+    const { ListTour, searchQuery, currentPage, limit } = this.state;
     console.log(ListTour);
     let filtered = this.dataAllTours;
     if (searchQuery) {
@@ -247,6 +266,17 @@ class ShowTour extends Component {
             "More Tour!"{" "}
           </button>
         )}
+        {/* <button className="btn btn-primary" onClick={this.handlePageChange}>
+          next page
+        </button> */}
+
+        <a
+          className="btn btn-primary"
+          href={`/tours/?page=${currentPage}&limit=${limit}`}
+          onClick={this.handlePageChange}
+        >
+          Next Page
+        </a>
       </div>
     );
   }

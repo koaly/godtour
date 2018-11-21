@@ -55,7 +55,7 @@ export default class TourIn extends Component {
             </div>
           </div>
           <center>
-            <Link to="/tours">
+            <Link to="/tours?page=1&limit=3">
               <button className="brownbut">Book Tour Now</button>
             </Link>
           </center>

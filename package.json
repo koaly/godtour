@@ -40,7 +40,8 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "query-string": "^6.2.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
