@@ -10,3 +10,13 @@ exports.ObjectIdIsNotValidException = function() {
   this.status = 404;
   this.message = "ObjectId is Not Valid";
 };
+
+exports.StatusIsNotVaild = function() {
+  this.name = "Status";
+  this.message = "Status user is not vaild";
+};
+
+exports.NoPermissonAccess = function() {
+  this.name = "Status";
+  this.message = "No Permission Acess";
+};

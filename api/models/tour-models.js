@@ -22,9 +22,6 @@ const tourSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  destCounty: {
-    type: String
-  },
   dayDuration: {
     type: Number,
     required: true
@@ -89,6 +86,24 @@ const tourSchema = mongoose.Schema({
   }
 });
 
+tourSchema.statics.findByOwnOneTour = function(userID, userStatus, tourID) {
+  return new Promise((resolve, reject) => {
+    this.findOne({ _id: tourID })
+      .then(tour => {
+        if (!tour) reject(new TourNotFoundException());
+
+        if (userStatus === 2 || tour.operatorID === userID) {
+          resolve(tour);
+        } else {
+          reject(new NoPermissonAccess());
+        }
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 tourSchema.methods.toInformationJSON = function() {
   return {
     imgsrc: this.imgsrc,
@@ -111,6 +126,7 @@ tourSchema.methods.toInformationJSON = function() {
     highlight: this.highlight
   };
 };
+
 tourSchema.methods.toProfileJSON = function() {
   return {
     id: this._id,
@@ -122,4 +138,5 @@ tourSchema.methods.toProfileJSON = function() {
     DELETE: `/api/tours?id=${this._id}`
   };
 };
+
 module.exports = mongoose.model("Tour", tourSchema);

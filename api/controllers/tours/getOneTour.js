@@ -10,12 +10,16 @@ const mongoose = require("mongoose");
 
 const handle = async (req, res) => {
   const {
-    query: { id }
+    payload: {
+      info: { id: userID, status: userStatus }
+    },
+    query: { id: tourID }
   } = req;
-  if (!mongoose.Types.ObjectId.isValid(id))
+
+  if (!mongoose.Types.ObjectId.isValid(tourID))
     throw new ObjectIdIsNotValidException();
 
-  let tour = await Tour.findOne({ _id: id });
+  let tour = await Tour.findByOwnOneTour(userID, userStatus, tourID);
   if (!tour) throw new TourNotFoundException();
 
   res.status(200).json({

@@ -2,6 +2,9 @@ const Tour = require("../../models/tour-models");
 const { asynWrapper } = require("../utility/");
 const mongoose = require("mongoose");
 
+toDate = (dateStr, timeStr) => {
+  return new Date(dateStr + " " + timeStr);
+};
 const handle = async (req, res) => {
   const {
     payload: {
@@ -13,7 +16,10 @@ const handle = async (req, res) => {
       dest,
       dayDuration,
       nightDuration,
-      startBooking,
+      startBookDate,
+      startBookTime,
+      endBookDate,
+      endBookTime,
       endBooking,
       departDate,
       returnDate,
@@ -34,11 +40,10 @@ const handle = async (req, res) => {
     operatorName: userDisplayName,
     price,
     dest,
-    destCounty,
     dayDuration,
     nightDuration,
-    startBooking,
-    endBooking,
+    startBooking: toDate(startBookDate, startBookTime),
+    endBooking: toDate(endBookDate, endBookTime),
     departDate,
     returnDate,
     airline,
@@ -57,6 +62,7 @@ const handle = async (req, res) => {
     msg: `success add tour ${result.name}`,
     name: result.name,
     operatorName: result.operatorName,
+    id: result.id,
     GET: `/api/tours?id=${result._id}`
   });
 };
