@@ -16,7 +16,7 @@ const config = {
 };
 
 function tourUrl(id) {
-  return tourDeleteEndpoint + "/" + id;
+  return tourDeleteEndpoint + "?id=" + id;
 }
 
 export function deleteTour(tourId) {
@@ -100,7 +100,7 @@ export function editTour(tour) {
     imgsrc
   } = tour;
   return http.put(
-    tourEditEndpoint + "/" + tour.id + "/edit",
+    tourEditEndpoint + "?id=" + tour.id + "/edit",
     {
       name,
       price,
