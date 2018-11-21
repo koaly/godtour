@@ -51,7 +51,7 @@
 }
 
 .social-container a:link, a:visited {
-    color: rgb(190, 185, 185);
+    color: rgb(209, 204, 204);
 }
 
 .social-container a:hover, a:active {
@@ -73,7 +73,7 @@
 } 
 
 .nav-list li a:link, a:visited {
-    color: rgb(190, 185, 185);
+    color: rgb(243, 237, 237);
 }
 
 .nav-list li a:hover, a:active {
@@ -96,32 +96,36 @@
     }
 
     .social-container .social-inner a.twitter{
-        background-color: #2bcdf5;
+        background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+        /* background-color: #2bcdf5; */
         margin-bottom: 15px;
         width: 100%
     }
 
     .social-container .social-inner a.facebook{
-        background-color: #2e2bf5;
+        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+        /* background-color: #2e2bf5; */
         margin-bottom: 15px;
         width: 100%
     }
 
     .social-container .social-inner a.youtube{
-        background-color: #f61e1e;
+        background-image: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
+        /* background-color: #f61e1e; */
         margin-bottom: 15px;
         width: 100%
     }
 
     .social-container .social-inner a.instagram{
-        background-color: #dd2bf5;
+        background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+        /* background-color: #dd2bf5; */
         margin-bottom: 15px;
         width: 100%
     }
 
     .social-container .social-inner a{
         /* height: 45px; */
-        border-radius: 23px;
+        border-radius: 30px;
         /* line-height: 45px; */
     }
 
