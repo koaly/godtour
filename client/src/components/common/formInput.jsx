@@ -43,11 +43,14 @@ class FormInput extends Component{
 		</label>
 	}
 
-	formTextArea( label , name , handleChange , mustHave = false){
+	formTextArea( label , name , handleChange , mustHave = false , id = null){
+		if( id === null ){
+			id = name.toString()
+		}
 		if( mustHave ){
 			return	<label>{label}&ensp;
 					<input	type = "textarea"
-							id = {name.toString()}
+							id = {id.toString()}
 							name = {name.toString()}
 							required
 							onChange = { handleChange.bind( this ) }/>
@@ -55,7 +58,7 @@ class FormInput extends Component{
 		else{
 			return	<label>{label}&ensp;
 					<input	type ="textarea"
-							id = {name.toString()}
+							id = {id.toString()}
 							name = {name.toString()}
 							onChange = { handleChange.bind( this ) } />
 		&ensp;</label>}

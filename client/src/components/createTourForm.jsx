@@ -43,7 +43,7 @@ class createTourForm extends FormInput {
 
 	handleSubmitData( event ){
 		var result = true;
-		if( ! document.getElementById("name").checkValidity() ){
+		if( ! document.getElementById("tourName").checkValidity() ){
 			toast.error("require your tour name");
 			result = false;
 		}
@@ -99,7 +99,7 @@ class createTourForm extends FormInput {
 			and second is array to input data to function create input form
 */
 		this.dataForm = [
-			[ "textarea" , ["Your Tour Name :", "name" , this.handleChange , true ] ] 
+			[ "textarea" , ["Your Tour Name :", "name" , this.handleChange , true , "tourName"]] 
 		,	[ "textarea" , ["Your Destination :" , "dest" , this.handleChange , true ] ]
 		,	[ "doubleNumber" ,	[ "Many member your group : " , this.handleChange , "MIN"
 									, "minMember" , this.state.dataTour.minMember , false , "MAX"
