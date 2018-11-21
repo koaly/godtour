@@ -112,29 +112,25 @@ class createTourForm extends FormInput {
 						) }
 					</li>
 					<li>
-						<label>Many you group  :&emsp;</label>
-						{ this.formHandle['number']( "MIN"		, "minMember" 
-													, this.handleChange , false
-													, this.state.dataTour.minMember
-													, "0"
-						)}
-						{ this.formHandle['number']( "MAX"		, "maxMember"
-													, this.handleChange , false
-													, this.state.dataTour.maxMember
-													, this.state.dataTour.minMember.toString()
+						{ this.formHandle["doubleNumber"]( "Many member your grorp :" 
+														, this.handleChange 
+														, "MIN"				, "maxMember"
+														, this.state.dataTour.minMember
+														, false
+														, "MAX"				, "minMember"
+														, this.state.dataTour.maxMember
+														, false
+
 						)}
 					</li>
 					<li>
-						<label>Duration Tour :&emsp;</label>
-						{ this.formHandle["number"]( "MIN"			, "minDuration"
-													, this.handleChange , false
+						{ this.formHandle["doubleNumber"]( "Duration Tour"	, this.handleChange
+													, "MIN"				, "minDuration"
 													, this.state.dataTour.minDuration.toString()
-													, "0"
-						)}
-						{ this.formHandle["number"]( "MAX"			, "maxDuration"
-													, this.handleChange , false
+													, false
+													, "MAX"				, "maxDuration"
 													, this.state.dataTour.maxDuration.toString()
-													, this.state.dataTour.minDuration.toString()
+													, false
 						)}
 					</li>
 					<li>
@@ -147,18 +143,13 @@ class createTourForm extends FormInput {
 						)}
 					</li>
 					<li>
-						<label>Price:&emsp;</label>
-						<label>&ensp;MIN</label>
-						{ this.formHandle["number"]( "minPrice"			, "minPrice"
-													, this.handleChange , false
+						{ this.formHandle["doubleNumber"]( "Price : "	, this.handleChange
+													, "MIN"				, "minPrice"
 													, this.state.dataTour.minPrice.toString()
-													, "0"
-						)}
-						<label>&ensp;MAX</label>
-						{ this.formHandle["number"]( "maxPrice"			, "maxPrice"
-													, this.handleChange , false
+													, false
+													, "MAX"				, "maxPrice"
 													, this.state.dataTour.maxPrice.toString()
-													, this.state.dataTour.minPrice.toString()
+													, false
 						)}
 					</li>
 					<li>
@@ -169,17 +160,11 @@ class createTourForm extends FormInput {
 						)}
 					</li>
 					<li>
-						<label>Want Guide&ensp;</label>
-						{ this.formHandle["radio"]( "YES"				, "requireGuide"
-													, this.handleChange	
-													, this.state.dataTour.requireGuide 
-													, "true" 
-						)} 
-						{ this.formHandle["radio"]( "NO"				, "requireGuide"
-													, this.handleChange	
-													, ! this.state.dataTour.requireGuide 
-													, "false" 
-						)} 
+						{ this.formHandle["doubleRadio"]( "Want Guide" , this.handleChange 
+													, "requireGuide" 
+													, this.state.dataTour.requireGuide
+													, "YES"				, "NO"
+						)}
 					</li>
 					<li>
 						{ this.formHandle["manyText"]( "Message to Tourism"			, "detail"

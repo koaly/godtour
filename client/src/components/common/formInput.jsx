@@ -7,12 +7,32 @@ class FormInput extends Component{
 
 	constructor( props ){
 		super( props ); 
-		this.formHandle = { textarea	: this.formTextArea
-							, number	: this.formNumber 
-							, date		: this.formDate
-							, radio		: this.formRadio
-							, manyText	: this.formManyText
+		this.formHandle = { textarea		: this.formTextArea.bind(this)
+							, number		: this.formNumber.bind(this) 
+							, date			: this.formDate.bind(this)
+							, radio			: this.formRadio.bind(this)
+							, manyText		: this.formManyText.bind(this)
+							, doubleNumber	: this.formDoubleNumber.bind(this)
+							, doubleRadio	: this.formDoubleRadio.bind(this)
 		}
+	}
+
+	formDoubleRadio( label , handleChange , name , value , labelTrue , labelFalse ){
+		return <label>{label}&ensp;
+			{this.formHandle['radio']( labelTrue, name, handleChange.bind(this), value, true)}
+			{this.formHandle['radio']( labelFalse, name, handleChange.bind(this), !value, false)}
+		</label>
+	}
+
+	formDoubleNumber( label , handleChange 
+					, labelMin , nameMin , valueMin , mustHaveMin 
+					, labelMax , nameMax , valueMax , mustHaveMax ){
+		return <label>{label}&ensp;
+			{this.formHandle['number']( labelMin , nameMin , handleChange.bind( this ) 
+									, mustHaveMin , valueMin , "0")}
+			{this.formHandle['number']( labelMax , nameMax , handleChange.bind( this ) 
+									, mustHaveMax , valueMax , valueMin)}
+		</label>
 	}
 
 	formTextArea( label , name , handleChange , mustHave = false){
