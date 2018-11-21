@@ -129,7 +129,8 @@ exports.addTour = async function (req, res, next) {
         const result = await tour.save();
         console.log(result);
         res.status(201).json({
-            message: "Tour added"
+            message: "Tour added",
+            tourID: result._id
         });
     } catch (e) {
         HandingErorr(res, e)

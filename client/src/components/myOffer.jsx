@@ -18,10 +18,10 @@ export default class MyOffer extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">My Offer</h1>
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-5">
               <ProfileBar user={user} />
             </div>
-            <div className="col-md-8 mt-2 ">
+            <div className="col-md-7 mt-2 ">
               <OfferBar />
             </div>
           </div>
