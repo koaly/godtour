@@ -95,7 +95,7 @@ tourSchema.statics.findByOwnOneTour = function(userID, userStatus, tourID) {
       .then(tour => {
         if (!tour) reject(new TourNotFoundException());
 
-        if (userStatus === 2 || tour.operatorID === userID) {
+        if (userStatus === 2 || tour.operatorID == userID) {
           resolve(tour);
         } else {
           reject(new NoPermissonAccess());

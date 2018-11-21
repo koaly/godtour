@@ -26,3 +26,9 @@ exports.UserNotFoundException = function(username) {
   this.status = 404;
   this.message = `User ${username || "unknown"} is not found in database`;
 };
+
+exports.Exception = function(username) {
+  this.name = "Server";
+  this.status = 500;
+  this.message = `Error in Server`;
+};
