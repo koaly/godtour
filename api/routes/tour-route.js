@@ -57,12 +57,11 @@ router.get(
 );
 
 router.put(
-  "/:id/edit",
+  "/",
   auth.require,
-  tourCtrl.checkOwnTour,
   tourConfig.tour,
   checkValidation,
-  tourCtrl.editTour
+  tourController.editTour
 );
 
 router.get(

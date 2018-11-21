@@ -1,5 +1,4 @@
 const jwt = require("express-jwt");
-const { check, oneOf, validationResult } = require("express-validator/check");
 const getTokenFromHeaders = req => {
   const {
     headers: { authorization }
