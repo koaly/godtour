@@ -115,6 +115,7 @@ class ShowTour extends Component {
     );
     console.log("After filter");
     const { ListTour, searchQuery } = this.state;
+    console.log(ListTour);
     let filtered = this.dataAllTours;
     if (searchQuery) {
       filtered = this.dataAllTours.filter(tour =>
@@ -122,9 +123,9 @@ class ShowTour extends Component {
       );
     }
     const showlistTour = ListTour.map(tour => (
-      <li key={tour._id} className="card mb-5 card-size">
+      <li key={tour.id} className="card mb-5 card-size">
         <img
-          src={tour.imgsrc}
+          src={tour.info.imgsrc}
           alt="sample image"
           className="mb-3"
           width="100%"
@@ -134,17 +135,18 @@ class ShowTour extends Component {
           <h3 className="mb-3">{tour.name}</h3>
           <p>
             <ClockIcon className="mr-3 mb-1" />
-            {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+            {tour.info.dayDuration} Day(s) {tour.info.nightDuration} Night(s)
           </p>
           <p>
             <AirplaneIcon className="mr-3 mb-1" />
-            Fly with {tour.airline}
+            Fly with {tour.info.airline}
           </p>
           <p>
             <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
-            Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
+            Remaining Seat(s) : {tour.info.remainingSeat}/{tour.info.maxSeat}{" "}
+            Seat(s)
           </p>
-          <Link className="" to={`/tours/id=${tour._id}`}>
+          <Link className="" to={`/tours/id=${tour.id}`}>
             Read More...
           </Link>
         </div>
@@ -152,9 +154,9 @@ class ShowTour extends Component {
     ));
 
     const showfilterTour = filtered.map(tour => (
-      <li key={tour._id} className="card mb-5 card-size">
+      <li key={tour.id} className="card mb-5 card-size">
         <img
-          src={tour.imgsrc}
+          src={tour.info.imgsrc}
           alt="sample image"
           className="mb-3"
           width="100%"
@@ -164,17 +166,17 @@ class ShowTour extends Component {
           <h3 className="mb-3">{tour.name}</h3>
           <p>
             <ClockIcon className="mr-3 mb-1" />
-            {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+            {tour.info.dayDuration} Day(s) {tour.info.nightDuration} Night(s)
           </p>
           <p>
             <AirplaneIcon className="mr-3 mb-1" />
-            Fly with {tour.airline}
+            Fly with {tour.info.airline}
           </p>
           <p>
             <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
-            Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+            Current Seat : {tour.info.remainingSeat}/{tour.info.maxSeat} Seats
           </p>
-          <Link className="" to={`/tours/id=${tour._id}`}>
+          <Link className="" to={`/tours/id=${tour.id}`}>
             Read More...
           </Link>
         </div>
@@ -236,16 +238,15 @@ class ShowTour extends Component {
         {this.condition === 1 && (
           <button className="GeneralButtonTour mgb"> 'Now Loading!' </button>
         )}
-        {searchQuery === "" &&
-          this.condition === 2 && (
-            <button
-              className="ButtonMoreTour GeneralButtonTour"
-              onClick={this.handleShowMore}
-            >
-              {" "}
-              "More Tour!"{" "}
-            </button>
-          )}
+        {searchQuery === "" && this.condition === 2 && (
+          <button
+            className="ButtonMoreTour GeneralButtonTour"
+            onClick={this.handleShowMore}
+          >
+            {" "}
+            "More Tour!"{" "}
+          </button>
+        )}
       </div>
     );
   }
