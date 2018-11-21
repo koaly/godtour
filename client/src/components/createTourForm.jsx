@@ -41,11 +41,11 @@ class createTourForm extends FormInput {
 
 	handleSubmitData( event ){
 		var result = true;
-		if( ! document.getElementById("tourName").checkValidity() ){
+		if( ! document.getElementById("name").checkValidity() ){
 			toast.error("require your tour name");
 			result = false;
 		}
-		if( ! document.getElementById("yourDestination").checkValidity()){
+		if( ! document.getElementById("dest").checkValidity()){
 			toast.error("require your destination");
 			result = false;
 		}
@@ -103,13 +103,13 @@ class createTourForm extends FormInput {
 				<ul>
 					<li>
 						<label>Your Tour Name : </label>
-						{ this.formHandle['textarea'](	"tourName"			, "name"
+						{ this.formHandle['textarea'](	"name"			, "name"
 														, this.handleChange	, true
 						)}
 					</li>
 					<li>
 						<label>Your Destination : </label>
-						{ this.formHandle['textarea'](	"yourDestination"	, "dest"
+						{ this.formHandle['textarea'](	"dest"			, "dest"
 														, this.handleChange , true
 						) }
 					</li>

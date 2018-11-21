@@ -15,6 +15,10 @@ class FormInput extends Component{
 		}
 	}
 
+	formDoubleNumber( id , name , handleChange , valueMin , valueMax ){
+
+	}
+
 	formTextArea( id , name , handleChange , mustHave = false){
 		if( mustHave ){
 			return <input	type = "textarea"
