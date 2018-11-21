@@ -275,7 +275,7 @@ export default class OneTour extends Component {
 									/> */}
                   <button
                     onClick={() => this.handleDelete(tour)}
-                    className="btn btn-danger "
+                    className="btn btn-danger ml-5 mb-5"
                   >
                     Delete Tour
                   </button>
@@ -294,7 +294,7 @@ export default class OneTour extends Component {
                     Edit Tour
                   </Link> */}
                   <Link
-                    className="btn btn-primary ml-4"
+                    className="btn btn-primary ml-4 mb-5"
                     to={{
                       pathname: `/editTour/${this.state.id}`,
                       state: {

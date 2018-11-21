@@ -35,7 +35,7 @@ export default class Profile extends Component {
     if (!isLoaded) {
       return <h1>isLoading</h1>;
     }
-    console.log(user);
+
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">

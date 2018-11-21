@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../css/showtour.css";
 import FetchAllTours from "./fetch/FetchAllTours";
 import SearchBox from "./searchBox";
+import queryString from "query-string";
+
 import {
   ClockIcon,
   PlaneShieldIcon,
@@ -17,12 +19,17 @@ var HandleObject = new TourConvert();
 class ShowTour extends Component {
   constructor(props) {
     super(props);
+    const values = queryString.parse(this.props.location.search);
     this.state = {
       Loading: true,
       Max: false,
       CurrentOrder: 0,
       ListTour: [],
-      searchQuery: ""
+      searchQuery: "",
+      limit: values.limit,
+      currentPage: values.page,
+      hasNextPage: false,
+      hasPrevPage: false
     };
     this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
@@ -48,6 +55,23 @@ class ShowTour extends Component {
     }));
   }
 
+  handleNextPage = () => {
+    const { currentPage } = this.state;
+    let currentPageInt = parseInt(currentPage, 10);
+    this.setState({ currentPage: currentPageInt + 1 });
+    console.log(currentPage);
+  };
+  handlePrevPage = () => {
+    const { currentPage } = this.state;
+    let currentPageInt = parseInt(currentPage, 10);
+    if (currentPageInt > 1) {
+      this.setState({ currentPage: currentPageInt - 1, hasPrevPage: true });
+    } else {
+      this.setState({ hasPrevPage: false });
+    }
+    console.log(currentPage);
+  };
+
   componentDidMount() {
     console.log("===============> ShowTour:componentDidMount");
     //    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
@@ -56,16 +80,25 @@ class ShowTour extends Component {
 
   async getAllData() {
     try {
-      const result = await getAllTours();
+      const result = await getAllTours(
+        this.state.limit,
+        this.state.currentPage
+      );
       console.log("getAllData", result);
       const value = result.data;
+      const { next: hasNextPage } = value;
       console.log("getAllData", value);
+      this.setState({ hasNextPage });
       this.dataAllTours = HandleObject.manage_group_tour_order(
         value,
         0,
         value.count
       );
       this.handleShowMore();
+      console.log(this.props.location.search);
+      const values = queryString.parse(this.props.location.search);
+      console.log(values);
+      console.log(values.page);
     } catch {}
   }
 
@@ -113,8 +146,17 @@ class ShowTour extends Component {
       this.state,
       this.dataAllTours
     );
+    console.log(this.dataAllTours);
     console.log("After filter");
-    const { ListTour, searchQuery } = this.state;
+    const {
+      ListTour,
+      searchQuery,
+      currentPage,
+      limit,
+      hasNextPage,
+      hasPrevPage
+    } = this.state;
+    console.log(ListTour);
     let filtered = this.dataAllTours;
     if (searchQuery) {
       filtered = this.dataAllTours.filter(tour =>
@@ -122,9 +164,9 @@ class ShowTour extends Component {
       );
     }
     const showlistTour = ListTour.map(tour => (
-      <li key={tour._id} className="card mb-5 card-size">
+      <li key={tour.id} className="card mb-5 card-size">
         <img
-          src={tour.imgsrc}
+          src={tour.info.imgsrc}
           alt="sample image"
           className="mb-3"
           width="100%"
@@ -134,17 +176,18 @@ class ShowTour extends Component {
           <h3 className="mb-3">{tour.name}</h3>
           <p>
             <ClockIcon className="mr-3 mb-1" />
-            {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+            {tour.info.dayDuration} Day(s) {tour.info.nightDuration} Night(s)
           </p>
           <p>
             <AirplaneIcon className="mr-3 mb-1" />
-            Fly with {tour.airline}
+            Fly with {tour.info.airline}
           </p>
           <p>
             <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
-            Remaining Seat(s) : {tour.currentSeat}/{tour.maxSeat} Seat(s)
+            Remaining Seat(s) : {tour.info.remainingSeat}/{tour.info.maxSeat}{" "}
+            Seat(s)
           </p>
-          <Link className="" to={`/tours/id=${tour._id}`}>
+          <Link className="" to={`/tours/id=${tour.id}`}>
             Read More...
           </Link>
         </div>
@@ -152,9 +195,9 @@ class ShowTour extends Component {
     ));
 
     const showfilterTour = filtered.map(tour => (
-      <li key={tour._id} className="card mb-5 card-size">
+      <li key={tour.id} className="card mb-5 card-size">
         <img
-          src={tour.imgsrc}
+          src={tour.info.imgsrc}
           alt="sample image"
           className="mb-3"
           width="100%"
@@ -164,17 +207,17 @@ class ShowTour extends Component {
           <h3 className="mb-3">{tour.name}</h3>
           <p>
             <ClockIcon className="mr-3 mb-1" />
-            {tour.dayDuration} Day(s) {tour.nightDuration} Night(s)
+            {tour.info.dayDuration} Day(s) {tour.info.nightDuration} Night(s)
           </p>
           <p>
             <AirplaneIcon className="mr-3 mb-1" />
-            Fly with {tour.airline}
+            Fly with {tour.info.airline}
           </p>
           <p>
             <AirlineSeatReclineNormalIcon className="mr-3 mb-1" />
-            Current Seat : {tour.currentSeat}/{tour.maxSeat} Seats
+            Current Seat : {tour.info.remainingSeat}/{tour.info.maxSeat} Seats
           </p>
-          <Link className="" to={`/tours/id=${tour._id}`}>
+          <Link className="" to={`/tours/id=${tour.id}`}>
             Read More...
           </Link>
         </div>
@@ -236,16 +279,36 @@ class ShowTour extends Component {
         {this.condition === 1 && (
           <button className="GeneralButtonTour mgb"> 'Now Loading!' </button>
         )}
-        {searchQuery === "" &&
-          this.condition === 2 && (
-            <button
-              className="ButtonMoreTour GeneralButtonTour"
-              onClick={this.handleShowMore}
-            >
-              {" "}
-              "More Tour!"{" "}
-            </button>
-          )}
+        {searchQuery === "" && this.condition === 2 && (
+          <button
+            className="ButtonMoreTour GeneralButtonTour"
+            onClick={this.handleShowMore}
+          >
+            {" "}
+            "More Tour!"{" "}
+          </button>
+        )}
+        {/* <button className="btn btn-primary" onClick={this.handlePageChange}>
+          next page
+        </button> */}
+        {currentPage !== "1" && (
+          <a
+            className="btn btn-primary"
+            href={`/tours/?page=${currentPage}&limit=${limit}`}
+            onClick={this.handlePrevPage}
+          >
+            Previous Page
+          </a>
+        )}
+        {hasNextPage && (
+          <a
+            className="btn btn-primary ml-2"
+            href={`/tours/?page=${currentPage}&limit=${limit}`}
+            onClick={this.handleNextPage}
+          >
+            Next Page
+          </a>
+        )}
       </div>
     );
   }

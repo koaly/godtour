@@ -9,7 +9,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server \" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "test": "node_modules/mocha/bin/mocha "
   },
   "repository": {
     "type": "git",
@@ -39,7 +40,14 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "query-string": "^6.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "should": "^13.2.3",
+    "superagent": "^4.0.0",
+    "supertest": "^3.3.0"
+  }
 }

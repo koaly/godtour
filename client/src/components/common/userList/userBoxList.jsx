@@ -14,6 +14,7 @@ export default class UserBoxList extends Component {
     super(props);
     this.state = {
       users: [],
+      count: 0,
       isLoaded: false,
 
       pageSize: 4,
@@ -24,10 +25,10 @@ export default class UserBoxList extends Component {
   async getUser() {
     try {
       const result = await getAllUsers();
-      const { user } = result.data.users;
-
+      const { users, count } = result.data;
+      console.log(users);
       toast.info("Update UserList");
-      this.setState({ users: user });
+      this.setState({ users, count });
     } catch (e) {
       const { message } = e.response.data.error;
       toast.error(`${message}`);
@@ -43,8 +44,8 @@ export default class UserBoxList extends Component {
     this.setState({ currentPage: page });
   };
   render() {
-    const { users, isLoaded, currentPage, pageSize } = this.state;
-    const { length: count } = this.state.users;
+    const { users, isLoaded, currentPage, pageSize, count } = this.state;
+    console.log(users);
     const selectUsers = paginate(users, currentPage, pageSize);
 
     if (!isLoaded) {
@@ -74,7 +75,7 @@ export default class UserBoxList extends Component {
                         src={user.imgsrc}
                         alt="profile"
                       />
-{/*                      <img
+                      {/*                      <img
                         className="profileimg mgt img-thumbnail rounded"
                         src={user.imgsrc}
                         alt="profile"
