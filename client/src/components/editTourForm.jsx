@@ -117,7 +117,7 @@ class EditTourForm extends Form {
 
   doSubmit = async () => {
     try {
-      const response = await editTour(this.state.data);
+      const response = await editTour(this.state);
       console.log(response);
       window.location = "/tours";
       toast.success("Edited Success");
@@ -147,6 +147,7 @@ class EditTourForm extends Form {
     const { tour } = this.props.location.state;
     console.log(tour);
     console.log(this.state);
+    console.log(this.state.data);
     return (
       <div className="container addtour form-container mgtb">
         <h2>Edit Tour</h2>

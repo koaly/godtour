@@ -100,9 +100,9 @@ export function editTour(tour) {
     detail,
     highlight,
     imgsrc
-  } = tour;
+  } = tour.data;
   return http.put(
-    tourEditEndpoint + "?id=" + tour.id + "/edit",
+    tourEditEndpoint + "/" + tour.id + "/edit",
     {
       name,
       price,
