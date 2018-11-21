@@ -59,29 +59,41 @@ const Footer = () => {
           
         </div>
         <div className="row no-gutters social-container">
-            <div className="d-lg-inline-block">
-              <a href="https://twitter.com/tour_wor1d" className="social-inner">
-                <p><TwitterIcon/></p>
-                <p>Twitter</p>
-              </a>
+          <div className="col-md-3">
+              <div className="social-inner d-lg-inline-block">
+                <a href="https://twitter.com/tour_wor1d" className="twitter">
+                  <center>
+                    <p className="my-2 mx-2"><TwitterIcon/> Twitter</p>
+                  </center>
+                </a>
+              </div>
             </div>
-            <div className="d-lg-inline-block">
-              <a href="https://www.facebook.com/tour.wor1d" className="social-inner">
-                <p><FacebookIcon/></p>
-                <p>Facebook</p>
-              </a>
+            <div className="col-md-3">
+              <div className="social-inner">
+                <a href="https://www.facebook.com/tour.wor1d" className="facebook">
+                  <center>
+                    <p className="my-2 mx-2"><FacebookIcon/> Facebook</p>
+                  </center>
+                </a>
+              </div>
             </div>
-            <div className="d-lg-inline-block">
-              <a href="https://www.youtube.com/channel/UCejOXMM5zGyD8GUETtqhJmQ" className="social-inner">
-                <p><YoutubeIcon/></p>
-                <p>Youtube</p>
-              </a>
+            <div className="col-md-3">
+              <div className="social-inner">
+                <a href="https://www.youtube.com/channel/UCejOXMM5zGyD8GUETtqhJmQ" className="youtube">
+                  <center>
+                    <p className="my-2 mx-2"><YoutubeIcon/> Youtube</p>
+                  </center>
+                </a>
+              </div>
             </div>
-            <div className="d-lg-inline-block">
-              <a href="https://www.instagram.com/tour.wor1d/" className="social-inner">
-                <p><InstagramIcon/></p>
-                <p>Instagram</p>
-              </a>
+            <div className="col-md-3">
+              <div className="social-inner">
+                <a href="https://www.instagram.com/tour.wor1d/" className="instagram">
+                  <center>
+                    <p className="my-2 mx-2"><InstagramIcon/> Instagram</p>
+                  </center>
+                </a>
+              </div>
             </div>
       </div>
     </footer>
