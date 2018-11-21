@@ -90,9 +90,9 @@ class ShowTour extends Component {
       console.log("getAllData", result);
       const value = result.data;
       const { next: hasNextPage } = value;
-      const { count, total } = value;
+      const { total } = value;
       console.log("getAllData", value);
-      this.setState({ hasNextPage, total, count });
+      this.setState({ hasNextPage, total });
       this.dataAllTours = HandleObject.manage_group_tour_order(
         value,
         0,
@@ -316,7 +316,7 @@ class ShowTour extends Component {
         )}
         <Pagination
           itemsCount={total}
-          pageSize={count}
+          pageSize={limit}
           onPageChange={this.handlePageChange}
           currentPage={parseInt(currentPage, 10)}
           hrefTo={`/tours/?page=${currentPage}&limit=${limit}`}
