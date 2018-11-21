@@ -14,6 +14,9 @@ const selectPrice = (lt, gt) => {
 */
 const handle = async (req, res) => {
   const {
+    payload: {
+      info: { id }
+    },
     query: { page, limit, gt, lt }
   } = req;
 
