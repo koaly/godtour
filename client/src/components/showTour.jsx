@@ -27,7 +27,9 @@ class ShowTour extends Component {
       ListTour: [],
       searchQuery: "",
       limit: values.limit,
-      currentPage: values.page
+      currentPage: values.page,
+      hasNextPage: false,
+      hasPrevPage: false
     };
     this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
@@ -53,10 +55,20 @@ class ShowTour extends Component {
     }));
   }
 
-  handlePageChange = () => {
+  handleNextPage = () => {
     const { currentPage } = this.state;
     let currentPageInt = parseInt(currentPage, 10);
     this.setState({ currentPage: currentPageInt + 1 });
+    console.log(currentPage);
+  };
+  handlePrevPage = () => {
+    const { currentPage } = this.state;
+    let currentPageInt = parseInt(currentPage, 10);
+    if (currentPageInt > 1) {
+      this.setState({ currentPage: currentPageInt - 1, hasPrevPage: true });
+    } else {
+      this.setState({ hasPrevPage: false });
+    }
     console.log(currentPage);
   };
 
@@ -74,7 +86,9 @@ class ShowTour extends Component {
       );
       console.log("getAllData", result);
       const value = result.data;
+      const { next: hasNextPage } = value;
       console.log("getAllData", value);
+      this.setState({ hasNextPage });
       this.dataAllTours = HandleObject.manage_group_tour_order(
         value,
         0,
@@ -132,8 +146,16 @@ class ShowTour extends Component {
       this.state,
       this.dataAllTours
     );
+    console.log(this.dataAllTours);
     console.log("After filter");
-    const { ListTour, searchQuery, currentPage, limit } = this.state;
+    const {
+      ListTour,
+      searchQuery,
+      currentPage,
+      limit,
+      hasNextPage,
+      hasPrevPage
+    } = this.state;
     console.log(ListTour);
     let filtered = this.dataAllTours;
     if (searchQuery) {
@@ -269,14 +291,24 @@ class ShowTour extends Component {
         {/* <button className="btn btn-primary" onClick={this.handlePageChange}>
           next page
         </button> */}
-
-        <a
-          className="btn btn-primary"
-          href={`/tours/?page=${currentPage}&limit=${limit}`}
-          onClick={this.handlePageChange}
-        >
-          Next Page
-        </a>
+        {currentPage !== "1" && (
+          <a
+            className="btn btn-primary"
+            href={`/tours/?page=${currentPage}&limit=${limit}`}
+            onClick={this.handlePrevPage}
+          >
+            Previous Page
+          </a>
+        )}
+        {hasNextPage && (
+          <a
+            className="btn btn-primary ml-2"
+            href={`/tours/?page=${currentPage}&limit=${limit}`}
+            onClick={this.handleNextPage}
+          >
+            Next Page
+          </a>
+        )}
       </div>
     );
   }
