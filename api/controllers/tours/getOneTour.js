@@ -4,7 +4,7 @@ const { asynWrapper } = require("../utility/");
 const {
   TourNotFoundException,
   ObjectIdIsNotValidException
-} = require("./exception");
+} = require("../utility/exception");
 
 const mongoose = require("mongoose");
 
