@@ -102,27 +102,23 @@ class createTourForm extends FormInput {
 				<h1>Create Tour</h1>
 				<ul>
 					<li>
-						<label>Your Tour Name : </label>
-						{ this.formHandle['textarea'](	"name"			, "name"
+						{ this.formHandle['textarea'](	"Your Tour Name"	, "name"
 														, this.handleChange	, true
 						)}
 					</li>
 					<li>
-						<label>Your Destination : </label>
-						{ this.formHandle['textarea'](	"dest"			, "dest"
+						{ this.formHandle['textarea'](	"Your Destination"	, "dest"
 														, this.handleChange , true
 						) }
 					</li>
 					<li>
 						<label>Many you group  :&emsp;</label>
-						<label>MIN</label>
-						{ this.formHandle['number']( "minMember"		, "minMember" 
+						{ this.formHandle['number']( "MIN"		, "minMember" 
 													, this.handleChange , false
 													, this.state.dataTour.minMember
 													, "0"
 						)}
-						<label>MAX</label>
-						{ this.formHandle['number']( "maxMember"		, "maxMember"
+						{ this.formHandle['number']( "MAX"		, "maxMember"
 													, this.handleChange , false
 													, this.state.dataTour.maxMember
 													, this.state.dataTour.minMember.toString()
@@ -130,14 +126,12 @@ class createTourForm extends FormInput {
 					</li>
 					<li>
 						<label>Duration Tour :&emsp;</label>
-						<label>MIN&emsp;</label>
-						{ this.formHandle["number"]( "minDuration"		, "minDuration"
+						{ this.formHandle["number"]( "MIN"			, "minDuration"
 													, this.handleChange , false
 													, this.state.dataTour.minDuration.toString()
 													, "0"
 						)}
-						<label>MAX&emsp;</label>
-						{ this.formHandle["number"]( "maxDuration"		, "maxDuration"
+						{ this.formHandle["number"]( "MAX"			, "maxDuration"
 													, this.handleChange , false
 													, this.state.dataTour.maxDuration.toString()
 													, this.state.dataTour.minDuration.toString()
@@ -145,12 +139,10 @@ class createTourForm extends FormInput {
 					</li>
 					<li>
 						<label>Period Tour :&emsp;</label>
-						<label>Start&emsp;</label>
-						{ this.formHandle["date"]( "startFreeDate"		, "startFreeDate"
+						{ this.formHandle["date"]( "Start"		, "startFreeDate"
 													, this.handleChange , false
 						)}
-						<label>End&emsp;</label>
-						{ this.formHandle["date"]( "endFreeDate"		, "endFreeDate"
+						{ this.formHandle["date"]( "End"		, "endFreeDate"
 													, this.handleChange , false
 						)}
 					</li>
@@ -170,8 +162,7 @@ class createTourForm extends FormInput {
 						)}
 					</li>
 					<li>
-						<label>Food:&emsp;</label>
-						{ this.formHandle["number"]( "food"				, "food"	
+						{ this.formHandle["number"]( "Food"				, "food"	
 													, this.handleChange , false
 													, this.state.dataTour.food
 													, "0"
@@ -179,28 +170,27 @@ class createTourForm extends FormInput {
 					</li>
 					<li>
 						<label>Want Guide&ensp;</label>
-						{ this.formHandle["radio"]( "radio"				, "requireGuide"
+						{ this.formHandle["radio"]( "YES"				, "requireGuide"
 													, this.handleChange	
 													, this.state.dataTour.requireGuide 
 													, "true" 
-						)} YES 
-						{ this.formHandle["radio"]( "radio"				, "requireGuide"
+						)} 
+						{ this.formHandle["radio"]( "NO"				, "requireGuide"
 													, this.handleChange	
 													, ! this.state.dataTour.requireGuide 
 													, "false" 
-						)} NO 
+						)} 
 					</li>
 					<li>
-						<p>Message to Tourism</p>
-						{ this.formHandle["manyText"]( "detail"			, "detail"
+						{ this.formHandle["manyText"]( "Message to Tourism"			, "detail"
 													, this.handleChange	, false
 													, "60"				, "5"
 													, "Let us know about your desired"
 						)}
 					</li>
 					<li>
-						<p>Message special detail of this tour</p>
-						{ this.formHandle["manyText"]( "highlight"		, "highlight"
+						{ this.formHandle["manyText"]( "Message special detail of this tour"	
+													, "highlight"
 													, this.handleChange , false
 													, "60"				, "5"
 													, "Let us know about your desired"
