@@ -33,6 +33,7 @@ class createTourForm extends FormInput {
 		this.conditionValue = [ "requireGuide"]
 		this.numericalValue = [	"minDuration" , "maxDuration" , "minMember" , "maxMember"
 								, "food" , "minPrice" , "maxPrice"];
+		this.testData = [ "Your Tour Name"	, "name" , this.handleChange	, true]
 	}
 
 	notReloadFunction(){
@@ -102,9 +103,10 @@ class createTourForm extends FormInput {
 				<h1>Create Tour</h1>
 				<ul>
 					<li>
-						{ this.formHandle['textarea'](	"Your Tour Name"	, "name"
+						{ this.formHandle['textarea'].apply( this , this.testData ) }
+{/*						{ this.formHandle['textarea'](	"Your Tour Name"	, "name"
 														, this.handleChange	, true
-						)}
+						)}*/}
 					</li>
 					<li>
 						{ this.formHandle['textarea'](	"Your Destination"	, "dest"
