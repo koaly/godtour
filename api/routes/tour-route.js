@@ -11,7 +11,7 @@ const tourConfig = require("./validation/tours-validation");
 const bookingConfig = require("./validation/booking-validation");
 const checkValidation = require("./validation/checkValidation");
 
-router.get("/", auth.require, tourController.getOneTour);
+router.get("/", auth.optional, tourController.getOneTour);
 router.get("/browse", auth.optional, tourController.getAllTours);
 //router.get("/browse", auth.optional, tourCtrl.getAll);
 router.get(
@@ -47,12 +47,7 @@ router.post(
   checkValidation,
   bookingCtrl.bookTour
 );
-router.delete(
-  "/",
-  auth.require,
-  //tourCtrl.checkOwnTour,
-  tourController.deleteTour
-);
+router.delete("/", auth.require, tourController.deleteTour);
 router.get(
   "/:id/edit",
   auth.require,

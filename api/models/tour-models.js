@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-
+const {
+  TourNotFoundException,
+  NoPermissonAccess
+} = require("../controllers/utility/exception");
 const tourSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: {
