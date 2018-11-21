@@ -25,11 +25,11 @@ const handle = async (req, res) => {
 
   const bookingResult = await Booking.find({ tourID: tourID });
 
-  //tour.remove();
+  tour.remove();
 
   console.log(bookingResult);
   bookingResult.forEach(book => {
-    //book.remove();
+    book.remove();
   });
 
   res.status(200).json({
