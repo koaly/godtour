@@ -90,6 +90,17 @@ class createTourForm extends FormInput {
 
 	componentDidMount() {
 		console.log("===============> createTourForm.componentDidMount");
+		this.updateDimensions();
+		window.addEventListener("resize" , this.updateDimensions.bind( this ) );
+	}
+
+	componentWillUnmount(){
+		console.log("===============> createTourForm.componentWillUnmount");
+		window.removeEventListener("resize" , this.updateDimensions.bind( this ));
+	}
+
+	updateDimensions(){
+		console.log( "width : height of window is " , window.innerWidth , window.innerHeight );
 	}
 
 	updateData(){

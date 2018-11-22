@@ -4,6 +4,11 @@ import Select from "./select";
 import Textarea from "./textarea";
 import "./formInput.css"
 
+function doResize( event , ui ){
+		console.log( "==========> FormInput.doResize " , event)
+		console.log( "=====> ui is " , ui ) 
+	}	
+
 class FormInput extends Component{
 
 	constructor( props ){
@@ -18,11 +23,6 @@ class FormInput extends Component{
 							, doubleDate	: this.formDoubleDate.bind(this)
 		}
 	}
-
-	doResize( event , ui ){
-		console.log( "==========> FormInput.doResize " , event)
-		console.log( "=====> ui is " , ui ) 
-	}	
 
 	setupClassNameLabel( numMode = 0){
 		this.className = ""
