@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Input from "./input";
 import Select from "./select";
 import Textarea from "./textarea";
+import "./formInput.css"
 
 class FormInput extends Component{
 
@@ -16,6 +17,15 @@ class FormInput extends Component{
 							, doubleRadio	: this.formDoubleRadio.bind(this)
 							, doubleDate	: this.formDoubleDate.bind(this)
 		}
+	}
+
+	doResize( event , ui ){
+		console.log( "==========> FormInput.doResize " , event)
+		console.log( "=====> ui is " , ui ) 
+	}	
+
+	setupClassNameLabel( numMode = 0){
+		this.className = ""
 	}
 
 	formDoubleDate( label, handleChange, label1, name1, mustHave1, label2, name2, mustHave2){

@@ -146,7 +146,7 @@ class createTourForm extends FormInput {
 				<h1>Create Tour</h1>
 				<ul>
 					{ this.dataForm.map( form => (
-						<li key={form[1][0]}>
+						<li>
 							{this.formHandle[ form[0] ].apply( this , form[1])}
 						</li>
 					))}
