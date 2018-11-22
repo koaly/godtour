@@ -3,6 +3,7 @@ import listCountries from "./common/dataList";
 import findDiffDay from "./common/otherFunction"; 
 import { toast } from "react-toastify";
 import FormInput from "./common/formInput";
+import "./common/formInput.css"
 
 class createTourForm extends FormInput {
 
@@ -101,6 +102,14 @@ class createTourForm extends FormInput {
 
 	updateDimensions(){
 		console.log( "width : height of window is " , window.innerWidth , window.innerHeight );
+		if( window.innerWidth <= 800 ){
+			this.setupClassName( 1 )
+			this.forceUpdate()
+		}
+		else{
+			this.setupClassName( 0 )
+			this.forceUpdate()
+		}
 	}
 
 	updateData(){
@@ -110,21 +119,21 @@ class createTourForm extends FormInput {
 			and second is array to input data to function create input form
 */
 		this.dataForm = [
-			[ "textarea" , ["Your Tour Name :", "name" , this.handleChange , true , "tourName"]] 
-		,	[ "textarea" , ["Your Destination :" , "dest" , this.handleChange , true ] ]
+			[ "textarea" , ["Your Tour Name", "name" , this.handleChange , true , "tourName"]] 
+		,	[ "textarea" , ["Your Destination" , "dest" , this.handleChange , true ] ]
 		,	[ "doubleNumber" ,	[ "Many member your group : " , this.handleChange , "MIN"
 									, "minMember" , this.state.dataTour.minMember , false , "MAX"
 									, "maxMember" , this.state.dataTour.maxMember , false
 								] ]
-		,	[ "doubleNumber" ,	[ "Duration Tour :" , this.handleChange , "MIN" , "minDuration"
+		,	[ "doubleNumber" ,	[ "Duration Tour" , this.handleChange , "MIN" , "minDuration"
 									, this.state.dataTour.minDuration.toString() , false , "MAX"
 									, "maxDuration" , this.state.dataTour.maxDuration , false
 								] ]
-		,	[ "doubleDate" , [ "Period Tour :" , this.handleChange 
+		,	[ "doubleDate" , [ "Period Tour" , this.handleChange 
 									, "Start" , "startFreeDate" , false
 									, "End" , "endFreeDate" , false
 								] ]
-		,	[ "doubleNumber" ,	[ "Price :" , this.handleChange , "MIN" , "minPrice" 
+		,	[ "doubleNumber" ,	[ "Price" , this.handleChange , "MIN" , "minPrice" 
 									, this.state.dataTour.minPrice , false , "MAX" , "maxPrice"
 									, this.state.dataTour.maxPrice , false 
 								] ] 
@@ -153,7 +162,7 @@ class createTourForm extends FormInput {
 			</div>);
 		}
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
-			return( <div className = "mgtb container">
+			return( <div className = "mgtb container testBlockD">
 				<h1>Create Tour</h1>
 				<ul>
 					{ this.dataForm.map( form => (
@@ -166,7 +175,7 @@ class createTourForm extends FormInput {
 			</div>);
 		}
 		else{
-			return(<div>
+			return(<div className="testBlockD">
 				<h1>Redirect Link to Page AddTour</h1>
 			</div>);
 		}

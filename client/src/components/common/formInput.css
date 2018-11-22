@@ -1,7 +1,27 @@
-.FromTestBlock{
+.testBlockR{
+	border : 0.5px solid red;
+}
+
+.testBlockB{
 	border : 0.5px solid blue;
 }
 
+.testBlockD{
+	border : 2px solid Black;
+}
+
+.labelHead00{
+	width	: 200px;
+}
+
 .labelHead01{
-	
+	width	: 100%;	
+}
+
+.textCenter{
+	text-align : center
+}
+
+.textLeft{
+	text-align : left
 }

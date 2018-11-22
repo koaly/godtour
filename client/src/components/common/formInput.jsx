@@ -24,8 +24,14 @@ class FormInput extends Component{
 		}
 	}
 
-	setupClassNameLabel( numMode = 0){
-		this.className = ""
+	setupClassName( numMode = 0){
+		console.log( "==========> FormInput.setupClassNameLabel " , numMode)
+		if( numMode === 1 ){
+			this.classNameLabel = "testBlockR labelHead01 textCenter"
+		}
+		else{
+			this.classNameLabel = "testBlockB labelHead00 textLeft"
+		}
 	}
 
 	formDoubleDate( label, handleChange, label1, name1, mustHave1, label2, name2, mustHave2){
@@ -54,11 +60,12 @@ class FormInput extends Component{
 	}
 
 	formTextArea( label , name , handleChange , mustHave = false , id = null){
+		console.log( "this.classNameLabel" , this.classNameLabel)
 		if( id === null ){
 			id = name.toString()
 		}
 		if( mustHave ){
-			return	<label>{label}&ensp;
+			return	<label><label className={this.classNameLabel}>{label}&ensp;</label>
 					<input	type = "textarea"
 							id = {id.toString()}
 							name = {name.toString()}
