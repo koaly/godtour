@@ -27,6 +27,7 @@ class createTourForm extends FormInput {
 							, detail			: ""
 							, highlight			: ""
 						  }
+			, mode		: -1
 		};
 		this.handleChange = this.handleChange.bind( this );
 		this.handleSubmitData = this.handleSubmitData.bind( this );
@@ -102,13 +103,17 @@ class createTourForm extends FormInput {
 
 	updateDimensions(){
 		console.log( "width : height of window is " , window.innerWidth , window.innerHeight );
+		let new_mode;
 		if( window.innerWidth <= 800 ){
-			this.setupClassName( 1 )
-			this.forceUpdate()
+			new_mode = 1;
 		}
 		else{
-			this.setupClassName( 0 )
-			this.forceUpdate()
+			new_mode = 0;
+		}
+		if( new_mode !== this.state.mode ){
+			this.setupClassName( new_mode );
+			this.state.mode = new_mode;
+			this.forceUpdate();
 		}
 	}
 
@@ -144,10 +149,10 @@ class createTourForm extends FormInput {
 								, this.state.dataTour.requireGuide , "YES"	, "NO"
 								] ]
 		,	["manyText" , [ "Message to Tourism" , "detail" , this.handleChange	, false
-									, "60"	, "5" , "Let us know about your desired"
+									, "20"	, "2" , "Let us know about your desired"
 								] ]
 		,	["manyText" , [ "Message special detail of this tour" , "highlight"
-									, this.handleChange , false , "60"	, "5"
+									, this.handleChange , false , "20"	, "2"
 									, "Let us know about your desired"
 								] ]
 		]
@@ -164,14 +169,14 @@ class createTourForm extends FormInput {
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
 			return( <div className = "mgtb container testBlockD">
 				<h1>Create Tour</h1>
-				<ul>
+				<div className="testBlockD">
 					{ this.dataForm.map( form => (
-						<li>
+						<div>
 							{this.formHandle[ form[0] ].apply( this , form[1])}
-						</li>
+						</div>
 					))}
 					<button onClick={this.handleSubmitData}>SUBMIT</button>	
-				</ul>
+				</div>
 			</div>);
 		}
 		else{

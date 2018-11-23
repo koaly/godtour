@@ -22,12 +22,15 @@ class FormInput extends Component{
 							, doubleRadio	: this.formDoubleRadio.bind(this)
 							, doubleDate	: this.formDoubleDate.bind(this)
 		}
+		this.freeString = "";
 	}
 
 	setupClassName( numMode = 0){
 		console.log( "==========> FormInput.setupClassNameLabel " , numMode)
 		if( numMode === 1 ){
 			this.classNameLabel = "testBlockR labelHead01 textCenter"
+			this.subLabel	= "sameLine"
+			this.subTag		= "width25 sameLine"
 		}
 		else{
 			this.classNameLabel = "testBlockB labelHead00 textLeft"
@@ -35,55 +38,65 @@ class FormInput extends Component{
 	}
 
 	formDoubleDate( label, handleChange, label1, name1, mustHave1, label2, name2, mustHave2){
-		return	<label>{label}&ensp;
+		return	<div className="minWidth100">
+				<label className={this.classNameLabel}>{label}</label>
 				{this.formHandle['date']( label1 , name1 , handleChange.bind(this) , mustHave1)}
 				{this.formHandle['date']( label2 , name2 , handleChange.bind(this) , mustHave2)}
-		</label>
+		</div>
 	}
 
 	formDoubleRadio( label , handleChange , name , value , labelTrue , labelFalse ){
-		return <label>{label}&ensp;
-			{this.formHandle['radio']( labelTrue, name, handleChange.bind(this), value, true)}
-			{this.formHandle['radio']( labelFalse, name, handleChange.bind(this), !value, false)}
-		</label>
+		return	<div className="minWidth100">
+				<label className={this.classNameLabel}>{label}</label>
+					{this.formHandle['radio']( labelTrue, name, handleChange.bind(this)
+												, value, true)}
+					{this.formHandle['radio']( labelFalse, name, handleChange.bind(this)
+												, !value, false)}
+		</div>
 	}
 
 	formDoubleNumber( label , handleChange 
 					, labelMin , nameMin , valueMin , mustHaveMin 
 					, labelMax , nameMax , valueMax , mustHaveMax ){
-		return <label>{label}&ensp;
-			{this.formHandle['number']( labelMin , nameMin , handleChange.bind( this ) 
-									, mustHaveMin , valueMin , "0")}
-			{this.formHandle['number']( labelMax , nameMax , handleChange.bind( this ) 
-									, mustHaveMax , valueMax , valueMin)}
-		</label>
+		return	<div className="minWidth100 testBlockB">
+				<label className={this.classNameLabel}>{label}</label>
+					{this.formHandle['number']( labelMin , nameMin , handleChange.bind( this ) 
+								, mustHaveMin , valueMin , "0"
+								, this.subTag , this.subLabel , "sameLine")}
+					{this.formHandle['number']( labelMax , nameMax , handleChange.bind( this ) 
+								, mustHaveMax, valueMax, valueMin
+								, this.subTag, this.subLabel , "sameLine")}
+		</div>
 	}
 
 	formTextArea( label , name , handleChange , mustHave = false , id = null){
-		console.log( "this.classNameLabel" , this.classNameLabel)
 		if( id === null ){
 			id = name.toString()
 		}
 		if( mustHave ){
-			return	<label><label className={this.classNameLabel}>{label}&ensp;</label>
+			return	<div className="widht100">
+					<label className={this.classNameLabel}>{label}</label>
 					<input	type = "textarea"
 							id = {id.toString()}
 							name = {name.toString()}
 							required
 							onChange = { handleChange.bind( this ) }/>
-		&ensp;</label>}
+		&ensp;</div>}
 		else{
-			return	<label>{label}&ensp;
+			return	<div><label className={this.classNameLabel}>{label}</label>
 					<input	type ="textarea"
 							id = {id.toString()}
 							name = {name.toString()}
 							onChange = { handleChange.bind( this ) } />
-		&ensp;</label>}
+		&ensp;</div>}
 	}
 
-	formNumber( label , name , handleChange , mustHave = false, value , min = null ){
+	formNumber( label , name , handleChange , mustHave = false, value , min = null 
+					, styleTag = this.freeString , styleLabel = this.classNameLabel 
+					, styleDIV = "widht100"){
 		if( mustHave ){
-			return	(<label>{label}&ensp; 
+			return	(<div className={styleDIV}>
+					<label className={styleLabel}>{label}</label> 
 					<input	type = "number"
 							id	= {name.toString()}
 							name = {name.toString()}
@@ -91,16 +104,19 @@ class FormInput extends Component{
 							onChange = { handleChange.bind( this ) }
 							min = {min.toString()}
 							value = {value.toString()} 
-		/>&ensp;</label>)}
+							className = {styleTag}
+		/>&ensp;</div>)}
 		else{
-			return	<label>{label}&ensp;
+			return	<div className={styleDIV}>
+					<label className={styleLabel}>{label}</label> 
 					< input	type = "number"
 							id	= {name.toString()}
 							name = {name.toString()}
 							onChange = { handleChange.bind( this ) }
 							min = {min.toString()}
 							value = {value.toString()}
-		/>&ensp;</label>}
+							className = {styleTag}
+		/>&ensp;</div>}
 	}	
 
 	formDate( label , name , handleChange , mustHave = false ){
@@ -113,12 +129,12 @@ class FormInput extends Component{
 							onChange = { handleChange.bind( this ) }
 		/>&ensp;</label>}
 		else{
-			return	<label>{label}&ensp;
+			return	<div className="sameLine">{label}&ensp;
 					< input	type = "date"
 							id = {name.toString()}
 							name = {name.toString()}
 							onChange = { handleChange.bind( this ) }
-		/>&ensp;</label>}
+		/>&ensp;</div>}
 	}
 
 	formRadio( label , name , handleChange , check , value ){
@@ -143,23 +159,25 @@ class FormInput extends Component{
 
 	formManyText( label , name , handleChange , mustHave , column , row , placeHolder ){
 		if( mustHave ){
-			return	<p>{label}
+			return	<div>
+					<label className={this.classNameLabel}>{label}</label>
 					< textarea	id = { name.toString() }
 								name = { name.toString() }
 								onChange = { handleChange.bind( this ) }
 								cols = { column.toString() }	
 								rows = { row.toString() }
 								placeholder = { placeHolder }
-		/></p>}
+		/></div>}
 		else{
-			return	<p>{label}
+			return	<div>
+					<label className={this.classNameLabel}>{label}</label>
 					< textarea	id = { name.toString() }
 								name = { name.toString() }
 								onChange = { handleChange.bind( this ) }
 								cols = { column.toString() }	
 								rows = { row.toString() }
 								placeholder = { placeHolder }
-		/></p>}
+		/></div>}
 	}
 
 } 
