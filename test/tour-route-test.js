@@ -3,7 +3,7 @@ const expect = require("chai").expect;
 
 const request = supertest.agent("http://localhost:5000/api");
 
-userCredentials = {
+nonOperatorCredentials = {
   email: "god@gmail.com",
   password: "12345"
 };
@@ -32,27 +32,53 @@ tourCredentials = {
   highlight: "everything"
 };
 
-// // no login
-// describe("Tour: Guest", () => {
-//   // create tour
-//   it("GET /tours/create with error 401", function(done) {
-//     this.timeout(2000);
+// no login
+describe("Tour: Guest", () => {
+  let tourID = '5bf867c90e8c0e3d6099278e';
+  // create tour
+  it("POST /tours/create with error 401", function(done) {
+    console.log(`/tours/create`);
+    this.timeout(0);
 
-//     request
-//       .get("/tours/create")
-//       .set("Accept", "application/json")
-//       .end((err, res) => {
-//         expect(res.statusCode).to.equal(401);
-//         done(err);
-//       });
-//   });
-// });
+    request
+      .post("/tours/create")
+      .set("Accept", "application/json")
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        done(err);
+      });
+  });
+  // edit tour
+  it(`PUT /tours?id with error 401`, function(done){
+    console.log(`/tours?id=${tourID}`);
+    this.timeout(0);
+    request
+      .put(`/tours?id=${tourID}`)
+      .set("Accept", "application/json")
+      .send(tourCredentials)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        done(err);
+      });
+  });
+  // delete tour
+  it(`DELETE /tours?id with error 401`, function(done) {
+    this.timeout(0);
+    request
+      .delete(`/tours?id=${tourID}`)
+      .set("Accept", "application/json")
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        done(err);
+      });
+  });
+});
 
 // operator login
 describe("Tour: Operator", () => {
   // login
-  var token = null;
-  var tourID = null;
+  let token = null;
+  let tourID = null;
   before(function(done) {
     this.timeout(0);
     request
@@ -60,25 +86,14 @@ describe("Tour: Operator", () => {
       .send(operatorCredentials)
       .end(function(err, response) {
         token = `JWT ${response.body.user.token}`;
+        console.log(operatorCredentials)
         expect(response.statusCode).to.equal(200);
         done(err);
       });
   });
   // create tour
-  // it("GET /tours/create with 200", function(done) {
-  //   this.timeout(0);
-
-  //   request
-  //     .get("/tours/create")
-  //     .set("Accept", "application/json")
-  //     .set("Authorization", token)
-  //     .end((err, res) => {
-  //       expect(res.body.message).to.equal("add tour page");
-  //       expect(res.statusCode).to.equal(200);
-  //       done(err);
-  //     });
-  // });
   it("POST /tours/create with 201", function(done) {
+    console.log(`/tours/create`);
     this.timeout(0);
 
     request
@@ -97,8 +112,8 @@ describe("Tour: Operator", () => {
   });
   // edit tour
   it(`PUT /tours?id with 200`, function(done){
-    this.timeout(0);
     console.log(`/tours?id=${tourID}`);
+    this.timeout(0);
     request
       .put(`/tours?id=${tourID}`)
       .set("Accept", "application/json")
@@ -112,15 +127,73 @@ describe("Tour: Operator", () => {
   // delete tour
   it(`DELETE /tours?id with 200`, function(done) {
     this.timeout(0);
-    console.log(`/tours?id=${tourID}`);
     request
       .delete(`/tours?id=${tourID}`)
       .set("Accept", "application/json")
       .set("Authorization", token)
       .end((err, res) => {
-        console.log(res.body);
         expect(res.statusCode).to.equal(200);
         expect(res.body.name).to.equal(tourCredentials.name);
+        done(err);
+      });
+  });
+});
+
+// user login
+describe("Tour: User", () => {
+  // login
+  let token = null;
+  let tourID = '5bf867c90e8c0e3d6099278e';
+  before(function(done) {
+    this.timeout(0);
+    request
+      .post("/users/login")
+      .send(nonOperatorCredentials)
+      .end(function(err, response) {
+        token = `JWT ${response.body.user.token}`;
+        console.log(nonOperatorCredentials)
+        expect(response.statusCode).to.equal(200);
+        done(err);
+      });
+  });
+  // create tour
+  it("POST /tours/create with error 403", function(done) {
+    console.log(`/tours/create`);
+    this.timeout(0);
+
+    request
+      .post("/tours/create")
+      .set("Accept", "application/json")
+      .set("Authorization", token)
+      .send(tourCredentials)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        done(err);
+      });
+  });
+  // edit tour
+  it(`PUT /tours?id with error 403`, function(done){
+    console.log(`/tours?id=${tourID}`);
+    this.timeout(0);
+    request
+      .put(`/tours?id=${tourID}`)
+      .set("Accept", "application/json")
+      .set("Authorization", token)
+      .send(tourCredentials)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
+        done(err);
+      });
+  });
+  // delete tour
+  it(`DELETE /tours?id with error 403`, function(done) {
+    this.timeout(0);
+    request
+      .delete(`/tours?id=${tourID}`)
+      .set("Accept", "application/json")
+      .set("Authorization", token)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(403);
         done(err);
       });
   });

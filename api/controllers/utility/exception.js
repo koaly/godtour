@@ -18,7 +18,8 @@ exports.StatusIsNotVaild = function() {
 
 exports.NoPermissonAccess = function() {
   this.name = "Status";
-  this.message = "No Permission Acess";
+  this.status = 403;
+  this.message = "Permission Denied";
 };
 //user old style function to memorize that is constructor
 exports.UserNotFoundException = function(username) {
