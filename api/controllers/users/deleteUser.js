@@ -1,6 +1,6 @@
 const User = require("../../models/user-models");
 const { asynWrapper } = require("../utility/");
-const { UserNotFoundException } = require("./exception");
+const { UserNotFoundException } = require("../utility/exception");
 
 const handle = async (req, res) => {
   /**

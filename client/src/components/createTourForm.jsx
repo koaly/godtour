@@ -33,6 +33,8 @@ class createTourForm extends FormInput {
 		this.conditionValue = [ "requireGuide"]
 		this.numericalValue = [	"minDuration" , "maxDuration" , "minMember" , "maxMember"
 								, "food" , "minPrice" , "maxPrice"];
+		this.testData = [ "Your Tour Name"	, "name" , this.handleChange	, true]
+		this.updateData = this.updateData.bind( this )
 	}
 
 	notReloadFunction(){
@@ -45,7 +47,7 @@ class createTourForm extends FormInput {
 			toast.error("require your tour name");
 			result = false;
 		}
-		if( ! document.getElementById("yourDestination").checkValidity()){
+		if( ! document.getElementById("dest").checkValidity()){
 			toast.error("require your destination");
 			result = false;
 		}
@@ -90,8 +92,50 @@ class createTourForm extends FormInput {
 		console.log("===============> createTourForm.componentDidMount");
 	}
 
+	updateData(){
+/*	this.formData is array to collect information for create form it is 2 dimension array
+		First Dimension tell many form have to fill data and have 2 component
+		In each order have 2 component first component is type of form
+			and second is array to input data to function create input form
+*/
+		this.dataForm = [
+			[ "textarea" , ["Your Tour Name :", "name" , this.handleChange , true , "tourName"]] 
+		,	[ "textarea" , ["Your Destination :" , "dest" , this.handleChange , true ] ]
+		,	[ "doubleNumber" ,	[ "Many member your group : " , this.handleChange , "MIN"
+									, "minMember" , this.state.dataTour.minMember , false , "MAX"
+									, "maxMember" , this.state.dataTour.maxMember , false
+								] ]
+		,	[ "doubleNumber" ,	[ "Duration Tour :" , this.handleChange , "MIN" , "minDuration"
+									, this.state.dataTour.minDuration.toString() , false , "MAX"
+									, "maxDuration" , this.state.dataTour.maxDuration , false
+								] ]
+		,	[ "doubleDate" , [ "Period Tour :" , this.handleChange 
+									, "Start" , "startFreeDate" , false
+									, "End" , "endFreeDate" , false
+								] ]
+		,	[ "doubleNumber" ,	[ "Price :" , this.handleChange , "MIN" , "minPrice" 
+									, this.state.dataTour.minPrice , false , "MAX" , "maxPrice"
+									, this.state.dataTour.maxPrice , false 
+								] ] 
+		,	[ "number" , [ "Food" , "food" , this.handleChange , false 
+									, this.state.dataTour.food , 0 
+								] ]
+		,	[ "doubleRadio" , [  "Want Guide" , this.handleChange , "requireGuide" 
+								, this.state.dataTour.requireGuide , "YES"	, "NO"
+								] ]
+		,	["manyText" , [ "Message to Tourism" , "detail" , this.handleChange	, false
+									, "60"	, "5" , "Let us know about your desired"
+								] ]
+		,	["manyText" , [ "Message special detail of this tour" , "highlight"
+									, this.handleChange , false , "60"	, "5"
+									, "Let us know about your desired"
+								] ]
+		]
+	}
+
 	render(){
 		console.log("===============> createTourForm.render" , this.state );
+		this.updateData()
 		if( this.state.user === null){
 			return(<div> 
 				<h1>Please Login Before Create Tour by Yourself</h1>
@@ -101,111 +145,11 @@ class createTourForm extends FormInput {
 			return( <div className = "mgtb container">
 				<h1>Create Tour</h1>
 				<ul>
-					<li>
-						<label>Your Tour Name : </label>
-						{ this.formHandle['textarea'](	"tourName"			, "name"
-														, this.handleChange	, true
-						)}
-					</li>
-					<li>
-						<label>Your Destination : </label>
-						{ this.formHandle['textarea'](	"yourDestination"	, "dest"
-														, this.handleChange , true
-						) }
-					</li>
-					<li>
-						<label>Many you group  :&emsp;</label>
-						<label>MIN</label>
-						{ this.formHandle['number']( "minMember"		, "minMember" 
-													, this.handleChange , false
-													, this.state.dataTour.minMember
-													, "0"
-						)}
-						<label>MAX</label>
-						{ this.formHandle['number']( "maxMember"		, "maxMember"
-													, this.handleChange , false
-													, this.state.dataTour.maxMember
-													, this.state.dataTour.minMember.toString()
-						)}
-					</li>
-					<li>
-						<label>Duration Tour :&emsp;</label>
-						<label>MIN&emsp;</label>
-						{ this.formHandle["number"]( "minDuration"		, "minDuration"
-													, this.handleChange , false
-													, this.state.dataTour.minDuration.toString()
-													, "0"
-						)}
-						<label>MAX&emsp;</label>
-						{ this.formHandle["number"]( "maxDuration"		, "maxDuration"
-													, this.handleChange , false
-													, this.state.dataTour.maxDuration.toString()
-													, this.state.dataTour.minDuration.toString()
-						)}
-					</li>
-					<li>
-						<label>Period Tour :&emsp;</label>
-						<label>Start&emsp;</label>
-						{ this.formHandle["date"]( "startFreeDate"		, "startFreeDate"
-													, this.handleChange , false
-						)}
-						<label>End&emsp;</label>
-						{ this.formHandle["date"]( "endFreeDate"		, "endFreeDate"
-													, this.handleChange , false
-						)}
-					</li>
-					<li>
-						<label>Price:&emsp;</label>
-						<label>&ensp;MIN</label>
-						{ this.formHandle["number"]( "minPrice"			, "minPrice"
-													, this.handleChange , false
-													, this.state.dataTour.minPrice.toString()
-													, "0"
-						)}
-						<label>&ensp;MAX</label>
-						{ this.formHandle["number"]( "maxPrice"			, "maxPrice"
-													, this.handleChange , false
-													, this.state.dataTour.maxPrice.toString()
-													, this.state.dataTour.minPrice.toString()
-						)}
-					</li>
-					<li>
-						<label>Food:&emsp;</label>
-						{ this.formHandle["number"]( "food"				, "food"	
-													, this.handleChange , false
-													, this.state.dataTour.food
-													, "0"
-						)}
-					</li>
-					<li>
-						<label>Want Guide&ensp;</label>
-						{ this.formHandle["radio"]( "radio"				, "requireGuide"
-													, this.handleChange	
-													, this.state.dataTour.requireGuide 
-													, "true" 
-						)} YES 
-						{ this.formHandle["radio"]( "radio"				, "requireGuide"
-													, this.handleChange	
-													, ! this.state.dataTour.requireGuide 
-													, "false" 
-						)} NO 
-					</li>
-					<li>
-						<p>Message to Tourism</p>
-						{ this.formHandle["manyText"]( "detail"			, "detail"
-													, this.handleChange	, false
-													, "60"				, "5"
-													, "Let us know about your desired"
-						)}
-					</li>
-					<li>
-						<p>Message special detail of this tour</p>
-						{ this.formHandle["manyText"]( "highlight"		, "highlight"
-													, this.handleChange , false
-													, "60"				, "5"
-													, "Let us know about your desired"
-						)}
-					</li>
+					{ this.dataForm.map( form => (
+						<li key={form[1][0]}>
+							{this.formHandle[ form[0] ].apply( this , form[1])}
+						</li>
+					))}
 					<button onClick={this.handleSubmitData}>SUBMIT</button>	
 				</ul>
 			</div>);

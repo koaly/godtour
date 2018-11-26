@@ -16,6 +16,7 @@ const checkValidation = require("./validation/checkValidation");
 
 //doesn't protect routes at this moment
 router.get("/", auth.optional, usercontroller.getOneUser);
+router.put("/", auth.require, usercontroller.editUser);
 router.get("/browse", auth.require, usercontroller.getFilterUser);
 
 router.get("/current", auth.require, userCtrl.currentUser);

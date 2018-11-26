@@ -20,7 +20,6 @@ const handle = async (req, res) => {
       startBookTime,
       endBookDate,
       endBookTime,
-      endBooking,
       departDate,
       returnDate,
       airline,
