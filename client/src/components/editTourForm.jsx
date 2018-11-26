@@ -144,10 +144,28 @@ class EditTourForm extends Form {
     // this.props.history.push("/");
   };
   componentDidMount() {
-    this.setState({ tour: "" });
+    // this.setState({ tour: "" });
   }
   render() {
     const { tour } = this.state;
+    if (!tour) return null;
+    const d = new Date(tour.departDate);
+    const date = d.getDate();
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+    const hour = d.getHours();
+    const minute = d.getMinutes();
+    const departDate = year + "-" + month + "-" + date;
+    const bookingTime = hour + ":" + minute;
+    const b = new Date(tour.endBooking);
+    // const date = b.getDate();
+    // const month = b.getMonth() + 1;
+    // const year = b.getFullYear();
+    // const hour = b.getHours();
+    // const minute = b.getMinutes();
+    console.log(hour);
+    console.log(minute);
+    console.log(departDate);
     console.log(tour);
     console.log(this.state);
     console.log(this.state.data);
@@ -188,14 +206,15 @@ class EditTourForm extends Form {
             "startBookTime",
             "Booking Time",
             "time",
-            "booking time"
+            "booking time",
+            bookingTime
           )}
           {this.renderInput(
             "departDate",
             "Departure Date",
             "date",
             "departure date",
-            tour.departDate
+            departDate
           )}
           {this.renderInput(
             "returnDate",

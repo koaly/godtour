@@ -74,7 +74,7 @@ class Form extends Component {
 
   renderInput(name, label, type = "text", placeholder, defaultVal) {
     const { data, errors } = this.state;
-
+    console.log(data[name]);
     return (
       <Input
         type={type}
