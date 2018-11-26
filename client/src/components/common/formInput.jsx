@@ -28,48 +28,64 @@ class FormInput extends Component{
 	setupClassName( numMode = 0){
 		console.log( "==========> FormInput.setupClassNameLabel " , numMode)
 		if( numMode === 1 ){
-			this.classNameLabel = "testBlockR labelHead01 textCenter"
-			this.subLabel	= "sameLine"
-			this.subTag		= "width25 sameLine"
-			this.styleSingleInput = "minWidth100"
+			this.classNameLabel = "labelHead01 textCenter"
+			this.subLabel	= "sameLine width25"
+			this.subTag		= "width70"
+			this.styleSingleInput	= "minWidth100"
+			this.subDIVRight		= "width45 sameLine marginRight3 blockRight"
+			this.subDIVLeft		= "width45 sameLine marginLeft3 blockLeft"
+			this.choiceDIV ="marginCenter "
+			this.radioAddition = " marginBottom minWidth100"
 		}
 		else{
-			this.classNameLabel = "testBlockB labelHead00 textLeft blockInside"
-			this.styleSingleInput = "width70 blockInside floatRight borderInput marginRight2"
-			this.subLabel	= "width20 textRight marginRight3px"
-			this.subTag		= "width75 "
+			this.classNameLabel = "labelHead00 textLeft sameLine marginLeft3"
+			this.styleSingleInput = "width60   borderInput marginRight2"
+			this.subLabel	= "width40px textRight marginRight3px sameLine"
+			this.subTag		= "width75 sameLine"
+			this.subDIVRight = "width30 sameLine"
+			this.subDIVLeft = "width30 sameLine"
+			this.choiceDIV = "sameLine"
+			this.radioAddition = "minWidth100"
 		}
 	}
 
 	formDoubleDate( label, handleChange, label1, name1, mustHave1, label2, name2, mustHave2){
 		return	<div className="minWidth100">
 				<label className={this.classNameLabel}>{label}</label>
-				{this.formHandle['date']( label1 , name1 , handleChange.bind(this) , mustHave1)}
-				{this.formHandle['date']( label2 , name2 , handleChange.bind(this) , mustHave2)}
+				{this.formHandle['date']( label1 , name1 , handleChange.bind(this) , mustHave1
+							, this.subTag , this.subLabel 
+							, this.subDIVLeft)}
+				{this.formHandle['date']( label2 , name2 , handleChange.bind(this) , mustHave2
+							, this.subTag , this.subLabel 
+							, this.subDIVRight)}
+				
 		</div>
 	}
 
 	formDoubleRadio( label , handleChange , name , value , labelTrue , labelFalse ){
-		return	<div className="minWidth100">
+		return	<div className={this.radioAddition}>
 				<label className={this.classNameLabel}>{label}</label>
+				<div className={ this.choiceDIV }>
 					{this.formHandle['radio']( labelTrue, name, handleChange.bind(this)
 												, value, true)}
 					{this.formHandle['radio']( labelFalse, name, handleChange.bind(this)
 												, !value, false)}
-		</div>
+		</div></div>
 	}
 
 	formDoubleNumber( label , handleChange 
 					, labelMin , nameMin , valueMin , mustHaveMin 
 					, labelMax , nameMax , valueMax , mustHaveMax ){
-		return	<div className="minWidth100 testBlockB">
+		return	<div className="minWidth100">
 				<label className={this.classNameLabel}>{label}</label>
 					{this.formHandle['number']( labelMin , nameMin , handleChange.bind( this ) 
 								, mustHaveMin , valueMin , "0"
-								, this.subTag , this.subLabel , "sameLine")}
+								, this.subTag , this.subLabel 
+								, this.subDIVLeft )}
 					{this.formHandle['number']( labelMax , nameMax , handleChange.bind( this ) 
 								, mustHaveMax, valueMax, valueMin
-								, this.subTag, this.subLabel , "sameLine")}
+								, this.subTag, this.subLabel 
+								, this.subDIVRight)}
 		</div>
 	}
 
@@ -121,25 +137,31 @@ class FormInput extends Component{
 							min = {min.toString()}
 							value = {value.toString()}
 							className = {styleTag}
-		/>&ensp;</div>}
+		/></div>}
 	}	
 
-	formDate( label , name , handleChange , mustHave = false ){
+	formDate( label , name , handleChange , mustHave = false 
+					, styleTag = this.styleSingleInput , styleLabel = this.classNameLabel 
+					, styleDIV = "width100"){
 		if( mustHave ){
-			return	<label>{label}&ensp;
+			return	<div className={styleDIV}>
+					<label className={styleLabel}>{label}</label>
 					< input	type = "date"
 							id = {name.toString()}
 							name = {name.toString()}
 							required
+							className = {styleTag}
 							onChange = { handleChange.bind( this ) }
-		/>&ensp;</label>}
+		/></div>}
 		else{
-			return	<div className="sameLine">{label}&ensp;
+			return	<div className={styleDIV}>
+					<label className={styleLabel}>{label}</label>
 					< input	type = "date"
 							id = {name.toString()}
 							name = {name.toString()}
 							onChange = { handleChange.bind( this ) }
-		/>&ensp;</div>}
+							className = {styleTag}
+		/></div>}
 	}
 
 	formRadio( label , name , handleChange , check , value ){

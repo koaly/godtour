@@ -126,7 +126,7 @@ class createTourForm extends FormInput {
 		this.dataForm = [
 			[ "textarea" , ["Your Tour Name", "name" , this.handleChange , true , "tourName"]] 
 		,	[ "textarea" , ["Your Destination" , "dest" , this.handleChange , true ] ]
-		,	[ "doubleNumber" ,	[ "Many member your group : " , this.handleChange , "MIN"
+		,	[ "doubleNumber" ,	[ "Many member your group" , this.handleChange , "MIN"
 									, "minMember" , this.state.dataTour.minMember , false , "MAX"
 									, "maxMember" , this.state.dataTour.maxMember , false
 								] ]
@@ -135,8 +135,8 @@ class createTourForm extends FormInput {
 									, "maxDuration" , this.state.dataTour.maxDuration , false
 								] ]
 		,	[ "doubleDate" , [ "Period Tour" , this.handleChange 
-									, "Start" , "startFreeDate" , false
-									, "End" , "endFreeDate" , false
+									, "START" , "startFreeDate" , false
+									, "END" , "endFreeDate" , false
 								] ]
 		,	[ "doubleNumber" ,	[ "Price" , this.handleChange , "MIN" , "minPrice" 
 									, this.state.dataTour.minPrice , false , "MAX" , "maxPrice"
@@ -169,9 +169,9 @@ class createTourForm extends FormInput {
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
 			return( <div className = "componentStyle testBlockD">
 				<h1>Create Tour</h1>
-				<div className="testBlockD">
+				<div className="noneMargin nonePadding">
 					{ this.dataForm.map( form => (
-						<div>
+						<div className="nonePadding noneMargin">
 							{this.formHandle[ form[0] ].apply( this , form[1])}
 						</div>
 					))}
@@ -180,7 +180,7 @@ class createTourForm extends FormInput {
 			</div>);
 		}
 		else{
-			return(<div className="testBlockD">
+			return(<div className="">
 				<h1>Redirect Link to Page AddTour</h1>
 			</div>);
 		}
