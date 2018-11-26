@@ -68,14 +68,14 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text", placeholder, defaultVal) {
+  renderInput(name, label, type = "text", placeholder) {
     const { data, errors } = this.state;
     console.log(data[name]);
     return (
       <Input
         type={type}
         name={name}
-        value={data[name] || defaultVal}
+        value={data[name]}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}
@@ -83,13 +83,13 @@ class Form extends Component {
       />
     );
   }
-  renderTextarea(name, label, type = "text", placeholder, defaultVal) {
+  renderTextarea(name, label, type = "text", placeholder) {
     const { data, errors } = this.state;
     return (
       <Textarea
         type={type}
         name={name}
-        value={data[name] || defaultVal}
+        value={data[name]}
         label={label}
         placeholder={placeholder}
         onChange={this.handleChange}
