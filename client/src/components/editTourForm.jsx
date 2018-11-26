@@ -20,11 +20,12 @@ class EditTourForm extends Form {
         nightDuration: "",
         startBookDate: "",
         startBookTime: "",
+        endBookDate: "",
+        endBookTime: "",
         departDate: "",
         returnDate: "",
         airline: "",
-        maxSeat: "",
-        currentSeat: "",
+        seat: "",
         food: "",
         detail: "",
         highlight: "",
@@ -81,6 +82,12 @@ class EditTourForm extends Form {
     startBookTime: Joi.string()
       .required()
       .label("StartBookTime"),
+    endBookDate: Joi.string()
+      .required()
+      .label("EndBookDate"),
+    endBookTime: Joi.string()
+      .required()
+      .label("EndBookTime"),
     departDate: Joi.string()
       .required()
       .label("DepartDate"),
@@ -90,16 +97,11 @@ class EditTourForm extends Form {
     airline: Joi.string()
       .required()
       .label("Airline"),
-    maxSeat: Joi.number()
+    seat: Joi.number()
       .integer()
       .min(0)
       .required()
-      .label("Max Seat"),
-    currentSeat: Joi.number()
-      .integer()
-      .min(0)
-      .required()
-      .label("Current Seat"),
+      .label("Seat"),
     food: Joi.number()
       .integer()
       .min(0)
@@ -120,7 +122,7 @@ class EditTourForm extends Form {
     try {
       const response = await editTour(this.state);
       console.log(response);
-      window.location = "/tours";
+      window.location = "/tours?page=1&limit=3";
       toast.success("Edited Success");
     } catch (ex) {
       console.log(ex.response.data);
@@ -144,27 +146,29 @@ class EditTourForm extends Form {
     // this.props.history.push("/");
   };
   componentDidMount() {
-    // this.setState({ tour: "" });
+    const { tour } = this.state;
+    // this.setState({ data: tour });
+    // this.setState({ data: tour, tour: "" });
   }
   render() {
-    const { tour } = this.state;
-    if (!tour) return null;
+    const { tour, data } = this.state;
+    if (!data) return null;
     const d = new Date(tour.departDate);
-    const date = d.getDate();
-    const month = d.getMonth() + 1;
-    const year = d.getFullYear();
-    const hour = d.getHours();
-    const minute = d.getMinutes();
-    const departDate = year + "-" + month + "-" + date;
-    const bookingTime = hour + ":" + minute;
+    const dDate = d.getDate();
+    const dMonth = d.getMonth() + 1;
+    const dYear = d.getFullYear();
+    const dHour = d.getHours();
+    const dMinute = d.getMinutes();
+    const departDate = dYear + "-" + dMonth + "-" + dDate;
+    const bookingTime = dHour + ":" + dMinute;
     const b = new Date(tour.endBooking);
-    // const date = b.getDate();
-    // const month = b.getMonth() + 1;
-    // const year = b.getFullYear();
-    // const hour = b.getHours();
-    // const minute = b.getMinutes();
-    console.log(hour);
-    console.log(minute);
+    const bDate = b.getDate();
+    const bMonth = b.getMonth() + 1;
+    const bYear = b.getFullYear();
+    const bHour = b.getHours();
+    const bMinute = b.getMinutes();
+    console.log(dHour);
+    console.log(dMinute);
     console.log(departDate);
     console.log(tour);
     console.log(this.state);
@@ -210,6 +214,18 @@ class EditTourForm extends Form {
             bookingTime
           )}
           {this.renderInput(
+            "endBookDate",
+            "End Booking Date",
+            "date",
+            "end booking date"
+          )}
+          {this.renderInput(
+            "endBookTime",
+            "End Booking Time",
+            "time",
+            "end booking time"
+          )}
+          {this.renderInput(
             "departDate",
             "Departure Date",
             "date",
@@ -230,20 +246,7 @@ class EditTourForm extends Form {
             "airline",
             tour.airline
           )}
-          {this.renderInput(
-            "maxSeat",
-            "Max Seat",
-            "number",
-            "max seat",
-            tour.maxSeat
-          )}
-          {this.renderInput(
-            "currentSeat",
-            "Current Seat",
-            "number",
-            "current seat",
-            tour.currentSeat
-          )}
+          {this.renderInput("seat", "Seat", "number", "seat", tour.maxSeat)}
           {this.renderInput("food", "Food", "text", "food", tour.food)}
           {this.renderInput(
             "imgsrc",

@@ -94,15 +94,14 @@ export function editTour(tour) {
     departDate,
     returnDate,
     airline,
-    maxSeat,
-    currentSeat,
+    seat,
     food,
     detail,
     highlight,
     imgsrc
   } = tour.data;
   return http.put(
-    tourEditEndpoint + "/" + tour.id + "/edit",
+    tourEditEndpoint + "?id=" + tour.id,
     {
       name,
       price,
@@ -116,8 +115,7 @@ export function editTour(tour) {
       departDate,
       returnDate,
       airline,
-      maxSeat,
-      currentSeat,
+      seat,
       food,
       detail,
       highlight,
