@@ -1,7 +1,7 @@
 const passport = require("passport");
 
 const { asynWrapper } = require("../utility/asynWarpper");
-const { UserNotFoundException } = require("./exception");
+const { UserNotFoundException } = require("../utility/exception");
 
 const handle = async (req, res) => {
   return await passport.authenticate(
