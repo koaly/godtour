@@ -104,7 +104,7 @@ class createTourForm extends FormInput {
 	updateDimensions(){
 		console.log( "width : height of window is " , window.innerWidth , window.innerHeight );
 		let new_mode;
-		if( window.innerWidth <= 800 ){
+		if( window.innerWidth < 1000 ){
 			new_mode = 1;
 		}
 		else{
@@ -167,7 +167,7 @@ class createTourForm extends FormInput {
 			</div>);
 		}
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
-			return( <div className = "mgtb container testBlockD">
+			return( <div className = "componentStyle testBlockD">
 				<h1>Create Tour</h1>
 				<div className="testBlockD">
 					{ this.dataForm.map( form => (

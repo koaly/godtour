@@ -10,9 +10,21 @@
 	border : 2px solid Black;
 }
 
+.noBorder{
+	border : 0px
+}
+
+.borderInput{
+	border : 1px solid Black;
+	border-radius : 10px;
+}
+
 .labelHead00{
-	min-width : 200px;
+	min-width : 200px;	
 	width	: auto;
+	width : 25%;
+	margin-left : 1%;
+	margin-right : None;
 }
 
 .labelHead01{
@@ -20,15 +32,23 @@
 }
 
 .textCenter{
-	text-align : center
+	text-align : center;
 }
 
 .textLeft{
-	text-align : left
+	text-align : left;
 }
 
 .textRight{
-	text-align : left
+	text-align : right;
+}
+
+.clearBoth{
+	clear : both;
+}
+
+.maxWidth100{
+	max-width : 100%;
 }
 
 .minWidth100{
@@ -44,14 +64,54 @@
 	width : 10%;
 }
 
+.width15{
+	width : 15%;
+}
+
+.width20{
+	width : 20%;
+}
+
 .width25{
 	width : 25%;
+}
+
+.width75{
+	width : 75%;
+	margin : None;
+}
+
+.width70{
+	width : 70%
+}
+
+.width50{
+	width : 50%;
 }
 
 .sameLine{
 	display : inline-block;
 	margin-right : 2px;
 	margin-left : 2px;
+}
+
+.blockInside{
+	display	: inline-block;
+}
+
+.floatRight{
+	float : right;
+}
+
+.floatCenter{
+	float : center;
+}
+
+.componentStyle{
+	width : 80%;
+	margin-right : 10%;
+	margin-left : 10%;
+	margin-top : 30px;
 }
 
 textarea{
@@ -61,4 +121,12 @@ textarea{
 	width : 100%;
 	border-radius: 10px;
 	display:block;	
+}
+
+.marginRight2{
+	margin-right: 2%;
+}
+
+.marginRight3px{
+	margin-right: 3px;
 }

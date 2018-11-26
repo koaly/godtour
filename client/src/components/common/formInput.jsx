@@ -31,9 +31,13 @@ class FormInput extends Component{
 			this.classNameLabel = "testBlockR labelHead01 textCenter"
 			this.subLabel	= "sameLine"
 			this.subTag		= "width25 sameLine"
+			this.styleSingleInput = "minWidth100"
 		}
 		else{
-			this.classNameLabel = "testBlockB labelHead00 textLeft"
+			this.classNameLabel = "testBlockB labelHead00 textLeft blockInside"
+			this.styleSingleInput = "width70 blockInside floatRight borderInput marginRight2"
+			this.subLabel	= "width20 textRight marginRight3px"
+			this.subTag		= "width75 "
 		}
 	}
 
@@ -78,6 +82,7 @@ class FormInput extends Component{
 					<label className={this.classNameLabel}>{label}</label>
 					<input	type = "textarea"
 							id = {id.toString()}
+							className={this.styleSingleInput}
 							name = {name.toString()}
 							required
 							onChange = { handleChange.bind( this ) }/>
@@ -92,7 +97,7 @@ class FormInput extends Component{
 	}
 
 	formNumber( label , name , handleChange , mustHave = false, value , min = null 
-					, styleTag = this.freeString , styleLabel = this.classNameLabel 
+					, styleTag = this.styleSingleInput , styleLabel = this.classNameLabel 
 					, styleDIV = "widht100"){
 		if( mustHave ){
 			return	(<div className={styleDIV}>
