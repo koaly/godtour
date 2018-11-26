@@ -11,6 +11,7 @@ class EditTourForm extends Form {
       id: this.props.match.params.id,
       token: this.props.token,
       user: this.props.user,
+      tour: this.props.location.state.tour,
       data: {
         name: "",
         price: "",
@@ -142,9 +143,11 @@ class EditTourForm extends Form {
     // console.log("Submitted");
     // this.props.history.push("/");
   };
-
+  componentDidMount() {
+    this.setState({ tour: "" });
+  }
   render() {
-    const { tour } = this.props.location.state;
+    const { tour } = this.state;
     console.log(tour);
     console.log(this.state);
     console.log(this.state.data);
