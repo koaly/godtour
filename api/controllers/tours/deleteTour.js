@@ -5,22 +5,25 @@ const { asynWrapper } = require("../utility/");
 const {
   TourNotFoundException,
   ObjectIdIsNotValidException
-} = require("./exception");
+} = require("../utility/exception");
 
 const mongoose = require("mongoose");
 
 const handle = async (req, res) => {
   const {
-    query: { id }
+    payload: {
+      info: { id: userID, status: userStatus }
+    },
+    query: { id: tourID }
   } = req;
 
-  if (!mongoose.Types.ObjectId.isValid(id))
+  if (!mongoose.Types.ObjectId.isValid(tourID))
     throw new ObjectIdIsNotValidException();
 
-  const tour = await Tour.findOne({ _id: id });
+  const tour = await Tour.findByOwnOneTour(userID, userStatus, tourID);
   if (!tour) throw new TourNotFoundException();
 
-  const bookingResult = await Booking.find({ tourID: id });
+  const bookingResult = await Booking.find({ tourID: tourID });
 
   tour.remove();
 

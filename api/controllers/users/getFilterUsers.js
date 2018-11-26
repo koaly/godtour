@@ -1,6 +1,9 @@
 const User = require("../../models/user-models");
 const { asynWrapper, getPaginate } = require("../utility/");
-const { UserNotFoundException, StatusIsNotVaild } = require("./exception");
+const {
+  UserNotFoundException,
+  StatusIsNotVaild
+} = require("../utility/exception");
 
 const getQueryForStatusUser = status => {
   return new Promise((resolve, reject) => {

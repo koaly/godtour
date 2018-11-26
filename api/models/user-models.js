@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt-nodejs");
 const jwt = require("jsonwebtoken");
 
+const {
+  UserNotFoundException,
+  NoPermissonAccess
+} = require("../controllers/utility/exception");
+
 const userSchema = mongoose.Schema({
   email: {
     type: String,
@@ -105,6 +110,24 @@ userSchema.methods.toAuthJSON = function() {
     token: this.generateJWT()
   };
 };
+
+userSchema.statics.findByOwnUser = function(userID, userStatus, findUsername) {
+  return new Promise((resolve, reject) => {
+    this.findOne({ username: findUsername })
+      .then(user => {
+        if (!user) reject(new UserNotFoundException());
+        if (userStatus === 2 || user._id == userID) {
+          resolve(user);
+        } else {
+          reject(new NoPermissonAccess());
+        }
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
 /*
 class UserNotFoundException {
     constructor() {

@@ -8,6 +8,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
+require('dotenv').config();
 const session = require('express-session');
 
 //require passport
@@ -15,7 +16,6 @@ const passport = require('passport')
 const passportSetup = require('./api/config/passport-setup');
 
 const expressValidator = require('express-validator');
-
 //connect to database
 mongoose.connect("mongodb://" + process.env.MONGO_MLAB_USER + ":"
     + process.env.MONGO_MLAB_PW +
