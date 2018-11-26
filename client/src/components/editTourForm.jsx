@@ -25,7 +25,8 @@ class EditTourForm extends Form {
         departDate: "",
         returnDate: "",
         airline: "",
-        seat: "",
+        currentSeat: "",
+        maxSeat: "",
         food: "",
         detail: "",
         highlight: "",
@@ -97,7 +98,12 @@ class EditTourForm extends Form {
     airline: Joi.string()
       .required()
       .label("Airline"),
-    seat: Joi.number()
+    currentSeat: Joi.number()
+      .integer()
+      .min(0)
+      .required()
+      .label("currentSeat"),
+    maxSeat: Joi.number()
       .integer()
       .min(0)
       .required()
@@ -147,12 +153,12 @@ class EditTourForm extends Form {
   };
   componentDidMount() {
     const { tour } = this.state;
-    // this.setState({ data: tour });
+
+    // this.setState({ data: tour, tour: "" });
     // this.setState({ data: tour, tour: "" });
   }
   render() {
     const { tour, data } = this.state;
-    if (!data) return null;
     const d = new Date(tour.departDate);
     const dDate = d.getDate();
     const dMonth = d.getMonth() + 1;
@@ -171,8 +177,13 @@ class EditTourForm extends Form {
     console.log(dMinute);
     console.log(departDate);
     console.log(tour);
+    console.log(data);
+    console.log(tour);
+    // if (!tour) return null;
+
     console.log(this.state);
     console.log(this.state.data);
+    console.log(data.departDate);
     return (
       <div className="container addtour form-container mgtb">
         <h2>Edit Tour</h2>
@@ -211,7 +222,7 @@ class EditTourForm extends Form {
             "Booking Time",
             "time",
             "booking time",
-            bookingTime
+            data.bookingTime
           )}
           {this.renderInput(
             "endBookDate",
@@ -230,7 +241,7 @@ class EditTourForm extends Form {
             "Departure Date",
             "date",
             "departure date",
-            departDate
+            data.departDate
           )}
           {this.renderInput(
             "returnDate",
@@ -246,7 +257,20 @@ class EditTourForm extends Form {
             "airline",
             tour.airline
           )}
-          {this.renderInput("seat", "Seat", "number", "seat", tour.maxSeat)}
+          {this.renderInput(
+            "currentSeat",
+            "Current Seat",
+            "number",
+            "current seat",
+            tour.currentSeat
+          )}
+          {this.renderInput(
+            "maxSeat",
+            "Max Seat",
+            "number",
+            "max seat",
+            tour.maxSeat
+          )}
           {this.renderInput("food", "Food", "text", "food", tour.food)}
           {this.renderInput(
             "imgsrc",
