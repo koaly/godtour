@@ -107,7 +107,7 @@ export default class OneTour extends Component {
       console.log(tour._id);
       await deleteTour(tour._id);
       toast.success("Delete success");
-      window.location = "/tours";
+      window.location = "/tours?page=1&limit=3";
       // await Axios.delete("http://localhost:5000/tours/" + this.state.tour._id, {
       //   headers: {
       //     Authorization: "JWT " + this.state.token
