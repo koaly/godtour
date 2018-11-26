@@ -34,8 +34,8 @@ router.delete("/", auth.require, tourCtrl.deleteTour);
 router.put(
   "/",
   auth.require,
-  tourConfig.tour,
-  checkValidation,
+  // tourConfig.tour,
+  // checkValidation,
   tourCtrl.editTour
 );
 /*
