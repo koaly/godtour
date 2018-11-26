@@ -193,7 +193,7 @@ describe("Tour: User", () => {
       .set("Accept", "application/json")
       .set("Authorization", token)
       .end((err, res) => {
-        expect(res.statusCode).to.equal(403);
+        expect(res.statusCode).to.equal(404);
         done(err);
       });
   });
