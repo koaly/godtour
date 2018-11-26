@@ -5,6 +5,12 @@ exports.TourNotFoundException = function(tourname) {
   this.message = `Tour ${tourname || "unknown"} is not found in database`;
 };
 
+exports.BookingNotFoundException = function() {
+  this.name = "Booking";
+  this.status = 404;
+  this.message = `Booking ${tourname || "unknown"} is not found in database`;
+};
+
 exports.ObjectIdIsNotValidException = function() {
   this.name = "ObjectId";
   this.status = 404;

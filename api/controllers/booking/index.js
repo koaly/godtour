@@ -1,0 +1,1 @@
+exports.getAllBooking = require("./getAllBooking");
