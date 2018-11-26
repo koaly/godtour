@@ -47,7 +47,7 @@ export default class OneTour extends Component {
       const result = await getSpecificTour(this.state.id);
       console.log(result);
       const { tour } = result.data;
-      this.setState({ tour: tour[0] });
+      this.setState({ tour });
     } catch (e) {
       //			console.log(e.response);
     }
@@ -189,7 +189,7 @@ export default class OneTour extends Component {
         </div>
       );
     }
-    if (!tour || tour.length === 0) {
+    if (!tour) {
       return <h1>notFoundTour</h1>;
     }
     console.log(tour);

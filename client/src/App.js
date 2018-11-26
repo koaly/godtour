@@ -87,7 +87,7 @@ class App extends Component {
               <Route path="/login" component={LoginForm} />
               <Route path="/logout" component={Logout} />
               <Route
-                path="/tours/id=:id"
+                path="/tours/:id"
                 render={props => <OneTour {...props} token={jwt} user={user} />}
               />
               <Route

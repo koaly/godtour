@@ -192,7 +192,7 @@ class ShowTour extends Component {
             Remaining Seat(s) : {tour.info.remainingSeat}/{tour.info.maxSeat}{" "}
             Seat(s)
           </p>
-          <Link className="" to={`/tours/id=${tour.id}`}>
+          <Link className="" to={`/tours/${tour.id}`}>
             Read More...
           </Link>
         </div>
