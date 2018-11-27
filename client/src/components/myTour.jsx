@@ -31,7 +31,7 @@ export default class myTour extends Component {
             <div className="col-md-5">
               <ProfileBar user={user} />
             </div>
-            <div className="col-md-7 mt-2">
+            <div className="col-md-7 mt-2 flex-column">
               <div className="profile-infor mr-5 ml-4">
                 <OwnTour />
               </div>
