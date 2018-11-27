@@ -27,6 +27,8 @@ import SumDataCreateTour from "./components/sumDataCreateTour";
 import MyTour from "./components/myTour";
 import RequestStatusForm from "./components/requestStatusForm";
 import MyTiy from "./components/myTiy";
+import AllTiys from "./components/allTiys";
+import CreateOffer from "./components/createOffer";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -89,6 +91,16 @@ class App extends Component {
               <Route
                 path="/tours/:id"
                 render={props => <OneTour {...props} token={jwt} user={user} />}
+              />
+              <Route
+                path="/allTiys"
+                render={props => <AllTiys {...props} token={jwt} user={user} />}
+              />
+              <Route
+                path="/:id/createOffer"
+                render={props => (
+                  <CreateOffer {...props} token={jwt} user={user} />
+                )}
               />
               <Route
                 path="/users/:username"

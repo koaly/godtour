@@ -48,12 +48,12 @@ export default class OwnTour extends Component {
 
     return (
       <div>
-        <p>{count} ownTour</p>
+        <p>Have {count} Own Tour(s)</p>
         <table className="table">
           <thead>
             <tr>
               <th>TourName</th>
-              <th>RemainingSeat</th>
+              <th>Remaining Seat(s)</th>
             </tr>
           </thead>
           <tbody>
