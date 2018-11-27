@@ -20,7 +20,7 @@ export default class SlideBoxItem extends Component {
     console.log(tour);
     return (
       <div className={name}>
-        <Link to={`/tours/id=${tour._id}`}>
+        <Link to={`/tours/${tour._id}`}>
           <img
             className="d-block w-100"
             style={{ maxHeight: 600 }}

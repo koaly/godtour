@@ -95,7 +95,7 @@ class AddTourForm extends Form {
     try {
       const response = await addTour(this.state.data);
       console.log(response);
-      window.location = "/tours";
+      window.location = "/tours?page=1&limit=3";
       toast.success("Added Success");
     } catch (ex) {
       console.log(ex.response.data);
@@ -162,12 +162,7 @@ class AddTourForm extends Form {
             "date",
             "departure date"
           )}
-          {this.renderInput(
-            "returnDate",
-            "Return Date",
-            "date",
-            "departure time"
-          )}
+          {this.renderInput("returnDate", "Return Date", "date", "return date")}
           {this.renderInput("airline", "Airline", "text", "airline")}
           {this.renderInput("seat", "Seat", "number", "seat")}
           {this.renderInput("food", "Food", "text", "food")}
