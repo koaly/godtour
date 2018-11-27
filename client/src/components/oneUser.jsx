@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 import { getSpecificUser, deleteSpecificUser } from "../services/specificUser";
 import { MailIcon } from "mdi-react";
 import Spinner from "./common/spinner";
-import getStatus from "./common/status"
+import getStatus from "./common/status";
+import { NavLink, Link } from "react-router-dom";
 export default class OneUser extends Component {
   constructor(props) {
     super(props);
@@ -75,7 +76,7 @@ export default class OneUser extends Component {
   };
 
   render() {
-    const { user, isLoaded } = this.state;
+    const { user, isLoaded, username } = this.state;
     const { registerDate } = user;
     const { currentUser } = this.props;
     console.log(currentUser);
@@ -101,17 +102,34 @@ export default class OneUser extends Component {
         <div className="profile-container bglight mgtb">
           <h1 className="profile-head">{user.displayName}</h1>
           <div className="row">
-            <div className="col-md-5 d-md-flex flex-column mb-3 mt-2 text-center">
-              <div className="nav flex-column">
-              <img
-                className="profileimg img-thumbnail rounded mx-3"
-                src={user.imgsrc}
-                
-                alt="sample image"
-              />
+            <div className="col-md-5">
+              <div className="text-center profile-infor mt-2 mb-3 mx-3">
+              <ul className="nav flex-column nav-pills">
+                  <img
+                    className="profileimg img-thumbnail rounded mx-3"
+                    src={user.imgsrc}
+                    
+                    alt="sample image"
+                  />
+                  <li className="nav-item">
+                    {/* <Link className="nav-link" exact to="/users/${username}">
+                      <span className="black">Profile</span>
+                    </Link> */}
+                    <NavLink className="nav-link" to={`/users/${user.username}`}>
+                      Profile
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to='/tours'>
+                      <center>
+                        <span className="black">User Tiys</span>
+                      </center>
+                    </NavLink>
+                  </li>
+              </ul>
               </div>
             </div>
-            <div className="col-md-7 d-md-flex flex-column mt-2 mb-3">
+            <div className="col-md-7 mt-2">
               <div className="profile-infor mt-1 mx-3">
                 <div className="profile-infor ">
                   <h4>
