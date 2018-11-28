@@ -34,7 +34,7 @@ tourCredentials = {
 
 // no login
 describe("Tour: Guest", () => {
-  let tourID = '5bf867c90e8c0e3d6099278e';
+  let tourID = '5bf4e94fe06f311ca128b121';
   // create tour
   it("POST /tours/create with error 401", function(done) {
     console.log(`/tours/create`);
@@ -143,7 +143,7 @@ describe("Tour: Operator", () => {
 describe("Tour: User", () => {
   // login
   let token = null;
-  let tourID = '5bf867c90e8c0e3d6099278e';
+  let tourID = '5bf4e94fe06f311ca128b121';
   before(function(done) {
     this.timeout(0);
     request
