@@ -7,7 +7,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <Link className="navbar-brand" to="/">
-        To-ur-world
+        <img src="https://i.imgur.com/KckwnUX.png" alt="logo" />
       </Link>
       <button
         className="navbar-toggler"
@@ -20,53 +20,89 @@ const NavBar = ({ user }) => {
       <div className="collapse navbar-collapse" id="collapsibleNavbar">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <NavLink className="nav-link" to="/tourIntroduce">
+            <NavLink
+              className="nav-link"
+              style={{ fontSize: 20 }}
+              to="/tourIntroduce"
+            >
               Tour Introduce
             </NavLink>
           </li>
-          {user &&
-            user.info.status === 0 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/users">
-                  Tour Operator
-                </NavLink>
-              </li>
-            )}
-          {user &&
-            user.info.status !== 0 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/users">
-                  Users
-                </NavLink>
-              </li>)}
-          {user &&
-            user.info.status !== 0 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/addTour">
-                  Add Tour
-                </NavLink>
-              </li>
-            )}
-          {user &&
-            user.info.status === 2 && (
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/admin/request">
-                  Request
-                  </NavLink>
-              </li>
-            )}
+          {user && user.info.status === 0 && (
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                style={{ fontSize: 20 }}
+                to="/users"
+              >
+                Tour Operator
+              </NavLink>
+            </li>
+          )}
+          {user && user.info.status !== 0 && (
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                style={{ fontSize: 20 }}
+                to="/users"
+              >
+                Users
+              </NavLink>
+            </li>
+          )}
+          {user && user.info.status !== 0 && (
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                style={{ fontSize: 20 }}
+                to="/addTour"
+              >
+                Add Tour
+              </NavLink>
+            </li>
+          )}
+          {user && user.info.status === 2 && (
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                style={{ fontSize: 20 }}
+                to="/admin/request"
+              >
+                Request
+              </NavLink>
+            </li>
+          )}
+          {user && user.info.status !== 0 && (
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                style={{ fontSize: 20 }}
+                to="/allTiys"
+              >
+                AllTiys
+              </NavLink>
+            </li>
+          )}
         </ul>
         <ul className="nav navbar-nav navbar-right">
           {!user && <LoginDropdown />}
           {user && (
             <React.Fragment>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">
+                <NavLink
+                  className="nav-link"
+                  style={{ fontSize: 20 }}
+                  to="/profile"
+                >
                   {user.info.displayName}
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/logout">
+                <NavLink
+                  className="nav-link"
+                  style={{ fontSize: 20 }}
+                  to="/logout"
+                >
                   Logout
                 </NavLink>
               </li>

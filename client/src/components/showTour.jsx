@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/showtour.css";
 import FetchAllTours from "./fetch/FetchAllTours";
 import SearchBox from "./searchBox";
+import Pagination from "./common/pagination";
 import queryString from "query-string";
 
 import {
@@ -27,7 +28,10 @@ class ShowTour extends Component {
       ListTour: [],
       searchQuery: "",
       limit: values.limit,
-      currentPage: values.page
+      currentPage: values.page,
+      hasNextPage: false,
+      total: 0,
+      pageSize: 0
     };
     this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
@@ -53,11 +57,22 @@ class ShowTour extends Component {
     }));
   }
 
-  handlePageChange = () => {
+  handleNextPage = () => {
     const { currentPage } = this.state;
     let currentPageInt = parseInt(currentPage, 10);
     this.setState({ currentPage: currentPageInt + 1 });
     console.log(currentPage);
+  };
+  handlePrevPage = () => {
+    const { currentPage } = this.state;
+    let currentPageInt = parseInt(currentPage, 10);
+    if (currentPageInt > 1) {
+      this.setState({ currentPage: currentPageInt - 1, hasPrevPage: true });
+    }
+    console.log(currentPage);
+  };
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
   };
 
   componentDidMount() {
@@ -74,7 +89,10 @@ class ShowTour extends Component {
       );
       console.log("getAllData", result);
       const value = result.data;
+      const { next: hasNextPage } = value;
+      const { total } = value;
       console.log("getAllData", value);
+      this.setState({ hasNextPage, total });
       this.dataAllTours = HandleObject.manage_group_tour_order(
         value,
         0,
@@ -132,8 +150,17 @@ class ShowTour extends Component {
       this.state,
       this.dataAllTours
     );
+    console.log(this.dataAllTours);
     console.log("After filter");
-    const { ListTour, searchQuery, currentPage, limit } = this.state;
+    const {
+      ListTour,
+      searchQuery,
+      currentPage,
+      limit,
+      hasNextPage,
+      count,
+      total
+    } = this.state;
     console.log(ListTour);
     let filtered = this.dataAllTours;
     if (searchQuery) {
@@ -165,7 +192,7 @@ class ShowTour extends Component {
             Remaining Seat(s) : {tour.info.remainingSeat}/{tour.info.maxSeat}{" "}
             Seat(s)
           </p>
-          <Link className="" to={`/tours/id=${tour.id}`}>
+          <Link className="" to={`/tours/${tour.id}`}>
             Read More...
           </Link>
         </div>
@@ -269,14 +296,31 @@ class ShowTour extends Component {
         {/* <button className="btn btn-primary" onClick={this.handlePageChange}>
           next page
         </button> */}
-
-        <a
-          className="btn btn-primary"
-          href={`/tours/?page=${currentPage}&limit=${limit}`}
-          onClick={this.handlePageChange}
-        >
-          Next Page
-        </a>
+        {currentPage !== "1" && (
+          <a
+            className="btn btn-primary mb-2 mr-2"
+            href={`/tours/?page=${currentPage}&limit=${limit}`}
+            onClick={this.handlePrevPage}
+          >
+            Previous Page
+          </a>
+        )}
+        {hasNextPage && (
+          <a
+            className="btn btn-primary mb-2"
+            href={`/tours/?page=${currentPage}&limit=${limit}`}
+            onClick={this.handleNextPage}
+          >
+            Next Page
+          </a>
+        )}
+        <Pagination
+          itemsCount={total}
+          pageSize={limit}
+          onPageChange={this.handlePageChange}
+          currentPage={parseInt(currentPage, 10)}
+          hrefTo={`/tours/?page=${currentPage}&limit=${limit}`}
+        />
       </div>
     );
   }

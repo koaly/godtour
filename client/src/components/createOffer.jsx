@@ -1,32 +1,33 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { addTour } from "../services/tourService";
+import { offerTiy } from "../services/tiyService";
 import { toast } from "react-toastify";
 
-class AddTourForm extends Form {
-  state = {
-    data: {
-      name: "",
-      price: "",
-      dest: "",
-      dayDuration: "",
-      nightDuration: "",
-      startBookDate: "",
-      startBookTime: "",
-      endBookDate: "",
-      endBookTime: "",
-      departDate: "",
-      returnDate: "",
-      airline: "",
-      seat: "",
-      food: "",
-      detail: "",
-      highlight: "",
-      imgsrc: ""
-    },
-    errors: {}
-  };
+class CreateOffer extends Form {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.match.params.id,
+      token: this.props.token,
+      user: this.props.user,
+      data: {
+        name: "",
+        price: "",
+        dest: "",
+        dayDuration: "",
+        nightDuration: "",
+        departDate: "",
+        returnDate: "",
+        airline: "",
+        member: "",
+        food: "",
+        detail: "",
+        highlight: ""
+      },
+      errors: {}
+    };
+  }
 
   schema = {
     name: Joi.string()
@@ -49,18 +50,6 @@ class AddTourForm extends Form {
       .required()
       .min(0)
       .label("NightDuration"),
-    startBookDate: Joi.string()
-      .required()
-      .label("StartBookDate"),
-    startBookTime: Joi.string()
-      .required()
-      .label("StartBookTime"),
-    endBookDate: Joi.string()
-      .required()
-      .label("EndBookDate"),
-    endBookTime: Joi.string()
-      .required()
-      .label("EndBookTime"),
     departDate: Joi.string()
       .required()
       .label("DepartDate"),
@@ -70,11 +59,11 @@ class AddTourForm extends Form {
     airline: Joi.string()
       .required()
       .label("Airline"),
-    seat: Joi.number()
+    member: Joi.number()
       .integer()
       .min(0)
       .required()
-      .label("Seat"),
+      .label("Member"),
     food: Joi.number()
       .integer()
       .min(0)
@@ -85,18 +74,15 @@ class AddTourForm extends Form {
       .label("Detail"),
     highlight: Joi.string()
       .required()
-      .label("Highlight"),
-    imgsrc: Joi.string()
-      .required()
-      .label("Imgsrc")
+      .label("Highlight")
   };
 
   doSubmit = async () => {
     try {
-      const response = await addTour(this.state.data);
+      const response = await offerTiy(this.state);
       console.log(response);
-      window.location = "/tours?page=1&limit=3";
-      toast.success("Added Success");
+      window.location = "/profile/myOffer";
+      toast.success("Create Offer Success");
     } catch (ex) {
       console.log(ex.response.data);
       if (
@@ -120,7 +106,7 @@ class AddTourForm extends Form {
   render() {
     return (
       <div className="container addtour form-container mgtb">
-        <h2>Add Tour</h2>
+        <h2>Create Offer</h2>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("name", "Name", "text", "name of tour")}
           {this.renderInput("price", "Price", "number", "price")}
@@ -138,25 +124,6 @@ class AddTourForm extends Form {
             "night duration"
           )}
           {this.renderInput(
-            "startBookDate",
-            "Booking Date",
-            "date",
-            "booking date"
-          )}
-          {this.renderInput("startBookTime", "Booking Time", "time", "booking")}
-          {this.renderInput(
-            "endBookDate",
-            "End Booking Date",
-            "date",
-            "booking date"
-          )}
-          {this.renderInput(
-            "endBookTime",
-            "End Booking Time",
-            "time",
-            "end booking"
-          )}
-          {this.renderInput(
             "departDate",
             "Departure Date",
             "date",
@@ -164,17 +131,16 @@ class AddTourForm extends Form {
           )}
           {this.renderInput("returnDate", "Return Date", "date", "return date")}
           {this.renderInput("airline", "Airline", "text", "airline")}
-          {this.renderInput("seat", "Seat", "number", "seat")}
+          {this.renderInput("member", "Member", "number", "member")}
           {this.renderInput("food", "Food", "text", "food")}
           {this.renderTextarea("detail", "Detail", "text", "detail")}
           {this.renderTextarea("highlight", "Highlight", "text", "highlight")}
-          {this.renderInput("imgsrc", "Imgsrc", "text", "imgsrc")}
           <div className="mgt" />
-          {this.renderButton("Add Tour")}
+          {this.renderButton("Offer tour")}
         </form>
       </div>
     );
   }
 }
 
-export default AddTourForm;
+export default CreateOffer;

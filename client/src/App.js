@@ -27,12 +27,15 @@ import SumDataCreateTour from "./components/sumDataCreateTour";
 import MyTour from "./components/myTour";
 import RequestStatusForm from "./components/requestStatusForm";
 import MyTiy from "./components/myTiy";
+import AllTiys from "./components/allTiys";
+import CreateOffer from "./components/createOffer";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import MyOffer from "./components/myOffer";
+import { ScrollToTop } from "./components/scrollToTop";
 
 class App extends Component {
   constructor() {
@@ -71,88 +74,106 @@ class App extends Component {
         <ToastContainer />
         <NavBar user={user} />
         <div>
-          <Switch>
-            <Route path="/" exact to component={HomePage} />
-            <Route path="/tours?page=1" component={ShowTour} />
-            <Route path="/not-found" component={NotFound} />
-            <Route path="/register" component={RegisterForm} />
-            <Route path="/request" component={RequestStatusForm} />
-            <Route
-              path="/tourIntroduce"
-              render={() => <TourIntroduce user={user} />}
-            />
-            <Route path="/login" component={LoginForm} />
-            <Route path="/logout" component={Logout} />
-            <Route
-              path="/tours/id=:id"
-              render={props => <OneTour {...props} token={jwt} user={user} />}
-            />
-            <Route
-              path="/users/:username"
-              render={props => (
-                <OneUser {...props} token={jwt} currentUser={user} />
-              )}
-            />
-            <Route
-              path="/tours"
-              render={props => <ShowTour {...props} token={jwt} />}
-            />
-            <Route
-              path="/users"
-              render={props => <ShowUser {...props} token={jwt} userr={user} />}
-            />
-            <Route
-              path="/admin/request"
-              render={props => (
-                <ShowRequest {...props} token={jwt} userr={user} />
-              )}
-            />
-            <Route
-              path="/createTour"
-              render={props => (
-                <CreateTourForm {...props} token={jwt} user={user} />
-              )}
-            />
-            <Route
-              path="/sumDataCreateTour"
-              render={props => (
-                <SumDataCreateTour {...props} token={jwt} user={user} />
-              )}
-            />
-            <Route path="/addTour" component={AddTourForm} />
-            <Route
-              path="/editTour/:id"
-              render={props => (
-                <EditTourForm {...props} token={jwt} user={user} />
-              )}
-            />
-            <Route path="/cancelBook" component={CancelBook} />
-            <Route
-              path="/profile/myBooking"
-              render={props => <MyBook {...props} user={user} token={jwt} />}
-            />
-            <Route
-              path="/profile/myTour"
-              render={props => <MyTour {...props} user={user} />}
-            />
-            <Route
-              path="/profile/myOffer"
-              render={props => <MyOffer {...props} user={user} />}
-            />
-            <Route
-              path="/profile/myCard"
-              render={() => <MyCard user={user} />}
-            />
-            <Route
-              path="/profile/purchaseList"
-              render={() => <PurchaseList user={user} />}
-            />
-            <Route path="/profile/myTiy" render={() => <MyTiy user={user} />} />
-            <Route path="/profile" render={() => <Profile user={user} />} />
-            <Route path="/testfetch" component={TestFetch} />
-            <Route path="/testpost" component={TestPost} />
-            <Redirect to="/not-found" />
-          </Switch>
+          <Route component={ScrollToTop} />
+          {
+            <Switch>
+              <Route path="/" exact to component={HomePage} />
+              <Route path="/tours?page=1" component={ShowTour} />
+              <Route path="/not-found" component={NotFound} />
+              <Route path="/register" component={RegisterForm} />
+              <Route path="/request" component={RequestStatusForm} />
+              <Route
+                path="/tourIntroduce"
+                render={() => <TourIntroduce user={user} />}
+              />
+              <Route path="/login" component={LoginForm} />
+              <Route path="/logout" component={Logout} />
+              <Route
+                path="/tours/:id"
+                render={props => <OneTour {...props} token={jwt} user={user} />}
+              />
+              <Route
+                path="/allTiys"
+                render={props => <AllTiys {...props} token={jwt} user={user} />}
+              />
+              <Route
+                path="/:id/createOffer"
+                render={props => (
+                  <CreateOffer {...props} token={jwt} user={user} />
+                )}
+              />
+              <Route
+                path="/users/:username"
+                render={props => (
+                  <OneUser {...props} token={jwt} currentUser={user} />
+                )}
+              />
+              <Route
+                path="/tours"
+                render={props => <ShowTour {...props} token={jwt} />}
+              />
+              <Route
+                path="/users"
+                render={props => (
+                  <ShowUser {...props} token={jwt} userr={user} />
+                )}
+              />
+              <Route
+                path="/admin/request"
+                render={props => (
+                  <ShowRequest {...props} token={jwt} userr={user} />
+                )}
+              />
+              <Route
+                path="/createTour"
+                render={props => (
+                  <CreateTourForm {...props} token={jwt} user={user} />
+                )}
+              />
+              <Route
+                path="/sumDataCreateTour"
+                render={props => (
+                  <SumDataCreateTour {...props} token={jwt} user={user} />
+                )}
+              />
+              <Route path="/addTour" component={AddTourForm} />
+              <Route
+                path="/editTour/:id"
+                render={props => (
+                  <EditTourForm {...props} token={jwt} user={user} />
+                )}
+              />
+              <Route path="/cancelBook" component={CancelBook} />
+              <Route
+                path="/profile/myBooking"
+                render={props => <MyBook {...props} user={user} token={jwt} />}
+              />
+              <Route
+                path="/profile/myTour"
+                render={props => <MyTour {...props} user={user} />}
+              />
+              <Route
+                path="/profile/myOffer"
+                render={props => <MyOffer {...props} user={user} />}
+              />
+              <Route
+                path="/profile/myCard"
+                render={() => <MyCard user={user} />}
+              />
+              <Route
+                path="/profile/purchaseList"
+                render={() => <PurchaseList user={user} />}
+              />
+              <Route
+                path="/profile/myTiy"
+                render={() => <MyTiy user={user} />}
+              />
+              <Route path="/profile" render={() => <Profile user={user} />} />
+              <Route path="/testfetch" component={TestFetch} />
+              <Route path="/testpost" component={TestPost} />
+              <Redirect to="/not-found" />
+            </Switch>
+          }
         </div>
         <Footer />
       </React.Fragment>

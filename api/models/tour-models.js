@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-
+const {
+  TourNotFoundException,
+  NoPermissonAccess
+} = require("../controllers/utility/exception");
 const tourSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: {
@@ -92,7 +95,7 @@ tourSchema.statics.findByOwnOneTour = function(userID, userStatus, tourID) {
       .then(tour => {
         if (!tour) reject(new TourNotFoundException());
 
-        if (userStatus === 2 || tour.operatorID === userID) {
+        if (userStatus === 2 || tour.operatorID == userID) {
           resolve(tour);
         } else {
           reject(new NoPermissonAccess());

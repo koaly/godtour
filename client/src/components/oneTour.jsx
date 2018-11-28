@@ -47,7 +47,7 @@ export default class OneTour extends Component {
       const result = await getSpecificTour(this.state.id);
       console.log(result);
       const { tour } = result.data;
-      this.setState({ tour: tour[0] });
+      this.setState({ tour });
     } catch (e) {
       //			console.log(e.response);
     }
@@ -107,7 +107,7 @@ export default class OneTour extends Component {
       console.log(tour._id);
       await deleteTour(tour._id);
       toast.success("Delete success");
-      window.location = "/tours";
+      window.location = "/tours?page=1&limit=3";
       // await Axios.delete("http://localhost:5000/tours/" + this.state.tour._id, {
       //   headers: {
       //     Authorization: "JWT " + this.state.token
@@ -189,7 +189,7 @@ export default class OneTour extends Component {
         </div>
       );
     }
-    if (!tour || tour.length === 0) {
+    if (!tour) {
       return <h1>notFoundTour</h1>;
     }
     console.log(tour);

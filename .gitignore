@@ -1,3 +1,4 @@
 node_modules
 *.jsx.swp
 .gitignore
+.env

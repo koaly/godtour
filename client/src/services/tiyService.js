@@ -4,6 +4,8 @@ import auth from "./authService";
 const apiEndpoint = "/api/users/current/offers";
 const tiyEndpoint = "/api/users/current/tiys";
 const tiyDeleteEndpoint = "/api/tiys/";
+const allTiysEndpoint = "/api/tiys";
+const offerTiysEndpoint = "/api/tiys";
 
 const config = {
   headers: {
@@ -15,10 +17,49 @@ export function getOwnOffer() {
   return http.get(apiEndpoint, config);
 }
 
+export function getAllTiys() {
+  return http.get(allTiysEndpoint + "/browse", config);
+}
+
 export function getOwnTiy() {
   return http.get(tiyEndpoint, config);
 }
 
 export function removeTiy(id) {
   return http.delete(tiyDeleteEndpoint + id, config);
+}
+
+export function offerTiy(tiy) {
+  const {
+    name,
+    price,
+    dest,
+    dayDuration,
+    nightDuration,
+    departDate,
+    returnDate,
+    airline,
+    member,
+    food,
+    detail,
+    highlight
+  } = tiy.data;
+  return http.post(
+    offerTiysEndpoint + "/" + tiy.id + "/offers/create",
+    {
+      name,
+      price,
+      dest,
+      dayDuration,
+      nightDuration,
+      departDate,
+      returnDate,
+      airline,
+      member,
+      food,
+      detail,
+      highlight
+    },
+    config
+  );
 }

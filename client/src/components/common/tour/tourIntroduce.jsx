@@ -67,7 +67,7 @@ class TourIntroduce extends Component {
               </div>
             </div>
 
-            <Link to="/tours">
+            <Link to="/tours?page=1&limit=3">
               <button className="but">Book Tour Now</button>
             </Link>
             {/*{user.info.status===0 && <a href="/tour">
