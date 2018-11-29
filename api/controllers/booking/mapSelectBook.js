@@ -31,6 +31,7 @@ const mapSelectBook = book => {
       tours: keys.map(k => {
         return {
           tour: k.name,
+          tour: k.keys,
           bookings: dict[k.keys]
         };
       })
