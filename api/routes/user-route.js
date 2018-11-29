@@ -41,17 +41,7 @@ router.delete(
   userCtrl.deleteUser
 );
 router.get("/current/bookings", auth.require, bookingcontroller.getOwnBooking);
-router.get(
-  "/current/bookings/:id",
-  auth.require,
-  bookingCtrl.checkNotNullBooking,
-  bookingCtrl.checkOwnBooking,
-  async (req, res) => {
-    res.status(200).json({
-      message: "cancel booking page"
-    });
-  }
-);
+
 router.delete(
   "/current/bookings/:id",
   auth.require,

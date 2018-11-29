@@ -17,7 +17,7 @@ const handle = async (req, res) => {
     booking: booking.map(b => {
       return {
         booking: b.toBookingJSON(),
-        GET: "https:/api/users/" + b.id
+        GET: "https:/api/tours/booking/" + b.id
       };
     })
   });

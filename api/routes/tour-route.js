@@ -3,6 +3,7 @@ const router = express.Router();
 
 const tourCtrl = require("../controllers/tours/");
 const operatorCtrl = require("../controllers/operator-controller");
+const bookingController = require("../controllers/booking/");
 const bookingCtrl = require("../controllers/booking-controller");
 const auth = require("./auth");
 
@@ -22,12 +23,14 @@ router.post(
   tourCtrl.addTour
 );
 
+router.get("/booking/:id", auth.require, bookingController.getOneBooking);
+
 router.post(
-  "/:id",
+  "/booking/:id",
   auth.require,
   bookingConfig.bookTour,
   checkValidation,
-  bookingCtrl.bookTour
+  bookingController.bookTour
 );
 router.delete("/", auth.require, tourCtrl.deleteTour);
 

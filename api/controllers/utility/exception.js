@@ -5,10 +5,10 @@ exports.TourNotFoundException = function(tourname) {
   this.message = `Tour ${tourname || "unknown"} is not found in database`;
 };
 
-exports.BookingNotFoundException = function() {
+exports.BookingNotFoundException = function(booking) {
   this.name = "Booking";
   this.status = 404;
-  this.message = `Booking ${tourname || "unknown"} is not found in database`;
+  this.message = `Booking ${booking || "unknown"} is not found in database`;
 };
 
 exports.ObjectIdIsNotValidException = function() {
@@ -33,7 +33,17 @@ exports.UserNotFoundException = function(username) {
   this.status = 404;
   this.message = `User ${username || "unknown"} is not found in database`;
 };
+exports.Request = function(value) {
+  this.name = "Id";
+  this.status = 400;
+  this.message = `request ${value}`;
+};
 
+exports.BookMoreThanCurrentSeat = function() {
+  this.name = "Booking";
+  this.status = 405;
+  this.message = "Attemped to book more than available";
+};
 exports.Exception = function(username) {
   this.name = "Server";
   this.status = 500;
