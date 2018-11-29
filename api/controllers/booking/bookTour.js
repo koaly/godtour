@@ -58,7 +58,7 @@ const handle = async (req, res) => {
     id: booking._id,
     tourId: tour._id,
     userId: userId,
-    currentSeat: `${tour.currentSeat}`,
+    currentSeat: tour.currentSeat,
     GET: "api/tours/booking/" + booking._id
   });
 };

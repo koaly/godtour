@@ -6,10 +6,12 @@ const mapSelectBook = book => {
     book.map(m => {
       if (dict[m.tourID]) {
         dict[m.tourID].push({
+          id: m._id,
           userID: m.userID,
           userName: m.userName,
           amountBooking: m.amountBooking,
-          bookingDate: m.bookingDate
+          bookingDate: m.bookingDate,
+          GET: "/api/tours/booking/" + m._id
         });
       } else {
         keys.push({
@@ -18,10 +20,12 @@ const mapSelectBook = book => {
         });
         dict[m.tourID] = [];
         dict[m.tourID].push({
+          id: m._id,
           userID: m.userID,
           userName: m.userName,
           amountBooking: m.amountBooking,
-          bookingDate: m.bookingDate
+          bookingDate: m.bookingDate,
+          GET: "/api/tours/booking/" + m._id
         });
       }
     });
@@ -31,7 +35,7 @@ const mapSelectBook = book => {
       tours: keys.map(k => {
         return {
           tour: k.name,
-          tour: k.keys,
+          tourId: k.keys,
           bookings: dict[k.keys]
         };
       })

@@ -12,8 +12,8 @@ const handle = async (req, res) => {
 
   if (!booking) throw new BookingNotFoundException();
 
-  booking = await getPaginate(booking, page, limit);
   booking = await mapSelectBook(booking);
+  //booking = await getPaginate(booking, page, limit);
   return res.status(200).json(booking);
 };
 

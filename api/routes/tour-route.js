@@ -26,12 +26,14 @@ router.post(
 router.get("/booking/:id", auth.require, bookingController.getOneBooking);
 
 router.post(
-  "/booking/:id",
+  "/:id",
   auth.require,
   bookingConfig.bookTour,
   checkValidation,
   bookingController.bookTour
 );
+
+router.delete("/booking/:id", auth.require, bookingController.cancelBooking);
 router.delete("/", auth.require, tourCtrl.deleteTour);
 
 router.put(
