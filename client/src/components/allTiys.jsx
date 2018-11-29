@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getAllTiys } from "../services/tiyService";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class AllTiys extends Component {
   constructor(props) {
@@ -11,11 +12,16 @@ class AllTiys extends Component {
     };
   }
   async componentDidMount() {
-    const { data } = await getAllTiys();
-    const { tiys } = data;
-    this.setState({ tiys, isLoaded: true });
-    console.log(data);
-    console.log(tiys);
+    try {
+      const { data } = await getAllTiys();
+      const { tiys } = data;
+      this.setState({ tiys, isLoaded: true });
+      console.log(data);
+      console.log(tiys);
+    } catch (ex) {
+      const { message } = ex.response.data.error;
+      toast.error(message);
+    }
   }
 
   render() {

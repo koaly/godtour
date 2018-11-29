@@ -27,7 +27,7 @@ export default class OwnTour extends Component {
       toast.info("Update TourList");
     } catch (e) {
       const { message } = e.response.data.error;
-      //toast.error(`${message}`)
+      toast.error(`${message}`);
     }
   }
   async componentDidMount() {
