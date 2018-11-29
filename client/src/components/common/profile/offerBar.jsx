@@ -21,7 +21,7 @@ export default class OfferBar extends Component {
       toast.info("Update OfferList");
     } catch (e) {
       const { message } = e.response.data.error;
-      //toast.error(`${message}`)
+      toast.error(`${message}`);
     }
   }
   async componentDidMount() {
