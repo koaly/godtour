@@ -24,7 +24,11 @@ export default class ProfileBooking extends Component {
   async getCurrentBooking() {
     try {
       const response = await showCurrentBookings();
-      const { booking } = response.data;
+      console.log(response);
+      const {
+        data: { booking }
+      } = response;
+      console.log(booking[0].booking);
 
       this.setState({ booking });
       toast.info("Update BookingList");
