@@ -9,7 +9,11 @@
 const asynWrapper = (asyncFn, req, res) => {
   asyncFn(req, res).catch(e => {
     console.log(e);
-    res.status(e.status || 500).json({ message: e.message });
+    res.status(e.status || 500).json({
+      error: {
+        msg: e.message
+      }
+    });
   });
 };
 module.exports = asynWrapper;
