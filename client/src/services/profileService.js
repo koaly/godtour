@@ -8,9 +8,6 @@ const config = {
   }
 };
 
-export function removeCurrentBookings(id) {
-  return http.delete(apiEndpoint + "/" + id, config);
-}
 export function showCurrentBookings() {
   return http.get(apiEndpoint, config);
 }

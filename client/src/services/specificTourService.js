@@ -2,6 +2,7 @@ import http from "./httpService";
 import auth from "./authService";
 
 const apiEndpoint = "/api/tours";
+
 const config = {
   headers: {
     Authorization: "JWT " + auth.getJwt()
@@ -15,4 +16,7 @@ export function getSpecificTour(id) {
 
 export function booking(id, field) {
   return http.post(apiEndpoint + "/" + id, field, config);
+}
+export function cancelBooking(id) {
+  return http.delete(apiEndpoint + "/booking/" + id, config);
 }

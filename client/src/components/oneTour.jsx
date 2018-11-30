@@ -66,7 +66,8 @@ export default class OneTour extends Component {
     };
     try {
       const result = await booking(this.state.id, field);
-      toast.success(`${result.data.message}`);
+      console.log(result.data);
+      toast.success(`${result.data.msg}`);
     } catch (e) {
       //mutliple error handliing
       const valiationError = e.response.data.errors;
