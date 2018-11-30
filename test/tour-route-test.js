@@ -74,10 +74,10 @@ describe("Tour: Guest", () => {
       });
   });
   // book tour
-  it('POST /tours/booking/:id with error 401', function(done){
+  it('POST /tours/:id with error 401', function(done){
     this.timeout(0);
     request
-      .post(`/tours/booking/${tourID}`)
+      .post(`/tours/${tourID}`)
       .set("Accept", "application/json")
       .send({ amountBooking : 2})
       .end((err, res) => {
@@ -151,10 +151,10 @@ describe("Tour: Operator", () => {
       });
   });
   // book tour
-  it('POST /tours/booking/:id 200', function(done){
+  it('POST /tours/:id 200', function(done){
     this.timeout(0);
     request
-      .post(`/tours/booking/5bf4e94fe06f311ca128b121`)
+      .post(`/tours/5bf4e94fe06f311ca128b121`)
       .set("Accept", "application/json")
       .set("Authorization", token)
       .send({ amountBooking : 2})
@@ -224,10 +224,10 @@ describe("Tour: User", () => {
       });
   });
   // book tour
-  it('POST /tours/booking/:id 200', function(done){
+  it('POST /tours/:id 200', function(done){
     this.timeout(0);
     request
-      .post(`/tours/booking/${tourID}`)
+      .post(`/tours/${tourID}`)
       .set("Accept", "application/json")
       .set("Authorization", token)
       .send({ amountBooking : 2})
