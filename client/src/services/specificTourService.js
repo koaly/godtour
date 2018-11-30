@@ -14,5 +14,5 @@ export function getSpecificTour(id) {
 }
 
 export function booking(id, field) {
-  return http.post(apiEndpoint + id, field, config);
+  return http.post(apiEndpoint + "/" + id, field, config);
 }
