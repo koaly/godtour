@@ -34,7 +34,7 @@ tourCredentials = {
 
 // no login
 describe("Tour: Guest", () => {
-  let tourID = '5bf867c90e8c0e3d6099278e';
+  let tourID = '5bf4e94fe06f311ca128b121';
   // create tour
   it("POST /tours/create with error 401", function(done) {
     console.log(`/tours/create`);
@@ -43,6 +43,7 @@ describe("Tour: Guest", () => {
     request
       .post("/tours/create")
       .set("Accept", "application/json")
+      .send(tourCredentials)
       .end((err, res) => {
         expect(res.statusCode).to.equal(401);
         done(err);
@@ -67,6 +68,18 @@ describe("Tour: Guest", () => {
     request
       .delete(`/tours?id=${tourID}`)
       .set("Accept", "application/json")
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        done(err);
+      });
+  });
+  // book tour
+  it('POST /tours/booking/:id with error 401', function(done){
+    this.timeout(0);
+    request
+      .post(`/tours/booking/${tourID}`)
+      .set("Accept", "application/json")
+      .send({ amountBooking : 2})
       .end((err, res) => {
         expect(res.statusCode).to.equal(401);
         done(err);
@@ -137,13 +150,26 @@ describe("Tour: Operator", () => {
         done(err);
       });
   });
+  // book tour
+  it('POST /tours/booking/:id 200', function(done){
+    this.timeout(0);
+    request
+      .post(`/tours/booking/5bf4e94fe06f311ca128b121`)
+      .set("Accept", "application/json")
+      .set("Authorization", token)
+      .send({ amountBooking : 2})
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        done(err);
+      });
+  });
 });
 
 // user login
 describe("Tour: User", () => {
   // login
   let token = null;
-  let tourID = '5bf867c90e8c0e3d6099278e';
+  let tourID = '5bf4e94fe06f311ca128b121';
   before(function(done) {
     this.timeout(0);
     request
@@ -194,6 +220,19 @@ describe("Tour: User", () => {
       .set("Authorization", token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(403);
+        done(err);
+      });
+  });
+  // book tour
+  it('POST /tours/booking/:id 200', function(done){
+    this.timeout(0);
+    request
+      .post(`/tours/booking/${tourID}`)
+      .set("Accept", "application/json")
+      .set("Authorization", token)
+      .send({ amountBooking : 2})
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
         done(err);
       });
   });

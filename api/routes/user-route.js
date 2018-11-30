@@ -8,6 +8,7 @@ const tiyCtrl = require("../controllers/tiy-controller");
 const offerCtrl = require("../controllers/offer-controller");
 const tourCtrl = require("../controllers/tour-controller");
 const bookingCtrl = require("../controllers/booking-controller");
+const bookingcontroller = require("../controllers/booking/");
 const operatorCtrl = require("../controllers/operator-controller");
 const adminCtrl = require("../controllers/admin-controller");
 const auth = require("./auth");
@@ -39,24 +40,13 @@ router.delete(
   adminCtrl.checkAdminStatus,
   userCtrl.deleteUser
 );
-router.get("/current/bookings", auth.require, bookingCtrl.getUserBooking);
-router.get(
-  "/current/bookings/:id",
-  auth.require,
-  bookingCtrl.checkNotNullBooking,
-  bookingCtrl.checkOwnBooking,
-  async (req, res) => {
-    res.status(200).json({
-      message: "cancel booking page"
-    });
-  }
-);
-router.delete(
-  "/current/bookings/:id",
-  auth.require,
-  bookingCtrl.checkOwnBooking,
-  bookingCtrl.cancelBooking
-);
+router.get("/current/booking", auth.require, bookingcontroller.getOwnBooking);
+
+router.delete("/current/booking/:id", auth.optional, (req, res) => {
+  res.status(200).json({
+    msg: "change path to DELETE tours/booking/:id"
+  });
+});
 
 router.get(
   "/current/tours",
