@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getOwnOffer } from "../../../services/tiyService";
+import { getOwnOffer, deleteSpecificOffer } from "../../../services/tiyService";
 import { toast } from "react-toastify";
 
 export default class OfferBar extends Component {
@@ -20,10 +20,23 @@ export default class OfferBar extends Component {
       console.log(offers[0].airline);
       toast.info("Update OfferList");
     } catch (e) {
-      const { message } = e.response.data.error;
-      toast.error(`${message}`);
+      const { msg } = e.response.data.error;
+      toast.error(`${msg}`);
     }
   }
+  handleDelete = async (tiyID, offerID) => {
+    try {
+      this.setState({ isLoaded: false });
+
+      await deleteSpecificOffer(tiyID, offerID);
+
+      this.setState({ isLoaded: true });
+      window.location("/profile/myOffer");
+    } catch (e) {
+      const { msg } = e.response.data.error;
+      toast.error(`${msg}`);
+    }
+  };
   async componentDidMount() {
     await this.getOffer();
   }
@@ -52,7 +65,12 @@ export default class OfferBar extends Component {
                       {o.departDate}/{o.returnDate}
                     </td>
                     <td>
-                      <button className="btn btn-danger btn-sm">Delete</button>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => this.handleDelete(o.tiyID, o._id)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 </tbody>

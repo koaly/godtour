@@ -5,6 +5,7 @@ import FetchAllTours from "./fetch/FetchAllTours";
 import SearchBox from "./searchBox";
 import Pagination from "./common/pagination";
 import queryString from "query-string";
+import Spinner from "./common/spinner"
 
 import {
   ClockIcon,
@@ -31,7 +32,8 @@ class ShowTour extends Component {
       currentPage: values.page,
       hasNextPage: false,
       total: 0,
-      pageSize: 0
+      pageSize: 0,
+      isLoaded: false
     };
     this.condition = 0; // 0 not anythin 1 is now loading 2 can look more tour
     this.ShowMoreCallback = this.ShowMoreCallback.bind(this);
@@ -79,6 +81,7 @@ class ShowTour extends Component {
     console.log("===============> ShowTour:componentDidMount");
     //    this.FetchAllTours.get_all_tours(this.FetchReceiveTourCallback);
     this.getAllData();
+    this.setState({isLoaded: true});
   }
 
   async getAllData() {
@@ -159,7 +162,8 @@ class ShowTour extends Component {
       limit,
       hasNextPage,
       count,
-      total
+      total,
+      isLoaded
     } = this.state;
     console.log(ListTour);
     let filtered = this.dataAllTours;
@@ -238,6 +242,17 @@ class ShowTour extends Component {
       if (this.state.Loading) this.condition = 1;
       else this.condition = 2;
     }
+
+    if (!isLoaded) {
+      return (
+        <div className="container text-align mgtb-2">
+          <div>
+            <Spinner />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container mgtb">
         {this.condition !== 1 && (

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getOwnTiy, removeTiy } from "../../../services/tiyService";
+import Spinner from "../spinner";
 
 class MyTiyTable extends Component {
   constructor(props) {
@@ -26,6 +27,17 @@ class MyTiyTable extends Component {
     const { count } = data;
     console.log(count);
     console.log(data);
+
+    if (!isLoaded) {
+      return (
+        <div className="container text-align mgtb-2">
+          <div>
+            <Spinner />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="profile-infor mx-3 ">
         <p>{count} Tiys</p>
