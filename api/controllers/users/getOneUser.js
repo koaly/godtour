@@ -7,7 +7,6 @@ const handle = async (req, res) => {
     query: { username }
   } = req;
   const user = await User.findOne({ username });
-
   if (!user) throw new UserNotFoundException(username);
 
   return res.status(200).json({
