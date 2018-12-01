@@ -49,8 +49,8 @@ export default class RequestBoxList extends Component {
 
     if (!isLoaded) {
       return (
-        <div className="container text-align">
-          <div className="user-content mx-3 my-3">
+        <div className="container text-align mgtb-2">
+          <div>
             <Spinner />
           </div>
         </div>
@@ -58,7 +58,7 @@ export default class RequestBoxList extends Component {
     }
 
     return (
-      <div className="profile-container bgdark">
+      <div className="profile-container">
         <div className="user-content mx-3 my-1">
           <h1 className="user-head">{count} Users in database</h1>
         </div>
