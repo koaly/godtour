@@ -15,13 +15,13 @@ export default class DeleteTourBar extends Component {
   removeTourById = async id => {
     try {
       const response = await deleteTour(id);
-      const { message } = response.data;
+      const { msg } = response.data;
 
-      toast.success(`${message}`);
+      toast.success(`${msg}`);
     } catch (e) {
       console.log(e);
-      const message = e.response.data.error.message;
-      toast.error(`${message}`);
+      const msg = e.response.data.error.message;
+      toast.error(`${msg}`);
     }
   };
 
