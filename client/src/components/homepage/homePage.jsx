@@ -35,7 +35,7 @@ class HomePage extends Component {
   }
 
   render() {
-    const {isLoaded } = this.state;
+    const { isLoaded } = this.state;
     if (!isLoaded) {
       return (
         <div className="container text-align mgtb-2">
@@ -54,7 +54,7 @@ class HomePage extends Component {
         <center>
           <h1 className="mb-5">Why Tour with To-ur World?</h1>
         </center>
-        <TourIn/>
+        <TourIn />
       </div>
     );
   }
