@@ -7,7 +7,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <Link className="navbar-brand" to="/">
-        <img src="https://i.imgur.com/KckwnUX.png" alt="logo" />
+        <img src="https://i.imgur.com/NVXiajl.png" alt="logo" />
       </Link>
       <button
         className="navbar-toggler"
@@ -19,7 +19,7 @@ const NavBar = ({ user }) => {
       </button>
       <div className="collapse navbar-collapse" id="collapsibleNavbar">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink
               className="nav-link"
               style={{ fontSize: 20 }}
@@ -27,12 +27,12 @@ const NavBar = ({ user }) => {
             >
               Tour Introduce
             </NavLink>
-          </li>
+          </li> */}
           {user && user.info.status === 0 && (
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 18 }}
                 to="/users"
               >
                 Tour Operator
@@ -43,7 +43,7 @@ const NavBar = ({ user }) => {
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 18 }}
                 to="/users"
               >
                 Users
@@ -54,7 +54,7 @@ const NavBar = ({ user }) => {
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 18 }}
                 to="/addTour"
               >
                 Add Tour
@@ -65,7 +65,7 @@ const NavBar = ({ user }) => {
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 18 }}
                 to="/admin/request"
               >
                 Request
@@ -76,7 +76,7 @@ const NavBar = ({ user }) => {
             <li className="nav-item">
               <NavLink
                 className="nav-link"
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 18 }}
                 to="/allTiys"
               >
                 AllTiys
@@ -91,7 +91,7 @@ const NavBar = ({ user }) => {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  style={{ fontSize: 20 }}
+                  style={{ fontSize: 18 }}
                   to="/profile"
                 >
                   {user.info.displayName}
@@ -100,7 +100,7 @@ const NavBar = ({ user }) => {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  style={{ fontSize: 20 }}
+                  style={{ fontSize: 18 }}
                   to="/logout"
                 >
                   Logout
