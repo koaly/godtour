@@ -35,6 +35,7 @@ tourCredentials = {
 // no login
 describe("Tour: Guest", () => {
   let tourID = '5bf4e94fe06f311ca128b121';
+  let bookingID = null;
   // create tour
   it("POST /tours/create with error 401", function(done) {
     console.log(`/tours/create`);
@@ -74,10 +75,10 @@ describe("Tour: Guest", () => {
       });
   });
   // book tour
-  it('POST /tours/booking/:id with error 401', function(done){
+  it('POST /tours/:id with error 401', function(done){
     this.timeout(0);
     request
-      .post(`/tours/booking/${tourID}`)
+      .post(`/tours/${tourID}`)
       .set("Accept", "application/json")
       .send({ amountBooking : 2})
       .end((err, res) => {
@@ -85,6 +86,18 @@ describe("Tour: Guest", () => {
         done(err);
       });
   });
+  // cancel booking
+  it('DELETE /tours/booking/:id with error 401', function(done){
+    this.timeout(0);
+    request
+      .delete(`/tours/booking/${bookingID}`)
+      .set("Accept", "application/json")
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(401);
+        done(err);
+      });
+  });
+
 });
 
 // operator login
@@ -92,6 +105,7 @@ describe("Tour: Operator", () => {
   // login
   let token = null;
   let tourID = null;
+  let bookingID = null;
   before(function(done) {
     this.timeout(0);
     request
@@ -151,13 +165,26 @@ describe("Tour: Operator", () => {
       });
   });
   // book tour
-  it('POST /tours/booking/:id 200', function(done){
+  it('POST /tours/:id with 200', function(done){
     this.timeout(0);
     request
-      .post(`/tours/booking/5bf4e94fe06f311ca128b121`)
+      .post(`/tours/5bf4e94fe06f311ca128b121`)
       .set("Accept", "application/json")
       .set("Authorization", token)
       .send({ amountBooking : 2})
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        bookingID = res.body.id;
+        done(err);
+      });
+  });
+  // cancel booking
+  it('DELETE /tours/booking/:id with 200', function(done){
+    this.timeout(0);
+    request
+      .delete(`/tours/booking/${bookingID}`)
+      .set("Accept", "application/json")
+      .set("Authorization", token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         done(err);
@@ -170,6 +197,7 @@ describe("Tour: User", () => {
   // login
   let token = null;
   let tourID = '5bf4e94fe06f311ca128b121';
+  let bookingID = null;
   before(function(done) {
     this.timeout(0);
     request
@@ -224,13 +252,26 @@ describe("Tour: User", () => {
       });
   });
   // book tour
-  it('POST /tours/booking/:id 200', function(done){
+  it('POST /tours/:id 200', function(done){
     this.timeout(0);
     request
-      .post(`/tours/booking/${tourID}`)
+      .post(`/tours/${tourID}`)
       .set("Accept", "application/json")
       .set("Authorization", token)
       .send({ amountBooking : 2})
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        bookingID = res.body.id;
+        done(err);
+      });
+  });
+  // cancel booking
+  it('DELETE /tours/booking/:id with 200', function(done){
+    this.timeout(0);
+    request
+      .delete(`/tours/booking/${bookingID}`)
+      .set("Accept", "application/json")
+      .set("Authorization", token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         done(err);
