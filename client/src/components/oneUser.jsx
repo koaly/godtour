@@ -88,7 +88,7 @@ export default class OneUser extends Component {
           <Spinner />
           <h1>{this.state.textLoad}</h1>
         </div>
-      )
+      );
     }
     if (!user || user.length === 0) {
       return <h1>notFoundUser</h1>;
@@ -104,29 +104,13 @@ export default class OneUser extends Component {
           <div className="row">
             <div className="col-md-5">
               <div className="text-center profile-infor mt-2 mb-3 mx-3">
-              <ul className="nav flex-column nav-pills">
+                <ul className="nav flex-column nav-pills">
                   <img
                     className="profileimg img-thumbnail rounded mx-3"
                     src={user.imgsrc}
-                    
                     alt="sample image"
                   />
-                  <li className="nav-item">
-                    {/* <Link className="nav-link" exact to="/users/${username}">
-                      <span className="black">Profile</span>
-                    </Link> */}
-                    <NavLink className="nav-link" to={`/users/${user.username}`}>
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className="nav-link" to='/tours'>
-                      <center>
-                        <span className="black">User Tiys</span>
-                      </center>
-                    </NavLink>
-                  </li>
-              </ul>
+                </ul>
               </div>
             </div>
             <div className="col-md-7 mt-2">
