@@ -104,37 +104,89 @@ class CreateOffer extends Form {
   };
 
   render() {
+    console.log(this.props.location.state);
+    const {
+      dest,
+      detail,
+      endFreeDate,
+      food,
+      highlight,
+      maxDuration,
+      maxMember,
+      maxPrice,
+      minDuration,
+      minMember,
+      minPrice,
+      name,
+      startFreeDate
+    } = this.props.location.state.tiys;
+    const deDate = new Date(startFreeDate);
+    console.log(deDate);
+    const dDate = deDate.getDate();
+    const dMonth = deDate.getMonth() + 1;
+    const dYear = deDate.getFullYear();
+    let getStartBookDate = dMonth + "/" + dDate + "/" + dYear;
+    console.log(getStartBookDate);
+    const reDate = new Date(endFreeDate);
+    console.log(endFreeDate);
+    const rDate = reDate.getDate();
+    console.log(rDate);
+    const rMonth = reDate.getMonth() + 1;
+    console.log(rMonth);
+    const rYear = reDate.getFullYear();
+    console.log(rYear);
+    let getReturnBookDate = rMonth + "/" + rDate + "/" + rYear;
+    console.log(getReturnBookDate);
+
+    console.log(dest);
     return (
       <div className="container addtour form-container mgtb">
         <h2>Create Offer</h2>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name", "text", "name of tour")}
-          {this.renderInput("price", "Price", "number", "price")}
-          {this.renderInput("dest", "Destination", "text", "destination")}
+          {this.renderInput("name", "Name", "text", name)}
+          {this.renderInput(
+            "price",
+            "Price",
+            "number",
+            minPrice + "-" + maxPrice
+          )}
+          {this.renderInput("dest", "Destination", "text", dest)}
           {this.renderInput(
             "dayDuration",
             "Day Duration",
             "text",
-            "day duration"
+            minDuration + "-" + maxDuration + " days"
           )}
           {this.renderInput(
             "nightDuration",
             "Night Duration",
             "text",
-            "night duration"
+            minDuration + "-" + maxDuration + " days"
           )}
           {this.renderInput(
             "departDate",
-            "Departure Date",
+            "Departure Date " + getStartBookDate + " to " + getReturnBookDate,
             "date",
-            "departure date"
+            "",
+            getStartBookDate + " to " + getReturnBookDate
           )}
-          {this.renderInput("returnDate", "Return Date", "date", "return date")}
+          {this.renderInput(
+            "returnDate",
+            "Return Date " + getStartBookDate + " to " + getReturnBookDate,
+            "date",
+            "",
+            getStartBookDate + " to " + getReturnBookDate
+          )}
           {this.renderInput("airline", "Airline", "text", "airline")}
-          {this.renderInput("member", "Member", "number", "member")}
-          {this.renderInput("food", "Food", "text", "food")}
-          {this.renderTextarea("detail", "Detail", "text", "detail")}
-          {this.renderTextarea("highlight", "Highlight", "text", "highlight")}
+          {this.renderInput(
+            "member",
+            "Member",
+            "number",
+            minMember + "-" + maxMember
+          )}
+          {this.renderInput("food", "Food", "text", food)}
+          {this.renderTextarea("detail", "Detail", "text", detail)}
+          {this.renderTextarea("highlight", "Highlight", "text", highlight)}
           <div className="mgt" />
           {this.renderButton("Offer tour")}
         </form>

@@ -8,5 +8,7 @@ exports.getFilterUser = require("./getFilterUsers");
  * @param {param} username username of user that want to request
  */
 exports.getOneUser = require("./getOneUser");
-
+exports.OneUser = require("./OneUser");
+exports.findUserRequest = require("./findUserRequest");
 exports.editUser = require("./editUser");
+exports.getMapUser = require("./getMapUser");

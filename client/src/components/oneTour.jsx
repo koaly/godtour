@@ -184,12 +184,14 @@ export default class OneTour extends Component {
     var user = this.state.user;
     if (!isLoaded) {
       return (
-        <div className="text-align mgtb">
-          <Spinner />
-          <h1>{this.state.textLoad}</h1>
+        <div className="container text-align mgtb-2">
+          <div>
+            <Spinner />
+          </div>
         </div>
       );
     }
+    
     if (!tour) {
       return <h1>notFoundTour</h1>;
     }

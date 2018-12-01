@@ -60,7 +60,7 @@ export default class OwnTour extends Component {
             {selectTours.map((tour, i) => (
               <tr key={i}>
                 <td>
-                  <Link className="text-primary" to={`/tours/id=${tour._id}`}>
+                  <Link className="text-primary" to={`/tours/${tour._id}`}>
                     {tour.name}
                   </Link>
                 </td>
