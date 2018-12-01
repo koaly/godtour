@@ -42,11 +42,19 @@ class AllTiys extends Component {
       <div className="container">
         <h1>hello</h1>
         {isLoaded &&
-          tiys.map(t => (
-            <div className="row">
-              <li key={t._id}>{t.name}</li>
-              <Link className="btn btn-primary" to={`/${t._id}/createOffer`}>
-                haha
+          tiys.map((t, index) => (
+            <div key={index} className="row">
+              <li>{t.name}</li>
+              <Link
+                className="btn btn-primary ml-4 mb-5"
+                to={{
+                  pathname: `/${t._id}/createOffer`,
+                  state: {
+                    tiys: t
+                  }
+                }}
+              >
+                Create offer
               </Link>
             </div>
           ))}

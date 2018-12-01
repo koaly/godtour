@@ -39,6 +39,12 @@ exports.Request = function(value) {
   this.message = `request ${value}`;
 };
 
+exports.NoRequestUpgrade = function(username) {
+  this.name = "User";
+  this.status = 403;
+  this.message = `${username} doesn't request upgrade`;
+};
+
 exports.BookMoreThanCurrentSeat = function() {
   this.name = "Booking";
   this.status = 405;
