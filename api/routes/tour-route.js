@@ -3,6 +3,7 @@ const router = express.Router();
 
 const tourCtrl = require("../controllers/tours/");
 const operatorCtrl = require("../controllers/operator-controller");
+const operatorController = require("../controllers/operator/");
 const bookingController = require("../controllers/booking/");
 const bookingCtrl = require("../controllers/booking-controller");
 const auth = require("./auth");
@@ -24,7 +25,16 @@ router.post(
 );
 
 router.get("/booking/:id", auth.require, bookingController.getOneBooking);
-
+router.get(
+  "/test",
+  auth.require,
+  operatorController.checkOperatorStatus,
+  (req, res, next) => {
+    res.status(200).json({
+      msg: "brick"
+    });
+  }
+);
 router.post(
   "/:id",
   auth.require,
