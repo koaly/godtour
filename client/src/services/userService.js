@@ -2,7 +2,7 @@ import http from "./httpService";
 import auth from "./authService";
 
 const apiEndpoint = "/api/users/signup";
-const allUserEndpoint = "/api/users/browse";
+const allUserEndpoint = "/api/users/browse?limit=100";
 
 const config = {
   headers: {
@@ -10,7 +10,7 @@ const config = {
   }
 };
 
-export function getAllUsers(user) {
+export function getAllUsers() {
   return http.get(allUserEndpoint, config);
 }
 
