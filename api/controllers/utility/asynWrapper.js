@@ -6,8 +6,8 @@
  * @returns {void}
  */
 
-const asynWrapper = (asyncFn, req, res) => {
-  asyncFn(req, res).catch(e => {
+const asynWrapper = (asyncFn, req, res, next) => {
+  asyncFn(req, res, next).catch(e => {
     console.log(e);
     res.status(e.status || 500).json({
       error: {
