@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import {
-  showCurrentBookings,
-  removeCurrentBookings
-} from "../../../services/profileService";
+import { showCurrentBookings } from "../../../services/profileService";
+
+import { cancelBooking } from "../../../services/specificTourService.js";
 import { toast } from "react-toastify";
 import { paginate } from "../../../utility/paginate";
 import { Link } from "react-router-dom";
@@ -24,7 +23,11 @@ export default class ProfileBooking extends Component {
   async getCurrentBooking() {
     try {
       const response = await showCurrentBookings();
-      const { booking } = response.data;
+      console.log(response);
+      const {
+        data: { booking }
+      } = response;
+      console.log(booking[0].booking);
 
       this.setState({ booking });
       toast.info("Update BookingList");
@@ -36,10 +39,10 @@ export default class ProfileBooking extends Component {
 
   async removeBooking(id) {
     try {
-      const response = await removeCurrentBookings(id);
-      const { message } = response.data;
+      const response = await cancelBooking(id);
+      const { msg } = response.data;
 
-      toast.success(`${message}`);
+      toast.success(`${msg}`);
     } catch (e) {
       console.log(e);
       const message = e.response.data.error.message;

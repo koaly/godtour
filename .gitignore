@@ -2,3 +2,4 @@ node_modules
 *.jsx.swp
 .gitignore
 .env
+package-lock.json
