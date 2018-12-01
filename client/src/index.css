@@ -180,7 +180,7 @@ code {
 }
 
 .profile-head {
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0.15) 0%,
       rgba(0, 0, 0, 0.15) 100%
@@ -194,11 +194,16 @@ code {
   background-blend-mode: multiply, multiply;
   padding-left: 20px;
   padding-top: 5px;
+  padding-bottom: 5px; */
+  background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+  padding-left: 20px;
+  padding-top: 5px;
   padding-bottom: 5px;
 }
 
 .bglight {
-  background-color: #ececec;
+  /* background-color: #ececec; */
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   overflow: hidden;

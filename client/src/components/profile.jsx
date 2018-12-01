@@ -3,6 +3,7 @@ import ProfileBar from "./common/profile/profileBar";
 import { MailIcon } from "mdi-react";
 import getStatus from "./common/status";
 import Link from "react-router-dom/Link";
+import Spinner from "./common/spinner";
 //import { Route, Switch, Redirect } from "react-router-dom";
 
 export default class Profile extends Component {
@@ -32,8 +33,15 @@ export default class Profile extends Component {
     const Rank = getStatus(status);
     const timeDate = registerDate.replace("T", " ").replace("Z", " ");
 
+
     if (!isLoaded) {
-      return <h1>isLoading</h1>;
+        return (
+          <div className="container text-align mgtb-2">
+            <div>
+              <Spinner />
+            </div>
+          </div>
+        );
     }
 
     return (

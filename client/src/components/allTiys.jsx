@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getAllTiys } from "../services/tiyService";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import Spinner from "../components/common/spinner";
 
 class AllTiys extends Component {
   constructor(props) {
@@ -27,6 +28,16 @@ class AllTiys extends Component {
   render() {
     const { tiys, isLoaded } = this.state;
     console.log(tiys);
+    if (!isLoaded) {
+      return (
+        <div className="container text-align mgtb-2">
+          <div>
+            <Spinner />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container">
         <h1>hello</h1>

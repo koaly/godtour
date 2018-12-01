@@ -50,8 +50,8 @@ export default class UserBoxList extends Component {
 
     if (!isLoaded) {
       return (
-        <div className="container text-align">
-          <div className="user-content mx-3 my-3">
+        <div className="container text-align mgtb-2">
+          <div>
             <Spinner />
           </div>
         </div>

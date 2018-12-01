@@ -74,7 +74,13 @@ export default class ProfileBooking extends Component {
     const selectBooking = paginate(booking, currentPage, pageSize);
 
     if (!isLoaded) {
-      return <Spinner />;
+      return (
+        <div className="container text-align mgtb-2">
+          <div>
+            <Spinner />
+          </div>
+        </div>
+      );
     }
 
     console.log(booking);
