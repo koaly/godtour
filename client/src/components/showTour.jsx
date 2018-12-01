@@ -170,13 +170,16 @@ class ShowTour extends Component {
     }
     const showlistTour = ListTour.map(tour => (
       <li key={tour.id} className="card mb-5 card-size">
-        <img
-          src={tour.info.imgsrc}
-          alt="sample image"
-          className="mb-3"
-          width="100%"
-          height="auto"
-        />
+        <Link to={`/tours/${tour.id}`}>
+          <img
+            src={tour.info.imgsrc}
+            alt="sample image"
+            className="mb-3"
+            width="100%"
+            height="auto"
+          />
+        </Link>
+
         <div className="showtour-content">
           <h3 className="mb-3">{tour.name}</h3>
           <p>

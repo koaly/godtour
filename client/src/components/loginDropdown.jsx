@@ -49,7 +49,7 @@ class LoginDropdown extends (Component, Form) {
           className="nav-link dropdown-toggle"
           to="/login"
           data-toggle="dropdown"
-          style={{fontSize:20}}
+          style={{fontSize:18}}
         >
           Login
         </NavLink>
