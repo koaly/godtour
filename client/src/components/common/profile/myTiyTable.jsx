@@ -28,16 +28,6 @@ class MyTiyTable extends Component {
     console.log(count);
     console.log(data);
 
-    if (!isLoaded) {
-      return (
-        <div className="container text-align mgtb-2">
-          <div>
-            <Spinner />
-          </div>
-        </div>
-      );
-    }
-
     return (
       <div className="profile-infor mx-3 ">
         <p>{count} Tiys</p>
