@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TrashCanIcon, CancelIcon } from "mdi-react";
-import SearchBox from "./searchBox";
+import SearchBox from "./common/searchBox";
 import { query } from "express-validator/check";
 import { getAllTours } from "../services/tourService";
 
