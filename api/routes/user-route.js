@@ -69,17 +69,11 @@ router.get(
   offerCtrl.getOwnOffer
 );
 
-router.get(
-  "/current/request/upgrade",
-  auth.require,
-  operatorCtrl.checkNonOperatorStatus,
-  userCtrl.currentUser
-);
+router.get("/current/request/upgrade", auth.require, userCtrl.currentUser);
 
 router.put(
   "/current/request/upgrade",
   auth.require,
-  operatorCtrl.checkNonOperatorStatus,
   operatorCtrl.requestUpgrade
 );
 
