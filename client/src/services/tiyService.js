@@ -17,6 +17,13 @@ export function getOwnOffer() {
   return http.get(apiEndpoint, config);
 }
 
+export function deleteSpecificOffer(tiyId, offerId) {
+  return http.delete(
+    offerTiysEndpoint + "/" + tiyId + "/offers/" + offerId,
+    config
+  );
+}
+
 export function getAllTiys() {
   return http.get(allTiysEndpoint + "/browse", config);
 }
