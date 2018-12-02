@@ -181,15 +181,17 @@ class createTourForm extends FormInput {
 			</div>);
 		}
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
-			return( <div className = "componentStyle ">
+			return( <div className = "componentStyle marginBottom10px">
 				<h1>Create Tour</h1>
 				<div className="noneMargin nonePadding">
 					{ this.dataForm.map( form => (
-						<div className="nonePadding noneMargin">
+						<div className="nonePadding noneMargin marginBottom10px">
 							{this.formHandle[ form[0] ].apply( this , form[1])}
 						</div>
 					))}
-					<button onClick={this.handleSubmitData}>SUBMIT</button>	
+					<button onClick={this.handleSubmitData}
+							className="btn btn-primary minWidth100"
+					>SUBMIT</button>	
 				</div>
 			</div>);
 		}
