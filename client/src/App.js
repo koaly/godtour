@@ -14,7 +14,7 @@ import RegisterForm from "./components/user/registerForm";
 import LoginForm from "./components/user/loginForm";
 import Logout from "./components/user/logout";
 import MyBook from "./components/profile/myBooking";
-import CancelBook from "./components/cancelBook";
+
 import MyCard from "./components/profile/myCard";
 import OneTour from "./components/tour/oneTour";
 import OneUser from "./components/user/oneUser";
@@ -36,7 +36,7 @@ import OneOffer from "./components/profile/oneOffer";
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
+import "./css/App.css";
 import MyOffer from "./components/profile/myOffer";
 import { ScrollToTop } from "./components/common/scrollToTop";
 
@@ -152,7 +152,7 @@ class App extends Component {
                   <EditTourForm {...props} token={jwt} user={user} />
                 )}
               />
-              <Route path="/cancelBook" component={CancelBook} />
+
               <Route
                 path="/profile/myBooking"
                 render={props => <MyBook {...props} user={user} token={jwt} />}
