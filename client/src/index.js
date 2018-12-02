@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import "./footer.css";
-import "./form.css";
-import "./tourIntro.css";
+import "./css/index.css";
+import "./css/footer.css";
+import "./css/form.css";
+import "./css/tourIntro.css";
 import "./components/homepage/hompage.css";
 
 import App from "./App";

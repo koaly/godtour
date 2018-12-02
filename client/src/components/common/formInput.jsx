@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Input from "./input";
 import Select from "./select";
 import Textarea from "./textarea";
-import "./formInput.css"
+import "../../css/formInput.css"
 
 function doResize( event , ui ){
 		console.log( "==========> FormInput.doResize " , event)
