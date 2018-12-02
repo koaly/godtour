@@ -5,6 +5,7 @@ const tiyCtrl = require("../controllers/tiy-controller");
 const adminCtrl = require("../controllers/admin");
 const offerCtrl = require("../controllers/offer-controller");
 const operatorController = require("../controllers/operator");
+const offerController = require("../controllers/offer");
 const auth = require("./auth");
 const checkValidation = require("./validation/checkValidation");
 const tiyConfig = require("./validation/tiy-validation");
@@ -85,11 +86,18 @@ router.put(
 );
 
 router.get(
+  "/offers/browse",
+  auth.optional,
+  offerController.getOffers,
+  offerController.showOffers
+);
+router.get(
   "/:tiyID/offers",
   auth.require,
   tiyCtrl.checkNotNullTiy,
   tiyCtrl.checkOwnTiyPlus,
-  offerCtrl.getByTiy
+  offerController.getOffersWithTiy,
+  offerController.showOffers
 );
 router.get(
   "/:tiyID/offers/create",
@@ -116,9 +124,8 @@ router.get(
   "/:tiyID/offers/:offerID",
   auth.require,
   tiyCtrl.checkNotNullTiy,
-  offerCtrl.checkNotNullOffer,
-  offerCtrl.checkOwnOfferPlus,
-  offerCtrl.getOneOffer
+  offerController.getCheckOwnOfferWithTiy,
+  offerController.oneOffers
 );
 //donesn't need body
 router.post(
@@ -133,9 +140,8 @@ router.delete(
   "/:tiyID/offers/:offerID",
   auth.require,
   tiyCtrl.checkNotNullTiy,
-  offerCtrl.checkNotNullOffer,
-  offerCtrl.checkOwnOffer,
-  offerCtrl.deleteOffer
+  offerController.getCheckOwnOffer,
+  offerController.deleteOffer
 );
 
 router.get(
