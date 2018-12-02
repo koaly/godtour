@@ -47,7 +47,11 @@ class TiyOffered extends Component {
 
             <div className="container col-md-7 mt-2 flex-column">
               <div className="profile-infor mx-3 ">
-                <p>{count} offer(s) is coming</p>
+                {count === 0 ? (
+                  <p>no one offer you haha</p>
+                ) : (
+                  <p>{count} offer(s) is coming</p>
+                )}
                 <div className="ovft">
                   <table className="table">
                     <thead>
