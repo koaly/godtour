@@ -23,7 +23,7 @@ import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
 import auth from "./services/authService";
 import CreateTourForm from "./components/user/createTourForm";
-import SumDataCreateTour from "./components/tour/sumDataCreateTour";
+import SumDataCreateTour from "./components/user/sumDataCreateTour";
 import MyTour from "./components/profile/myTour";
 import RequestStatusForm from "./components/requestStatus/requestStatusForm";
 import MyTiy from "./components/profile/myTiy";
@@ -134,7 +134,7 @@ class App extends Component {
                 )}
               />
               <Route
-                path="/createTour"
+                path="/createTiy"
                 render={props => (
                   <CreateTourForm {...props} token={jwt} user={user} />
                 )}

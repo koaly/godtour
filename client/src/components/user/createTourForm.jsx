@@ -97,17 +97,6 @@ class createTourForm extends FormInput {
     console.log("=====> handleChange.state ", this.state);
   }
 
-  componentDidMount() {
-    console.log("===============> createTourForm.componentDidMount");
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-  componentWillUnmount() {
-    console.log("===============> createTourForm.componentWillUnmount");
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
-
   updateDimensions() {
     console.log(
       "width : height of window is ",
@@ -126,6 +115,30 @@ class createTourForm extends FormInput {
       this.forceUpdate();
     }
   }
+	countTime(){
+		this.count = this.count + 1;
+		if( this.count == 5 ){
+			window.location = "/addTour";
+		}
+	}
+
+	componentDidMount() {
+		console.log("===============> createTourForm.componentDidMount");
+		this.updateDimensions();
+		window.addEventListener("resize" , this.updateDimensions.bind( this ) );
+		if( this.state.user.info.status !== 0 ){
+			this.intervalRedirection = setInterval( this.countTime.bind( this ) , 100 );
+			this.count = 0 ;
+		}
+	}
+
+	componentWillUnmount(){
+		console.log("===============> createTourForm.componentWillUnmount");
+		window.removeEventListener("resize" , this.updateDimensions.bind( this ));
+		if( this.state.user.info.status !== 0 ){
+			clearInterval( this.intervalRedirection );
+		}
+	}
 
   updateData() {
     /*	this.formData is array to collect information for create form it is 2 dimension array
