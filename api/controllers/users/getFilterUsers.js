@@ -36,12 +36,15 @@ const handler = async (req, res) => {
   //both from url browse/?page=3&limit=5
 
   const {
-    payload: { info },
+    payload: {
+      info: { status }
+    },
     query: { page, limit }
   } = req;
 
-  const { status } = info;
+  //select status for querry
   const querry = await getQueryForStatusUser(status);
+
   let users = await User.find(querry);
   if (!users || users.length == 0) throw new UserNotFoundException();
 
