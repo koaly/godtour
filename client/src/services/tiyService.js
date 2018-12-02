@@ -48,6 +48,10 @@ export function acceptOffered(tiyID, offerID) {
   );
 }
 
+export function cancelOffered(tiyID) {
+  return http.post(offerTiysEndpoint + "/" + tiyID, "", config);
+}
+
 export function offerTiy(tiy) {
   const {
     name,
