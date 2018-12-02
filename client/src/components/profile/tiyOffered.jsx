@@ -56,7 +56,7 @@ class TiyOffered extends Component {
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
-          <h1 className="profile-head">My Booking</h1>
+          <h1 className="profile-head">My Tiys</h1>
           <div className="row">
             <div className="col-md-5 d-md-flex flex-column">
               <ProfileBar user={user} />
@@ -69,6 +69,7 @@ class TiyOffered extends Component {
                 ) : (
                   <p>{count} offer(s)</p>
                 )}
+
                 <div className="ovft">
                   <table className="table">
                     <thead>
@@ -82,8 +83,8 @@ class TiyOffered extends Component {
                       {!isLoaded ? (
                         <Spinner />
                       ) : (
-                        data.offers.map(o => (
-                          <tr key={o._id}>
+                        data.offers.map((o, i) => (
+                          <tr key={i}>
                             <td>{o.name}</td>
                             <td>{o.price}</td>
                             <td>
