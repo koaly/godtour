@@ -18,6 +18,7 @@ export default class DeleteTourBar extends Component {
       const { msg } = response.data;
 
       toast.success(`${msg}`);
+      window.location = "/profile/myTour";
     } catch (e) {
       console.log(e);
       const msg = e.response.data.error.message;
