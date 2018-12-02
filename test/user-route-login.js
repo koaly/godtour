@@ -1,5 +1,5 @@
 // run with mocha
-// when npm install -g mocha don't fonget to sudo if you do in linux
+// when npm install -g mocha don't forget to sudo if you do in linux
 // -> npm test
 
 const supertest = require("supertest");
@@ -45,7 +45,7 @@ describe("Guest No login", function() {
 describe("Users login with JWT", function() {
   //init token
   var token = null;
-
+  let info = null;
   //login users before we continue
   before(function(done) {
     // runs before all tests in this block
@@ -70,6 +70,14 @@ describe("Users login with JWT", function() {
       .set("Authorization", token)
       .end((err, res) => {
         expect(res.body.info.username).to.equal("suck");
+        info = {
+          displayName: res.body.info.displayName,
+          imgsrc: res.body.info.imgsrc,
+          gender: res.body.info.gender,
+          upgradeReason: res.body.info.upgradeReason,
+          upgradeRequest: res.body.info.upgradeRequest
+        };
+        console.log(info);
         expect(res.statusCode).to.equal(200);
         done(err);
       });
@@ -104,4 +112,18 @@ describe("Users login with JWT", function() {
         done(err);
       });
   });
+
+  // //edit user
+  // it("/users/current/edit return 200", function(done) {
+  //   this.timeout(0);
+  //   request
+  //     .put("/users/current/edit")
+  //     .set("Accept", "application/json")
+  //     .set("Authorization", token)
+  //     .set(info)
+  //     .end((err, res) => {
+  //       expect(res.statusCode).to.equal(200);
+  //       done(err);
+  //     });
+  // })
 });
