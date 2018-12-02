@@ -90,15 +90,29 @@ class createTourForm extends FormInput {
 		console.log( "=====> handleChange.state " , this.state);
 	}
 
+	countTime(){
+		this.count = this.count + 1;
+		if( this.count == 5 ){
+			window.location = "/addTour";
+		}
+	}
+
 	componentDidMount() {
 		console.log("===============> createTourForm.componentDidMount");
 		this.updateDimensions();
 		window.addEventListener("resize" , this.updateDimensions.bind( this ) );
+		if( this.state.user.info.status !== 0 ){
+			this.intervalRedirection = setInterval( this.countTime.bind( this ) , 100 );
+			this.count = 0 ;
+		}
 	}
 
 	componentWillUnmount(){
 		console.log("===============> createTourForm.componentWillUnmount");
 		window.removeEventListener("resize" , this.updateDimensions.bind( this ));
+		if( this.state.user.info.status !== 0 ){
+			clearInterval( this.intervalRedirection );
+		}
 	}
 
 	updateDimensions(){
