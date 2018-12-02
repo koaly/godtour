@@ -208,12 +208,20 @@ textarea{
 	height : 100%;
 }
 
+.height100px{
+	height : 100px;
+}
+
 .noneMargin{
 	margin : None;
 }
 
 .nonePadding{
 	padding : None;
+}
+
+.paddingLeft10px{
+	padding-left : 10px;
 }
 
 .marginCenter{
