@@ -100,10 +100,7 @@ export default class ProfileBooking extends Component {
               {selectBooking.map((book, i) => (
                 <tr key={i}>
                   <td>
-                    <Link
-                      className="text-primary"
-                      to={`/tours/id=${book.tourID}`}
-                    >
+                    <Link className="text-primary" to={`/tours/${book.tourID}`}>
                       {book.tourName}
                     </Link>
                   </td>

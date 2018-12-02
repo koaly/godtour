@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getOwnTiy, removeTiy } from "../../services/tiyService";
 import Spinner from "../common/spinner";
+import { Link } from "react-router-dom";
 
 class MyTiyTable extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class MyTiyTable extends Component {
 
     return (
       <div className="profile-infor mx-3 ">
-        <p>{count} Tiys</p>
+        <p>{count} Tiys (click your tiy to see if someone offer you a tour)</p>
         <div className="ovft">
           <table className="table">
             <thead>
@@ -45,13 +46,18 @@ class MyTiyTable extends Component {
                 data.tiys.map(d => (
                   <tr key={d._id}>
                     <td>
-                      {/* <Link
-                className="text-primary"
-                to={`/tours/id=${book.tourID}`}
-              >
-                {book.tourName}
-              </Link> */}
-                      {d.name}
+                      <Link
+                        className="text-primary"
+                        to={{
+                          pathname: "/profile/myTiy/offered",
+                          state: {
+                            tiyID: d._id,
+                            isAccepted: d.isAccepted
+                          }
+                        }}
+                      >
+                        {d.name}
+                      </Link>
                     </td>
                     <td>
                       {d.minPrice}/{d.maxPrice}
