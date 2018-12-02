@@ -22,7 +22,7 @@ import PurchaseList from "./components/profile/purchaseList";
 import TestFetch from "./components/fetch/example/FetchTest";
 import TestPost from "./components/fetch/example/PostTest";
 import auth from "./services/authService";
-import CreateTourForm from "./components/tour/createTourForm";
+import CreateTourForm from "./components/user/createTourForm";
 import SumDataCreateTour from "./components/tour/sumDataCreateTour";
 import MyTour from "./components/profile/myTour";
 import RequestStatusForm from "./components/requestStatus/requestStatusForm";
