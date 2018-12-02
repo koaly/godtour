@@ -55,3 +55,15 @@ exports.Exception = function(username) {
   this.status = 500;
   this.message = `Error in Server`;
 };
+
+exports.OfferNotFound = function(id) {
+  this.name = "Offer";
+  this.status = 404;
+  this.message = `Offer ${$id || ""} Not found`;
+};
+
+exports.TiyNotFound = function(id) {
+  this.name = "Tiy";
+  this.status = 404;
+  this.message = `Tiy ${$id || ""} Not found`;
+};

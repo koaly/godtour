@@ -118,7 +118,6 @@ exports.editCurrentUser = async (req, res, next) => {
       displayName,
       imgsrc,
       gender,
-      status,
       upgradeRequest,
       upgradeReason
     } = req.body;
@@ -128,7 +127,6 @@ exports.editCurrentUser = async (req, res, next) => {
     editUser.displayName = displayName;
     editUser.imgsrc = imgsrc;
     editUser.gender = gender;
-    editUser.status = status;
     editUser.upgradeRequest = upgradeRequest;
     editUser.upgradeReason = upgradeReason;
 
