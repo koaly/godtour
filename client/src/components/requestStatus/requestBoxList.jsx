@@ -91,13 +91,13 @@ export default class RequestBoxList extends Component {
                       <div className="row">
                         <div className="col-6">
                           <AcceptStatusButton
-                            id={user.id}
+                            id={user.username}
                             acceptStatus={this.getRequest.bind(this)}
                           />
                         </div>
                         <div className="col-6">
                           <RefuseStatusButton
-                            id={user.id}
+                            id={user.username}
                             acceptStatus={this.getRequest.bind(this)}
                           />
                         </div>
