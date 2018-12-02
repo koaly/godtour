@@ -66,7 +66,7 @@ export default class MyBook extends Component {
     return (
       <div className="container">
         <div className="profile-container bglight mgtb">
-          <h1 className="profile-head">My Booking</h1>
+          <h1 className="profile-head">My Tiys</h1>
           <div className="row">
             <div className="col-md-5 d-md-flex flex-column">
               <ProfileBar user={user} />
