@@ -89,22 +89,22 @@ class AllTiys extends Component {
     const { tiys, isLoaded, mode } = this.state;
     console.log(tiys);
     return (
-      <div className=" minWidth100  ">
+      <div className=" minWidth100  mgtb">
         <h1 className="minWidth100 textCenter">List Tour by Customer</h1>
         <div className=" minWidth100 clearBoth  headColumn">
-          <div className={"textLeft paddingLeft4 sameLine" + this.firstStyle}>
+          <div className={"textLeft paddingLeft4 sameLine mb-2" + this.firstStyle}>
             NAME TOUR
           </div>
-          <div className={"textCenter sameLine" + this.secondStyle}>
-            DESTINATIOn
+          <div className={"textCenter sameLine mb-2" + this.secondStyle}>
+            DESTINATION
           </div>
           {mode < 2 && (
-            <div className={"textCenter sameLine" + this.secondStyle}>
+            <div className={"textCenter sameLine mb-2" + this.secondStyle}>
               PRICE
             </div>
           )}
           {mode < 1 && (
-            <div className={"textCenter sameLine" + this.thirdStyle}>
+            <div className={"textCenter sameLine mb-2" + this.thirdStyle}>
               DURATION
             </div>
           )}
@@ -115,19 +115,26 @@ class AllTiys extends Component {
               <p
                 key={t._id}
                 className={"sameLine paddingLeft2" + this.firstStyle}
+                style={{fontSize:18}}
               >
                 {t.name}
               </p>
-              <p className={"sameLine textCenter" + this.secondStyle}>
+              <p className={"sameLine textCenter" + this.secondStyle}
+                style={{fontSize:18}}
+              >
                 {t.dest}
               </p>
               {mode < 2 && (
-                <p className={"sameLine textCenter" + this.secondStyle}>
+                <p className={"sameLine textCenter" + this.secondStyle}
+                  style={{fontSize:18}}
+                >
                   {t.minPrice} - {t.maxPrice}
                 </p>
               )}
               {mode < 1 && (
-                <p className={"sameLine textCenter" + this.thirdStyle}>
+                <p className={"sameLine textCenter" + this.thirdStyle}
+                  style={{fontSize:18}}
+                >
                   {t.minDuration} - {t.maxDuration}
                 </p>
               )}

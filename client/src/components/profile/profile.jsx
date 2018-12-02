@@ -33,15 +33,15 @@ export default class Profile extends Component {
     const Rank = getStatus(status);
     const timeDate = registerDate.replace("T", " ").replace("Z", " ");
 
-    if (!isLoaded) {
-      return (
-        <div className="container text-align mgtb-2">
-          <div>
-            <Spinner />
-          </div>
-        </div>
-      );
-    }
+    // if (!isLoaded) {
+    //   return (
+    //     <div className="container text-align mgtb-2">
+    //       <div>
+    //         <Spinner />
+    //       </div>
+    //     </div>
+    //   );
+    // }
 
     return (
       <div className="container">
