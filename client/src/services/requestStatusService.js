@@ -9,8 +9,8 @@ const config = {
   }
 };
 
-export function acceptStatus(id) {
-  return http.get(apiEndpoint + id + "/accept", config);
+export function acceptStatus(username) {
+  return http.get(apiEndpoint + username + "/accept", config);
   //how to use put bro
 }
 
@@ -19,7 +19,7 @@ export function requestStatus(data) {
   return http.put(requestStatusEndpoint, { reasonToUpgrade }, config);
 }
 
-export function refuseStatus(id) {
-  return http.get(apiEndpoint + id + "/refuse", config);
+export function refuseStatus(username) {
+  return http.get(apiEndpoint + username + "/refuse", config);
   //how to use put bro
 }

@@ -1,0 +1,236 @@
+.testBlockR{
+	border : 0.5px solid red;
+}
+
+.testBlockB{
+	border : 0.5px solid blue;
+}
+
+.testBlockD{
+	border : 2px solid Black;
+}
+
+.noBorder{
+	border : 0px
+}
+
+.borderInput{
+	border : 1px solid Black;
+	border-radius : 10px;
+}
+
+.labelHead00{
+	min-width : 250px;	
+	width	: auto;
+	width : 20%;
+	margin-left : 1%;
+	margin-right : None;
+}
+
+.labelHead01{
+	width	: 100%;
+}
+
+.textCenter{
+	text-align : center;
+}
+
+.textLeft{
+	text-align : left;
+}
+
+.textRight{
+	text-align : right;
+}
+
+.clearBoth{
+	clear : both;
+}
+
+.maxWidth100{
+	max-width : 100%;
+}
+
+.minWidth100{
+	min-width	: 100%;
+	clear	: both;
+}
+
+.minWidth30{
+	min-width	: 30%;
+}
+
+.minWidth35{
+	min-width	: 35%;
+}
+
+.minWidth34{
+	min-width	: 34%;
+}
+
+.minWidth33{
+	min-width	: 33%;
+}
+
+.autoWidth{
+	width : auto;
+}
+
+.width40px{
+	width : 40px;
+}
+
+.width150px{
+	width : 150px;
+}
+
+.minWidth25{
+	min-width : 25%
+}
+
+.minWidth75{
+	min-width : 75%
+}
+
+.width10{
+	width : 10%;
+}
+
+.width15{
+	width : 15%;
+}
+
+.width20{
+	width : 20%;
+}
+
+.width25{
+	width : 25%;
+}
+
+.width30{
+	width : 30%
+}
+
+.width40{
+	width : 40%
+}
+
+.width45{
+	width : 45%
+}
+
+.width50{
+	width : 50%;
+}
+
+.width60{
+	width : 60%;
+	margin : None;
+}
+
+.width65{
+	width : 65%;
+	margin : None;
+}
+
+.width75{
+	width : 75%;
+	margin : None;
+}
+
+.width70{
+	width : 70%
+}
+
+.width100{
+	width :100%;
+}
+
+.sameLine{
+	display : inline-block;
+	margin-right : 2px;
+	margin-left : 2px;
+}
+
+.floatRight{
+	float : right;
+}
+
+.floatCenter{
+	float : center;
+}
+
+.componentStyle{
+	width : 80%;
+	margin-right : 10%;
+	margin-left : 10%;
+	margin-top : 30px;
+}
+
+textarea{
+	overflow:hidden;
+	margin-right:30px auto;
+	margin-left:30px auto;
+	width : 100%;
+	border-radius: 10px;
+	display:block;	
+}
+
+.marginRight3{
+	margin-right: 3%;
+}
+
+.marginLeft3{
+	margin-left: 3%;
+}
+
+.marginRight3px{
+	margin-right: 3px;
+}
+
+.blockLeft{
+	display : block;
+	float : left;
+}
+
+.blockRight{
+	display : block;
+	float : right;
+}
+
+.blockCenter{
+	display : block;
+	float : center;
+}
+
+.height100{
+	height : 100%;
+}
+
+.height100px{
+	height : 100px;
+}
+
+.noneMargin{
+	margin : None;
+}
+
+.nonePadding{
+	padding : None;
+}
+
+.paddingLeft10px{
+	padding-left : 10px;
+}
+
+.marginCenter{
+	width : auto;
+	position : absolute;
+	left : 43%;
+}
+
+.marginBottom{
+	margin-bottom : 30px
+}
+

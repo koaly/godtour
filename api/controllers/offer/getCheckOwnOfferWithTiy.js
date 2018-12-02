@@ -14,7 +14,7 @@ const handle = async (req, res, next) => {
   const {
     //payload from auth
     payload: {
-      info: { id: UserID, status: userStatus }
+      info: { id: userID, status: userStatus }
     },
     //from url
     params: { offerID, tiyID }
@@ -37,9 +37,8 @@ const handle = async (req, res, next) => {
   const offer = await Offer.findOne({ _id: offerID });
   //if not found offers in serach
   if (!offer) throw new OfferNotFound(offerID);
-
   //check if not own tour return no permission if admin can access
-  if (userStatus == 2 || (UserID == offer.operatorID && UserID == tiy.UserID)) {
+  if (userStatus == 2 || userID == offer.operatorID || userID == tiy.userID) {
     //set variable to locals in res to send to next middleware
     res.locals.offer = offer;
     res.locals.tiy = tiy;

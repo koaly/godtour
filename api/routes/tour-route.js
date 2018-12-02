@@ -11,6 +11,7 @@ const bookingConfig = require("./validation/booking-validation");
 const checkValidation = require("./validation/checkValidation");
 
 router.get("/", auth.optional, tourCtrl.getOneTour);
+router.get("/browse", auth.optional, tourCtrl.getAllTours);
 //router.get("/browse", auth.optional, tourCtrl.getAll);
 router.post(
   "/create",

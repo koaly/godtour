@@ -1,65 +1,64 @@
-.GeneralButtonTour{
-	cursor			: pointer;
-	clear			: both;
-	width			: 100%;
-	border			: none;
-	border-radius	: 3px; /* make smoth anger */
-	padding-top		: 10px;
-	padding-bottom		: 10px;
-	background-color: white;
-	/*opacity			: .5;*/
-	text-align		: center;
-	display			: inline-block;
-	font-size		: 16px;
-	font-weight		: bold;
-	color			: DarkBlue;
+.GeneralButtonTour {
+  cursor: pointer;
+  clear: both;
+  width: 100%;
+  border: none;
+  border-radius: 3px; /* make smoth anger */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  /*opacity			: .5;*/
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  color: DarkBlue;
 }
 
-
-.ButtonMoreTour:hover{
-	background-color: #f6f6f6;
-	/*font-weight		: bold;
+.ButtonMoreTour:hover {
+  background-color: #f6f6f6;
+  /*font-weight		: bold;
 	color			: DarkBlue;*/
 }
 
-.BlockTour{
-	border: 1px solid black;
-	height: 200px;
-	margin-bottom : 2px;
-	padding-left: 10px;
-	padding-top : 10px;
+.BlockTour {
+  border: 1px solid black;
+  height: 200px;
+  margin-bottom: 2px;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
-.HeadTour{
-	text-transform	: capitalize;
-	font-family		: "Times New Roman" , Times , serif;
-	font-weight		: bold;
-	color			: blue;
-	display			: inline-block; /* make block follow text */
+.HeadTour {
+  text-transform: capitalize;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  color: blue;
+  display: inline-block; /* make block follow text */
 }
 
-.SeatTour{
-	text-align		: right;
-	font-weight		: bold;
-	display			: inline-block;
-	float			: right;
+.SeatTour {
+  text-align: right;
+  font-weight: bold;
+  display: inline-block;
+  /* float: right; */
 }
 
-.TestBlock{
-	border : 0.5px solid blue;
+.TestBlock {
+  border: 0.5px solid blue;
 }
 
-.ReadMore{
-	float			: right;
-	vertical-align	: bottom;
+.ReadMore {
+  float: right;
+  vertical-align: bottom;
 }
 
 .tourlist {
-	background:white;
-	border-radius	: 3px;
-	padding-botom:3px;
-	padding-top:3px;
-	padding-left:6px;
-	height:60px;
-	margin-bottom: 25px;
+  background: white;
+  border-radius: 3px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  padding-left: 6px;
+  height: 60px;
+  margin-bottom: 25px;
 }
