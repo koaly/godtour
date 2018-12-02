@@ -85,7 +85,16 @@ class TiyOffered extends Component {
                       ) : (
                         data.offers.map((o, i) => (
                           <tr key={i}>
-                            <td>{o.name}</td>
+                            <td>
+                              <a
+                                className="text-primary"
+                                href={`/profile/myTiy/${o.tiyID}/offered/${
+                                  o._id
+                                }`}
+                              >
+                                {o.name}
+                              </a>
+                            </td>
                             <td>{o.price}</td>
                             <td>
                               {o.departDate}/{o.returnDate}
