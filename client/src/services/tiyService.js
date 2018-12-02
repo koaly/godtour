@@ -6,6 +6,7 @@ const tiyEndpoint = "/api/users/current/tiys";
 const tiyDeleteEndpoint = "/api/tiys/";
 const allTiysEndpoint = "/api/tiys";
 const offerTiysEndpoint = "/api/tiys";
+const editTiysEndpoint = "/api/tiys";
 
 const config = {
   headers: {
@@ -30,6 +31,43 @@ export function getAllTiys() {
 
 export function getOwnTiy() {
   return http.get(tiyEndpoint, config);
+}
+
+export function editOwnTiy(tiy) {
+  const {
+    name,
+    minPrice,
+    maxPrice,
+    minMember,
+    maxMember,
+    minDuration,
+    maxDuration,
+    food,
+    startFreeDate,
+    endFreeDate,
+    detail,
+    dest,
+    highlight
+  } = tiy.data;
+  return http.put(
+    editTiysEndpoint + "/" + tiy.id + "/edit",
+    {
+      name,
+      minPrice,
+      maxPrice,
+      minMember,
+      maxMember,
+      minDuration,
+      maxDuration,
+      food,
+      startFreeDate,
+      endFreeDate,
+      detail,
+      dest,
+      highlight
+    },
+    config
+  );
 }
 
 export function removeTiy(id) {
