@@ -154,7 +154,7 @@ class App extends Component {
                 render={props => <MyTour {...props} user={user} />}
               />
               <Route
-                path="/profile/offered"
+                path="/profile/myTiy/offered"
                 render={props => <TiyOffered {...props} user={user} />}
               />
 

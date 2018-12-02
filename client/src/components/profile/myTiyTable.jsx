@@ -49,7 +49,7 @@ class MyTiyTable extends Component {
                       <Link
                         className="text-primary"
                         to={{
-                          pathname: "/profile/offered",
+                          pathname: "/profile/myTiy/offered",
                           state: {
                             tiyID: d._id,
                             isAccepted: d.isAccepted

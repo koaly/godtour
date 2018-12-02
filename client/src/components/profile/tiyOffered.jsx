@@ -3,7 +3,8 @@ import {
   getOwnTiy,
   removeTiy,
   showTiyOffered,
-  acceptOffered
+  acceptOffered,
+  cancelOffered
 } from "../../services/tiyService";
 import Spinner from "../common/spinner";
 import ProfileBar from "./profileBar";
@@ -31,9 +32,18 @@ class TiyOffered extends Component {
     try {
       this.setState({ isLoaded: false });
       await acceptOffered(tiyID, offerID);
-      toast.success("accept offer");
-      this.setState({ isLoaded: true });
-      window.location = "/profile/myTiy";
+      toast.success("Accept offer");
+      this.setState({ isLoaded: true, isAccepted: true });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  cancelOfferById = async tiyID => {
+    try {
+      this.setState({ isLoaded: false });
+      await cancelOffered(tiyID);
+      toast.success("Cancel Offer");
+      this.setState({ isLoaded: true, isAccepted: false });
     } catch (e) {
       console.log(e);
     }
@@ -80,7 +90,7 @@ class TiyOffered extends Component {
                               {o.departDate}/{o.returnDate}
                             </td>
                             <td>
-                              {!isAccepted && (
+                              {!isAccepted ? (
                                 <button
                                   onClick={() =>
                                     this.acceptOfferById(o.tiyID, o._id)
@@ -88,6 +98,13 @@ class TiyOffered extends Component {
                                   className="btn btn-success btn-sm"
                                 >
                                   Accept
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => this.cancelOfferById(o.tiyID)}
+                                  className="btn btn-danger btn-sm"
+                                >
+                                  Cancel
                                 </button>
                               )}
                             </td>
