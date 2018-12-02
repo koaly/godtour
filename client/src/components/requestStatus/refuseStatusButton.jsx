@@ -18,7 +18,7 @@ export default class RefuseStatusButton extends Component {
       const { msg } = response.data;
 
       toast.success(`${msg}`);
-      window.location = "/admin/request";
+      // window.location = "/admin/request";
     } catch (e) {
       console.log(e);
       const msg = e.response.data.error.msg;
@@ -33,7 +33,7 @@ export default class RefuseStatusButton extends Component {
     await this.refuseStatusById(id);
     await updateStatus();
     this.setState({ isAccepting: false });
-    window.location = "/admin/request";
+    // window.location = "/admin/request";
   };
 
   render() {

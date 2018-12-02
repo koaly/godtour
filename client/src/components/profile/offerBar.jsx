@@ -20,8 +20,8 @@ export default class OfferBar extends Component {
       console.log(offers[0].airline);
       toast.info("Update OfferList");
     } catch (e) {
-      const { msg } = e.response.data.error;
-      toast.error(`${msg}`);
+      const { message } = e.response.data.error;
+      toast.error(`${message}`);
     }
   }
   handleDelete = async (tiyID, offerID) => {
