@@ -7,6 +7,7 @@ import { paginate } from "../../utility/paginate";
 import { Link } from "react-router-dom";
 import Pagination from "../common/pagination";
 import Spinner from "../common/spinner";
+import MyBookingTable from "./myBookingTable";
 
 export default class ProfileBooking extends Component {
   constructor(props) {
@@ -65,9 +66,7 @@ export default class ProfileBooking extends Component {
     await this.getCurrentBooking();
     this.setState({ isLoaded: true });
   }
-  showDate(date) {
-    return date.replace("T", " ").replace("Z", " ");
-  }
+
   render() {
     const { booking, isLoaded, currentPage, pageSize } = this.state;
     const { length: count } = this.state.booking;
@@ -88,36 +87,7 @@ export default class ProfileBooking extends Component {
       <div className="profile-infor mx-3">
         <p>{count} bookings</p>
         <div className="ovft">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>TourName</th>
-                <th>Amount</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {selectBooking.map((book, i) => (
-                <tr key={i}>
-                  <td>
-                    <Link className="text-primary" to={`/tours/${book.tourID}`}>
-                      {book.tourName}
-                    </Link>
-                  </td>
-                  <td>{book.amountBooking}</td>
-                  <td>{this.showDate(book.bookingDate)}</td>
-                  <td>
-                    <button
-                      onClick={() => this.handleDelete(book.id)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <MyBookingTable selectBooking={selectBooking} />
         </div>
         <Pagination
           itemsCount={count}
