@@ -224,6 +224,14 @@ textarea{
 	padding-left : 10px;
 }
 
+.paddingLeft2{
+	padding-left : 2%;
+}
+
+.paddingLeft4{
+	padding-left : 4%;
+}
+
 .marginCenter{
 	width : auto;
 	position : absolute;
