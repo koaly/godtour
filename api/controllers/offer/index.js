@@ -1,0 +1,1 @@
+exports.getCheckOwnOffer = require("./getCheckOwnOffer");

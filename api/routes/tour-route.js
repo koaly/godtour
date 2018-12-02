@@ -2,10 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const tourCtrl = require("../controllers/tours/");
-const operatorCtrl = require("../controllers/operator-controller");
 const operatorController = require("../controllers/operator/");
 const bookingController = require("../controllers/booking/");
-const bookingCtrl = require("../controllers/booking-controller");
 const auth = require("./auth");
 
 const tourConfig = require("./validation/tours-validation");
@@ -13,28 +11,17 @@ const bookingConfig = require("./validation/booking-validation");
 const checkValidation = require("./validation/checkValidation");
 
 router.get("/", auth.optional, tourCtrl.getOneTour);
-router.get("/browse", auth.optional, tourCtrl.getAllTours);
 //router.get("/browse", auth.optional, tourCtrl.getAll);
 router.post(
   "/create",
   auth.require,
-  operatorCtrl.checkOperatorStatus,
+  operatorController.checkOperatorStatus,
   tourConfig.tour,
   checkValidation,
   tourCtrl.addTour
 );
 
 router.get("/booking/:id", auth.require, bookingController.getOneBooking);
-router.get(
-  "/test",
-  auth.require,
-  operatorController.checkOperatorStatus,
-  (req, res, next) => {
-    res.status(200).json({
-      msg: "brick"
-    });
-  }
-);
 router.post(
   "/:id",
   auth.require,

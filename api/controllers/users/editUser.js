@@ -17,9 +17,9 @@ handle = async (req, res) => {
   //need jwt blacklist to refesh token and cann't no use expire token
   //make me think it dificult T^T
   const user = await User.findByOwnUser(userID, status, username);
-
-  if (!user) throw new UserNotFoundException(username);
+  
   console.log(user);
+  if (!user) throw new UserNotFoundException(username);
   console.log(upgradeRequest);
   const editUser = {
     displayName: displayName || user.displayName,
@@ -32,7 +32,7 @@ handle = async (req, res) => {
   const result = await User.update({ _id: user.id }, editUser);
   if (result) {
     res.status(200).json({
-      msg: "success edit user"
+      msg: "success edit user",
     });
   } else throw new Exception();
 };
