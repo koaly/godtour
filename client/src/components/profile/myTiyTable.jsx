@@ -66,15 +66,9 @@ class MyTiyTable extends Component {
                       {d.startFreeDate}/{d.endFreeDate}
                     </td>
                     <td>
-                      <button
-                        onClick={() => this.handleDelete(d._id)}
-                        className="btn btn-danger btn-sm"
-                      >
-                        Delete
-                      </button>
                       {!d.isAccepted && (
                         <Link
-                          className="btn btn-primary btn-sm"
+                          className="btn btn-primary btn-sm mb-2 pl-3 pr-3"
                           to={{
                             pathname: `/profile/myTiy/edit/${d._id}`,
                             state: {
@@ -85,6 +79,12 @@ class MyTiyTable extends Component {
                           Edit
                         </Link>
                       )}
+                      <button
+                        onClick={() => this.handleDelete(d._id)}
+                        className="btn btn-danger btn-sm"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

@@ -16,9 +16,9 @@ export default class ProfileBar extends Component {
   }
   render() {
     const { user, isLoaded } = this.state;
-    if (!isLoaded) {
-      return <Spinner />;
-    }
+    // if (!isLoaded) {
+    //   return <Spinner />;
+    // }
     if (!user) {
       return <h1>Login</h1>;
     }
