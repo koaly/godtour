@@ -29,6 +29,7 @@ import RequestStatusForm from "./components/requestStatus/requestStatusForm";
 import MyTiy from "./components/profile/myTiy";
 import AllTiys from "./components/tour/allTiys";
 import CreateOffer from "./components/tour/createOffer";
+import TiyOffered from "./components/profile/tiyOffered";
 
 import { Route, Switch, Router, Redirect } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -152,6 +153,11 @@ class App extends Component {
                 path="/profile/myTour"
                 render={props => <MyTour {...props} user={user} />}
               />
+              <Route
+                path="/profile/myTiy/offered"
+                render={props => <TiyOffered {...props} user={user} />}
+              />
+
               <Route
                 path="/profile/myOffer"
                 render={props => <MyOffer {...props} user={user} />}
