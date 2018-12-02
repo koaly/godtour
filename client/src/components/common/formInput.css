@@ -56,6 +56,16 @@
 	clear	: both;
 }
 
+.minWidth100px{
+	min-width	: 100px;
+	clear	: both;
+}
+
+.minWidth80px{
+	min-width	: 80px;
+	clear	: both;
+}
+
 .minWidth30{
 	min-width	: 30%;
 }
@@ -210,6 +220,10 @@ textarea{
 
 .height100px{
 	height : 100px;
+}
+
+.height30px{
+	height : 30px;
 }
 
 .noneMargin{
