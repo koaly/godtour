@@ -31,7 +31,7 @@ class MyTiyTable extends Component {
 
     return (
       <div className="profile-infor mx-3 ">
-        <p>{count} Tiys</p>
+        <p>{count} Tiys (click your tiy to see if someone offer you a tour)</p>
         <div className="ovft">
           <table className="table">
             <thead>
@@ -51,7 +51,8 @@ class MyTiyTable extends Component {
                         to={{
                           pathname: "/profile/offered",
                           state: {
-                            tiyID: d._id
+                            tiyID: d._id,
+                            isAccepted: d.isAccepted
                           }
                         }}
                       >

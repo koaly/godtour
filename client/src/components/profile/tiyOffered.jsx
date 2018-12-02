@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import {
   getOwnTiy,
   removeTiy,
-  showTiyOffered
+  showTiyOffered,
+  acceptOffered
 } from "../../services/tiyService";
 import Spinner from "../common/spinner";
 import ProfileBar from "./profileBar";
 import { Link } from "react-router-dom/Link";
+import { toast } from "react-toastify";
 
 class TiyOffered extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class TiyOffered extends Component {
       data: [],
       isLoaded: false,
       user: this.props.user,
-      id: this.props.location.state.tiyID
+      id: this.props.location.state.tiyID,
+      isAccepted: this.props.location.state.isAccepted
     };
   }
   async componentDidMount() {
@@ -24,15 +27,19 @@ class TiyOffered extends Component {
     console.log(data);
     this.setState({ isLoaded: true, data });
   }
-  //   handleDelete = async id => {
-  //     this.setState({ isLoaded: false });
-
-  //     await removeTiy(id);
-  //     const { data } = await getOwnTiy();
-  //     this.setState({ isLoaded: true, data });
-  //   };
+  acceptOfferById = async (tiyID, offerID) => {
+    try {
+      this.setState({ isLoaded: false });
+      await acceptOffered(tiyID, offerID);
+      toast.success("accept offer");
+      this.setState({ isLoaded: true });
+      window.location = "/profile/myTiy";
+    } catch (e) {
+      console.log(e);
+    }
+  };
   render() {
-    const { data, isLoaded, user } = this.state;
+    const { data, isLoaded, user, isAccepted } = this.state;
     const { count } = data;
     console.log(count);
     console.log(data);
@@ -50,7 +57,7 @@ class TiyOffered extends Component {
                 {count === 0 ? (
                   <p>no one offer you haha</p>
                 ) : (
-                  <p>{count} offer(s) is coming</p>
+                  <p>{count} offer(s)</p>
                 )}
                 <div className="ovft">
                   <table className="table">
@@ -73,12 +80,16 @@ class TiyOffered extends Component {
                               {o.departDate}/{o.returnDate}
                             </td>
                             <td>
-                              {/* <button
-                                // onClick={() => this.handleDelete(o._id)}
-                                className="btn btn-danger btn-sm"
-                              >
-                                Delete
-                              </button> */}
+                              {!isAccepted && (
+                                <button
+                                  onClick={() =>
+                                    this.acceptOfferById(o.tiyID, o._id)
+                                  }
+                                  className="btn btn-success btn-sm"
+                                >
+                                  Accept
+                                </button>
+                              )}
                             </td>
                           </tr>
                         ))
