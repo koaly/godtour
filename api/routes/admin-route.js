@@ -33,7 +33,7 @@ router.get(
 );
 //no body require don't need to validation
 router.get(
-  "/request/upgrade/:id/refuse",
+  "/request/upgrade/:username/refuse",
   auth.require,
   operatorController.checkAdminStatus,
   adminController.checkUpgradeRequest,

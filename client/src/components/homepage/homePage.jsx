@@ -36,15 +36,15 @@ class HomePage extends Component {
 
   render() {
     const { isLoaded } = this.state;
-    if (!isLoaded) {
-      return (
-        <div className="container text-align mgtb-2">
-          <div>
-            <Spinner />
-          </div>
-        </div>
-      );
-    }
+    // if (!isLoaded) {
+    //   return (
+    //     <div className="container text-align mgtb-2">
+    //       <div>
+    //         <Spinner />
+    //       </div>
+    //     </div>
+    //   );
+    // }
 
     return (
       <div>

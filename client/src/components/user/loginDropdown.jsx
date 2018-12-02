@@ -77,8 +77,8 @@ class LoginDropdown extends (Component, Form) {
                 </form>
               </div>
             </div>
-            <div className="bottom text-center">
-              New here ?<Link to="/register">Register</Link>
+            <div className="bottom text-center btn-register">
+              New here ?<a href="/register" className="ml-2 black">Register</a>
             </div>
           </li>
         </ul>
