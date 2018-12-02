@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Link from "react-router-dom/Link";
-import "./slideBoxItem.css";
+import "../../css/slideBoxItem.css";
 
 export default class SlideBoxItem extends Component {
   constructor(props) {
