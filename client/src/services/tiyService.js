@@ -40,6 +40,14 @@ export function showTiyOffered(id) {
   return http.get(offerTiysEndpoint + "/" + id + "/offers", config);
 }
 
+export function acceptOffered(tiyID, offerID) {
+  return http.post(
+    offerTiysEndpoint + "/" + tiyID + "/offers/" + offerID,
+    "",
+    config
+  );
+}
+
 export function offerTiy(tiy) {
   const {
     name,
