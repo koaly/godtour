@@ -31,7 +31,7 @@ export default class OfferBar extends Component {
       await deleteSpecificOffer(tiyID, offerID);
 
       this.setState({ isLoaded: true });
-      window.location("/profile/myOffer");
+      window.location = "/profile/myOffer";
     } catch (e) {
       const { msg } = e.response.data.error;
       toast.error(`${msg}`);

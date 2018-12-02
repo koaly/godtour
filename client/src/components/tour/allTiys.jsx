@@ -50,7 +50,10 @@ class AllTiys extends Component {
               <div className="profile-infor mx-1 my-1">
                 <div className="row">
                   <ul>
-                    <div className="ml-3">{t.name}</div>
+                    <div className="ml-3">
+                      <li>{t.name}</li>
+                      <li>from {t.userName}</li>
+                    </div>
                   </ul>
                   <Link
                     // className="btn btn-primary ml-4 mb-5"
