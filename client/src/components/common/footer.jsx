@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="row row-30">
           <div className="col-md-4 col-xl-5">
             <div className="pr-xl-4">
-              <h5 className="mt-3">Copyright © 2018</h5>
+              <h5 className="mt-3">Copyright © 2018 TO-UR WORLD</h5>
               <h5 className="mt-3">All Rights Reserved</h5>
             </div>
             <hr className="info-color mb-4 mt-0 d-inline-block mx-auto" />
@@ -23,34 +23,31 @@ const Footer = () => {
             <h5 className="mt-3">Contacts</h5>
             <dl className="contact-list">
               <dt>Address:</dt>
-              <dd>798 South Park Avenue, Jaipur, Raj</dd>
+              <dd>50 Ngam Wong Wan Rd, Ladyaow Chatuchak</dd>
             </dl>
             <dl className="contact-list">
               <dt>email:</dt>
-              <dd>hahahaha</dd>
+              <dd>godtour@gmail.com</dd>
             </dl>
             <dl className="contact-list">
               <dt>phones:</dt>
-              <dd>hahahaha</dd>
+              <dd>02-5920422</dd>
             </dl>
           </div>
           <div className="visib col-md-4 col-xl-3">
-            <h5 className="mt-3">Links</h5>
+            <h5 className="mt-3">Tours</h5>
             <ul className="nav-list">
+               <li>
+                <a href="/tours/5bf4e94fe06f311ca128b121">Turkey</a>
+              </li> 
               <li>
-                <a href="#">About</a>
+                <a href="/tours/5bdea081df29330e611b47c1">Russia</a>
               </li>
               <li>
-                <a href="#">Projects</a>
+                <a href="/tours/5bde9d6ddf29330e611b47bf">Hongkong</a>
               </li>
               <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">About</a>
+                <a href="/tours/5bdea317c44f8217ececa502">Macau</a>
               </li>
             </ul>
           </div>

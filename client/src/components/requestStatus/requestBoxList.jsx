@@ -27,6 +27,8 @@ export default class RequestBoxList extends Component {
       const { users } = result.data;
       toast.info("Update RequestList");
       this.setState({ users: users });
+      console.log(users);
+      console.log(users.users[0].username);
     } catch (e) {
       const { message } = e.response.data.error;
       console.log(message);
@@ -60,44 +62,44 @@ export default class RequestBoxList extends Component {
     return (
       <div className="profile-container">
         <div className="user-content mx-3 my-1">
-          <h1 className="user-head">{count} Users in database</h1>
+          <h1 className="user-head">{users.count} User(s) in database</h1>
         </div>
         <ul>
-          {selectUsers.map((user, i) => (
-            <li key={i}>
+          {users.users.map( u => (
+            <li>
               <div className="user-content mx-3 my-3">
                 <div className="profile-infor mx-1 my-1">
                   <div className="row">
                     <div className="col-sm-12 col-lg-3 text-aligin ubl-imgbox mb-2">
                       <img
                         className="profileimg mgt img-thumbnail rounded"
-                        src={user.imgsrc}
+                        src={u.imgsrc}
                         alt="profile"
                       />
                     </div>
                     <div className="col-sm-8 col-lg-5 my-3">
                       <h5>
-                        {user.displayName} ({getStatus(user.status)})
+                        {u.displayName} ({getStatus(u.status)})
                       </h5>
-                      <h6>@{user.username}</h6>
-                      <h6>Email: {user.email}</h6>
-                      <h6>Request: {user.upgradeReason}</h6>
+                      <h6>@{u.username}</h6>
+                      <h6>Email: {u.email}</h6>
+                      <h6>Request: {u.upgradeReason}</h6>
                       <br />
                       <h5>
-                        <Link to={`/users/${user.username}`}>See more</Link>
+                        <Link to={`/users/${u.username}`}>See more</Link>
                       </h5>
                     </div>
                     <div className="col-sm-4 col-lg-4 my-3">
                       <div className="row">
                         <div className="col-6">
                           <AcceptStatusButton
-                            id={user._id}
+                            id={u._id}
                             acceptStatus={this.getRequest.bind(this)}
                           />
                         </div>
                         <div className="col-6">
                           <RefuseStatusButton
-                            id={user._id}
+                            id={u._id}
                             acceptStatus={this.getRequest.bind(this)}
                           />
                         </div>
