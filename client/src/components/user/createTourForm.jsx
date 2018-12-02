@@ -167,7 +167,7 @@ class createTourForm extends FormInput {
 			</div>);
 		}
 		else if( this.state.user.info.status === 0 && this.state.fillingForm ){
-			return( <div className = "componentStyle testBlockD">
+			return( <div className = "componentStyle ">
 				<h1>Create Tour</h1>
 				<div className="noneMargin nonePadding">
 					{ this.dataForm.map( form => (
