@@ -36,6 +36,10 @@ export function removeTiy(id) {
   return http.delete(tiyDeleteEndpoint + id, config);
 }
 
+export function showTiyOffered(id) {
+  return http.get(offerTiysEndpoint + "/" + id + "/offers", config);
+}
+
 export function offerTiy(tiy) {
   const {
     name,
