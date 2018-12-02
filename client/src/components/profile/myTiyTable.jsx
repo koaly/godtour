@@ -72,6 +72,19 @@ class MyTiyTable extends Component {
                       >
                         Delete
                       </button>
+                      {!d.isAccepted && (
+                        <Link
+                          className="btn btn-primary btn-sm"
+                          to={{
+                            pathname: `/profile/myTiy/edit/${d._id}`,
+                            state: {
+                              tiys: d
+                            }
+                          }}
+                        >
+                          Edit
+                        </Link>
+                      )}
                     </td>
                   </tr>
                 ))}
