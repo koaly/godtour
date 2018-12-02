@@ -15,13 +15,13 @@ export default class AcceptStatusButton extends Component {
   acceptStatusById = async id => {
     try {
       const response = await acceptStatus(id);
-      const { message } = response.data;
-
-      toast.success(`${message}`);
+      const { msg } = response.data;
+      console.log(response);
+      toast.success(`${msg}`);
     } catch (e) {
       console.log(e);
-      const message = e.response.data.error.message;
-      toast.error(`${message}`);
+      const msg = e.response.data.error.msg;
+      toast.error(`${msg}`);
     }
   };
 

@@ -45,13 +45,19 @@ class AllTiys extends Component {
 					<p className="sameLine width20 textCenter">{t.dest}</p>
 					<p className="sameLine width20 textCenter">{t.minPrice} - {t.maxPrice}</p>
 					<p className="sameLine width15 textCenter">{t.minDuration} - {t.maxDuration}</p>
-					<Link className="btn btn-primary sameLine" to={`/${t._id}/createOffer`}>CREATE</Link>
-					
+					<Link className="btn btn-primary sameLine" 
+                    to={{
+                      pathname: `/${t._id}/createOffer`,
+                      state: {
+                        tiys: t
+                      }
+                    }}>CREATE
+          </Link>
 				</div>
 			) ) }
 		</div>
 		);
 	}
-}
+
 
 export default AllTiys;

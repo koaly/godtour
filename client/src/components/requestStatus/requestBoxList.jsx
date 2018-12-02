@@ -16,7 +16,7 @@ export default class RequestBoxList extends Component {
       users: [],
       isLoaded: false,
 
-      pageSize: 4,
+      pageSize: 2,
       currentPage: 1
     };
   }
@@ -26,10 +26,10 @@ export default class RequestBoxList extends Component {
       const result = await getUserRequest();
       const { users } = result.data;
       toast.info("Update RequestList");
-      this.setState({ users: users });
+      this.setState({ users });
     } catch (e) {
-      const { message } = e.response.data.error;
-      console.log(message);
+      const { msg } = e.response.data.error;
+      console.log(msg);
       //toast.error(`${message}`);
     }
   }
@@ -44,9 +44,9 @@ export default class RequestBoxList extends Component {
   };
   render() {
     const { users, isLoaded, currentPage, pageSize } = this.state;
-    const { length: count } = this.state.users;
-    const selectUsers = paginate(users, currentPage, pageSize);
-
+    const { count } = this.state.users;
+    const selectUsers = paginate(users.users, currentPage, pageSize);
+    console.log(selectUsers);
     if (!isLoaded) {
       return (
         <div className="container text-align mgtb-2">
@@ -60,7 +60,7 @@ export default class RequestBoxList extends Component {
     return (
       <div className="profile-container">
         <div className="user-content mx-3 my-1">
-          <h1 className="user-head">{count} Users in database</h1>
+          <h1 className="user-head">{count} User(s) in database</h1>
         </div>
         <ul>
           {selectUsers.map((user, i) => (
@@ -91,13 +91,13 @@ export default class RequestBoxList extends Component {
                       <div className="row">
                         <div className="col-6">
                           <AcceptStatusButton
-                            id={user._id}
+                            id={user.id}
                             acceptStatus={this.getRequest.bind(this)}
                           />
                         </div>
                         <div className="col-6">
                           <RefuseStatusButton
-                            id={user._id}
+                            id={user.id}
                             acceptStatus={this.getRequest.bind(this)}
                           />
                         </div>

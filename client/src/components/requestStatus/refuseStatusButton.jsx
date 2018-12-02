@@ -15,14 +15,14 @@ export default class RefuseStatusButton extends Component {
   refuseStatusById = async id => {
     try {
       const response = await refuseStatus(id);
-      const { message } = response.data;
+      const { msg } = response.data;
 
-      toast.success(`${message}`);
-      window.location("/admin/request");
+      toast.success(`${msg}`);
+      window.location = "/admin/request";
     } catch (e) {
       console.log(e);
-      const message = e.response.data.error.message;
-      toast.error(`${message}`);
+      const msg = e.response.data.error.msg;
+      toast.error(`${msg}`);
     }
   };
 
@@ -33,7 +33,7 @@ export default class RefuseStatusButton extends Component {
     await this.refuseStatusById(id);
     await updateStatus();
     this.setState({ isAccepting: false });
-    window.location("/admin/request");
+    window.location = "/admin/request";
   };
 
   render() {
