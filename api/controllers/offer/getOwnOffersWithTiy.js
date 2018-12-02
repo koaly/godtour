@@ -3,8 +3,7 @@ const { asynWrapper, checkObjectIdIsValid } = require("../utility");
 const {
   OfferNotFound,
   Request,
-  ObjectIdIsNotValidException,
-  NoPermissonAccess
+  ObjectIdIsNotValidException
 } = require("../utility/exception");
 
 const handle = async (req, res, next) => {
@@ -23,19 +22,13 @@ const handle = async (req, res, next) => {
   if (!checkObjectIdIsValid(tiyID)) throw new ObjectIdIsNotValidException();
 
   //search offer models with tiyID
-  const offer = await Offer.find({ _id: tiyID });
+  const offers = await Offer.find({ _id: tiyID, operatorID: UserID });
 
   //if not found offers in serach
-  if (!offer) throw new OfferNotFound(offerID);
+  if (!offers) throw new OfferNotFound(offerID);
 
-  //check if not own tour return no permission if admin can access
-  if (userStatus == 2 || UserID == offer.operatorID) {
-    res.locals.offer = offer;
-    next();
-  } else {
-    //handleing permission
-    throw new NoPermissonAccess();
-  }
+  res.locals.offers = offers;
+  next();
 };
 
 //warpper catch function

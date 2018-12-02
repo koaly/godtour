@@ -23,7 +23,7 @@ const handle = async (req, res, next) => {
   if (!checkObjectIdIsValid(offerID)) throw new ObjectIdIsNotValidException();
 
   //search offer models with offerID
-  const offer = await Offer.find({ _id: offerID });
+  const offer = await Offer.findOne({ _id: offerID });
 
   //if not found offers in serach
   if (!offer) throw new OfferNotFound(offerID);
