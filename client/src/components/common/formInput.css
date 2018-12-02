@@ -56,6 +56,16 @@
 	clear	: both;
 }
 
+.minWidth100px{
+	min-width	: 100px;
+	clear	: both;
+}
+
+.minWidth80px{
+	min-width	: 80px;
+	clear	: both;
+}
+
 .minWidth30{
 	min-width	: 30%;
 }
@@ -110,6 +120,10 @@
 
 .width30{
 	width : 30%
+}
+
+.width35{
+	width : 35%
 }
 
 .width40{
@@ -212,6 +226,10 @@ textarea{
 	height : 100px;
 }
 
+.height30px{
+	height : 30px;
+}
+
 .noneMargin{
 	margin : None;
 }
@@ -222,6 +240,14 @@ textarea{
 
 .paddingLeft10px{
 	padding-left : 10px;
+}
+
+.paddingLeft2{
+	padding-left : 2%;
+}
+
+.paddingLeft4{
+	padding-left : 4%;
 }
 
 .marginCenter{
