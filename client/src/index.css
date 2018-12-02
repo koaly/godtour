@@ -71,25 +71,18 @@ body {
 #login-dp .form-group {
   margin-bottom: 10px;
 }
-.btn-fb {
-  color: #fff;
-  background-color: #3b5998;
-}
 .btn-google {
   color: #fff;
   background-color: red;
 }
-.btn-google:hover {
-  color: #fff;
-  background-color: red;
+
+#login-dp .btn-register a:link, a:visited {
+  color: rgb(148, 8, 8);
 }
-.btn-tw {
-  color: #fff;
-  background-color: #55acee;
-}
-.btn-tw:hover {
-  color: #fff;
-  background-color: #59b5fa;
+
+#login-dp .btn-register a:hover, a:active {
+  color: rgb(235, 19, 19);
+  text-decoration: none;
 }
 
 .mdi-icon {
@@ -180,7 +173,7 @@ code {
 }
 
 .profile-head {
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0.15) 0%,
       rgba(0, 0, 0, 0.15) 100%
@@ -194,11 +187,16 @@ code {
   background-blend-mode: multiply, multiply;
   padding-left: 20px;
   padding-top: 5px;
+  padding-bottom: 5px; */
+  background-image: linear-gradient(45deg, #93a5cf 0%, #cbd0dd 100%);
+  padding-left: 20px;
+  padding-top: 5px;
   padding-bottom: 5px;
 }
 
 .bglight {
-  background-color: #ececec;
+  /* background-color: #ececec; */
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
   overflow: hidden;

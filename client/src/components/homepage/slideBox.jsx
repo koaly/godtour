@@ -41,9 +41,14 @@ export default class SlideBox extends Component {
     const { isLoaded, tours } = this.state;
     console.log(tours);
     if (!isLoaded) {
-      return <Spinner />;
+      return (
+        <div className="container text-align mgtb-3">
+          <div>
+            <Spinner />
+          </div>
+        </div>
+      );
     }
-
     return (
       <div
         id="carouselExampleIndicators"
