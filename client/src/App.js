@@ -125,7 +125,7 @@ class App extends Component {
                 )}
               />
               <Route
-                path="/createTour"
+                path="/createTiy"
                 render={props => (
                   <CreateTourForm {...props} token={jwt} user={user} />
                 )}
