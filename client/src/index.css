@@ -71,25 +71,18 @@ body {
 #login-dp .form-group {
   margin-bottom: 10px;
 }
-.btn-fb {
-  color: #fff;
-  background-color: #3b5998;
-}
 .btn-google {
   color: #fff;
   background-color: red;
 }
-.btn-google:hover {
-  color: #fff;
-  background-color: red;
+
+#login-dp .btn-register a:link, a:visited {
+  color: rgb(148, 8, 8);
 }
-.btn-tw {
-  color: #fff;
-  background-color: #55acee;
-}
-.btn-tw:hover {
-  color: #fff;
-  background-color: #59b5fa;
+
+#login-dp .btn-register a:hover, a:active {
+  color: rgb(235, 19, 19);
+  text-decoration: none;
 }
 
 .mdi-icon {
