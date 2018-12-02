@@ -5,7 +5,7 @@ import Spinner from "../common/spinner";
 import Link from "react-router-dom/Link";
 import { paginate } from "../../utility/paginate";
 import Pagination from "../common/pagination";
-import "../user/userBoxList.css";
+import "../../css/userBoxList.css";
 import getStatus from "../common/status";
 import AcceptStatusButton from "./acceptStatusButton";
 import RefuseStatusButton from "./refuseStatusButton";

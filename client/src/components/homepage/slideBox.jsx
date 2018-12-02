@@ -3,7 +3,7 @@ import { showRandomTour } from "../../services/homeService";
 import { toast } from "react-toastify";
 import Spinner from "../common/spinner";
 import SlideBoxItem from "./slideBoxItem";
-import "./slideBoxItem.css";
+import "../../css/slideBoxItem.css";
 export default class SlideBox extends Component {
   constructor(props) {
     super(props);

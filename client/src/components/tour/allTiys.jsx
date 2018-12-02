@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { getAllTiys } from "../../services/tiyService";
 import { Link } from "react-router-dom";
-import "./../common/formInput.css";
-import "./../common/allTiys.css";
+import "../../css/formInput.css";
+import "../../css/allTiys.css";
 
 class AllTiys extends Component {
   constructor(props) {
@@ -92,7 +92,9 @@ class AllTiys extends Component {
       <div className=" minWidth100  mgtb">
         <h1 className="minWidth100 textCenter">List Tour by Customer</h1>
         <div className=" minWidth100 clearBoth  headColumn">
-          <div className={"textLeft paddingLeft4 sameLine mb-2" + this.firstStyle}>
+          <div
+            className={"textLeft paddingLeft4 sameLine mb-2" + this.firstStyle}
+          >
             NAME TOUR
           </div>
           <div className={"textCenter sameLine mb-2" + this.secondStyle}>
@@ -115,25 +117,28 @@ class AllTiys extends Component {
               <p
                 key={t._id}
                 className={"sameLine paddingLeft2" + this.firstStyle}
-                style={{fontSize:18}}
+                style={{ fontSize: 18 }}
               >
                 {t.name}
               </p>
-              <p className={"sameLine textCenter" + this.secondStyle}
-                style={{fontSize:18}}
+              <p
+                className={"sameLine textCenter" + this.secondStyle}
+                style={{ fontSize: 18 }}
               >
                 {t.dest}
               </p>
               {mode < 2 && (
-                <p className={"sameLine textCenter" + this.secondStyle}
-                  style={{fontSize:18}}
+                <p
+                  className={"sameLine textCenter" + this.secondStyle}
+                  style={{ fontSize: 18 }}
                 >
                   {t.minPrice} - {t.maxPrice}
                 </p>
               )}
               {mode < 1 && (
-                <p className={"sameLine textCenter" + this.thirdStyle}
-                  style={{fontSize:18}}
+                <p
+                  className={"sameLine textCenter" + this.thirdStyle}
+                  style={{ fontSize: 18 }}
                 >
                   {t.minDuration} - {t.maxDuration}
                 </p>
