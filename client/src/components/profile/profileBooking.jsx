@@ -16,11 +16,14 @@ export default class ProfileBooking extends Component {
       booking: [],
       isLoaded: false,
 
-      pageSize: 4,
+      pageSize: 3,
       currentPage: 1
     };
   }
 
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  };
   async getCurrentBooking() {
     try {
       const response = await showCurrentBookings();
@@ -37,31 +40,6 @@ export default class ProfileBooking extends Component {
       //toast.error(`${message}`)
     }
   }
-
-  async removeBooking(id) {
-    try {
-      const response = await cancelBooking(id);
-      const { msg } = response.data;
-
-      toast.success(`${msg}`);
-    } catch (e) {
-      console.log(e);
-      const message = e.response.data.error.message;
-      toast.error(`${message}`);
-    }
-  }
-  handlePageChange = page => {
-    this.setState({ currentPage: page });
-  };
-
-  handleDelete = async id => {
-    this.setState({ isLoaded: false });
-
-    await this.removeBooking(id);
-    await this.getCurrentBooking();
-
-    this.setState({ isLoaded: true });
-  };
   async componentDidMount() {
     await this.getCurrentBooking();
     this.setState({ isLoaded: true });
@@ -70,8 +48,9 @@ export default class ProfileBooking extends Component {
   render() {
     const { booking, isLoaded, currentPage, pageSize } = this.state;
     const { length: count } = this.state.booking;
-    const selectBooking = paginate(booking, currentPage, pageSize);
-
+    let selectBooking = paginate(booking, currentPage, pageSize);
+    console.log(selectBooking);
+    console.log(count);
     if (!isLoaded) {
       return (
         <div className="container text-align mgtb-2">
@@ -87,7 +66,7 @@ export default class ProfileBooking extends Component {
       <div className="profile-infor mx-3">
         <p>{count} bookings</p>
         <div className="ovft">
-          <MyBookingTable selectBooking={selectBooking} />
+          <MyBookingTable selectBooking={selectBooking} booking={booking} />
         </div>
         <Pagination
           itemsCount={count}
