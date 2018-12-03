@@ -97,17 +97,6 @@ class createTourForm extends FormInput {
     console.log("=====> handleChange.state ", this.state);
   }
 
-  componentDidMount() {
-    console.log("===============> createTourForm.componentDidMount");
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
-  }
-
-  componentWillUnmount() {
-    console.log("===============> createTourForm.componentWillUnmount");
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-  }
-
   updateDimensions() {
     console.log(
       "width : height of window is ",
@@ -126,6 +115,30 @@ class createTourForm extends FormInput {
       this.forceUpdate();
     }
   }
+	countTime(){
+		this.count = this.count + 1;
+		if( this.count == 5 ){
+			window.location = "/addTour";
+		}
+	}
+
+	componentDidMount() {
+		console.log("===============> createTourForm.componentDidMount");
+		this.updateDimensions();
+		window.addEventListener("resize" , this.updateDimensions.bind( this ) );
+		if( this.state.user.info.status !== 0 ){
+			this.intervalRedirection = setInterval( this.countTime.bind( this ) , 100 );
+			this.count = 0 ;
+		}
+	}
+
+	componentWillUnmount(){
+		console.log("===============> createTourForm.componentWillUnmount");
+		window.removeEventListener("resize" , this.updateDimensions.bind( this ));
+		if( this.state.user.info.status !== 0 ){
+			clearInterval( this.intervalRedirection );
+		}
+	}
 
   updateData() {
     /*	this.formData is array to collect information for create form it is 2 dimension array
@@ -241,6 +254,15 @@ class createTourForm extends FormInput {
 
   render() {
     console.log("===============> createTourForm.render", this.state);
+	let marginBottom = "";
+	let marginButton = " marginBottom10px";
+	if( this.state.mode === 0 ){
+		marginBottom = " marginBottom10px ";
+	}
+	else{
+		marginButton = "marginBottom10px marginTop10px";
+	}
+	
     this.updateData();
     if (this.state.user === null) {
       return (
@@ -254,11 +276,13 @@ class createTourForm extends FormInput {
           <h1>Create Tour</h1>
           <div className="noneMargin nonePadding">
             {this.dataForm.map(form => (
-              <div className="nonePadding noneMargin">
+              <div className={ "nonePadding noneMargin " + marginBottom }>
                 {this.formHandle[form[0]].apply(this, form[1])}
               </div>
             ))}
-            <button onClick={this.handleSubmitData}>SUBMIT</button>
+            <button onClick={this.handleSubmitData}
+				className={ "btn btn-primary minWidth100 " + marginButton }
+			>SUBMIT</button>
           </div>
         </div>
       );

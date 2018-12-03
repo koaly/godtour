@@ -73,7 +73,7 @@ export default class MyBook extends Component {
             </div>
 
             <div className="container col-md-7 mt-2 flex-column">
-              <Link className="btn btn-primary ml-3" to="/createTour">
+              <Link className="btn btn-primary ml-3" to="/createTiy">
                 create TIY
               </Link>
               <MyTiyTable />
